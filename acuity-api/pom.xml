@@ -12,7 +12,11 @@
     <name>Acuity API</name>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.acuity.rs</groupId>
+            <artifactId>rs-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
