@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Acuity</groupId>
-    <artifactId>AcuityCore</artifactId>
+    <groupId>com.acuity</groupId>
+    <artifactId>acuity-parent</artifactId>
+    <version>1.0.00-SNAPSHOT</version>
+    <name>Acuity</name>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
 
+    <modules>
         <module>http-api</module>
         <module>http-service</module>
         <module>runescape-api</module>
         <module>acuity-client</module>
         <module>acuity-api</module>
     </modules>
-
-
 </project>
