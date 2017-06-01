@@ -7,4 +7,9 @@ import com.acuity.rs.mapping.Inject;
  */
 @Inject("RSWorld")
 public interface RSWorld {
+
+    @Inject("world")
+    int getWorld();
+
+
 }

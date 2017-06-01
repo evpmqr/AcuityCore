@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by Zach on 5/31/2017.
  */
-public class AcuityAPI {
+public class AcuityWebAPI {
 
     private static final String BASE_URL = "http://localhost:8080";
 
@@ -27,6 +27,13 @@ public class AcuityAPI {
     }
 
     public static Response makeCall(HttpUrl url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        return CLIENT.newCall(request).execute();
+    }
+
+    public static Response makeCall(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();

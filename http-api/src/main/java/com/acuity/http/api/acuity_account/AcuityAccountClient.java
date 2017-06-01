@@ -1,8 +1,7 @@
 package com.acuity.http.api.acuity_account;
 
-import com.acuity.http.api.AcuityAPI;
+import com.acuity.http.api.AcuityWebAPI;
 import okhttp3.HttpUrl;
-import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -17,14 +16,14 @@ import java.util.Optional;
 public class AcuityAccountClient {
 
     public Optional<AcuityAccount> findCurrentAccount(){
-        HttpUrl account = AcuityAPI.getApiBase().newBuilder()
+        HttpUrl account = AcuityWebAPI.getApiBase().newBuilder()
                 .addPathSegment("account")
                 .build();
         try {
-            Response execute = AcuityAPI.makeCall(account);
+            Response execute = AcuityWebAPI.makeCall(account);
             try (ResponseBody body = execute.body()){
                 InputStream in = body.byteStream();
-                return Optional.ofNullable(AcuityAPI.GSON.fromJson(new InputStreamReader(in), AcuityAccount.class));
+                return Optional.ofNullable(AcuityWebAPI.GSON.fromJson(new InputStreamReader(in), AcuityAccount.class));
             }
         } catch (IOException e) {
             e.printStackTrace();
