@@ -30,6 +30,11 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.acuity.http</groupId>
+            <artifactId>http-api</artifactId>
+            <version>1.0.00-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
