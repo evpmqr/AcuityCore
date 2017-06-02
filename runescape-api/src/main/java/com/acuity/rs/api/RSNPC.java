@@ -5,6 +5,6 @@ import com.acuity.rs.mapping.Inject;
 /**
  * Created by Zachary Herridge on 6/2/2017.
  */
-@Inject("RSNPCComposite")
-public interface RSNpcComposite {
+@Inject("RSNPC")
+public interface RSNPC {
 }
