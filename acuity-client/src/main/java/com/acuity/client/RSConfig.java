@@ -51,23 +51,19 @@ public class RSConfig {
         }
     }
 
-    public String getProperty(String name)
-    {
+    public String getProperty(String name) {
         return properties.get(name);
     }
 
-    public Map<String, String> getProperties()
-    {
+    public Map<String, String> getProperties() {
         return properties;
     }
 
-    public String getAppletProperty(String name)
-    {
+    public String getAppletProperty(String name) {
         return appletProperties.get(name);
     }
 
-    public Map<String, String> getAppletProperties()
-    {
+    public Map<String, String> getAppletProperties() {
         return appletProperties;
     }
 

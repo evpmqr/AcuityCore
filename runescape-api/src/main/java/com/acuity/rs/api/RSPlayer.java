@@ -3,8 +3,8 @@ package com.acuity.rs.api;
 import com.acuity.rs.mapping.Inject;
 
 /**
- * Created by Zachary Herridge on 6/1/2017.
+ * Created by Zachary Herridge on 6/2/2017.
  */
-@Inject("Player")
-public interface RSPlayer extends RSSceneActor {
+@Inject("RSPlayer")
+public interface RSPlayer {
 }
