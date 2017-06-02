@@ -1,5 +1,6 @@
-package com.acuity.http.api;
+package com.acuity.http.api.pricecheck;
 
+import com.acuity.http.api.AcuityWebAPI;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 

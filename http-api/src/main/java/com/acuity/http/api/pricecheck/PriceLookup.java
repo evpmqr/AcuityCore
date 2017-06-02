@@ -1,4 +1,4 @@
-package com.acuity.http.api;
+package com.acuity.http.api.pricecheck;
 
 /**
  * Created by Eclipseop.
