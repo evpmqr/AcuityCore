@@ -13,8 +13,4 @@ public class World {
     public World(@NotNull RSWorld rsWorld) {
         this.rsWorld = rsWorld;
     }
-
-    public int getWorld(){
-        return rsWorld.getWorld();
-    }
 }

@@ -33,6 +33,7 @@ public class SparkApp implements SparkApplication {
             get("/version", (request, response) -> JSONUtil.toJSON("version", AcuityWebAPI.getVersion()));
 
             get("/account", acuityAccountService::findCurrentAccount, objectToJSONTransformer);
+            get("/login", (request, response) -> JSONUtil.toJSON("result", acuityAccountService.login(request, response)));
 
             path("/authed", () -> {
                 before("/*", loggedInFilter);
@@ -44,5 +45,4 @@ public class SparkApp implements SparkApplication {
             });
         });
     }
-
 }

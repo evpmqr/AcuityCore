@@ -33,7 +33,8 @@ public class AcuityAccountClient {
 
 
     public static void main(String[] args) {
-        new AcuityAccountClient().findCurrentAccount().ifPresent(System.out::print);
+        boolean login = AcuityWebAPI.login("zachary", "testpassword");
+        System.out.println(login + ", " + AcuityWebAPI.getJwt());
     }
 
 }

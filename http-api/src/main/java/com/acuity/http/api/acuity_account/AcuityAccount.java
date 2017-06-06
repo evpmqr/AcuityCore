@@ -15,6 +15,14 @@ public class AcuityAccount {
         this.passwordHash = passwordHash;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public String toString() {
         return "AcuityAccount{" +
