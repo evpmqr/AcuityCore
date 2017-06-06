@@ -1,14 +1,21 @@
 package com.acuity.http.api.pricecheck;
 
 import com.acuity.http.api.AcuityWebAPI;
+import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +25,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class PriceChecker {
 
-	private static final String RSB_URL = "https://api.rsbuddy.com/grandExchange?a=guidePrice&i=";
+    private static final HttpUrl RSBUDDY_GE_URL = HttpUrl.parse("https://api.rsbuddy.com/grandExchange?a=guidePrice");
+
 	private static final Cache<Integer, PriceLookup> cache = CacheBuilder.newBuilder()
 			.expireAfterWrite(10, TimeUnit.MINUTES)
 			.build();
@@ -33,13 +41,19 @@ public class PriceChecker {
 	}
 
 	private static PriceLookup lookup(final int itemId) {
-		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(RSB_URL + itemId).openStream()))) {
-			final PriceLookup priceLookup = AcuityWebAPI.INSTANCE.getGson().fromJson(bufferedReader.readLine(), PriceLookup.class);
-			cache.put(itemId, priceLookup);
-			return priceLookup;
-		} catch (IOException e) {
-			System.out.println("Error loading RSExchange for item " + itemId); // TODO: 6/2/2017 logger
-			return new PriceLookup();
-		}
+        HttpUrl request = RSBUDDY_GE_URL.newBuilder()
+                .addQueryParameter("i", String.valueOf(itemId))
+                .build();
+        try {
+            Response execute = AcuityWebAPI.INSTANCE.makeCall(request);
+            try (ResponseBody body = execute.body()){
+                InputStream in = body.byteStream();
+                return AcuityWebAPI.INSTANCE.getGson().fromJson(new InputStreamReader(in), PriceLookup.class);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading RSExchange for item " + itemId); // TODO: 6/2/2017 logger
+        }
+
+        return new PriceLookup();
 	}
 }
