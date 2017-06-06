@@ -30,7 +30,7 @@ public class SparkApp implements SparkApplication {
 
     public void setupRoutes(){
         path("/api", () -> {
-            get("/version", (request, response) -> JSONUtil.toJSON("version", AcuityWebAPI.getVersion()));
+            get("/version", (request, response) -> JSONUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));
 
             get("/account", acuityAccountService::findCurrentAccount, objectToJSONTransformer);
             get("/login", (request, response) -> JSONUtil.toJSON("result", acuityAccountService.login(request, response)));

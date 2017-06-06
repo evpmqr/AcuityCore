@@ -28,7 +28,7 @@ public class PriceChecker {
 		}
 
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(RSB_URL + itemId).openStream()))) {
-			final PriceLookup priceLookup = AcuityWebAPI.GSON.fromJson(bufferedReader.readLine(), PriceLookup.class);
+			final PriceLookup priceLookup = AcuityWebAPI.INSTANCE.getGson().fromJson(bufferedReader.readLine(), PriceLookup.class);
 			cache.put(itemId, priceLookup);
 			return priceLookup;
 		} catch (IOException e) {

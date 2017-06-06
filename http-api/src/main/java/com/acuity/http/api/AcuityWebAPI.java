@@ -13,22 +13,24 @@ import java.util.HashMap;
  */
 public class AcuityWebAPI {
 
+    public static final AcuityWebAPI INSTANCE = new AcuityWebAPI();
+
     private static final String BASE_URL = "http://localhost:8080";
 
-    public static final OkHttpClient CLIENT = new OkHttpClient();
-    public static final Gson GSON = new Gson();
+    private final OkHttpClient client = new OkHttpClient();
+    private final Gson gson = new Gson();
 
-    private static String jwt = "NULL";
+    private String jwt = "NULL";
 
-    public static String getVersion(){
+    public String getVersion(){
         return "1.0.00";
     }
 
-    public static HttpUrl getApiBase() {
+    public HttpUrl getApiBase() {
         return HttpUrl.parse(BASE_URL + "/api");
     }
 
-    public static boolean login(String username, String password){
+    public boolean login(String username, String password){
         HttpUrl login = getApiBase().newBuilder()
                 .addPathSegment("login")
                 .addQueryParameter("username", username)
@@ -40,8 +42,7 @@ public class AcuityWebAPI {
             try (ResponseBody body = response.body()){
                 InputStream in = body.byteStream();
 
-
-                HashMap hashMap = AcuityWebAPI.GSON.fromJson(new InputStreamReader(in), HashMap.class);
+                HashMap hashMap = gson.fromJson(new InputStreamReader(in), HashMap.class);
                 String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
                 if (result.startsWith("OK|")){
                     jwt = result.substring(3);
@@ -55,23 +56,31 @@ public class AcuityWebAPI {
         return false;
     }
 
-    public static Response makeCall(HttpUrl url) throws IOException {
+    public Response makeCall(HttpUrl url) throws IOException {
         Request request = new Request.Builder()
                 .addHeader("ACUITY_AUTH", jwt)
                 .url(url)
                 .build();
-        return CLIENT.newCall(request).execute();
+        return client.newCall(request).execute();
     }
 
-    public static Response makeCall(String url) throws IOException {
+    public Response makeCall(String url) throws IOException {
         Request request = new Request.Builder()
                 .addHeader("ACUITY_AUTH", jwt)
                 .url(url)
                 .build();
-        return CLIENT.newCall(request).execute();
+        return client.newCall(request).execute();
     }
 
-    public static String getJwt() {
+    public Gson getGson() {
+        return gson;
+    }
+
+    public OkHttpClient getClient() {
+        return client;
+    }
+
+    public String getJwt() {
         return jwt;
     }
 }

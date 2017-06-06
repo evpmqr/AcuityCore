@@ -16,14 +16,14 @@ import java.util.Optional;
 public class AcuityAccountClient {
 
     public Optional<AcuityAccount> findCurrentAccount(){
-        HttpUrl account = AcuityWebAPI.getApiBase().newBuilder()
+        HttpUrl account = AcuityWebAPI.INSTANCE.getApiBase().newBuilder()
                 .addPathSegment("account")
                 .build();
         try {
-            Response execute = AcuityWebAPI.makeCall(account);
+            Response execute = AcuityWebAPI.INSTANCE.makeCall(account);
             try (ResponseBody body = execute.body()){
                 InputStream in = body.byteStream();
-                return Optional.ofNullable(AcuityWebAPI.GSON.fromJson(new InputStreamReader(in), AcuityAccount.class));
+                return Optional.ofNullable(AcuityWebAPI.INSTANCE.getGson().fromJson(new InputStreamReader(in), AcuityAccount.class));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,10 +31,8 @@ public class AcuityAccountClient {
         return Optional.empty();
     }
 
-
     public static void main(String[] args) {
-        boolean login = AcuityWebAPI.login("zachary", "testpassword");
-        System.out.println(login + ", " + AcuityWebAPI.getJwt());
+        boolean login = AcuityWebAPI.INSTANCE.login("zachary", "testpassword");
+        System.out.println(login + ", " + AcuityWebAPI.INSTANCE.getJwt());
     }
-
 }

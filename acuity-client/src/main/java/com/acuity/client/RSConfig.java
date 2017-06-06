@@ -24,7 +24,7 @@ public class RSConfig {
     private final Map<String, String> appletProperties = new HashMap<>();
 
     private RSConfig() throws IOException {
-        try (Response response = AcuityWebAPI.makeCall(CONFIG_URL);
+        try (Response response = AcuityWebAPI.INSTANCE.makeCall(CONFIG_URL);
              BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()))) {
             String str;
             while ((str = reader.readLine()) != null) {
