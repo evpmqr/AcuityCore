@@ -16,6 +16,7 @@ public class AcuityWebAPI {
     public static final AcuityWebAPI INSTANCE = new AcuityWebAPI();
 
     private static final String BASE_URL = "http://localhost:8080";
+    private static final HttpUrl API_BASE = HttpUrl.parse(BASE_URL + "/api");
 
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
@@ -26,12 +27,12 @@ public class AcuityWebAPI {
         return "1.0.00";
     }
 
-    public HttpUrl getApiBase() {
-        return HttpUrl.parse(BASE_URL + "/api");
+    public static HttpUrl.Builder createApiBuilder() {
+        return API_BASE.newBuilder();
     }
 
     public boolean login(String username, String password){
-        HttpUrl login = getApiBase().newBuilder()
+        HttpUrl login = createApiBuilder()
                 .addPathSegment("login")
                 .addQueryParameter("username", username)
                 .addQueryParameter("password", password)

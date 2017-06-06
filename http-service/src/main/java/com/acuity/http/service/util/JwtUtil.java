@@ -20,11 +20,11 @@ public class JwtUtil {
         headerClaims.put("displayName", acuityAccount.getDisplayName());
 
         Algorithm algorithm = Algorithm.HMAC256("tempSecret");
-        String token = JWT.create()
+
+        return JWT.create()
                 .withIssuer("auth0")
                 .withHeader(headerClaims)
                 .sign(algorithm);
-        return token;
     }
 
 }

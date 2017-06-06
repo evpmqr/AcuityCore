@@ -16,7 +16,7 @@ import java.util.Optional;
 public class AcuityAccountClient {
 
     public Optional<AcuityAccount> findCurrentAccount(){
-        HttpUrl account = AcuityWebAPI.INSTANCE.getApiBase().newBuilder()
+        HttpUrl account = AcuityWebAPI.createApiBuilder()
                 .addPathSegment("account")
                 .build();
         try {
@@ -29,10 +29,5 @@ public class AcuityAccountClient {
             e.printStackTrace();
         }
         return Optional.empty();
-    }
-
-    public static void main(String[] args) {
-        boolean login = AcuityWebAPI.INSTANCE.login("zachary", "testpassword");
-        System.out.println(login + ", " + AcuityWebAPI.INSTANCE.getJwt());
     }
 }

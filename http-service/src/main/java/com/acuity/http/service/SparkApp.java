@@ -1,7 +1,7 @@
 package com.acuity.http.service;
 
 import com.acuity.http.api.AcuityWebAPI;
-import com.acuity.http.api.JSONUtil;
+import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import com.acuity.http.service.auth_filters.AdminFilter;
 import com.acuity.http.service.auth_filters.LoggedInFilter;
@@ -30,10 +30,10 @@ public class SparkApp implements SparkApplication {
 
     public void setupRoutes(){
         path("/api", () -> {
-            get("/version", (request, response) -> JSONUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));
+            get("/version", (request, response) -> JsonUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));
 
             get("/account", acuityAccountService::findCurrentAccount, objectToJSONTransformer);
-            get("/login", (request, response) -> JSONUtil.toJSON("result", acuityAccountService.login(request, response)));
+            get("/login", (request, response) -> JsonUtil.toJSON("result", acuityAccountService.login(request, response)));
 
             path("/authed", () -> {
                 before("/*", loggedInFilter);

@@ -1,4 +1,4 @@
-package com.acuity.http.api;
+package com.acuity.http.api.util;
 
 import com.google.gson.Gson;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Created by Zachary Herridge on 6/1/2017.
  */
-public class JSONUtil {
+public class JsonUtil {
 
     private static final Gson GSON = new Gson();
 
