@@ -8,8 +8,6 @@ import java.io.File;
  */
 public class RSAppletLoader {
 
-    public static final String INJECTED_JAR_PATH = "";
-
     private boolean initialSetupComplete = false;
     private RSConfig rsConfig;
     private RSClassLoader classLoader;
@@ -20,7 +18,7 @@ public class RSAppletLoader {
         if (!initialSetupComplete){
             rsConfig = RSConfig.load();
             String initialClass = rsConfig.getProperty(RSConfig.INITIAL_CLASS).replace(".class", "");
-            classLoader = new RSClassLoader(new File(INJECTED_JAR_PATH));
+            classLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
             appletClass = classLoader.loadClass(initialClass);
             initialSetupComplete = true;
         }
@@ -34,6 +32,10 @@ public class RSAppletLoader {
 
     public Class<?> getAppletClass() {
         return appletClass;
+    }
+
+    public RSConfig getRsConfig() {
+        return rsConfig;
     }
 
     public RSClassLoader getClassLoader() {

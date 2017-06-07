@@ -6,8 +6,12 @@ package com.acuity.rs.api;
 
 public interface RSClient {
 
+    int getGameState();
+
     String getUsername();
 
     void setUsername(String username);
+
+
 
 }
