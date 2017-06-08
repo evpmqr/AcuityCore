@@ -14,5 +14,5 @@ public interface RSOverlay extends RSCacheableNode {
 
     int getTexture();
 
-    boolean isIsHidden();
+    boolean isHidden();
 }

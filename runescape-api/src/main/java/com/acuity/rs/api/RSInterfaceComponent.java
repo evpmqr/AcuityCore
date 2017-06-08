@@ -94,7 +94,7 @@ public interface RSInterfaceComponent extends RSNode {
 
     boolean isFlippedVertically();
 
-    boolean isHasScript();
+    boolean isHidden();
 
-    boolean isIsHidden();
+    boolean isScript();
 }

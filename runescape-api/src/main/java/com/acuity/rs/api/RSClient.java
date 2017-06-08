@@ -413,10 +413,7 @@ public interface RSClient extends RSGameEngine {
     void invokeSetRasterBuffer(int var0, int var1, int var2);
 
     //Static field.
-    boolean isIsDynamicRegion();
-
-    //Static field.
-    boolean isIsResized();
+    boolean isDynamicRegion();
 
     //Static field.
     boolean isLowMemory();
@@ -432,6 +429,9 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     boolean[][] isRenderArea();
+
+    //Static field.
+    boolean isResized();
 
     //Static field.
     boolean[] isValidInterfaces();

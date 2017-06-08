@@ -66,9 +66,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
     boolean isClipped1();
 
-    boolean isIsRotated();
-
-    boolean isIsSolid();
-
     boolean isNonFlatShading();
+
+    boolean isRotated();
+
+    boolean isSolid();
 }

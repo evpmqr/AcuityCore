@@ -20,9 +20,9 @@ public interface RSNPCComposite extends RSCacheableNode {
 
     int getVarpIndex();
 
-    boolean isIsClickable();
+    boolean isClickable();
 
-    boolean isIsMinimapVisible();
+    boolean isMinimapVisible();
 
-    boolean isIsVisible();
+    boolean isVisible();
 }
