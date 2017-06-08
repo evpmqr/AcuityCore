@@ -1,8 +1,14 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSNodeDeque {
+
+    com.acuity.rs.api.RSNode getHead();
+
+    com.acuity.rs.api.RSNode getCurrent();
+
+    RSNode invokeCurrent();
+
+    RSNode invokeNext();
 }

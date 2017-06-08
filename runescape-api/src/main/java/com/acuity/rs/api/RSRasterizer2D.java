@@ -1,8 +1,6 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSRasterizer2D {
+public interface RSRasterizer2D extends RSCacheableNode {
 }

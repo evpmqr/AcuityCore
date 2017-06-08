@@ -1,8 +1,14 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSFriendsListMember {
+
+    int getWorld();
+
+    int getRank();
+
+    java.lang.String getPreviousName();
+
+    java.lang.String getName();
 }

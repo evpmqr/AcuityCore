@@ -1,8 +1,16 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSNode {
+
+    long getKey();
+
+    com.acuity.rs.api.RSNode getPrevious();
+
+    com.acuity.rs.api.RSNode getNext();
+
+    void invokeUnlink();
+
+    boolean invokeLinked();
 }

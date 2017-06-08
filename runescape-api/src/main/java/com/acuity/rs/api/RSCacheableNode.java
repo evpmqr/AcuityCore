@@ -1,8 +1,10 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSCacheableNode {
+public interface RSCacheableNode extends RSNode {
+
+    com.acuity.rs.api.RSCacheableNode getNext();
+
+    com.acuity.rs.api.RSCacheableNode getPrevious();
 }

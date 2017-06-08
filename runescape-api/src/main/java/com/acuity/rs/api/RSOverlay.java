@@ -1,8 +1,18 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSOverlay {
+public interface RSOverlay extends RSCacheableNode {
+
+    int getColor();
+
+    int getSaturation();
+
+    int getLightness();
+
+    int getTexture();
+
+    int getHue();
+
+    boolean isIsHidden();
 }

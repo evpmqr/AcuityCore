@@ -1,8 +1,10 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSAudioInstrument {
+
+    com.acuity.rs.api.RSAudioEnvelope getPitchEnvelope();
+
+    int[] getOscillatorPitch();
 }

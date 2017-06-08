@@ -1,8 +1,14 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSClanMember {
+public interface RSClanMember extends RSNode {
+
+    int getWorld();
+
+    byte getRank();
+
+    java.lang.String getUsername();
+
+    java.lang.String getName();
 }

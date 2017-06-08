@@ -1,7 +1,30 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
-public interface RSAnimationSequence {
+//Generated
+
+public interface RSAnimationSequence extends RSCacheableNode {
+
+    boolean isStretches();
+
+    int getMaxLoops();
+
+    int getLeftHandItem();
+
+    int[] getFrameIDs();
+
+    int getPriority();
+
+    int getReplyMode();
+
+    int getRightHandItem();
+
+    int getFrameStep();
+
+    int[] getInterleaveLeave();
+
+    int getForcedPriority();
+
+    int getPrecedenceAnimating();
+
+    int[] getFrameLenghts();
 }

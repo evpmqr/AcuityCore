@@ -1,8 +1,30 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSSceneElement {
+
+    int getFlags();
+
+    com.acuity.rs.api.RSRenderable getEntity();
+
+    int getLevel();
+
+    int getOffsetX();
+
+    int getOffsetY();
+
+    int getOrientation();
+
+    int getSceneY();
+
+    int getSceneX();
+
+    int getEndSceneY();
+
+    int getEndSceneX();
+
+    int getUid();
+
+    int getHeight();
 }

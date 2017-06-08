@@ -1,8 +1,12 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSVarpbit {
+public interface RSVarpbit extends RSCacheableNode {
+
+    int getMostSignificantBit();
+
+    int getVarpIndex();
+
+    int getLeastSignificantBit();
 }

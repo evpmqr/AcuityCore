@@ -1,7 +1,12 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
+
 public interface RSAudioEffect {
+
+    com.acuity.rs.api.RSAudioInstrument[] getInstruments();
+
+    int getEnd();
+
+    int getStart();
 }

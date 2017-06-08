@@ -1,8 +1,22 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSItemLayer {
+
+    com.acuity.rs.api.RSRenderable getTop();
+
+    com.acuity.rs.api.RSRenderable getBottom();
+
+    com.acuity.rs.api.RSRenderable getMiddle();
+
+    int getHeight();
+
+    int getHash();
+
+    int getFlags();
+
+    int getX();
+
+    int getY();
 }

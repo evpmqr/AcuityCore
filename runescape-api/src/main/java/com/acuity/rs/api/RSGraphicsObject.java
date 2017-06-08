@@ -1,8 +1,16 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSGraphicsObject {
+public interface RSGraphicsObject extends RSRenderable {
+
+    int getSceneX();
+
+    int getSceneY();
+
+    int getLevel();
+
+    int getHeight();
+
+    int getId();
 }

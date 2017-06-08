@@ -1,8 +1,8 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSNPC {
+public interface RSNPC extends RSActor {
+
+    com.acuity.rs.api.RSNPCComposite getDefinition();
 }

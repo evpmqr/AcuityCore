@@ -1,8 +1,18 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSSceneTileDecor {
+
+    int getLevel();
+
+    int getRenderInfoBitPacked();
+
+    com.acuity.rs.api.RSRenderable getEntity();
+
+    int getUid();
+
+    int getSceneX();
+
+    int getSceneY();
 }

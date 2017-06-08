@@ -1,8 +1,8 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSIndexData {
+public interface RSIndexData extends RSIndexDataBase {
+
+    int getIndex();
 }

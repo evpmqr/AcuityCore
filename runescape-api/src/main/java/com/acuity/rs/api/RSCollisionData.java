@@ -1,8 +1,16 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSCollisionData {
+
+    int getHeight();
+
+    int getInsetX();
+
+    int getInsetY();
+
+    int[][] getFlags();
+
+    int getWidth();
 }

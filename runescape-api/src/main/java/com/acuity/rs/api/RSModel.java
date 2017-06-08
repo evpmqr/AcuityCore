@@ -1,8 +1,18 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSModel {
+public interface RSModel extends RSRenderable {
+
+    int[] getXTriangles();
+
+    int[] getVerticesX();
+
+    int[] getVerticesY();
+
+    int[] getVerticesZ();
+
+    int[] getYTriangles();
+
+    int[] getZTriangles();
 }

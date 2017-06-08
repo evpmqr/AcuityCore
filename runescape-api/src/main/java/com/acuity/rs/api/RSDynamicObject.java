@@ -1,8 +1,18 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSDynamicObject {
+public interface RSDynamicObject extends RSRenderable {
+
+    int getOrientation();
+
+    int getId();
+
+    int getSceneY();
+
+    int getSceneX();
+
+    int getLevel();
+
+    int getType();
 }

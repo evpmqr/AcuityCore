@@ -1,8 +1,16 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSHashTable {
+
+    com.acuity.rs.api.RSNode[] getBuckets();
+
+    com.acuity.rs.api.RSNode getHead();
+
+    int getSize();
+
+    int getIndex();
+
+    com.acuity.rs.api.RSNode getTail();
 }

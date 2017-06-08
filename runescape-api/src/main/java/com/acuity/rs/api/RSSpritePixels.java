@@ -1,8 +1,20 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSSpritePixels {
+public interface RSSpritePixels extends RSRasterizer2D {
+
+    int getMaxWidth();
+
+    int[] getPixels();
+
+    int getHeight();
+
+    int getMaxHeight();
+
+    int getOffsetX();
+
+    int getOffsetY();
+
+    int getWidth();
 }

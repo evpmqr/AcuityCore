@@ -1,8 +1,22 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSPendingSpawn {
+public interface RSPendingSpawn extends RSNode {
+
+    int getLevel();
+
+    int getHitpoints();
+
+    int getSceneX();
+
+    int getSceneY();
+
+    int getOrientation();
+
+    int getId();
+
+    int getType();
+
+    int getDelay();
 }

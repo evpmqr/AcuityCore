@@ -1,8 +1,28 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSSceneBoundaryDecor {
+
+    com.acuity.rs.api.RSRenderable getRenderable2();
+
+    int getRenderFlag();
+
+    int getRenderInfoBitPacked();
+
+    com.acuity.rs.api.RSRenderable getEntity();
+
+    int getRotation();
+
+    int getSceneX();
+
+    int getSceneY();
+
+    int getOffsetX();
+
+    int getOffsetY();
+
+    int getUid();
+
+    int getLevel();
 }

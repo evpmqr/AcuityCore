@@ -1,8 +1,16 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSSceneTileModel {
+
+    int getUnderlay();
+
+    int getRotation();
+
+    int getOverlay();
+
+    boolean isFlatShade();
+
+    int getShape();
 }

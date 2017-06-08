@@ -1,8 +1,6 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSFont {
+public interface RSFont extends RSFontTypeFace {
 }

@@ -1,8 +1,20 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSWorld {
+
+    int getIndex();
+
+    int getMask();
+
+    int getLocation();
+
+    java.lang.String getActivity();
+
+    int getId();
+
+    int getPopulation();
+
+    java.lang.String getDomain();
 }

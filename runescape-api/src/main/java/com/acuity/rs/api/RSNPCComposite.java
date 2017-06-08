@@ -1,8 +1,28 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSNPCComposite {
+public interface RSNPCComposite extends RSCacheableNode {
+
+    int getId();
+
+    int[] getModels();
+
+    boolean isIsClickable();
+
+    boolean isIsMinimapVisible();
+
+    int[] getTransformIds();
+
+    int getCombatLevel();
+
+    int getVarpbitIndex();
+
+    java.lang.String getName();
+
+    int getVarpIndex();
+
+    boolean isIsVisible();
+
+    java.lang.String[] getActions();
 }

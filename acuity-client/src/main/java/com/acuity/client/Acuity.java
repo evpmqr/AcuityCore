@@ -37,11 +37,8 @@ public class Acuity {
                     System.out.println("NPCS: " + npcs.length);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }

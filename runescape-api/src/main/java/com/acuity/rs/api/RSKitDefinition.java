@@ -1,8 +1,26 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSKitDefinition {
+public interface RSKitDefinition extends RSCacheableNode {
+
+    boolean isNonSelectable();
+
+    int[] getModelIds();
+
+    short[] getRetextureToReplace();
+
+    int getBodyPartId();
+
+    short[] getRetextureToFind();
+
+    int[] getModels();
+
+    short[] getRecolorToReplace();
+
+    short[] getRecolorToFind();
+
+    boolean invokeReady();
+
+    RSModelComposite invokeGetModelData();
 }

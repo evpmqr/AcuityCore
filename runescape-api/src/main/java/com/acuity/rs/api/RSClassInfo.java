@@ -1,8 +1,12 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSClassInfo {
+public interface RSClassInfo extends RSNode {
+
+    java.lang.reflect.Method[] getMethods();
+
+    byte[][][] getMethodArgs();
+
+    java.lang.reflect.Field[] getFields();
 }

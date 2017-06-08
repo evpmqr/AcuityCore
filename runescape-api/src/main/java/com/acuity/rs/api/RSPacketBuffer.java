@@ -1,8 +1,14 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSPacketBuffer {
+public interface RSPacketBuffer extends RSBuffer {
+
+    com.acuity.rs.api.RSISAACCipher getCipher();
+
+    int invokeReadOpcode();
+
+    void invokeSeed(int var0);
+
+    void invokeWriteHeader(int var0);
 }

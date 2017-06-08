@@ -1,8 +1,12 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSFileSystem {
+public interface RSFileSystem extends RSNode {
+
+    byte[] getBuffer();
+
+    com.acuity.rs.api.RSIndexData getTable();
+
+    com.acuity.rs.api.RSIndexFile getIndex();
 }

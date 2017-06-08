@@ -1,8 +1,10 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
-public interface RSTextureProviderImpl {
+public interface RSTextureProviderImpl extends RSTextureProvider {
+
+    com.acuity.rs.api.RSIndexDataBase getTable();
+
+    int invokeLoad(int var0);
 }

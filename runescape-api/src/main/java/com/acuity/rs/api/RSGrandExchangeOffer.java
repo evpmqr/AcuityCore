@@ -1,8 +1,18 @@
 package com.acuity.rs.api;
 
-/**
- * Created by Zachary Herridge on 6/2/2017.
- */
+//Generated
 
 public interface RSGrandExchangeOffer {
+
+    int getItemQuantity();
+
+    int getQuantitySold();
+
+    int getPrice();
+
+    byte getStatus();
+
+    int getItemId();
+
+    int getSpentMoney();
 }
