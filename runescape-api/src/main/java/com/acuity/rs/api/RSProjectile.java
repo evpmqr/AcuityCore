@@ -44,5 +44,5 @@ public interface RSProjectile extends RSRenderable {
 
     double getZ();
 
-    boolean isIsMoving();
+    boolean isMoving();
 }

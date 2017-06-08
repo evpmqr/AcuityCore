@@ -96,5 +96,5 @@ public interface RSInterfaceComponent extends RSNode {
 
     boolean isHidden();
 
-    boolean isScript();
+    boolean isScriptAvailable();
 }

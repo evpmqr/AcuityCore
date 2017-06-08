@@ -92,5 +92,5 @@ public interface RSItemComposite extends RSCacheableNode {
 
     void invokePopulateFromBuffer(RSBuffer var0, int var1);
 
-    boolean isIsMembers();
+    boolean isMembers();
 }
