@@ -17,4 +17,6 @@ public interface RSScript extends RSCacheableNode {
     java.lang.String[] getStringOperands();
 
     int getStringStackCount();
+
+    Object[] getSwitches();
 }
