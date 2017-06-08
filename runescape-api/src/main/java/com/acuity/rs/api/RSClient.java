@@ -12,6 +12,7 @@ public interface RSClient {
 
     void setUsername(String username);
 
+    RSNPC[] getNpcs();
 
 
 }

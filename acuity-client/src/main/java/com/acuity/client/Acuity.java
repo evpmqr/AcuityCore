@@ -3,6 +3,7 @@ package com.acuity.client;
 import com.acuity.client.rs.RSAppletLoader;
 import com.acuity.client.rs.RSStub;
 import com.acuity.rs.api.RSClient;
+import com.acuity.rs.api.RSNPC;
 
 import javax.swing.*;
 import java.applet.Applet;
@@ -30,7 +31,11 @@ public class Acuity {
 
             while (true){
                 Thread.sleep(3000);
-                System.out.println("GameState: " + ((RSClient) applet).getGameState());;
+
+                if (((RSClient) applet).getGameState() > 10){
+                    RSNPC[] npcs = ((RSClient) applet).getNpcs();
+                    System.out.println("NPCS: " + npcs.length);
+                }
             }
 
         } catch (Exception e) {
