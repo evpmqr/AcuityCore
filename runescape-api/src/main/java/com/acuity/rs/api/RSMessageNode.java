@@ -4,15 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSMessageNode extends RSCacheableNode {
 
-    java.lang.String getSender();
-
-    java.lang.String getValue();
-
-    int getType();
+    int getId();
 
     java.lang.String getName();
 
-    int getId();
+    java.lang.String getSender();
 
     int getTick();
+
+    int getType();
+
+    java.lang.String getValue();
 }

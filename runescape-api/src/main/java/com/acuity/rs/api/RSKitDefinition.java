@@ -4,23 +4,23 @@ package com.acuity.rs.api;
 
 public interface RSKitDefinition extends RSCacheableNode {
 
-    boolean isNonSelectable();
+    int getBodyPartId();
 
     int[] getModelIds();
 
-    short[] getRetextureToReplace();
-
-    int getBodyPartId();
-
-    short[] getRetextureToFind();
-
     int[] getModels();
-
-    short[] getRecolorToReplace();
 
     short[] getRecolorToFind();
 
-    boolean invokeReady();
+    short[] getRecolorToReplace();
+
+    short[] getRetextureToFind();
+
+    short[] getRetextureToReplace();
 
     RSModelComposite invokeGetModelData();
+
+    boolean invokeReady();
+
+    boolean isNonSelectable();
 }

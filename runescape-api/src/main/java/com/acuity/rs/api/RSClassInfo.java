@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSClassInfo extends RSNode {
 
-    java.lang.reflect.Method[] getMethods();
+    java.lang.reflect.Field[] getFields();
 
     byte[][][] getMethodArgs();
 
-    java.lang.reflect.Field[] getFields();
+    java.lang.reflect.Method[] getMethods();
 }

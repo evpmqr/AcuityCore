@@ -4,15 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSGrandExchangeOffer {
 
-    int getItemQuantity();
+    int getItemId();
 
-    int getQuantitySold();
+    int getItemQuantity();
 
     int getPrice();
 
-    byte getStatus();
-
-    int getItemId();
+    int getQuantitySold();
 
     int getSpentMoney();
+
+    byte getStatus();
 }

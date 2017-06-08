@@ -6,9 +6,9 @@ public interface RSNormalVertex {
 
     int getMagnitude();
 
-    int getY();
-
     int getX();
+
+    int getY();
 
     int getZ();
 }

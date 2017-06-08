@@ -6,7 +6,7 @@ public interface RSSceneTilePaint {
 
     int getRgb();
 
-    boolean isFlatShade();
-
     int getTexture();
+
+    boolean isFlatShade();
 }

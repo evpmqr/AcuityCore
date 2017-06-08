@@ -8,7 +8,7 @@ public interface RSScriptState {
 
     com.acuity.rs.api.RSScript getInvokedFromScript();
 
-    java.lang.String[] getSavedLocalStrings();
-
     int[] getSavedLocalInts();
+
+    java.lang.String[] getSavedLocalStrings();
 }

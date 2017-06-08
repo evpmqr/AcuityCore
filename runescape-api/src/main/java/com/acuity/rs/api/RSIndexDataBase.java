@@ -4,27 +4,27 @@ package com.acuity.rs.api;
 
 public interface RSIndexDataBase {
 
-    int[] getArchiveNames();
-
     int[] getArchiveCrcs();
 
     int[][] getArchiveFileIds();
 
-    com.acuity.rs.api.RSIdentityTable[] getChildren();
-
-    int[] getArchiveRevisions();
-
-    com.acuity.rs.api.RSIdentityTable getEntry();
+    int[][] getArchiveFileNames();
 
     int[] getArchiveIds();
 
-    java.lang.Object[][] getBuffer();
-
-    int getValidArchivesCount();
-
-    int[][] getArchiveFileNames();
+    int[] getArchiveNames();
 
     int[] getArchiveNumberOfFiles();
+
+    int[] getArchiveRevisions();
+
+    java.lang.Object[][] getBuffer();
+
+    com.acuity.rs.api.RSIdentityTable[] getChildren();
+
+    com.acuity.rs.api.RSIdentityTable getEntry();
+
+    int getValidArchivesCount();
 
     byte invokeUnpack(int var0, int var1, int var2);
 }

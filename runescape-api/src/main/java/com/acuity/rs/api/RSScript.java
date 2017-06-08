@@ -4,17 +4,17 @@ package com.acuity.rs.api;
 
 public interface RSScript extends RSCacheableNode {
 
-    java.lang.String[] getStringOperands();
-
-    int getStringStackCount();
-
-    int getLocalStringCount();
-
-    int getLocalIntCount();
-
-    int getIntStackCount();
+    int[] getInstructions();
 
     int[] getIntOperands();
 
-    int[] getInstructions();
+    int getIntStackCount();
+
+    int getLocalIntCount();
+
+    int getLocalStringCount();
+
+    java.lang.String[] getStringOperands();
+
+    int getStringStackCount();
 }

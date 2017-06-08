@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSBufferProvider {
 
+    int getHeight();
+
     int[] getPixels();
 
     int getWidth();
-
-    int getHeight();
 }

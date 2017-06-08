@@ -6,13 +6,13 @@ public interface RSSceneBoundary {
 
     com.acuity.rs.api.RSRenderable getEntity();
 
-    int getUid();
+    int getLevel();
 
     com.acuity.rs.api.RSRenderable getRenderable2();
-
-    int getLevel();
 
     int getSceneX();
 
     int getSceneY();
+
+    int getUid();
 }

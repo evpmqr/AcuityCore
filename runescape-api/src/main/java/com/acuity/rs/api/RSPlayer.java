@@ -6,19 +6,19 @@ public interface RSPlayer extends RSActor {
 
     java.lang.String[] getActions();
 
-    int getSkullIcon();
-
-    java.lang.String getName();
-
     com.acuity.rs.api.RSPlayerComposite getAppearance();
 
-    int getTeam();
+    int getCombatLevel();
 
     com.acuity.rs.api.RSModel getModel();
 
-    int getTotalLevel();
+    java.lang.String getName();
 
     int getPrayerIcon();
 
-    int getCombatLevel();
+    int getSkullIcon();
+
+    int getTeam();
+
+    int getTotalLevel();
 }

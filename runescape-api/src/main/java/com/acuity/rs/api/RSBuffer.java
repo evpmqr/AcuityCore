@@ -4,47 +4,47 @@ package com.acuity.rs.api;
 
 public interface RSBuffer extends RSNode {
 
-    byte[] getPayload();
-
     int getOffset();
 
-    void invokeEncryptXtea2(int var0);
-
-    void invokePutByte(int var0);
+    byte[] getPayload();
 
     void invokeDecryptXtea(int var0);
 
-    int invokeReadShortSmart();
-
-    void invokePutVarInt(int var0);
-
     void invokeEncryptXtea(int var0, int var1, int var2);
+
+    void invokeEncryptXtea2(int var0);
+
+    void invokePut24bitInt(int var0);
+
+    void invokePutByte(int var0);
+
+    void invokePutBytes(byte var0, int var1, int var2);
+
+    void invokePutInt(int var0);
 
     void invokePutLong(long var0);
 
-    long invokeReadLong();
+    void invokePutShort(int var0);
 
-    java.lang.String invokeReadString();
+    void invokePutVarInt(int var0);
+
+    int invokeRead24BitInt();
 
     void invokeReadBytes(byte var0, int var1, int var2);
 
     int invokeReadInt();
 
-    void invokePutShort(int var0);
-
-    int invokeReadUnsignedByte();
-
-    void invokePut24bitInt(int var0);
-
-    void invokePutBytes(byte var0, int var1, int var2);
-
-    int invokeReadVarInt();
+    long invokeReadLong();
 
     int invokeReadShort();
 
+    int invokeReadShortSmart();
+
+    java.lang.String invokeReadString();
+
+    int invokeReadUnsignedByte();
+
     int invokeReadUnsignedShort();
 
-    int invokeRead24BitInt();
-
-    void invokePutInt(int var0);
+    int invokeReadVarInt();
 }

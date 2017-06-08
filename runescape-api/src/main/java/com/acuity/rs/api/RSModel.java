@@ -4,13 +4,13 @@ package com.acuity.rs.api;
 
 public interface RSModel extends RSRenderable {
 
-    int[] getXTriangles();
-
     int[] getVerticesX();
 
     int[] getVerticesY();
 
     int[] getVerticesZ();
+
+    int[] getXTriangles();
 
     int[] getYTriangles();
 

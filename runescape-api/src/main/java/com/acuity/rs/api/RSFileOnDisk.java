@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSFileOnDisk {
 
-    long getLength();
-
     java.io.RandomAccessFile getFile();
+
+    long getLength();
 
     long getPosition();
 }

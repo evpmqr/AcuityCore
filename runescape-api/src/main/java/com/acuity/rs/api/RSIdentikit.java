@@ -4,8 +4,6 @@ package com.acuity.rs.api;
 
 public interface RSIdentikit {
 
-    boolean isShowing();
-
     int getId();
 
     int[] getTranslator_x();
@@ -13,4 +11,6 @@ public interface RSIdentikit {
     int[] getTranslator_y();
 
     int[] getTranslator_z();
+
+    boolean isShowing();
 }

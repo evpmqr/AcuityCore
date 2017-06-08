@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSCoordinates {
 
+    int getPlane();
+
     int getWorldX();
 
     int getWorldY();
-
-    int getPlane();
 }

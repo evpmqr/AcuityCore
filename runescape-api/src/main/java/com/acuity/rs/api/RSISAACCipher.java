@@ -10,7 +10,7 @@ public interface RSISAACCipher {
 
     int getValuesRemaining();
 
-    int invokeNextInt();
-
     void invokeGenerateMoreResults();
+
+    int invokeNextInt();
 }

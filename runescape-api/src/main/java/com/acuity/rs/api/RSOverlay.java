@@ -6,13 +6,13 @@ public interface RSOverlay extends RSCacheableNode {
 
     int getColor();
 
-    int getSaturation();
+    int getHue();
 
     int getLightness();
 
-    int getTexture();
+    int getSaturation();
 
-    int getHue();
+    int getTexture();
 
     boolean isIsHidden();
 }

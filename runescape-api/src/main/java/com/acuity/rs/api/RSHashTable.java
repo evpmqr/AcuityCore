@@ -8,9 +8,9 @@ public interface RSHashTable {
 
     com.acuity.rs.api.RSNode getHead();
 
-    int getSize();
-
     int getIndex();
+
+    int getSize();
 
     com.acuity.rs.api.RSNode getTail();
 }

@@ -4,15 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSSceneTileDecor {
 
+    com.acuity.rs.api.RSRenderable getEntity();
+
     int getLevel();
 
     int getRenderInfoBitPacked();
 
-    com.acuity.rs.api.RSRenderable getEntity();
-
-    int getUid();
-
     int getSceneX();
 
     int getSceneY();
+
+    int getUid();
 }

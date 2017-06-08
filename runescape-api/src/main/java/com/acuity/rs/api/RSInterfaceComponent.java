@@ -4,97 +4,97 @@ package com.acuity.rs.api;
 
 public interface RSInterfaceComponent extends RSNode {
 
-    int getScrollWidth();
+    java.lang.String[] getActions();
 
-    int getModelId();
-
-    int getRelativeX();
-
-    int getRelativeY();
-
-    int getShadowColor();
-
-    int getScrollX();
-
-    int getFondId();
-
-    int getWidth();
+    int getBorderThickness();
 
     int getBoundsIndex();
 
-    int getItemId();
+    int getComponentIndex();
 
-    java.lang.String[] getActions();
+    com.acuity.rs.api.RSInterfaceComponent[] getComponents();
+
+    int getContentType();
+
+    int[][] getDynamicValues();
+
+    int getFondId();
+
+    int getHeight();
 
     int getInsetY();
 
-    com.acuity.rs.api.RSInterfaceComponent getParent();
+    int getItemId();
 
-    int getHeight();
+    int[] getItemIds();
+
+    int getItemStackSize();
+
+    int[] getItemStackSizes();
+
+    int getModelId();
+
+    int getModelType();
+
+    java.lang.String getName();
+
+    int getOpacity();
+
+    int getOriginalWidth();
 
     int getOriginalX();
 
     int getOriginalY();
 
-    int getOriginalWidth();
+    com.acuity.rs.api.RSInterfaceComponent getParent();
 
-    boolean isFlippedHorizontally();
+    int getParentUid();
 
-    java.lang.String getText();
+    int getRelativeX();
 
-    int getItemStackSize();
+    int getRelativeY();
 
-    int getComponentIndex();
+    int getRotationX();
 
-    boolean isIsHidden();
+    int getRotationY();
 
-    int getUid();
+    int getRotationZ();
 
-    boolean isFlippedVertically();
+    int getScrollHeight();
 
-    int[] getItemStackSizes();
+    int getScrollWidth();
 
-    boolean isHasScript();
-
-    int getContentType();
-
-    int getTextColor();
+    int getScrollX();
 
     java.lang.String getSelectedAction();
 
-    int getBorderThickness();
+    int getShadowColor();
 
-    java.lang.String getName();
+    int getSpriteId();
 
-    int[][] getDynamicValues();
+    java.lang.String[] getTableActions();
+
+    java.lang.String getText();
+
+    int getTextColor();
 
     java.lang.String getTooltip();
+
+    int getType();
+
+    int getUid();
+
+    int getWidth();
 
     int getXPadding();
 
     int getYPadding();
 
-    com.acuity.rs.api.RSInterfaceComponent[] getComponents();
+    boolean isFlippedHorizontally();
 
-    java.lang.String[] getTableActions();
+    boolean isFlippedVertically();
 
-    int getParentUid();
+    boolean isHasScript();
 
-    int getModelType();
-
-    int getOpacity();
-
-    int getSpriteId();
-
-    int[] getItemIds();
-
-    int getRotationZ();
-
-    int getRotationY();
-
-    int getRotationX();
-
-    int getScrollHeight();
-
-    int getType();
+    boolean isIsHidden();
 }

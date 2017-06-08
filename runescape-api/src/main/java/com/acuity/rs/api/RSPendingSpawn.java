@@ -4,19 +4,19 @@ package com.acuity.rs.api;
 
 public interface RSPendingSpawn extends RSNode {
 
-    int getLevel();
+    int getDelay();
 
     int getHitpoints();
+
+    int getId();
+
+    int getLevel();
+
+    int getOrientation();
 
     int getSceneX();
 
     int getSceneY();
 
-    int getOrientation();
-
-    int getId();
-
     int getType();
-
-    int getDelay();
 }

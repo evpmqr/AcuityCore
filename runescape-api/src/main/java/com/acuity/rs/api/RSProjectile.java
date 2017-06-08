@@ -4,45 +4,45 @@ package com.acuity.rs.api;
 
 public interface RSProjectile extends RSRenderable {
 
+    com.acuity.rs.api.RSAnimationSequence getAnimationSequence();
+
     double getCurrentY();
 
     int getCycle();
 
-    int getYRotation();
-
-    int getStartTime();
-
-    double getHeightOffset();
-
-    double getZ();
-
     int getFloor();
-
-    double getSpeedY();
-
-    int getId();
-
-    com.acuity.rs.api.RSAnimationSequence getAnimationSequence();
-
-    double getVelocityY();
-
-    double getVelocityZ();
-
-    double getVelocityX();
-
-    int getInteracting();
 
     int getHeight();
 
-    boolean isIsMoving();
+    double getHeightOffset();
 
-    int getTargetDistance();
+    int getId();
 
-    int getXRotation();
+    int getInteracting();
+
+    int getSlope();
+
+    double getSpeedY();
+
+    int getStartTime();
 
     int getStrictX();
 
     int getStrictY();
 
-    int getSlope();
+    int getTargetDistance();
+
+    double getVelocityX();
+
+    double getVelocityY();
+
+    double getVelocityZ();
+
+    int getXRotation();
+
+    int getYRotation();
+
+    double getZ();
+
+    boolean isIsMoving();
 }

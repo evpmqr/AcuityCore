@@ -4,13 +4,13 @@ package com.acuity.rs.api;
 
 public interface RSCollisionData {
 
+    int[][] getFlags();
+
     int getHeight();
 
     int getInsetX();
 
     int getInsetY();
-
-    int[][] getFlags();
 
     int getWidth();
 }

@@ -4,17 +4,17 @@ package com.acuity.rs.api;
 
 public interface RSItemLayer {
 
-    com.acuity.rs.api.RSRenderable getTop();
-
     com.acuity.rs.api.RSRenderable getBottom();
 
-    com.acuity.rs.api.RSRenderable getMiddle();
-
-    int getHeight();
+    int getFlags();
 
     int getHash();
 
-    int getFlags();
+    int getHeight();
+
+    com.acuity.rs.api.RSRenderable getMiddle();
+
+    com.acuity.rs.api.RSRenderable getTop();
 
     int getX();
 

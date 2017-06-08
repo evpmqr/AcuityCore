@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSHitBar extends RSNode {
 
-    int getHealth();
-
     int getCycle();
+
+    int getHealth();
 
     int getHealthRatio();
 }

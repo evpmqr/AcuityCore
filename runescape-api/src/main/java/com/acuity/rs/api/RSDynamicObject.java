@@ -4,15 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSDynamicObject extends RSRenderable {
 
-    int getOrientation();
-
     int getId();
 
-    int getSceneY();
+    int getLevel();
+
+    int getOrientation();
 
     int getSceneX();
 
-    int getLevel();
+    int getSceneY();
 
     int getType();
 }

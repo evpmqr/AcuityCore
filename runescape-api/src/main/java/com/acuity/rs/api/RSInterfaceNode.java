@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSInterfaceNode extends RSNode {
 
-    int getState();
-
     int getId();
+
+    int getState();
 }

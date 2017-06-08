@@ -4,13 +4,13 @@ package com.acuity.rs.api;
 
 public interface RSSceneTileModel {
 
-    int getUnderlay();
+    int getOverlay();
 
     int getRotation();
 
-    int getOverlay();
+    int getShape();
+
+    int getUnderlay();
 
     boolean isFlatShade();
-
-    int getShape();
 }

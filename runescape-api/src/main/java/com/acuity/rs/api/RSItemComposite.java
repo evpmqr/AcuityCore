@@ -4,93 +4,93 @@ package com.acuity.rs.api;
 
 public interface RSItemComposite extends RSCacheableNode {
 
-    int getFemaleOffset();
+    int getAmbient();
 
-    java.lang.String getName();
+    short[] getColourToReplace();
 
-    int getYan2d();
+    short[] getColourToReplaceWith();
 
-    int getNotedTemplate();
+    int getContrast();
+
+    int[] getCountCo();
+
+    int[] getCountObj();
+
+    int getFemaleHeadModel();
+
+    int getFemaleHeadModel2();
 
     int getFemaleModel();
 
     int getFemaleModel1();
 
-    int getOffsetX2d();
-
     int getFemaleModel2();
 
-    int getInventoryModel();
-
-    int getContrast();
-
-    int getZan2d();
-
-    int getFemaleHeadModel();
-
-    int getTeam();
-
-    short[] getColourToReplaceWith();
-
-    int[] getCountObj();
-
-    int[] getCountCo();
-
-    int getId();
-
-    int getOffsetY2d();
-
-    int getFemaleHeadModel2();
-
-    int getMaleHeadModel2();
-
-    int getZoom2d();
-
-    int getMaleHeadModel();
-
-    short[] getTextToReplaceWith();
-
-    int getAmbient();
-
-    boolean isIsMembers();
-
-    int getMaleOffset();
-
-    short[] getColourToReplace();
-
-    int getNote();
+    int getFemaleOffset();
 
     java.lang.String[] getGroundActions();
 
-    int getPrice();
+    int getId();
 
     java.lang.String[] getInventoryActions();
 
-    short[] getTextureToReplace();
+    int getInventoryModel();
 
-    int getResizeX();
+    int getIsStackable();
 
-    int getResizeZ();
+    int getMaleHeadModel();
 
-    int getResizeY();
+    int getMaleHeadModel2();
 
     int getMaleModel();
-
-    int getXan2d();
 
     int getMaleModel1();
 
     int getMaleModel2();
 
-    int getIsStackable();
+    int getMaleOffset();
+
+    java.lang.String getName();
+
+    int getNote();
+
+    int getNotedTemplate();
+
+    int getOffsetX2d();
+
+    int getOffsetY2d();
+
+    int getPrice();
+
+    int getResizeX();
+
+    int getResizeY();
+
+    int getResizeZ();
+
+    int getTeam();
+
+    short[] getTextToReplaceWith();
+
+    short[] getTextureToReplace();
+
+    int getXan2d();
+
+    int getYan2d();
+
+    int getZan2d();
+
+    int getZoom2d();
+
+    boolean invokeGetEquipmentModel(boolean var0);
+
+    RSModel invokeGetModel(int var0);
 
     RSModelComposite invokeGetWornModelData(boolean var0);
 
     void invokeLoadBuffer(RSBuffer var0);
 
-    boolean invokeGetEquipmentModel(boolean var0);
-
     void invokePopulateFromBuffer(RSBuffer var0, int var1);
 
-    RSModel invokeGetModel(int var0);
+    boolean isIsMembers();
 }

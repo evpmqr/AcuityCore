@@ -4,13 +4,13 @@ package com.acuity.rs.api;
 
 public interface RSGraphicsObject extends RSRenderable {
 
-    int getSceneX();
-
-    int getSceneY();
-
-    int getLevel();
-
     int getHeight();
 
     int getId();
+
+    int getLevel();
+
+    int getSceneX();
+
+    int getSceneY();
 }

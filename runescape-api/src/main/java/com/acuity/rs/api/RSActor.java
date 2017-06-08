@@ -4,41 +4,41 @@ package com.acuity.rs.api;
 
 public interface RSActor extends RSRenderable {
 
-    int getSubAnimationFrame();
-
-    java.lang.String getOverhead();
-
     int getActionAnimationDisable();
 
     int getActionFrame();
 
-    int getOrientation();
-
-    int getPoseAnimation();
-
-    int getTargetIndex();
-
-    int getQueueSize();
-
     int getAngle();
 
-    int getSpellAnimationId();
+    int getAnimation();
+
+    com.acuity.rs.api.RSCombatInfoList getHealthBars();
 
     int[] getHitsplatCycles();
 
     int getIdlePoseAnimation();
 
-    com.acuity.rs.api.RSCombatInfoList getHealthBars();
+    int getOrientation();
 
-    int getStrictY();
-
-    int[] getPathY();
-
-    int getStrictX();
+    java.lang.String getOverhead();
 
     int[] getPathX();
 
-    int getAnimation();
+    int[] getPathY();
+
+    int getPoseAnimation();
+
+    int getQueueSize();
+
+    int getSpellAnimationId();
+
+    int getStrictX();
+
+    int getStrictY();
+
+    int getSubAnimationFrame();
+
+    int getTargetIndex();
 
     boolean isInSequence();
 }

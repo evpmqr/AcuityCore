@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSAudioEffect {
 
-    com.acuity.rs.api.RSAudioInstrument[] getInstruments();
-
     int getEnd();
+
+    com.acuity.rs.api.RSAudioInstrument[] getInstruments();
 
     int getStart();
 }

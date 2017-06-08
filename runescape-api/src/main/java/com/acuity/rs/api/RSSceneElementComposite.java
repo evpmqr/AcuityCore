@@ -4,71 +4,71 @@ package com.acuity.rs.api;
 
 public interface RSSceneElementComposite extends RSCacheableNode {
 
-    int[] getObjectTypes();
-
-    int[] getObjectModels();
-
     java.lang.String[] getActions();
 
-    int getOffsetHeight();
+    int getAmbient();
 
-    boolean isIsRotated();
+    int getAmbientSoundId();
+
+    int getAnimationId();
+
+    int getClipType();
+
+    short[] getColors();
+
+    int getContrast();
+
+    int getId();
+
+    int getMapIconId();
+
+    int getMapSceneId();
+
+    int getModelSizeHeight();
 
     int getModelSizeX();
 
     int getModelSizeY();
 
-    int getId();
+    java.lang.String getName();
 
     short[] getNewColors();
 
-    int getClipType();
+    int[] getObjectModels();
+
+    int[] getObjectTypes();
+
+    int getOffsetHeight();
+
+    int getOffsetX();
+
+    int getOffsetY();
 
     int getSizeX();
 
     int getSizeY();
 
-    int getMapSceneId();
+    short[] getTextureToFind();
 
     short[] getTextureToReplace();
 
-    short[] getTextureToFind();
-
-    int getModelSizeHeight();
-
-    int getContrast();
-
-    int getAmbientSoundId();
-
-    java.lang.String getName();
-
-    short[] getColors();
+    int[] getTransformIds();
 
     int getVarpId();
 
-    boolean isNonFlatShading();
-
-    int getMapIconId();
-
-    int getAmbient();
-
-    int getAnimationId();
-
     int getVarpIndex();
 
-    int getOffsetY();
-
-    int getOffsetX();
-
-    int[] getTransformIds();
-
-    boolean isClipped();
-
-    boolean isIsSolid();
-
-    boolean isClipped1();
+    RSSceneElementComposite invokeGetImpostor();
 
     void invokeLoadData(RSBuffer var0, int var1);
 
-    RSSceneElementComposite invokeGetImpostor();
+    boolean isClipped();
+
+    boolean isClipped1();
+
+    boolean isIsRotated();
+
+    boolean isIsSolid();
+
+    boolean isNonFlatShading();
 }

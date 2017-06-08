@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSNormalFace {
 
+    int getX();
+
     int getY();
 
     int getZ();
-
-    int getX();
 }

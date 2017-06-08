@@ -4,19 +4,19 @@ package com.acuity.rs.api;
 
 public interface RSAudioEnvelope {
 
-    int getMax();
-
-    int getTicks();
-
-    int getPhaseIndex();
+    int getAmplitude();
 
     int getEnd();
 
+    int getMax();
+
+    int getPhaseIndex();
+
     int[] getPhases();
 
-    int getAmplitude();
+    int getStart();
 
     int getStep();
 
-    int getStart();
+    int getTicks();
 }

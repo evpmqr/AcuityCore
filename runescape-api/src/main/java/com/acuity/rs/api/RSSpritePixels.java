@@ -4,17 +4,17 @@ package com.acuity.rs.api;
 
 public interface RSSpritePixels extends RSRasterizer2D {
 
-    int getMaxWidth();
-
-    int[] getPixels();
-
     int getHeight();
 
     int getMaxHeight();
 
+    int getMaxWidth();
+
     int getOffsetX();
 
     int getOffsetY();
+
+    int[] getPixels();
 
     int getWidth();
 }

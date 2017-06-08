@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSAudioInstrument {
 
-    com.acuity.rs.api.RSAudioEnvelope getPitchEnvelope();
-
     int[] getOscillatorPitch();
+
+    com.acuity.rs.api.RSAudioEnvelope getPitchEnvelope();
 }

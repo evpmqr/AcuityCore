@@ -4,9 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSSceneElement {
 
-    int getFlags();
+    int getEndSceneX();
+
+    int getEndSceneY();
 
     com.acuity.rs.api.RSRenderable getEntity();
+
+    int getFlags();
+
+    int getHeight();
 
     int getLevel();
 
@@ -16,15 +22,9 @@ public interface RSSceneElement {
 
     int getOrientation();
 
-    int getSceneY();
-
     int getSceneX();
 
-    int getEndSceneY();
-
-    int getEndSceneX();
+    int getSceneY();
 
     int getUid();
-
-    int getHeight();
 }

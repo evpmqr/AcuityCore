@@ -4,57 +4,57 @@ package com.acuity.rs.api;
 
 public interface RSModelComposite extends RSRenderable {
 
-    byte[] getTextureRenderTypes();
-
-    int getTriangleFaceCount();
-
-    int[] getVertexX();
-
-    byte[] getFaceRenderPriorities();
-
-    byte[] getTextureCoords();
-
-    int[] getVertexZ();
-
-    int[] getVertexY();
-
-    byte getPriority();
-
-    short[] getFaceTextures();
+    byte[] getFaceAlphas();
 
     short[] getFaceColor();
 
+    com.acuity.rs.api.RSNormalFace[] getFaceNormals();
+
+    byte[] getFaceRenderPriorities();
+
     byte[] getFaceRenderType();
 
-    int getVertexCount();
-
-    int[] getTriangleSkinValues();
+    short[] getFaceTextures();
 
     com.acuity.rs.api.RSNormalVertex[] getNormals();
 
-    short[] getTexTriangleZ();
+    byte getPriority();
 
     short[] getTexTriangleX();
 
     short[] getTexTriangleY();
 
+    short[] getTexTriangleZ();
+
+    byte[] getTextureCoords();
+
     short[] getTexturePrimaryColor();
 
-    byte[] getFaceAlphas();
+    byte[] getTextureRenderTypes();
+
+    int getTriangleFaceCount();
 
     int[] getTrianglePointsX();
 
     int[] getTrianglePointsY();
 
-    int[] getVertexSkins();
-
-    com.acuity.rs.api.RSNormalFace[] getFaceNormals();
-
     int[] getTrianglePointsZ();
 
-    RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
+    int[] getTriangleSkinValues();
+
+    int getVertexCount();
+
+    int[] getVertexSkins();
+
+    int[] getVertexX();
+
+    int[] getVertexY();
+
+    int[] getVertexZ();
 
     void invokeComputeAnimationTables();
 
     void invokeComputeNormals();
+
+    RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
 }

@@ -4,13 +4,21 @@ package com.acuity.rs.api;
 
 public interface RSAnimationSequence extends RSCacheableNode {
 
-    boolean isStretches();
+    int getForcedPriority();
 
-    int getMaxLoops();
+    int[] getFrameIDs();
+
+    int[] getFrameLenghts();
+
+    int getFrameStep();
+
+    int[] getInterleaveLeave();
 
     int getLeftHandItem();
 
-    int[] getFrameIDs();
+    int getMaxLoops();
+
+    int getPrecedenceAnimating();
 
     int getPriority();
 
@@ -18,13 +26,5 @@ public interface RSAnimationSequence extends RSCacheableNode {
 
     int getRightHandItem();
 
-    int getFrameStep();
-
-    int[] getInterleaveLeave();
-
-    int getForcedPriority();
-
-    int getPrecedenceAnimating();
-
-    int[] getFrameLenghts();
+    boolean isStretches();
 }

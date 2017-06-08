@@ -4,11 +4,11 @@ package com.acuity.rs.api;
 
 public interface RSFriendsListMember {
 
-    int getWorld();
-
-    int getRank();
+    java.lang.String getName();
 
     java.lang.String getPreviousName();
 
-    java.lang.String getName();
+    int getRank();
+
+    int getWorld();
 }

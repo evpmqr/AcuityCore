@@ -4,17 +4,17 @@ package com.acuity.rs.api;
 
 public interface RSWorld {
 
-    int getIndex();
-
-    int getMask();
-
-    int getLocation();
-
     java.lang.String getActivity();
+
+    java.lang.String getDomain();
 
     int getId();
 
-    int getPopulation();
+    int getIndex();
 
-    java.lang.String getDomain();
+    int getLocation();
+
+    int getMask();
+
+    int getPopulation();
 }
