@@ -2,7 +2,6 @@ package com.acuity.api.rs.peers;
 
 import com.acuity.api.rs.peers.mobile.Npc;
 import com.acuity.api.rs.peers.mobile.Player;
-import com.acuity.api.rs.query.Npcs;
 import com.acuity.rs.api.RSClient;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
@@ -62,6 +61,62 @@ public class Client {
 
     public int getGameState() {
         return rsClient.getGameState();
+    }
+
+    public int[][][] getTileHeights() {
+        return rsClient.getTileHeights();
+    }
+
+    public byte[][][] getSceneRenderRules() {
+        return rsClient.getSceneRenderRules();
+    }
+
+    public int getCameraX() {
+        return rsClient.getCameraX();
+    }
+
+    public int getCameraY() {
+        return rsClient.getCameraY();
+    }
+
+    public int getCameraZ() {
+        return rsClient.getCameraZ();
+    }
+
+    public int getCameraPitch() {
+        return rsClient.getCameraPitch();
+    }
+
+    public int getCameraYaw() {
+        return rsClient.getCameraYaw();
+    }
+
+    public int getViewportHeight() {
+        return rsClient.getViewportHeight();
+    }
+
+    public int getViewportScale() {
+        return rsClient.getViewportScale();
+    }
+
+    public int getViewportWidth() {
+        return rsClient.getViewportWidth();
+    }
+
+    public int getMapScale() {
+        return rsClient.getMapScale();
+    }
+
+    public int getMapRotation() {
+        return rsClient.getMapRotation();
+    }
+
+    public int getMinimapOffset() {
+        return rsClient.getMinimapOffset();
+    }
+
+    public boolean isResized() {
+        return rsClient.isResized();
     }
 
     public RSClient getRsClient(){

@@ -2,10 +2,10 @@ package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.movement.Tile;
+import com.acuity.api.rs.movement.SceneLocation;
+import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.peers.mobile.Actor;
 import com.acuity.api.rs.peers.mobile.Player;
-import com.acuity.api.rs.query.Players;
 
 import java.util.Optional;
 
@@ -21,16 +21,12 @@ public class LocalPlayer {
         return AcuityInstance.getClient().getLocalPlayer();
     }
 
-    public static Tile getLocation() {
-        return get().map(Locatable::toLocation).orElse(null);
+    public static WorldLocation getWorldLocation() {
+        return get().map(Locatable::getWorldLocation).orElse(null);
     }
 
-    public static int getX() {
-        return getLocation().getX();
-    }
-
-    public static int getY() {
-        return getLocation().getY();
+    public static SceneLocation getSceneLocation() {
+        return get().map(Locatable::getSceneLocation).orElse(null);
     }
 
     public static boolean isAnimating() {

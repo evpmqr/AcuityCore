@@ -1,9 +1,10 @@
 package com.acuity.api.rs.interfaces;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.movement.SceneTile;
-import com.acuity.api.rs.movement.Tile;
+import com.acuity.api.rs.movement.SceneLocation;
+import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.utils.LocalPlayer;
+import com.google.common.base.Preconditions;
 
 /**
  * Created by Eclipseop.
@@ -11,64 +12,48 @@ import com.acuity.api.rs.utils.LocalPlayer;
  */
 public interface Locatable {
 
-    default int getSceneX() {
-        System.out.println("Locatable: returning default sceneX: " + this.getClass().getName());
-        return 0;
-    }
+    int getSceneX();
 
-    default int getSceneY() {
-        System.out.println("Locatable: returning default sceneY: " + this.getClass().getName());
-        return 0;
-    }
+    int getSceneY();
 
     default int getPlane() {
         return AcuityInstance.getClient().getPlane();
     }
 
-    default int getX() {
-        return toLocation().getX();
+    default WorldLocation getWorldLocation() {
+        return new WorldLocation(getSceneX() + AcuityInstance.getClient().getBaseSceneX(), getSceneY() + AcuityInstance.getClient().getBaseSceneY(), getPlane());
     }
 
-    default int getY() {
-        return toLocation().getY();
-    }
-
-    default Tile toLocation() {
-        return new Tile(getSceneX() + AcuityInstance.getClient().getBaseSceneX(), getSceneY() + AcuityInstance.getClient().getBaseSceneY(), getPlane());
-    }
-
-    default SceneTile toSceneTile() {
-        return new SceneTile(getSceneX(), getSceneY(), getPlane());
+    default SceneLocation getSceneLocation() {
+        return new SceneLocation(getSceneX(), getSceneY(), getPlane());
     }
 
     default int distance() {
-        return distance(LocalPlayer.getLocation());
+        return distance(LocalPlayer.getWorldLocation());
     }
 
     default boolean isOnMiniMap() {
-        return toLocation().isOnMiniMap();
+        return getWorldLocation().isOnMiniMap();
     }
 
     default int distance(Locatable locatable) {
-        return (int) Math.round(distancePrecise(locatable));
+        return Math.toIntExact(Math.round(distancePrecise(locatable)));
     }
 
     default double distancePrecise() {
-        return distancePrecise(LocalPlayer.getLocation());
+        return distancePrecise(LocalPlayer.getWorldLocation());
     }
 
     default double distancePrecise(Locatable locatable) {
-        if (locatable == null) {
-            return Integer.MAX_VALUE - 1;
-        }
+        Preconditions.checkNotNull(locatable);
 
-        Tile t = locatable.toLocation();
-        Tile t2 = toLocation();
+        WorldLocation location1 = locatable.getWorldLocation();
+        WorldLocation location2 = getWorldLocation();
 
         if (this.getPlane() != this.getPlane()) {
             return Integer.MAX_VALUE - 1;
         }
 
-        return Math.hypot(t.getX() - t2.getX(), t.getY() - t2.getY());
+        return Math.hypot(location1.getWorldY() - location2.getWorldY(), location1.getWorldX() - location2.getWorldX());
     }
 }

@@ -1,24 +1,28 @@
 package com.acuity.api.rs.movement;
 
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.Scene;
 
 /**
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class SceneTile implements Locatable {
+public class SceneLocation implements Locatable {
 
-	private int x;
-	private int y;
+	private int baseX, baseY;
+	private int sceneX;
+	private int sceneY;
 	private int plane;
 
-	public SceneTile(int x, int y, int plane) {
-		this.x = x;
-		this.y = y;
+	public SceneLocation(int x, int y, int plane) {
+		this.sceneX = x;
+		this.sceneY = y;
 		this.plane = plane;
+		this.baseX = Scene.getBaseX();
+		this.baseY = Scene.getBaseY();
 	}
 
-	public SceneTile(int x, int y) {
+	public SceneLocation(int x, int y) {
 		this(x, y, 0);
 	}
 
@@ -28,12 +32,12 @@ public class SceneTile implements Locatable {
 
 	@Override
 	public int getSceneX() {
-		return x;
+		return sceneX;
 	}
 
 	@Override
 	public int getSceneY() {
-		return y;
+		return sceneY;
 	}
 
 	@Override
