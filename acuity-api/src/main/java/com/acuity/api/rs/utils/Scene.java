@@ -1,6 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.movement.SceneLocation;
+import com.acuity.api.rs.movement.WorldLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

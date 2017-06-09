@@ -1,7 +1,7 @@
 package com.acuity.api.rs.movement;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.utils.Map;
 import com.acuity.api.rs.utils.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,18 +35,29 @@ public class SceneLocation implements Locatable {
 		return getSceneX() > 3 && getSceneX() <= 98 && getSceneY() > 3 && getSceneY() <= 98;
 	}
 
-	@Override
 	public int getSceneX() {
 		return sceneX;
 	}
 
-	@Override
 	public int getSceneY() {
 		return sceneY;
+	}
+
+	public int getBaseX() {
+		return baseX;
+	}
+
+	public int getBaseY() {
+		return baseY;
 	}
 
 	@Override
 	public int getPlane() {
 		return plane;
+	}
+
+	@Override
+	public WorldLocation getWorldLocation() {
+		return new WorldLocation(getSceneX() + getBaseX(), getSceneY() + getBaseY(), getPlane());
 	}
 }

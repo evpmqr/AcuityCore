@@ -68,7 +68,7 @@ public class Perspective {
 
     public static Point worldToMiniMap(int x, int y, int distance)
     {
-        int angle = Map.getScale() + Map.getRotation() & 0x7FF;
+        int angle = MiniMap.getScale() + MiniMap.getRotation() & 0x7FF;
 
         SceneLocation sceneLocation = LocalPlayer.getSceneLocation();
         x = x / 32 - sceneLocation.getSceneX() / 32;
@@ -80,8 +80,8 @@ public class Perspective {
             int sin = SINE[angle];
             int cos = COSINE[angle];
 
-            sin = sin * 256 / (Map.getOffset() + 256);
-            cos = cos * 256 / (Map.getOffset() + 256);
+            sin = sin * 256 / (MiniMap.getOffset() + 256);
+            cos = cos * 256 / (MiniMap.getOffset() + 256);
 
             int xx = y * sin + cos * x >> 16;
             int yy = sin * x - y * cos >> 16;

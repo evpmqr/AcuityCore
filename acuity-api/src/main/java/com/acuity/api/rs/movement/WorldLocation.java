@@ -2,7 +2,6 @@ package com.acuity.api.rs.movement;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.utils.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,38 +41,7 @@ public class WorldLocation implements Locatable {
 	}
 
 	@Override
-	public int getSceneX() {
-		return getWorldY() - AcuityInstance.getClient().getBaseSceneX();
-	}
-
-	@Override
-	public int getSceneY() {
-		return getWorldX() - AcuityInstance.getClient().getBaseSceneY();
-	}
-
-	@Override
 	public WorldLocation getWorldLocation() {
 		return this;
-	}
-
-	@Override
-	public String toString() {
-		return "WorldLocation{" +
-				"worldX=" + worldX +
-				", worldY=" + worldY +
-				", plane=" + plane +
-				'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		WorldLocation tile = (WorldLocation) o;
-
-		if (worldX != tile.worldX) return false;
-		if (worldY != tile.worldY) return false;
-		return plane == tile.plane;
 	}
 }

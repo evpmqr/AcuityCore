@@ -3,7 +3,6 @@ package com.acuity.api;
 import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSStub;
 import com.acuity.api.rs.peers.Client;
-import com.acuity.api.rs.utils.Map;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.EventBus;
@@ -57,7 +56,7 @@ public class AcuityInstance {
 
     @NotNull
     public static Client getClient(){
-        Preconditions.checkNotNull(client, "Method was called before the rs instance was inited.");
+        Preconditions.checkNotNull(client, "Make sure the client is loaded before referencing it.");
         return client;
     }
 

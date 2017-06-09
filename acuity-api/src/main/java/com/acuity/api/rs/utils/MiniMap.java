@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class Map {
+public class MiniMap {
 
-    private static final Logger logger = LoggerFactory.getLogger(Map.class);
+    private static final Logger logger = LoggerFactory.getLogger(MiniMap.class);
 
     public static int getScale(){
         return AcuityInstance.getClient().getMapScale();

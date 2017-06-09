@@ -3,6 +3,7 @@ package com.acuity.api.rs.query;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.peers.mobile.Npc;
+import com.google.common.base.Predicates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class Npcs {
 	}
 
 	public static List<Npc> getLoaded() {
-		return getLoaded(p -> true);
+		return getLoaded(npc -> true);
 	}
 
 	public static Optional<Npc> getNearest(final Predicate<? super Npc> predicate) {

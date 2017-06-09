@@ -1,6 +1,8 @@
 package com.acuity.api.rs.peers.mobile;
 
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.movement.SceneLocation;
+import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.peers.Renderable;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
@@ -111,6 +113,15 @@ public abstract class Actor extends Renderable implements Locatable {
 
     public boolean isAnimating() {
         return rsActor.getAnimation() != rsActor.getIdlePoseAnimation();
+    }
+
+    public SceneLocation getSceneLocation(){
+        return new SceneLocation(getSceneX(), getSceneY(), getPlane());
+    }
+
+    @Override
+    public WorldLocation getWorldLocation() {
+        return getSceneLocation().getWorldLocation();
     }
 
     public RSActor getRsActor() {

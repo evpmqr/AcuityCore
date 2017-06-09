@@ -12,20 +12,10 @@ import com.google.common.base.Preconditions;
  */
 public interface Locatable {
 
-    int getSceneX();
-
-    int getSceneY();
+    WorldLocation getWorldLocation();
 
     default int getPlane() {
-        return AcuityInstance.getClient().getPlane();
-    }
-
-    default WorldLocation getWorldLocation() {
-        return new WorldLocation(getSceneX() + AcuityInstance.getClient().getBaseSceneX(), getSceneY() + AcuityInstance.getClient().getBaseSceneY(), getPlane());
-    }
-
-    default SceneLocation getSceneLocation() {
-        return new SceneLocation(getSceneX(), getSceneY(), getPlane());
+        return getWorldLocation().getPlane();
     }
 
     default int distance() {

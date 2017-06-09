@@ -28,7 +28,7 @@ public class LocalPlayer {
     }
 
     public static SceneLocation getSceneLocation() {
-        return get().map(Locatable::getSceneLocation).orElse(null);
+        return get().map(player -> getSceneLocation()).orElse(null);
     }
 
     public static boolean isAnimating() {
