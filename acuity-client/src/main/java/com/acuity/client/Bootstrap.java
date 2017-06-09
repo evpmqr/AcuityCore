@@ -13,13 +13,16 @@ public class Bootstrap {
     public static void main(String[] args) {
         try {
 
+
             JFrame frame = new JFrame();
-            frame.setSize(new Dimension(500, 500));
+            frame.setSize(new Dimension(800, 600));
             frame.setVisible(true);
 
             AcuityInstance.init();
             frame.getContentPane().add(AcuityInstance.getApplet());
+
             AcuityInstance.loadClient();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
