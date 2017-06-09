@@ -14,6 +14,8 @@ import java.awt.*;
  */
 public class Acuity {
 
+    private static RSClient client;
+
     public static void main(String[] args) {
         RSAppletLoader rsAppletLoader = new RSAppletLoader();
         try {
@@ -29,16 +31,23 @@ public class Acuity {
             applet.init();
             applet.start();
 
+            client = (RSClient) applet;
+
             while (true){
                 Thread.sleep(3000);
 
-                if (((RSClient) applet).getGameState() > 10){
-                    RSNPC[] npcs = ((RSClient) applet).getNpcs();
+                if ((client.getGameState() > 10)) {
+                    RSNPC[] npcs = client.getNpcs();
                     System.out.println("NPCS: " + npcs.length);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // TODO: 6/8/2017 placeholder
+    public static RSClient getClient() {
+        return client;
     }
 }
