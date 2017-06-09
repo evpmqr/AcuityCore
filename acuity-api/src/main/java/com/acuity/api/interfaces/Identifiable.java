@@ -6,5 +6,5 @@ package com.acuity.api.interfaces;
  */
 public interface Identifiable {
 
-	int getId();
+	Integer getId();
 }

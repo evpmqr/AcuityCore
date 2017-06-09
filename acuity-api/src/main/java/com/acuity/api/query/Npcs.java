@@ -20,6 +20,7 @@ public class Npcs {
 	private static Logger logger = LoggerFactory.getLogger(Npcs.class);
 
 	public static Stream<Npc> stream() {
+	    logger.debug("Building Npc stream from client.");
 		return Arrays.stream(Acuity.getClient().getNpcs())
 				.filter(Objects::nonNull)
 				.map(Npc::new);
