@@ -19,8 +19,7 @@ public abstract class Renderable implements Interactive {
 	protected RSRenderable rsRenderable;
 
 	public Renderable(@NotNull final RSRenderable peer) {
-        Preconditions.checkNotNull(peer);
-		this.rsRenderable = peer;
+		this.rsRenderable = Preconditions.checkNotNull(peer);
 	}
 
 	public int getHeight() {

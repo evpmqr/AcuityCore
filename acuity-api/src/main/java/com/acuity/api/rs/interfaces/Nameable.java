@@ -9,7 +9,6 @@ public interface Nameable {
 	String getName();
 
 	default String getNullSafeName() {
-		final String name = getName();
-		return name == null ? "null" : name;
+		return String.valueOf(getName());
 	}
 }

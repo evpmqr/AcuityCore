@@ -18,6 +18,7 @@ public class RSAppletLoader {
     private RSClassLoader classLoader;
     private Class<?> appletClass;
     private Applet applet;
+    private static RSStub rsStub;
 
     public Applet loadApplet() throws Exception {
         if (!initialSetupComplete){
@@ -30,6 +31,8 @@ public class RSAppletLoader {
         }
         logger.info("Applet class loaded creating new instance of applet.");
         applet = (Applet) appletClass.newInstance();
+        rsStub = new RSStub(rsConfig, applet);
+        applet.setStub(rsStub);
         return applet;
     }
 

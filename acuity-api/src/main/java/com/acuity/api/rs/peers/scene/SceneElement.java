@@ -15,8 +15,7 @@ public class SceneElement {
     private RSSceneElement rsSceneElement;
 
     public SceneElement(RSSceneElement peer) {
-        Preconditions.checkNotNull(peer);
-        this.rsSceneElement = peer;
+        this.rsSceneElement = Preconditions.checkNotNull(peer);
     }
 
     public RSSceneElement getRsSceneElement() {

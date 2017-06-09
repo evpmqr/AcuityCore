@@ -17,8 +17,7 @@ public class Node {
     private RSNode rsNode;
 
     public Node(@NotNull RSNode peer) {
-        Preconditions.checkNotNull(peer);
-        this.rsNode = peer;
+        this.rsNode = Preconditions.checkNotNull(peer);
     }
 
 

@@ -18,8 +18,7 @@ public class Scene {
     private RSScene rsScene;
 
     public Scene(RSScene peer) {
-        Preconditions.checkNotNull(peer);
-        this.rsScene = peer;
+        this.rsScene = Preconditions.checkNotNull(peer);
     }
 
     public SceneElement[] getElements(){

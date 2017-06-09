@@ -24,8 +24,7 @@ public class SceneTile extends Node {
 
     public SceneTile(@NotNull RSSceneTile peer) {
         super(peer);
-        Preconditions.checkNotNull(peer);
-        this.rsSceneTile = peer;
+        this.rsSceneTile = Preconditions.checkNotNull(peer);
     }
 
     public SceneElement[] getSceneElements(){

@@ -26,8 +26,7 @@ public class Npc extends Actor implements Identifiable {
 
 	public Npc(@NotNull RSNPC peer) {
 		super(peer);
-        Preconditions.checkNotNull(peer);
-        this.rsNpc = peer;
+        this.rsNpc = Preconditions.checkNotNull(peer);
 	}
 
 	@Nullable

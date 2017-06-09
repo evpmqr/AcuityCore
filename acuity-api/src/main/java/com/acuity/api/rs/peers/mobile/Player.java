@@ -25,8 +25,7 @@ public class Player extends Actor {
 
 	public Player(@NotNull final RSPlayer peer) {
 		super(peer);
-		Preconditions.checkNotNull(peer);
-		this.rsPlayer = peer;
+		this.rsPlayer = Preconditions.checkNotNull(peer);
 	}
 
 	public boolean isSkulled() {

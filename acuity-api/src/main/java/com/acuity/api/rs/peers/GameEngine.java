@@ -18,8 +18,7 @@ public class GameEngine {
     private RSGameEngine rsGameEngine;
 
     public GameEngine(@NotNull RSGameEngine peer) {
-        Preconditions.checkNotNull(peer);
-        this.rsGameEngine = peer;
+        this.rsGameEngine = Preconditions.checkNotNull(peer);
     }
 
     public Canvas getCanvas(){

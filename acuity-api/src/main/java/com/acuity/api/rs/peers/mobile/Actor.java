@@ -23,8 +23,7 @@ public abstract class Actor extends Renderable implements Locatable {
 
     public Actor(@NotNull final RSActor peer) {
         super(peer);
-        Preconditions.checkNotNull(peer);
-        this.rsActor = peer;
+        this.rsActor = Preconditions.checkNotNull(peer);
     }
 
     public int getSceneX() {

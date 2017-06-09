@@ -23,8 +23,7 @@ public class Client {
     private RSClient rsClient;
 
     public Client(@NotNull RSClient peer) {
-        Preconditions.checkNotNull(peer);
-        this.rsClient = peer;
+        this.rsClient = Preconditions.checkNotNull(peer);
     }
 
     public Scene getScene(){
