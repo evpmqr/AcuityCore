@@ -26,4 +26,8 @@ public abstract class Renderable implements Interactive {
 	public RSModel invokeGetModel() {
 		return rsRenderable.invokeGetModel();// TODO: 6/9/2017 Add wrapper
     }
+
+    public RSRenderable getRsRenderable() {
+        return rsRenderable;
+    }
 }

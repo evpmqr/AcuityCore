@@ -46,4 +46,8 @@ public class Npc extends Actor implements Identifiable {
 	public Optional<RSNPCComposite> getDefinition() {
 		return Optional.ofNullable(rsNpc.getDefinition()); // TODO: 6/8/2017 add transform
 	}
+
+    public RSNPC getRsNpc() {
+        return rsNpc;
+    }
 }

@@ -108,4 +108,8 @@ public abstract class Actor extends Renderable implements Locatable {
     public boolean isAnimating() {
         return rsActor.getAnimation() != rsActor.getIdlePoseAnimation();
     }
+
+    public RSActor getRsActor() {
+        return rsActor;
+    }
 }

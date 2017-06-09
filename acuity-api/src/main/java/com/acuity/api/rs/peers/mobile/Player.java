@@ -66,4 +66,8 @@ public class Player extends Actor {
 	public String getName() {
 		return rsPlayer.getName();
 	}
+
+    public RSPlayer getRsPlayer() {
+        return rsPlayer;
+    }
 }

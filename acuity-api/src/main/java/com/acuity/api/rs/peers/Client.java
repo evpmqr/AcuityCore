@@ -45,10 +45,6 @@ public class Client {
         return Optional.of(new Player(localPlayer));
     }
 
-    public RSClient getRsClient(){
-        return rsClient;
-    }
-
     public int getPlane() {
         return rsClient.getPlane();
     }
@@ -59,5 +55,9 @@ public class Client {
 
     public int getBaseSceneY() {
         return rsClient.getBaseSceneY();
+    }
+
+    public RSClient getRsClient(){
+        return rsClient;
     }
 }
