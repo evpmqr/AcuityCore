@@ -1,5 +1,6 @@
 package com.acuity.api.wrappers.mobile;
 
+import com.acuity.api.interfaces.Identifiable;
 import com.acuity.rs.api.RSNPC;
 import com.acuity.rs.api.RSNPCComposite;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc extends Mobile<RSNPC> implements RSNPC {
+public class Npc extends Mobile<RSNPC> implements RSNPC, Identifiable {
 
 	public Npc(RSNPC object) {
 		super(object);

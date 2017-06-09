@@ -1,6 +1,5 @@
 package com.acuity.api.wrappers.mobile;
 
-import com.acuity.api.interfaces.Identifiable;
 import com.acuity.api.interfaces.Locatable;
 import com.acuity.api.wrappers.Entity;
 import com.acuity.client.Acuity;
@@ -11,7 +10,7 @@ import com.acuity.rs.api.RSCombatInfoList;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Mobile<T extends RSActor> extends Entity<T> implements RSActor, Identifiable, Locatable {
+public abstract class Mobile<T extends RSActor> extends Entity<T> implements RSActor, Locatable {
 
 	public Mobile(final T object) {
 		super(object);
