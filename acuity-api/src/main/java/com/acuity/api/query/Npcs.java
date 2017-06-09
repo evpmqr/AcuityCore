@@ -1,8 +1,10 @@
 package com.acuity.api.query;
 
 import com.acuity.api.interfaces.Locatable;
-import com.acuity.api.wrappers.mobile.Npc;
+import com.acuity.api.peers.mobile.Npc;
 import com.acuity.client.Acuity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -14,6 +16,8 @@ import java.util.stream.Stream;
  * Date: 6/8/2017.
  */
 public class Npcs {
+
+	private static Logger logger = LoggerFactory.getLogger(Npcs.class);
 
 	public static Stream<Npc> stream() {
 		return Arrays.stream(Acuity.getClient().getNpcs())
@@ -42,4 +46,5 @@ public class Npcs {
 	public static Optional<Npc> getNearest(final int id) {
 		return getNearest(p -> p.getId() == id);
 	}
+
 }

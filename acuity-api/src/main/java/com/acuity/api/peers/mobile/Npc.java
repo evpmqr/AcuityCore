@@ -1,8 +1,9 @@
-package com.acuity.api.wrappers.mobile;
+package com.acuity.api.peers.mobile;
 
-import com.acuity.api.interfaces.Identifiable;
 import com.acuity.rs.api.RSNPC;
 import com.acuity.rs.api.RSNPCComposite;
+import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,10 +13,14 @@ import java.util.List;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc extends Mobile<RSNPC> implements RSNPC, Identifiable {
+public class Npc extends Actor {
 
-	public Npc(RSNPC object) {
-		super(object);
+	private RSNPC rsNpc;
+
+	public Npc(@NotNull RSNPC peer) {
+		super(peer);
+        Preconditions.checkNotNull(peer);
+        this.rsNpc = peer;
 	}
 
 	@Override
@@ -46,8 +51,7 @@ public class Npc extends Mobile<RSNPC> implements RSNPC, Identifiable {
 		return Arrays.asList(definition.getActions());
 	}
 
-	@Override
 	public RSNPCComposite getDefinition() {
-		return object.getDefinition(); // TODO: 6/8/2017 add transform
+		return getDefinition(); // TODO: 6/8/2017 add transform
 	}
 }

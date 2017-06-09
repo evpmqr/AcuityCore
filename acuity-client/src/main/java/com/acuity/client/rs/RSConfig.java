@@ -3,6 +3,8 @@ package com.acuity.client.rs;
 import com.acuity.http.api.AcuityWebAPI;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +17,8 @@ import java.util.Map;
  */
 public class RSConfig {
 
+    private Logger logger = LoggerFactory.getLogger(RSConfig.class);
+
     private static final HttpUrl CONFIG_URL = HttpUrl.parse("http://oldschool.runescape.com/jav_config.ws");
     public static final String CODEBASE = "codebase";
     public static final String INITIAL_JAR = "initial_jar";
@@ -24,10 +28,12 @@ public class RSConfig {
     private final Map<String, String> appletProperties = new HashMap<>();
 
     private RSConfig() throws IOException {
+        logger.info("Starting config details pull from '{}'.", CONFIG_URL);
         try (Response response = AcuityWebAPI.INSTANCE.makeCall(CONFIG_URL);
              BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()))) {
             String str;
             while ((str = reader.readLine()) != null) {
+                logger.debug("Got line: '{}'.", str);
                 int idx = str.indexOf('=');
                 if (idx == -1) {
                     continue;
@@ -49,6 +55,7 @@ public class RSConfig {
                 }
             }
         }
+        logger.debug("Finished reading config.");
     }
 
     public String getProperty(String name) {
