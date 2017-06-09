@@ -5,6 +5,7 @@ import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,12 +16,12 @@ import java.util.List;
  */
 public class Player extends Actor {
 
-	private RSPlayer object;
+	private RSPlayer rsPlayer;
 
-	public Player(@NotNull final RSPlayer object) {
-		super(object);
-		Preconditions.checkNotNull(object);
-		this.object = object;
+	public Player(@NotNull final RSPlayer peer) {
+		super(peer);
+		Preconditions.checkNotNull(peer);
+		this.rsPlayer = peer;
 	}
 
 	public boolean isSkulled() {
@@ -28,40 +29,42 @@ public class Player extends Actor {
 	}
 
 	public RSPlayerComposite getAppearance() {
-		return object.getAppearance();
+		return rsPlayer.getAppearance();// TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getCombatLevel() {
-		return object.getCombatLevel();
+		return rsPlayer.getCombatLevel();
 	}
 
 	public RSModel getModel() {
-		return object.getModel();
+		return rsPlayer.getModel(); // TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getPrayerIcon() {
-		return object.getPrayerIcon();
+		return rsPlayer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
+
 	public int getSkullIcon() {
-		return object.getSkullIcon();
+		return rsPlayer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTeam() {
-		return object.getTeam();
+		return rsPlayer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTotalLevel() {
-		return object.getTotalLevel();
+		return rsPlayer.getTotalLevel();
 	}
 
 	@Override
 	public List<String> getActions() {
-		return Arrays.asList(object.getActions());
+		return Arrays.asList(rsPlayer.getActions());
 	}
 
+	@Nullable
 	@Override
 	public String getName() {
-		return object.getName();
+		return rsPlayer.getName();
 	}
 }

@@ -79,7 +79,7 @@ public abstract class Actor extends Renderable implements Locatable {
     }
 
     public RSCombatInfoList getHealthBars() {
-        return rsActor.getHealthBars();
+        return rsActor.getHealthBars(); // TODO: 6/9/2017 Add wrapper
     }
 
     public int getIdlePoseAnimation() {
@@ -87,7 +87,7 @@ public abstract class Actor extends Renderable implements Locatable {
     }
 
     public String getOverhead() {
-        return rsActor.getOverhead();
+        return rsActor.getOverhead(); // TODO: 6/9/2017 Figure out if default state is 'null'. If it is add documentation and @Nullable
     }
 
     public int getPoseAnimation() {
