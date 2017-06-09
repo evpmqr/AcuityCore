@@ -1,7 +1,7 @@
 package com.acuity.api.query;
 
 import com.acuity.api.interfaces.Locatable;
-import com.acuity.api.wrappers.mobile.Npc;
+import com.acuity.api.peers.mobile.Npc;
 import com.acuity.client.Acuity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

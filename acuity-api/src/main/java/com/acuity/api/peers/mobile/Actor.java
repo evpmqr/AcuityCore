@@ -1,11 +1,13 @@
-package com.acuity.api.wrappers.mobile;
+package com.acuity.api.peers.mobile;
 
 import com.acuity.api.interfaces.Identifiable;
 import com.acuity.api.interfaces.Locatable;
-import com.acuity.api.wrappers.Renderable;
+import com.acuity.api.peers.Renderable;
 import com.acuity.client.Acuity;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
+import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 
 /**
  * Created by Eclipseop.
@@ -15,9 +17,10 @@ public abstract class Actor extends Renderable implements Identifiable, Locatabl
 
     private RSActor rsActor;
 
-    public Actor(final RSActor rsActor) {
-        super(rsActor);
-        this.rsActor = rsActor;
+    public Actor(@NotNull final RSActor peer) {
+        super(peer);
+        Preconditions.checkNotNull(peer);
+        this.rsActor = peer;
     }
 
     public int getSceneX() {

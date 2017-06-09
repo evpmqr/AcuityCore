@@ -6,9 +6,7 @@ package com.acuity.api.interfaces;
  */
 public interface Nameable {
 
-	default String getName() {
-		throw new UnsupportedOperationException();
-	}
+	String getName();
 
 	default String getNullSafeName() {
 		final String name = getName();
