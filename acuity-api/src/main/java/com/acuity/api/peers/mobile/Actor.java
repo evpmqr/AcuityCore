@@ -109,4 +109,8 @@ public abstract class Actor extends Renderable implements Locatable {
     public int[] getHitsplatCycles() {
         return rsActor.getHitsplatCycles();
     }
+
+    public boolean isAnimating() {
+        return rsActor.getAnimation() != rsActor.getIdlePoseAnimation();
+    }
 }
