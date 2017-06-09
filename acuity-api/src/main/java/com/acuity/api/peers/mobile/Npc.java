@@ -3,11 +3,13 @@ package com.acuity.api.peers.mobile;
 import com.acuity.rs.api.RSNPC;
 import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.sun.istack.internal.NotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Eclipseop.
@@ -25,33 +27,20 @@ public class Npc extends Actor {
 
 	@Override
 	public String getName() {
-		final RSNPCComposite definition = getDefinition();
-		if (definition == null) {
-			return "";
-		}
-		return definition.getName();
+	    return getDefinition().map(RSNPCComposite::getName).orElse(null);
 	}
 
 	@Override
-	public int getId() {
-		final RSNPCComposite definition = getDefinition();
-		if (definition == null) {
-			return -1;
-		}
-		return definition.getId();
+	public Integer getId() {
+	    return getDefinition().map(RSNPCComposite::getId).orElse(null);
 	}
 
 	@Override
 	public List<String> getActions() {
-		final RSNPCComposite definition = getDefinition();
-		if (definition == null) {
-			return Collections.EMPTY_LIST;
-		}
-
-		return Arrays.asList(definition.getActions());
+        return getDefinition().map(RSNPCComposite::getActions).map(Arrays::asList).orElse(Collections.emptyList());
 	}
 
-	public RSNPCComposite getDefinition() {
-		return getDefinition(); // TODO: 6/8/2017 add transform
+	public Optional<RSNPCComposite> getDefinition() {
+		return Optional.ofNullable(rsNpc.getDefinition()); // TODO: 6/8/2017 add transform
 	}
 }
