@@ -3,7 +3,6 @@ package com.acuity.api.query;
 import com.acuity.api.peers.mobile.Player;
 import com.acuity.client.Acuity;
 import com.acuity.rs.api.RSPlayer;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +45,9 @@ public class Players {
 
 	public static Optional<Player> getLocal() {
 		final RSPlayer localPlayer = Acuity.getClient().getLocalPlayer();
-		Preconditions.checkNotNull(localPlayer);
+		if (localPlayer == null) {
+			return Optional.empty();
+		}
 		return Optional.of(new Player(localPlayer));
 	}
 
