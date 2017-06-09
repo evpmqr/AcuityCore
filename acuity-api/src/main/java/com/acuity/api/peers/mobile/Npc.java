@@ -43,20 +43,4 @@ public class Npc extends Actor {
 	public Optional<RSNPCComposite> getDefinition() {
 		return Optional.ofNullable(rsNpc.getDefinition()); // TODO: 6/8/2017 add transform
 	}
-
-    public static void main(String[] args) {
-        Predicate<String> predicate = new Predicate<String>() {
-            @Override
-            public boolean apply(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean equals(Object o) {
-                return false;
-            }
-        };
-
-        System.out.println(predicate);
-    }
 }
