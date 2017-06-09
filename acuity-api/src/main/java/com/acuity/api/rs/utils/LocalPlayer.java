@@ -18,7 +18,7 @@ public class LocalPlayer {
         if (AcuityInstance.getClient().getGameState() <= 20) {
             return Optional.empty();
         }
-        return Players.getLocal();
+        return AcuityInstance.getClient().getLocalPlayer();
     }
 
     public static Tile getLocation() {

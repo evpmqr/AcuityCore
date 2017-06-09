@@ -18,7 +18,7 @@ import java.util.Optional;
  */
 public class Client {
 
-    private static Logger logger = LoggerFactory.getLogger(Client.class);
+    private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
     private RSClient rsClient;
 
@@ -28,18 +28,21 @@ public class Client {
     }
 
     public Player[] getPlayers(){
+        logger.trace("Wrapping RSPlayer[] from RSClient.");
         return Arrays.stream(rsClient.getPlayers())
                 .map(peer -> peer != null ? new Player(peer) : null)
                 .toArray(Player[]::new);
     }
 
     public Npc[] getNpcs(){
+        logger.trace("Wrapping RSNpc[] from RSClient.");
         return Arrays.stream(rsClient.getNpcs())
                 .map(peer -> peer != null ? new Npc(peer) : null)
                 .toArray(Npc[]::new);
     }
 
     public Optional<Player> getLocalPlayer(){
+        logger.trace("Wrapping RSPlayer-local from RSClient.");
         final RSPlayer localPlayer = rsClient.getLocalPlayer();
         if (localPlayer == null) return Optional.empty();
         return Optional.of(new Player(localPlayer));
@@ -62,6 +65,7 @@ public class Client {
     }
 
     public RSClient getRsClient(){
+        logger.trace("Accessing peer directly via getter.");
         return rsClient;
     }
 }

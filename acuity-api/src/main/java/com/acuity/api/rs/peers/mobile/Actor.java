@@ -6,12 +6,16 @@ import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
 public abstract class Actor extends Renderable implements Locatable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Actor.class);
 
     private RSActor rsActor;
 
@@ -110,6 +114,7 @@ public abstract class Actor extends Renderable implements Locatable {
     }
 
     public RSActor getRsActor() {
+        logger.trace("Accessing peer directly via getter.");
         return rsActor;
     }
 }

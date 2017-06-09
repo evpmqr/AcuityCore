@@ -2,6 +2,7 @@ package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.peers.mobile.Player;
+import com.acuity.api.rs.utils.LocalPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,30 +23,41 @@ public class Players {
 	private static Logger logger = LoggerFactory.getLogger(Players.class);
 
 	public static Stream<Player> streamLoaded() {
-		logger.debug("Building Player streamLoaded from client.");
 		return Arrays.stream(AcuityInstance.getClient().getPlayers())
 				.filter(Objects::nonNull);
 	}
 
 	public static List<Player> getLoaded(final Predicate<? super Player> predicate) {
+        logger.trace("Returning Players(s) matching predicate.");
 		return streamLoaded()
 				.filter(predicate::test)
 				.collect(Collectors.toList());
 	}
 
+	public static Optional<Player> getFirst(final Predicate<? super Player> predicate){
+        logger.trace("Returning first Players matching predicate.");
+        return streamLoaded()
+                .filter(predicate::test)
+                .findFirst();
+    }
+
 	public static List<Player> getLoaded() {
 		return getLoaded(p -> true);
 	}
 
-	public static List<Player> get(final String... displayNames) {
-		return streamLoaded().filter(p -> Arrays.asList(displayNames).contains(p.getName())).collect(Collectors.toList());
+	public static List<Player> getLoaded(final String... displayNames) {
+        final List<String> names = Arrays.asList(displayNames);
+        logger.debug("Returning Player(s) with names in {}", names);
+        return getLoaded(player -> names.contains(player.getName()));
 	}
+
+    public static Optional<Player> getFirst(final String... displayNames) {
+        final List<String> names = Arrays.asList(displayNames);
+        logger.debug("Returning first Player with name in {}", names);
+        return getFirst(player -> names.contains(player.getName()));
+    }
 
 	public static Optional<Player> getLocal() {
-	    return AcuityInstance.getClient().getLocalPlayer();
-	}
-
-	public static Optional<Player> getFirst(final String... displayNames) {
-		return get(displayNames).stream().findFirst();
+	    return LocalPlayer.get();
 	}
 }

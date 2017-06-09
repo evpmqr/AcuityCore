@@ -1,11 +1,14 @@
 package com.acuity.api.rs.peers.mobile;
 
+import com.acuity.api.rs.peers.Client;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
  * Date: 6/9/2017.
  */
 public class Player extends Actor {
+
+    private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
 	private RSPlayer rsPlayer;
 
@@ -68,6 +73,7 @@ public class Player extends Actor {
 	}
 
     public RSPlayer getRsPlayer() {
+        logger.trace("Accessing peer directly via getter.");
         return rsPlayer;
     }
 }

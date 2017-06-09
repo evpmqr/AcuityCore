@@ -6,6 +6,8 @@ import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +19,8 @@ import java.util.Optional;
  * Date: 6/8/2017.
  */
 public class Npc extends Actor implements Identifiable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Npc.class);
 
 	private RSNPC rsNpc;
 
@@ -48,6 +52,7 @@ public class Npc extends Actor implements Identifiable {
 	}
 
     public RSNPC getRsNpc() {
+        logger.trace("Accessing peer directly via getter.");
         return rsNpc;
     }
 }
