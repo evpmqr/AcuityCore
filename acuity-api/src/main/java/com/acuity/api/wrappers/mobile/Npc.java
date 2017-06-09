@@ -11,10 +11,13 @@ import java.util.List;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc extends Mobile<RSNPC> implements RSNPC {
+public class Npc extends Actor {
 
-	public Npc(RSNPC object) {
-		super(object);
+	private RSNPC rsNpc;
+
+	public Npc(RSNPC rsNpc) {
+		super(rsNpc);
+		this.rsNpc = rsNpc;
 	}
 
 	@Override
@@ -45,8 +48,7 @@ public class Npc extends Mobile<RSNPC> implements RSNPC {
 		return Arrays.asList(definition.getActions());
 	}
 
-	@Override
 	public RSNPCComposite getDefinition() {
-		return object.getDefinition(); // TODO: 6/8/2017 add transform
+		return getDefinition(); // TODO: 6/8/2017 add transform
 	}
 }
