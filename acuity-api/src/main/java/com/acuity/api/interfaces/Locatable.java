@@ -2,6 +2,7 @@ package com.acuity.api.interfaces;
 
 import com.acuity.api.movement.SceneTile;
 import com.acuity.api.movement.Tile;
+import com.acuity.api.peers.mobile.LocalPlayer;
 import com.acuity.client.Acuity;
 
 /**
@@ -40,13 +41,9 @@ public interface Locatable {
 		return new SceneTile(getSceneX(), getSceneY(), getPlane());
 	}
 
-	// TODO: 6/8/2017 when players are added
-
 	default int distance() {
-		return -1;
-		//return distance(LocalPlayer.getLocation());
+		return distance(LocalPlayer.getLocation());
 	}
-
 
 	default boolean isOnMiniMap() {
 		return toLocation().isOnMiniMap();
@@ -56,11 +53,9 @@ public interface Locatable {
 		return (int) Math.round(distancePrecise(locatable));
 	}
 
-	/*
 	default double distancePrecise() {
 		return distancePrecise(LocalPlayer.getLocation());
 	}
-	*/
 
 	default double distancePrecise(Locatable locatable) {
 		if (locatable == null) {
