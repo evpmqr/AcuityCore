@@ -1,6 +1,6 @@
 package com.acuity.api.rs.movement;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 
 /**
@@ -38,12 +38,12 @@ public class Tile implements Locatable {
 
 	@Override
 	public int getSceneX() {
-		return getX() - RSInstance.getClient().getBaseSceneX();
+		return getX() - AcuityInstance.getClient().getBaseSceneX();
 	}
 
 	@Override
 	public int getSceneY() {
-		return getY() - RSInstance.getClient().getBaseSceneY();
+		return getY() - AcuityInstance.getClient().getBaseSceneY();
 	}
 
 	@Override

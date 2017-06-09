@@ -1,6 +1,6 @@
 package com.acuity.api.rs.utils;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.Tile;
 import com.acuity.api.rs.peers.mobile.Actor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class LocalPlayer {
 
     public static Optional<Player> get() {
-        if (RSInstance.getClient().getGameState() <= 20) {
+        if (AcuityInstance.getClient().getGameState() <= 20) {
             return Optional.empty();
         }
         return Players.getLocal();

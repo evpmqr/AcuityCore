@@ -5,6 +5,7 @@ import com.acuity.api.applet.RSStub;
 import com.acuity.api.rs.peers.Client;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
+import com.google.common.eventbus.EventBus;
 import com.sun.istack.internal.NotNull;
 
 import java.applet.Applet;
@@ -12,13 +13,15 @@ import java.applet.Applet;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class RSInstance {
+public class AcuityInstance {
 
     private static Client client;
 
     private static Applet applet;
     private static RSAppletLoader appletLoader;
     private static RSStub rsStub;
+
+    private static EventBus rsEventBus = new EventBus();
 
     public static void init() throws Exception {
         appletLoader = new RSAppletLoader();
@@ -49,5 +52,9 @@ public class RSInstance {
     public static Client getClient(){
         Preconditions.checkNotNull(client, "Method was called before the rs instance was inited.");
         return client;
+    }
+
+    public static EventBus getEventBus() {
+        return rsEventBus;
     }
 }

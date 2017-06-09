@@ -1,6 +1,6 @@
 package com.acuity.api.rs.query;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.peers.mobile.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class Players {
 
 	public static Stream<Player> streamLoaded() {
 		logger.debug("Building Player streamLoaded from client.");
-		return Arrays.stream(RSInstance.getClient().getPlayers())
+		return Arrays.stream(AcuityInstance.getClient().getPlayers())
 				.filter(Objects::nonNull);
 	}
 
@@ -42,7 +42,7 @@ public class Players {
 	}
 
 	public static Optional<Player> getLocal() {
-	    return RSInstance.getClient().getLocalPlayer();
+	    return AcuityInstance.getClient().getLocalPlayer();
 	}
 
 	public static Optional<Player> getFirst(final String... displayNames) {

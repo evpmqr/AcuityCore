@@ -1,6 +1,6 @@
 package com.acuity.api.rs.query;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.peers.mobile.Npc;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class Npcs {
 	private static Logger logger = LoggerFactory.getLogger(Npcs.class);
 
 	public static Stream<Npc> streamLoaded() {
-		return Arrays.stream(RSInstance.getClient().getNpcs())
+		return Arrays.stream(AcuityInstance.getClient().getNpcs())
                 .filter(Objects::nonNull);
 	}
 

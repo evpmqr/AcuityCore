@@ -1,6 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.movement.SceneTile;
 import com.acuity.api.rs.movement.Tile;
 import com.acuity.api.rs.utils.LocalPlayer;
@@ -22,7 +22,7 @@ public interface Locatable {
     }
 
     default int getPlane() {
-        return RSInstance.getClient().getPlane();
+        return AcuityInstance.getClient().getPlane();
     }
 
     default int getX() {
@@ -34,7 +34,7 @@ public interface Locatable {
     }
 
     default Tile toLocation() {
-        return new Tile(getSceneX() + RSInstance.getClient().getBaseSceneX(), getSceneY() + RSInstance.getClient().getBaseSceneY(), getPlane());
+        return new Tile(getSceneX() + AcuityInstance.getClient().getBaseSceneX(), getSceneY() + AcuityInstance.getClient().getBaseSceneY(), getPlane());
     }
 
     default SceneTile toSceneTile() {

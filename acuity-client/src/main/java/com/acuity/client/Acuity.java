@@ -1,6 +1,6 @@
 package com.acuity.client;
 
-import com.acuity.api.RSInstance;
+import com.acuity.api.AcuityInstance;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +12,14 @@ public class Acuity {
 
     public static void main(String[] args) {
         try {
-            RSInstance.init();
+            AcuityInstance.init();
 
             JFrame frame = new JFrame();
             frame.setSize(new Dimension(500, 500));
             frame.setVisible(true);
-            frame.getContentPane().add(RSInstance.getApplet());
+            frame.getContentPane().add(AcuityInstance.getApplet());
 
-            RSInstance.loadClient();
+            AcuityInstance.loadClient();
         } catch (Exception e) {
             e.printStackTrace();
         }
