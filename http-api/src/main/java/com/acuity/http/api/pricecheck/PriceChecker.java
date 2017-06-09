@@ -1,21 +1,17 @@
 package com.acuity.http.api.pricecheck;
 
 import com.acuity.http.api.AcuityWebAPI;
-import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class PriceChecker {
 
     private static final HttpUrl RSBUDDY_GE_URL = HttpUrl.parse("https://api.rsbuddy.com/grandExchange?a=guidePrice");
+    private static final Logger logger = LoggerFactory.getLogger(PriceChecker.class);
 
 	private static final Cache<Integer, PriceLookup> cache = CacheBuilder.newBuilder()
 			.expireAfterWrite(10, TimeUnit.MINUTES)
@@ -51,7 +48,7 @@ public class PriceChecker {
                 return AcuityWebAPI.INSTANCE.getGson().fromJson(new InputStreamReader(in), PriceLookup.class);
             }
         } catch (IOException e) {
-            System.out.println("Error loading RSExchange for item " + itemId); // TODO: 6/2/2017 logger
+			logger.warn("Error loading RSExchange for item " + itemId);
         }
 
         return new PriceLookup();
