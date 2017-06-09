@@ -1,8 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.movement.SceneLocation;
-import com.acuity.api.rs.movement.WorldLocation;
+import com.acuity.api.rs.peers.scene.SceneElement;
+import com.acuity.api.rs.peers.scene.SceneTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,5 +31,13 @@ public class Scene {
 
     public static int getBaseY(){
         return AcuityInstance.getClient().getBaseSceneY();
+    }
+
+    public SceneElement[] getElements(){
+        return AcuityInstance.getClient().getScene().getElements();
+    }
+
+    public SceneTile[][][] getTiles(){
+        return AcuityInstance.getClient().getScene().getTiles();
     }
 }

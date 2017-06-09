@@ -2,6 +2,7 @@ package com.acuity.api.rs.peers;
 
 import com.acuity.api.rs.peers.mobile.Npc;
 import com.acuity.api.rs.peers.mobile.Player;
+import com.acuity.api.rs.peers.scene.Scene;
 import com.acuity.rs.api.RSClient;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
@@ -24,6 +25,10 @@ public class Client {
     public Client(@NotNull RSClient peer) {
         Preconditions.checkNotNull(peer);
         this.rsClient = peer;
+    }
+
+    public Scene getScene(){
+        return new Scene(rsClient.getSceneGraph());
     }
 
     public Player[] getPlayers(){
