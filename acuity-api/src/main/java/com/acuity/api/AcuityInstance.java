@@ -31,12 +31,20 @@ public class AcuityInstance {
         logger.info("applet loading started.");
         appletLoader = new RSAppletLoader();
         applet = appletLoader.loadApplet();
+
     }
 
     public static void loadClient(){
         logger.info("client loading started.");
         rsStub = new RSStub(appletLoader.getRsConfig(), applet);
         applet.setStub(rsStub);
+
+        /*
+          Temporary fix for mac / linux is fails to load
+          due to size of 0 applet.
+         */
+        applet.setSize(800, 600);
+
         applet.init();
         applet.start();
         client = new Client((RSClient) applet);
