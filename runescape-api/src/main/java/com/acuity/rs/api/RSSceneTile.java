@@ -10,13 +10,13 @@ public interface RSSceneTile extends RSNode {
 
     com.acuity.rs.api.RSItemLayer getItemLayer();
 
-    int getLevel();
-
     com.acuity.rs.api.RSSceneElement[] getMarkers();
 
     com.acuity.rs.api.RSSceneTileModel getModel();
 
     com.acuity.rs.api.RSSceneTilePaint getPaint();
+
+    int getPlane();
 
     int getSceneX();
 

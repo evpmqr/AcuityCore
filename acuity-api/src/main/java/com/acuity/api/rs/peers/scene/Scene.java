@@ -1,6 +1,7 @@
 package com.acuity.api.rs.peers.scene;
 
-import com.acuity.rs.api.RSSceneGraph;
+
+import com.acuity.rs.api.RSScene;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,23 +15,23 @@ public class Scene {
 
     private static final Logger logger = LoggerFactory.getLogger(Scene.class);
 
-    private RSSceneGraph rsSceneGraph;
+    private RSScene rsScene;
 
-    public Scene(RSSceneGraph peer) {
+    public Scene(RSScene peer) {
         Preconditions.checkNotNull(peer);
-        this.rsSceneGraph = peer;
+        this.rsScene = peer;
     }
 
     public SceneElement[] getElements(){
         logger.trace("Wrapping SceneElement[] from RSScene.");
-        return Arrays.stream(rsSceneGraph.getTempMarkers())
+        return Arrays.stream(rsScene.getElements())
                 .map(peer -> peer != null ? new SceneElement(peer) : null)
                 .toArray(SceneElement[]::new);
     }
 
     public SceneTile[][][] getTiles(){
         logger.trace("Wrapping SceneTile[][][] from RSScene.");
-        return Arrays.stream(rsSceneGraph.getTiles())
+        return Arrays.stream(rsScene.getTiles())
                 .map(tile1 -> Arrays.stream(tile1)
                         .map(tile2 -> Arrays.stream(tile2)
                                 .map(tile3 -> tile3 != null ? new SceneTile(tile3) : null)
@@ -39,8 +40,8 @@ public class Scene {
                 ).toArray(SceneTile[][][]::new);
     }
 
-    public RSSceneGraph getRsSceneGraph() {
+    public RSScene getRsScene() {
         logger.trace("Accessing peer directly via getter.");
-        return rsSceneGraph;
+        return rsScene;
     }
 }

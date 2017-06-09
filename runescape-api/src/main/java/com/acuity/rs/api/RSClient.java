@@ -338,7 +338,7 @@ public interface RSClient extends RSGameEngine {
     int getRunEnergy();
 
     //Static field.
-    com.acuity.rs.api.RSSceneGraph getSceneGraph();
+    com.acuity.rs.api.RSScene getSceneGraph();
 
     //Static field.
     byte[][][] getSceneRenderRules();

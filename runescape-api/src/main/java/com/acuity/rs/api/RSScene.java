@@ -2,9 +2,9 @@ package com.acuity.rs.api;
 
 //Generated
 
-public interface RSSceneGraph {
+public interface RSScene {
 
-    com.acuity.rs.api.RSSceneElement[] getTempMarkers();
+    com.acuity.rs.api.RSSceneElement[] getElements();
 
     com.acuity.rs.api.RSSceneTile[][][] getTiles();
 

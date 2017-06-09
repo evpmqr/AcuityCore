@@ -28,7 +28,7 @@ public class Client {
     }
 
     public Scene getScene(){
-        return new Scene(rsClient.getSceneGraph());
+        return new Scene(rsClient.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
     }
 
     public Player[] getPlayers(){

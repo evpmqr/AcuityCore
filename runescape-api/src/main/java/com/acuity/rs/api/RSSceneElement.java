@@ -14,13 +14,13 @@ public interface RSSceneElement {
 
     int getHeight();
 
-    int getLevel();
-
     int getOffsetX();
 
     int getOffsetY();
 
     int getOrientation();
+
+    int getPlane();
 
     int getSceneX();
 
