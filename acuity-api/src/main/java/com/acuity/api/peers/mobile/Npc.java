@@ -5,6 +5,7 @@ import com.acuity.rs.api.RSNPC;
 import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,11 +26,13 @@ public class Npc extends Actor implements Identifiable {
         this.rsNpc = peer;
 	}
 
+	@Nullable
 	@Override
 	public String getName() {
 	    return getDefinition().map(RSNPCComposite::getName).orElse(null);
 	}
 
+	@Nullable
 	@Override
 	public Integer getId() {
 	    return getDefinition().map(RSNPCComposite::getId).orElse(null);
