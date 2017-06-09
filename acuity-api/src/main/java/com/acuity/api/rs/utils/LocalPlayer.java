@@ -6,6 +6,9 @@ import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.peers.mobile.Actor;
 import com.acuity.api.rs.peers.mobile.Player;
+import com.acuity.inject.callbacks.Hooks;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
@@ -14,10 +17,9 @@ import java.util.Optional;
  */
 public class LocalPlayer {
 
+    private static final Logger logger = LoggerFactory.getLogger(LocalPlayer.class);
+
     public static Optional<Player> get() {
-        if (AcuityInstance.getClient().getGameState() <= 20) {
-            return Optional.empty();
-        }
         return AcuityInstance.getClient().getLocalPlayer();
     }
 

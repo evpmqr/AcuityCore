@@ -1,11 +1,15 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
 public class Scene {
+
+    private static final Logger logger = LoggerFactory.getLogger(Scene.class);
 
     public static int getPlane(){
         return AcuityInstance.getClient().getPlane();

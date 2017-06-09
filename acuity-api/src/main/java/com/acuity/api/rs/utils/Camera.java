@@ -7,7 +7,6 @@ import com.acuity.api.AcuityInstance;
  */
 public class Camera {
 
-
     public static int getX(){
         return AcuityInstance.getClient().getCameraX();
     }

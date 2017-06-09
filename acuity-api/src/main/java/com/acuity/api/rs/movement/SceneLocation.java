@@ -1,13 +1,18 @@
 package com.acuity.api.rs.movement;
 
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.Map;
 import com.acuity.api.rs.utils.Scene;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
 public class SceneLocation implements Locatable {
+
+	private static final Logger logger = LoggerFactory.getLogger(SceneLocation.class);
 
 	private int baseX, baseY;
 	private int sceneX;

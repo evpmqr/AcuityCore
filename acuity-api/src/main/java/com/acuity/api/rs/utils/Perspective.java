@@ -3,6 +3,8 @@ package com.acuity.api.rs.utils;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.peers.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -11,6 +13,8 @@ import java.awt.geom.Rectangle2D;
  * Created by Zachary Herridge on 6/9/2017.
  */
 public class Perspective {
+
+    private static final Logger logger = LoggerFactory.getLogger(Perspective.class);
 
     public static final int[] SINE = new int[2048];
     public static final int[] COSINE = new int[2048];
