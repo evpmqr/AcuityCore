@@ -1,6 +1,5 @@
 package com.acuity.api.peers.mobile;
 
-import com.acuity.api.interfaces.Identifiable;
 import com.acuity.api.interfaces.Locatable;
 import com.acuity.api.peers.Renderable;
 import com.acuity.client.Acuity;
@@ -13,7 +12,7 @@ import com.sun.istack.internal.NotNull;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Actor extends Renderable implements Identifiable, Locatable {
+public abstract class Actor extends Renderable implements Locatable {
 
     private RSActor rsActor;
 
