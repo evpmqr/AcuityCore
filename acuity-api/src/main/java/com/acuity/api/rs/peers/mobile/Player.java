@@ -1,4 +1,4 @@
-package com.acuity.api.peers.mobile;
+package com.acuity.api.rs.peers.mobile;
 
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
@@ -43,7 +43,6 @@ public class Player extends Actor {
 	public int getPrayerIcon() {
 		return rsPlayer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
-
 
 	public int getSkullIcon() {
 		return rsPlayer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it

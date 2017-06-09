@@ -1,6 +1,6 @@
-package com.acuity.api.peers.mobile;
+package com.acuity.api.rs.peers.mobile;
 
-import com.acuity.api.interfaces.Identifiable;
+import com.acuity.api.rs.interfaces.Identifiable;
 import com.acuity.rs.api.RSNPC;
 import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;

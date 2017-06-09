@@ -1,12 +1,8 @@
 package com.acuity.client;
 
-import com.acuity.client.rs.RSAppletLoader;
-import com.acuity.client.rs.RSStub;
-import com.acuity.rs.api.RSClient;
-import com.acuity.rs.api.RSNPC;
+import com.acuity.api.RSInstance;
 
 import javax.swing.*;
-import java.applet.Applet;
 import java.awt.*;
 
 /**
@@ -14,40 +10,18 @@ import java.awt.*;
  */
 public class Acuity {
 
-    private static RSClient client;
-
     public static void main(String[] args) {
-        RSAppletLoader rsAppletLoader = new RSAppletLoader();
         try {
-            Applet applet = rsAppletLoader.loadApplet();
+            RSInstance.init();
 
             JFrame frame = new JFrame();
             frame.setSize(new Dimension(500, 500));
             frame.setVisible(true);
-            frame.getContentPane().add(applet);
+            frame.getContentPane().add(RSInstance.getApplet());
 
-            RSStub rsStub = new RSStub(rsAppletLoader.getRsConfig(), applet);
-            applet.setStub(rsStub);
-            applet.init();
-            applet.start();
-
-            client = (RSClient) applet;
-
-            while (true){
-                Thread.sleep(3000);
-
-                if ((client.getGameState() > 10)) {
-                    RSNPC[] npcs = client.getNpcs();
-                    System.out.println("NPCS: " + npcs.length);
-                }
-            }
+            RSInstance.loadClient();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // TODO: 6/8/2017 placeholder
-    public static RSClient getClient() {
-        return client;
     }
 }

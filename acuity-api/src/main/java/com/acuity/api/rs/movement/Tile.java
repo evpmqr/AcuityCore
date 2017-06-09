@@ -1,7 +1,7 @@
-package com.acuity.api.movement;
+package com.acuity.api.rs.movement;
 
-import com.acuity.api.interfaces.Locatable;
-import com.acuity.client.Acuity;
+import com.acuity.api.RSInstance;
+import com.acuity.api.rs.interfaces.Locatable;
 
 /**
  * Created by Eclipseop.
@@ -38,12 +38,12 @@ public class Tile implements Locatable {
 
 	@Override
 	public int getSceneX() {
-		return getX() - Acuity.getClient().getBaseScenceX();
+		return getX() - RSInstance.getClient().getBaseSceneX();
 	}
 
 	@Override
 	public int getSceneY() {
-		return getY() - Acuity.getClient().getBaseSceneY();
+		return getY() - RSInstance.getClient().getBaseSceneY();
 	}
 
 	@Override

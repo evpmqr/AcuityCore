@@ -1,4 +1,4 @@
-package com.acuity.api.interfaces;
+package com.acuity.api.rs.interfaces;
 
 /**
  * Created by Eclipseop.

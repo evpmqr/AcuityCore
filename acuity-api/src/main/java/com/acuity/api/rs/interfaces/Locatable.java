@@ -1,9 +1,8 @@
-package com.acuity.api.interfaces;
+package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.movement.SceneTile;
-import com.acuity.api.movement.Tile;
-import com.acuity.api.peers.mobile.LocalPlayer;
-import com.acuity.client.Acuity;
+import com.acuity.api.RSInstance;
+import com.acuity.api.rs.movement.SceneTile;
+import com.acuity.api.rs.movement.Tile;
 
 /**
  * Created by Eclipseop.
@@ -22,7 +21,7 @@ public interface Locatable {
 	}
 
 	default int getPlane() {
-		return Acuity.getClient().getPlane();
+		return RSInstance.getClient().getPlane();
 	}
 
 	default int getX() {
@@ -34,16 +33,20 @@ public interface Locatable {
 	}
 
 	default Tile toLocation() {
-		return new Tile(getSceneX() + Acuity.getClient().getBaseScenceX(), getSceneY() + Acuity.getClient().getBaseSceneY(), getPlane());
+		return new Tile(getSceneX() + RSInstance.getClient().getBaseSceneX(), getSceneY() + RSInstance.getClient().getBaseSceneY(), getPlane());
 	}
 
 	default SceneTile toSceneTile() {
 		return new SceneTile(getSceneX(), getSceneY(), getPlane());
 	}
 
+	// TODO: 6/8/2017 when players are added
+
 	default int distance() {
-		return distance(LocalPlayer.getLocation());
+		return -1;
+		//return distance(LocalPlayer.getLocation());
 	}
+
 
 	default boolean isOnMiniMap() {
 		return toLocation().isOnMiniMap();
@@ -53,9 +56,11 @@ public interface Locatable {
 		return (int) Math.round(distancePrecise(locatable));
 	}
 
+	/*
 	default double distancePrecise() {
 		return distancePrecise(LocalPlayer.getLocation());
 	}
+	*/
 
 	default double distancePrecise(Locatable locatable) {
 		if (locatable == null) {

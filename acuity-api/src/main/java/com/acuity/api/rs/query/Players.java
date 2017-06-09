@@ -1,8 +1,7 @@
-package com.acuity.api.query;
+package com.acuity.api.rs.query;
 
-import com.acuity.api.peers.mobile.Player;
-import com.acuity.client.Acuity;
-import com.acuity.rs.api.RSPlayer;
+import com.acuity.api.RSInstance;
+import com.acuity.api.rs.peers.mobile.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,15 +21,14 @@ public class Players {
 
 	private static Logger logger = LoggerFactory.getLogger(Players.class);
 
-	public static Stream<Player> stream() {
-		logger.debug("Building Player stream from client.");
-		return Arrays.stream(Acuity.getClient().getPlayers())
-				.filter(Objects::nonNull)
-				.map(Player::new);
+	public static Stream<Player> streamLoaded() {
+		logger.debug("Building Player streamLoaded from client.");
+		return Arrays.stream(RSInstance.getClient().getPlayers())
+				.filter(Objects::nonNull);
 	}
 
 	public static List<Player> getLoaded(final Predicate<? super Player> predicate) {
-		return stream()
+		return streamLoaded()
 				.filter(predicate::test)
 				.collect(Collectors.toList());
 	}
@@ -40,15 +38,11 @@ public class Players {
 	}
 
 	public static List<Player> get(final String... displayNames) {
-		return stream().filter(p -> Arrays.asList(displayNames).contains(p.getName())).collect(Collectors.toList());
+		return streamLoaded().filter(p -> Arrays.asList(displayNames).contains(p.getName())).collect(Collectors.toList());
 	}
 
 	public static Optional<Player> getLocal() {
-		final RSPlayer localPlayer = Acuity.getClient().getLocalPlayer();
-		if (localPlayer == null) {
-			return Optional.empty();
-		}
-		return Optional.of(new Player(localPlayer));
+	    return RSInstance.getClient().getLocalPlayer();
 	}
 
 	public static Optional<Player> getFirst(final String... displayNames) {

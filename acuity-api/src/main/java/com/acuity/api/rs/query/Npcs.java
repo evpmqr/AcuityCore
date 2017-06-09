@@ -1,8 +1,8 @@
-package com.acuity.api.query;
+package com.acuity.api.rs.query;
 
-import com.acuity.api.interfaces.Locatable;
-import com.acuity.api.peers.mobile.Npc;
-import com.acuity.client.Acuity;
+import com.acuity.api.RSInstance;
+import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.peers.mobile.Npc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,17 +19,15 @@ public class Npcs {
 
 	private static Logger logger = LoggerFactory.getLogger(Npcs.class);
 
-	public static Stream<Npc> stream() {
-	    logger.debug("Building Npc stream from client.");
-		return Arrays.stream(Acuity.getClient().getNpcs())
-				.filter(Objects::nonNull)
-				.map(Npc::new);
+	public static Stream<Npc> streamLoaded() {
+		return Arrays.stream(RSInstance.getClient().getNpcs())
+                .filter(Objects::nonNull);
 	}
 
 	public static List<Npc> getLoaded(final Predicate<? super Npc> predicate) {
-		return stream()
-				.filter(predicate::test)
-				.collect(Collectors.toList());
+		return streamLoaded()
+                .filter(predicate::test)
+                .collect(Collectors.toList());
 	}
 
 	public static List<Npc> getLoaded() {
@@ -37,11 +35,14 @@ public class Npcs {
 	}
 
 	public static Optional<Npc> getNearest(final Predicate<? super Npc> predicate) {
-		return stream().filter(predicate).sorted(Comparator.comparingInt(Locatable::distance)).findFirst();
+		return streamLoaded()
+                .filter(predicate)
+                .sorted(Comparator.comparingInt(Locatable::distance))
+                .findFirst();
 	}
 
 	public static Optional<Npc> getNearest(final String name) {
-		return getNearest(p -> p.getName().equalsIgnoreCase(name));
+		return getNearest(p -> p.getNullSafeName().equalsIgnoreCase(name));
 	}
 
 	public static Optional<Npc> getNearest(final int id) {

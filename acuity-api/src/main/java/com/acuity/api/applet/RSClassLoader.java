@@ -1,4 +1,4 @@
-package com.acuity.client.rs;
+package com.acuity.api.applet;
 
 import java.io.File;
 import java.net.MalformedURLException;

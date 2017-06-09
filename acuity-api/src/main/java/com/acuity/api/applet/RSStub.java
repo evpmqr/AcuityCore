@@ -1,4 +1,4 @@
-package com.acuity.client.rs;
+package com.acuity.api.applet;
 
 import java.applet.Applet;
 import java.applet.AppletContext;

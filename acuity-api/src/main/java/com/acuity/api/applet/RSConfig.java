@@ -1,4 +1,4 @@
-package com.acuity.client.rs;
+package com.acuity.api.applet;
 
 import com.acuity.http.api.AcuityWebAPI;
 import okhttp3.HttpUrl;

@@ -1,6 +1,6 @@
-package com.acuity.api.movement;
+package com.acuity.api.rs.movement;
 
-import com.acuity.api.interfaces.Locatable;
+import com.acuity.api.rs.interfaces.Locatable;
 
 /**
  * Created by Eclipseop.

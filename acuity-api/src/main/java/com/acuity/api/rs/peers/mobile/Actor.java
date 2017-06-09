@@ -1,8 +1,7 @@
-package com.acuity.api.peers.mobile;
+package com.acuity.api.rs.peers.mobile;
 
-import com.acuity.api.interfaces.Locatable;
-import com.acuity.api.peers.Renderable;
-import com.acuity.client.Acuity;
+import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.peers.Renderable;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.google.common.base.Preconditions;
@@ -44,10 +43,6 @@ public abstract class Actor extends Renderable implements Locatable {
 
     public int[] getPathY() {
         return rsActor.getPathY();
-    }
-
-    public int getPlane() {
-        return Acuity.getClient().getPlane();
     }
 
     public int getOrientation() {

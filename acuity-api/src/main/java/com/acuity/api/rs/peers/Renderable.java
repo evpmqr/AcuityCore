@@ -1,6 +1,6 @@
-package com.acuity.api.peers;
+package com.acuity.api.rs.peers;
 
-import com.acuity.api.interfaces.Interactive;
+import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;

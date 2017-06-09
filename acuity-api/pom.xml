@@ -28,11 +28,6 @@
             <version>19.0</version>
         </dependency>
         <dependency>
-            <groupId>com.acuity</groupId>
-            <artifactId>acuity-client</artifactId>
-            <version>1.0.00-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
@@ -46,6 +41,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.acuity.http</groupId>
+            <artifactId>http-api</artifactId>
+            <version>1.0.00-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
