@@ -3,7 +3,6 @@ package com.acuity.http.api.util;
 import com.google.gson.Gson;
 
 import java.util.Collections;
-import java.util.HashMap;
 
 /**
  * Created by Zachary Herridge on 6/1/2017.
