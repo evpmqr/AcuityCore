@@ -57,6 +57,10 @@ public class Client {
         return rsClient.getBaseSceneY();
     }
 
+    public int getGameState() {
+        return rsClient.getGameState();
+    }
+
     public RSClient getRsClient(){
         return rsClient;
     }

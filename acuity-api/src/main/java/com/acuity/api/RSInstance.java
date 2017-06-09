@@ -4,6 +4,7 @@ import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSStub;
 import com.acuity.api.rs.peers.Client;
 import com.acuity.rs.api.RSClient;
+import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 
 import java.applet.Applet;
@@ -46,6 +47,7 @@ public class RSInstance {
 
     @NotNull
     public static Client getClient(){
+        Preconditions.checkNotNull(client, "Method was called before the rs instance was inited.");
         return client;
     }
 }
