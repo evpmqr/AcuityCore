@@ -15,103 +15,100 @@ import org.slf4j.LoggerFactory;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Actor extends Renderable implements Locatable {
+public abstract class Actor<T extends RSActor> extends Renderable<T> implements Locatable {
 
     private static final Logger logger = LoggerFactory.getLogger(Actor.class);
-
-    private RSActor rsActor;
-
-    public Actor(@NotNull final RSActor peer) {
+    
+    public Actor(@NotNull final T peer) {
         super(peer);
-        this.rsActor = Preconditions.checkNotNull(peer);
     }
 
     public int getSceneX() {
-        return rsActor.getStrictX() >> 7;
+        return peer.getStrictX() >> 7;
     }
 
     public int getSceneY() {
-        return rsActor.getStrictY() >> 7;
+        return peer.getStrictY() >> 7;
     }
 
     public int getStrictX() {
-        return rsActor.getStrictX();
+        return peer.getStrictX();
     }
 
     public int getStrictY() {
-        return rsActor.getStrictY();
+        return peer.getStrictY();
     }
 
     public int[] getPathX() {
-        return rsActor.getPathX();
+        return peer.getPathX();
     }
 
     public int[] getPathY() {
-        return rsActor.getPathY();
+        return peer.getPathY();
     }
 
     public int getOrientation() {
-        return rsActor.getOrientation();
+        return peer.getOrientation();
     }
 
     public int getTargetIndex() {
-        return rsActor.getTargetIndex();
+        return peer.getTargetIndex();
     }
 
     public int getAngle() {
-        return rsActor.getAngle();
+        return peer.getAngle();
     }
 
     public int getAnimation() {
-        return rsActor.getAnimation();
+        return peer.getAnimation();
     }
 
     public int getQueueSize() {
-        return rsActor.getQueueSize();
+        return peer.getQueueSize();
     }
 
     public int getActionAnimationDisable() {
-        return rsActor.getActionAnimationDisable();
+        return peer.getActionAnimationDisable();
     }
 
     public int getActionFrame() {
-        return rsActor.getActionFrame();
+        return peer.getActionFrame();
     }
 
     public RSCombatInfoList getHealthBars() {
-        return rsActor.getHealthBars(); // TODO: 6/9/2017 Add wrapper
+        return peer.getHealthBars(); // TODO: 6/9/2017 Add wrapper
     }
 
     public int getIdlePoseAnimation() {
-        return rsActor.getIdlePoseAnimation();
+        return peer.getIdlePoseAnimation();
     }
 
     public String getOverhead() {
-        return rsActor.getOverhead(); // TODO: 6/9/2017 Figure out if default state is 'null'. If it is add documentation and @Nullable
+        return peer.getOverhead(); // TODO: 6/9/2017 Figure out if default state is 'null'. If it is add documentation and @Nullable
     }
 
     public int getPoseAnimation() {
-        return rsActor.getPoseAnimation();
+        return peer.getPoseAnimation();
     }
 
     public int getSpellAnimationId() {
-        return rsActor.getSpellAnimationId();
+        return peer.getSpellAnimationId();
     }
 
     public int getSubAnimationFrame() {
-        return rsActor.getSubAnimationFrame();
+        return peer.getSubAnimationFrame();
     }
 
     public boolean isInSequence() {
-        return rsActor.isInSequence();
+        return peer.isInSequence();
     }
 
     public int[] getHitsplatCycles() {
-        return rsActor.getHitsplatCycles();
+        return peer.getHitsplatCycles();
     }
 
     public boolean isAnimating() {
-        return rsActor.getAnimation() != rsActor.getIdlePoseAnimation();
+        return peer.getAnimation() != peer.getIdlePoseAnimation();
     }
 
     public SceneLocation getSceneLocation(){
@@ -121,10 +118,5 @@ public abstract class Actor extends Renderable implements Locatable {
     @Override
     public WorldLocation getWorldLocation() {
         return getSceneLocation().getWorldLocation();
-    }
-
-    public RSActor getRsActor() {
-        logger.trace("Accessing peer directly via getter.");
-        return rsActor;
     }
 }

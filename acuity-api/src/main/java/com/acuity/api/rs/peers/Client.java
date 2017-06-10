@@ -16,115 +16,108 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class Client {
+public class Client<T extends RSClient> extends GameEngine<T>{
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
-    private RSClient rsClient;
-
-    public Client(@NotNull RSClient peer) {
-        this.rsClient = Preconditions.checkNotNull(peer);
+    public Client(@NotNull T peer) {
+        super(peer);
     }
 
     public Scene getScene(){
-        return new Scene(rsClient.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
+        return new Scene(peer.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
     }
 
     public Player[] getPlayers(){
         logger.trace("Wrapping RSPlayer[] from RSClient.");
-        return Arrays.stream(rsClient.getPlayers())
+        return Arrays.stream(peer.getPlayers())
                 .map(peer -> peer != null ? new Player(peer) : null)
                 .toArray(Player[]::new);
     }
 
     public Npc[] getNpcs(){
         logger.trace("Wrapping RSNpc[] from RSClient.");
-        return Arrays.stream(rsClient.getNpcs())
+        return Arrays.stream(peer.getNpcs())
                 .map(peer -> peer != null ? new Npc(peer) : null)
                 .toArray(Npc[]::new);
     }
 
     public Optional<Player> getLocalPlayer(){
         logger.trace("Wrapping RSPlayer-local from RSClient.");
-        final RSPlayer localPlayer = rsClient.getLocalPlayer();
+        final RSPlayer localPlayer = peer.getLocalPlayer();
         if (localPlayer == null) return Optional.empty();
         return Optional.of(new Player(localPlayer));
     }
 
     public int getPlane() {
-        return rsClient.getPlane();
+        return peer.getPlane();
     }
 
     public int getBaseSceneX() {
-        return rsClient.getBaseScenceX();
+        return peer.getBaseScenceX();
     }
 
     public int getBaseSceneY() {
-        return rsClient.getBaseSceneY();
+        return peer.getBaseSceneY();
     }
 
     public int getGameState() {
-        return rsClient.getGameState();
+        return peer.getGameState();
     }
 
     public int[][][] getTileHeights() {
-        return rsClient.getTileHeights();
+        return peer.getTileHeights();
     }
 
     public byte[][][] getSceneRenderRules() {
-        return rsClient.getSceneRenderRules();
+        return peer.getSceneRenderRules();
     }
 
     public int getCameraX() {
-        return rsClient.getCameraX();
+        return peer.getCameraX();
     }
 
     public int getCameraY() {
-        return rsClient.getCameraY();
+        return peer.getCameraY();
     }
 
     public int getCameraZ() {
-        return rsClient.getCameraZ();
+        return peer.getCameraZ();
     }
 
     public int getCameraPitch() {
-        return rsClient.getCameraPitch();
+        return peer.getCameraPitch();
     }
 
     public int getCameraYaw() {
-        return rsClient.getCameraYaw();
+        return peer.getCameraYaw();
     }
 
     public int getViewportHeight() {
-        return rsClient.getViewportHeight();
+        return peer.getViewportHeight();
     }
 
     public int getViewportScale() {
-        return rsClient.getViewportScale();
+        return peer.getViewportScale();
     }
 
     public int getViewportWidth() {
-        return rsClient.getViewportWidth();
+        return peer.getViewportWidth();
     }
 
     public int getMapScale() {
-        return rsClient.getMapScale();
+        return peer.getMapScale();
     }
 
     public int getMapRotation() {
-        return rsClient.getMapRotation();
+        return peer.getMapRotation();
     }
 
     public int getMinimapOffset() {
-        return rsClient.getMinimapOffset();
+        return peer.getMinimapOffset();
     }
 
     public boolean isResized() {
-        return rsClient.isResized();
-    }
-
-    public RSClient getRsClient(){
-        logger.trace("Accessing peer directly via getter.");
-        return rsClient;
+        return peer.isResized();
     }
 }

@@ -28,14 +28,14 @@ public class AcuityInstance {
     private static EventBus rsEventBus = new EventBus();
 
     public static void init() throws Exception {
-        logger.info("applet loading started.");
+        logger.info("Applet loading started.");
         appletLoader = new RSAppletLoader();
         applet = appletLoader.loadApplet();
 
     }
 
     public static void loadClient(){
-        logger.info("client loading started.");
+        logger.info("RSClient loading started.");
         rsStub = new RSStub(appletLoader.getRsConfig(), applet);
         applet.setStub(rsStub);
 
@@ -45,9 +45,11 @@ public class AcuityInstance {
          */
         applet.setSize(800, 600);
 
+        logger.info("Booting applet.");
         applet.init();
         applet.start();
         client = new Client((RSClient) applet);
+        logger.debug("RSClient loading finished.");
     }
 
     public static Applet getApplet() {
@@ -64,8 +66,7 @@ public class AcuityInstance {
 
     @NotNull
     public static Client getClient(){
-        Preconditions.checkNotNull(client, "Make sure the client is loaded before referencing it.");
-        return client;
+        return Preconditions.checkNotNull(client, "Make sure the client is loaded before referencing it.");
     }
 
     public static EventBus getEventBus() {

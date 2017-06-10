@@ -28,12 +28,12 @@ public class RSConfig {
     private final Map<String, String> appletProperties = new HashMap<>();
 
     private RSConfig() throws IOException {
-        logger.info("Starting config details pull from '{}'.", CONFIG_URL);
+        logger.info("Starting config details load from '{}'.", CONFIG_URL);
         try (Response response = AcuityWebAPI.INSTANCE.makeCall(CONFIG_URL);
              BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()))) {
             String str;
             while ((str = reader.readLine()) != null) {
-                logger.debug("Got line: '{}'.", str);
+                logger.trace("Got line: '{}'.", str);
                 int idx = str.indexOf('=');
                 if (idx == -1) {
                     continue;
@@ -55,7 +55,7 @@ public class RSConfig {
                 }
             }
         }
-        logger.debug("Finished reading config.");
+        logger.debug("Finished loading config with {} general properties and {} applet properties.", properties.size(), appletProperties.size());
     }
 
     public String getProperty(String name) {
