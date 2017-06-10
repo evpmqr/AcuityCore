@@ -22,7 +22,8 @@ public class Interface {
      */
     public InterfaceComponent[] getComponents() {
         return Arrays.stream(this.children)
-                .filter(Objects::nonNull).map(child -> new InterfaceComponent(this, null, child))
+                .filter(Objects::nonNull)
+                .map(child -> new InterfaceComponent(this, null, child))
                 .toArray(InterfaceComponent[]::new);
     }
 
@@ -32,7 +33,8 @@ public class Interface {
      */
     public int getCountOfComponents() {
         return (int) Arrays.stream(this.children)
-                .filter(Objects::nonNull).map(child -> new InterfaceComponent(this, null, child))
+                .filter(Objects::nonNull)
+                .map(child -> new InterfaceComponent(this, null, child))
                 .count();
     }
 }
