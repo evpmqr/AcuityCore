@@ -4,6 +4,7 @@ import com.acuity.api.rs.peers.mobile.Npc;
 import com.acuity.api.rs.peers.mobile.Player;
 import com.acuity.api.rs.peers.scene.Scene;
 import com.acuity.rs.api.RSClient;
+import com.acuity.rs.api.RSInterfaceComponent;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -20,7 +21,7 @@ public class Client {
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
-    private RSClient rsClient;
+    private final RSClient rsClient;
 
     public Client(@NotNull RSClient peer) {
         this.rsClient = Preconditions.checkNotNull(peer);
@@ -52,6 +53,7 @@ public class Client {
         return Optional.of(new Player(localPlayer));
     }
 
+
     public int getPlane() {
         return rsClient.getPlane();
     }
@@ -75,6 +77,8 @@ public class Client {
     public byte[][][] getSceneRenderRules() {
         return rsClient.getSceneRenderRules();
     }
+
+    public RSInterfaceComponent[][] getInterfaces() { return rsClient.getInterfaces(); }
 
     public int getCameraX() {
         return rsClient.getCameraX();

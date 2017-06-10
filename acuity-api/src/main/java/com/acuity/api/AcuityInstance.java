@@ -31,7 +31,6 @@ public class AcuityInstance {
         logger.info("Applet loading started.");
         appletLoader = new RSAppletLoader();
         applet = appletLoader.loadApplet();
-
     }
 
     public static void loadClient(){
