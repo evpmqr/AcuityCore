@@ -4,7 +4,6 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.peers.Client;
 import com.acuity.api.rs.peers.interfaces.Interface;
 import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
-import com.acuity.api.rs.peers.interfaces.InterfaceComponentChild;
 import com.acuity.rs.api.RSInterfaceComponent;
 
 import java.util.ArrayList;
@@ -76,7 +75,7 @@ public class Interfaces {
      *
      * Parent -> Child -> GrandChild
      */
-    public static InterfaceComponentChild lookup(int parentIndex, int childIndex, int grandchildIndex) {
+    public static InterfaceComponent lookup(int parentIndex, int childIndex, int grandchildIndex) {
         final InterfaceComponent component = lookup(parentIndex, childIndex);
         if(component == null) {
             return null;

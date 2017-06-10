@@ -8,11 +8,13 @@ import java.util.Objects;
 
 public class InterfaceComponent extends AbstractInterfaceComponent {
 
-    private final Interface parent;
+    private final Interface root;
+    private final InterfaceComponent parent;
     private final RSInterfaceComponent child;
 
-    public InterfaceComponent(Interface parent, RSInterfaceComponent child) {
+    public InterfaceComponent(Interface root, InterfaceComponent parent, RSInterfaceComponent child) {
         super(child);
+        this.root = root;
         this.parent = parent;
         this.child = child;
     }
@@ -20,14 +22,18 @@ public class InterfaceComponent extends AbstractInterfaceComponent {
     /**
      * @return A list of non null grand children of this sub-component.
      */
-    public InterfaceComponentChild[] getSubComponents() {
+    public InterfaceComponent[] getSubComponents() {
         return Arrays.stream(this.child.getComponents())
                 .filter(Objects::nonNull)
-                .map(gc -> new InterfaceComponentChild(this, gc))
-                .toArray(InterfaceComponentChild[]::new);
+                .map(gc -> new InterfaceComponent(root, this, gc))
+                .toArray(InterfaceComponent[]::new);
     }
 
-    public Interface getParent() {
+    public InterfaceComponent getParent() {
         return parent;
+    }
+
+    public Interface getRoot() {
+        return root;
     }
 }
