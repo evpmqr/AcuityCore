@@ -17,15 +17,12 @@ import java.util.List;
  * Created by Eclipseop.
  * Date: 6/9/2017.
  */
-public class Player extends Actor {
+public class Player<T extends RSPlayer> extends Actor<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
-	private RSPlayer rsPlayer;
-
-	public Player(@NotNull final RSPlayer peer) {
+	public Player(@NotNull final T peer) {
 		super(peer);
-		this.rsPlayer = Preconditions.checkNotNull(peer);
 	}
 
 	public boolean isSkulled() {
@@ -33,46 +30,41 @@ public class Player extends Actor {
 	}
 
 	public RSPlayerComposite getAppearance() {
-		return rsPlayer.getAppearance();// TODO: 6/9/2017 Add wrapper
+		return peer.getAppearance();// TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getCombatLevel() {
-		return rsPlayer.getCombatLevel();
+		return peer.getCombatLevel();
 	}
 
 	public RSModel getModel() {
-		return rsPlayer.getModel(); // TODO: 6/9/2017 Add wrapper
+		return peer.getModel(); // TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getPrayerIcon() {
-		return rsPlayer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return peer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getSkullIcon() {
-		return rsPlayer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return peer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTeam() {
-		return rsPlayer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
+		return peer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTotalLevel() {
-		return rsPlayer.getTotalLevel();
+		return peer.getTotalLevel();
 	}
 
 	@Override
 	public List<String> getActions() {
-		return Arrays.asList(rsPlayer.getActions());
+		return Arrays.asList(peer.getActions());
 	}
 
 	@Nullable
 	@Override
 	public String getName() {
-		return rsPlayer.getName();
+		return peer.getName();
 	}
-
-    public RSPlayer getRsPlayer() {
-        logger.trace("Accessing peer directly via getter.");
-        return rsPlayer;
-    }
 }
