@@ -1,7 +1,5 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.google.common.base.Preconditions;
@@ -40,7 +38,7 @@ public interface Locatable {
         WorldLocation location1 = locatable.getWorldLocation();
         WorldLocation location2 = getWorldLocation();
 
-        if (this.getPlane() != this.getPlane()) {
+        if (location1.getPlane() != location2.getPlane()) {
             return Integer.MAX_VALUE - 1;
         }
 
