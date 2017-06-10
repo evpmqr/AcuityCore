@@ -17,6 +17,7 @@ public class Bootstrap {
             JFrame frame = new JFrame();
             frame.setSize(new Dimension(800, 600));
             frame.setVisible(true);
+            frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
             AcuityInstance.init();
             frame.getContentPane().add(AcuityInstance.getApplet());
