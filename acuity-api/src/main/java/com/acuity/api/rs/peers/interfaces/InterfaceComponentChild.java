@@ -17,7 +17,6 @@ public class InterfaceComponentChild extends AbstractInterfaceComponent {
         this.child = child;
     }
 
-
     public InterfaceComponent getParent() {
         return parent;
     }

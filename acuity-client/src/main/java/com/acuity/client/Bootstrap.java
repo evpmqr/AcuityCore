@@ -28,7 +28,7 @@ public class Bootstrap {
 
             AcuityInstance.loadClient();
 
-          
+
 
         } catch (Exception e) {
             e.printStackTrace();

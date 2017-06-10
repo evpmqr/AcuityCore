@@ -27,4 +27,7 @@ public class InterfaceComponent extends AbstractInterfaceComponent {
                 .toArray(InterfaceComponentChild[]::new);
     }
 
+    public Interface getParent() {
+        return parent;
+    }
 }
