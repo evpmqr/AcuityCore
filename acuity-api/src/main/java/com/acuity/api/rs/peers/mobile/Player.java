@@ -1,6 +1,5 @@
 package com.acuity.api.rs.peers.mobile;
 
-import com.acuity.api.rs.peers.Client;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerComposite;
@@ -44,16 +43,27 @@ public class Player extends Actor {
 		return rsPlayer.getModel(); // TODO: 6/9/2017 Add wrapper
 	}
 
+	/*
+	default = -1
+	magic = 2
+	ranged = 1
+	melee = 0
+	retribution = 3
+	redemption = 5
+	smite = 4
+	 */
 	public int getPrayerIcon() {
-		return rsPlayer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getPrayerIcon();
 	}
 
+	//default value = -1
 	public int getSkullIcon() {
-		return rsPlayer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getSkullIcon();
 	}
 
+	//default value = 0
 	public int getTeam() {
-		return rsPlayer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getTeam();
 	}
 
 	public int getTotalLevel() {

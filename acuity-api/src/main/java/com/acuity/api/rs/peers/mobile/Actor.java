@@ -8,6 +8,7 @@ import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,8 +87,10 @@ public abstract class Actor extends Renderable implements Locatable {
         return rsActor.getIdlePoseAnimation();
     }
 
+    //null when no overhead text
+    @Nullable
     public String getOverhead() {
-        return rsActor.getOverhead(); // TODO: 6/9/2017 Figure out if default state is 'null'. If it is add documentation and @Nullable
+        return rsActor.getOverhead();
     }
 
     public int getPoseAnimation() {

@@ -26,8 +26,9 @@ public class Client {
         this.rsClient = Preconditions.checkNotNull(peer);
     }
 
+    //init in loading screen, could technically be null before then
     public Scene getScene(){
-        return new Scene(rsClient.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
+        return new Scene(rsClient.getSceneGraph());
     }
 
     public Player[] getPlayers(){
