@@ -18,13 +18,15 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc<T extends RSNPC> extends Actor<T> implements Identifiable {
+public class Npc extends Actor implements Identifiable {
 
     private static final Logger logger = LoggerFactory.getLogger(Npc.class);
 
+	private RSNPC rsNpc;
 
-	public Npc(@NotNull T peer) {
+	public Npc(@NotNull RSNPC peer) {
 		super(peer);
+        this.rsNpc = Preconditions.checkNotNull(peer);
 	}
 
 	@Nullable
@@ -45,6 +47,10 @@ public class Npc<T extends RSNPC> extends Actor<T> implements Identifiable {
 	}
 
 	public Optional<RSNPCComposite> getDefinition() {
-		return Optional.ofNullable(peer.getDefinition()); // TODO: 6/8/2017 add transform
+		return Optional.ofNullable(rsNpc.getDefinition()); // TODO: 6/8/2017 add transform
 	}
+
+    public RSNPC getRsNpc() {
+        return rsNpc;
+    }
 }

@@ -17,12 +17,15 @@ import java.util.List;
  * Created by Eclipseop.
  * Date: 6/9/2017.
  */
-public class Player<T extends RSPlayer> extends Actor<T> {
+public class Player extends Actor {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
-	public Player(@NotNull final T peer) {
+	private RSPlayer rsPlayer;
+
+	public Player(@NotNull final RSPlayer peer) {
 		super(peer);
+		this.rsPlayer = Preconditions.checkNotNull(peer);
 	}
 
 	public boolean isSkulled() {
@@ -30,41 +33,45 @@ public class Player<T extends RSPlayer> extends Actor<T> {
 	}
 
 	public RSPlayerComposite getAppearance() {
-		return peer.getAppearance();// TODO: 6/9/2017 Add wrapper
+		return rsPlayer.getAppearance();// TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getCombatLevel() {
-		return peer.getCombatLevel();
+		return rsPlayer.getCombatLevel();
 	}
 
 	public RSModel getModel() {
-		return peer.getModel(); // TODO: 6/9/2017 Add wrapper
+		return rsPlayer.getModel(); // TODO: 6/9/2017 Add wrapper
 	}
 
 	public int getPrayerIcon() {
-		return peer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getPrayerIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getSkullIcon() {
-		return peer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getSkullIcon(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTeam() {
-		return peer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
+		return rsPlayer.getTeam(); // TODO: 6/9/2017 Find the default value and document it
 	}
 
 	public int getTotalLevel() {
-		return peer.getTotalLevel();
+		return rsPlayer.getTotalLevel();
 	}
 
 	@Override
 	public List<String> getActions() {
-		return Arrays.asList(peer.getActions());
+		return Arrays.asList(rsPlayer.getActions());
 	}
 
 	@Nullable
 	@Override
 	public String getName() {
-		return peer.getName();
+		return rsPlayer.getName();
 	}
+
+    public RSPlayer getRsPlayer() {
+        return rsPlayer;
+    }
 }

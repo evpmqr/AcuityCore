@@ -16,18 +16,25 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class SceneTile<T extends RSSceneTile> extends Node<T> {
+public class SceneTile extends Node {
 
     private static final Logger logger = LoggerFactory.getLogger(SceneTile.class);
 
-    public SceneTile(@NotNull T peer) {
+    private RSSceneTile rsSceneTile;
+
+    public SceneTile(@NotNull RSSceneTile peer) {
         super(peer);
+        this.rsSceneTile = Preconditions.checkNotNull(peer);
     }
 
     public SceneElement[] getSceneElements(){
         logger.trace("Wrapping RSSceneElement[] from RSSceneTile.");
-        return Arrays.stream(peer.getMarkers())
+        return Arrays.stream(rsSceneTile.getMarkers())
                 .map(peer -> peer != null ? new SceneElement(peer) : null)
                 .toArray(SceneElement[]::new);
+    }
+
+    public RSSceneTile getRsSceneTile() {
+        return rsSceneTile;
     }
 }

@@ -12,21 +12,26 @@ import org.slf4j.LoggerFactory;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Renderable<T extends RSRenderable> extends Wrapper<T> implements Interactive {
+public abstract class Renderable implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(Renderable.class);
 
+	protected RSRenderable rsRenderable;
 
-	public Renderable(@NotNull final T peer) {
-		super(peer);
+	public Renderable(@NotNull final RSRenderable peer) {
+		this.rsRenderable = Preconditions.checkNotNull(peer);
 	}
 
 	public int getHeight() {
-		return peer.getHeight();
+		return rsRenderable.getHeight();
 	}
 
 	public RSModel invokeGetModel() {
 	    logger.trace("Invoking getModel() on RSModel.");
-		return peer.invokeGetModel();// TODO: 6/9/2017 Add wrapper
+		return rsRenderable.invokeGetModel();// TODO: 6/9/2017 Add wrapper
+    }
+
+    public RSRenderable getRsRenderable() {
+        return rsRenderable;
     }
 }

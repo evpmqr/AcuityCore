@@ -16,108 +16,114 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class Client<T extends RSClient> extends GameEngine<T>{
+public class Client {
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
-    public Client(@NotNull T peer) {
-        super(peer);
+    private RSClient rsClient;
+
+    public Client(@NotNull RSClient peer) {
+        this.rsClient = Preconditions.checkNotNull(peer);
     }
 
     public Scene getScene(){
-        return new Scene(peer.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
+        return new Scene(rsClient.getSceneGraph());// TODO: 6/9/2017 Check if this can be null when logged out. If it can make this Optional
     }
 
     public Player[] getPlayers(){
         logger.trace("Wrapping RSPlayer[] from RSClient.");
-        return Arrays.stream(peer.getPlayers())
+        return Arrays.stream(rsClient.getPlayers())
                 .map(peer -> peer != null ? new Player(peer) : null)
                 .toArray(Player[]::new);
     }
 
     public Npc[] getNpcs(){
         logger.trace("Wrapping RSNpc[] from RSClient.");
-        return Arrays.stream(peer.getNpcs())
+        return Arrays.stream(rsClient.getNpcs())
                 .map(peer -> peer != null ? new Npc(peer) : null)
                 .toArray(Npc[]::new);
     }
 
     public Optional<Player> getLocalPlayer(){
         logger.trace("Wrapping RSPlayer-local from RSClient.");
-        final RSPlayer localPlayer = peer.getLocalPlayer();
+        final RSPlayer localPlayer = rsClient.getLocalPlayer();
         if (localPlayer == null) return Optional.empty();
         return Optional.of(new Player(localPlayer));
     }
 
     public int getPlane() {
-        return peer.getPlane();
+        return rsClient.getPlane();
     }
 
     public int getBaseSceneX() {
-        return peer.getBaseScenceX();
+        return rsClient.getBaseScenceX();
     }
 
     public int getBaseSceneY() {
-        return peer.getBaseSceneY();
+        return rsClient.getBaseSceneY();
     }
 
     public int getGameState() {
-        return peer.getGameState();
+        return rsClient.getGameState();
     }
 
     public int[][][] getTileHeights() {
-        return peer.getTileHeights();
+        return rsClient.getTileHeights();
     }
 
     public byte[][][] getSceneRenderRules() {
-        return peer.getSceneRenderRules();
+        return rsClient.getSceneRenderRules();
     }
 
     public int getCameraX() {
-        return peer.getCameraX();
+        return rsClient.getCameraX();
     }
 
     public int getCameraY() {
-        return peer.getCameraY();
+        return rsClient.getCameraY();
     }
 
     public int getCameraZ() {
-        return peer.getCameraZ();
+        return rsClient.getCameraZ();
     }
 
     public int getCameraPitch() {
-        return peer.getCameraPitch();
+        return rsClient.getCameraPitch();
     }
 
     public int getCameraYaw() {
-        return peer.getCameraYaw();
+        return rsClient.getCameraYaw();
     }
 
     public int getViewportHeight() {
-        return peer.getViewportHeight();
+        return rsClient.getViewportHeight();
     }
 
     public int getViewportScale() {
-        return peer.getViewportScale();
+        return rsClient.getViewportScale();
     }
 
     public int getViewportWidth() {
-        return peer.getViewportWidth();
+        return rsClient.getViewportWidth();
     }
 
     public int getMapScale() {
-        return peer.getMapScale();
+        return rsClient.getMapScale();
     }
 
     public int getMapRotation() {
-        return peer.getMapRotation();
+        return rsClient.getMapRotation();
     }
 
     public int getMinimapOffset() {
-        return peer.getMinimapOffset();
+        return rsClient.getMinimapOffset();
     }
 
     public boolean isResized() {
-        return peer.isResized();
+        return rsClient.isResized();
+    }
+
+    public RSClient getRsClient(){
+        return rsClient;
     }
 }
