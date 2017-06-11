@@ -9,6 +9,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Created by MadDev, June 10, 2017
+ */
 public class InterfaceComponent extends AbstractInterfaceComponent {
 
     public InterfaceComponent(RSInterfaceComponent peer) {
