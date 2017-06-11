@@ -25,15 +25,15 @@ public class Npcs {
                 .filter(Objects::nonNull);
 	}
 
+	public static List<Npc> getLoaded() {
+		return getLoaded(npc -> true);
+	}
+
 	public static List<Npc> getLoaded(final Predicate<? super Npc> predicate) {
         logger.trace("Returning Ncp(s) matching predicate.");
 		return streamLoaded()
                 .filter(predicate::test)
                 .collect(Collectors.toList());
-	}
-
-	public static List<Npc> getLoaded() {
-		return getLoaded(npc -> true);
 	}
 
 	public static Optional<Npc> getNearest(final Predicate<? super Npc> predicate) {

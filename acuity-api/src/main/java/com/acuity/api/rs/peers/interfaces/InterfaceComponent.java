@@ -7,35 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InterfaceComponent extends AbstractInterfaceComponent {
 
-    private final Interface root;
-    private final InterfaceComponent parent;
-    private final RSInterfaceComponent child;
-
-    public InterfaceComponent(Interface root, InterfaceComponent parent, RSInterfaceComponent child) {
-        super(child);
-        this.root = root;
-        this.parent = parent;
-        this.child = child;
+    public InterfaceComponent(RSInterfaceComponent peer) {
+        super(peer);
     }
 
     /**
      * @return A list of non null grand children of this sub-component.
      */
-    public List<InterfaceComponent> getSubComponents() {
-        return Arrays.stream(this.child.getComponents())
-                .filter(Objects::nonNull)
-                .map(gc -> new InterfaceComponent(root, this, gc))
-                .collect(Collectors.toList());
-    }
-
-    public InterfaceComponent getParent() {
-        return parent;
-    }
-
-    public Interface getRoot() {
-        return root;
+    public InterfaceComponent[] getComponents() {
+        return Arrays.stream(rsInterfaceComponent.getComponents())
+                .map(child -> child != null ? new InterfaceComponent(child) : null)
+                .toArray(InterfaceComponent[]::new);
     }
 }

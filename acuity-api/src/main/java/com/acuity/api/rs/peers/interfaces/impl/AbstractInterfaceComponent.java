@@ -7,7 +7,7 @@ import com.google.common.base.Preconditions;
 
 public abstract class AbstractInterfaceComponent extends Node {
 
-    private final RSInterfaceComponent rsInterfaceComponent;
+    protected final RSInterfaceComponent rsInterfaceComponent;
 
     public AbstractInterfaceComponent(RSInterfaceComponent peer) {
         super(peer);

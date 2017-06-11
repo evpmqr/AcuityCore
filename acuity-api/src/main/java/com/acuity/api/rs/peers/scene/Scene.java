@@ -31,9 +31,9 @@ public class Scene {
     public SceneTile[][][] getTiles(){
         logger.trace("Wrapping SceneTile[][][] from RSScene.");
         return Arrays.stream(rsScene.getTiles())
-                .map(tile1 -> Arrays.stream(tile1)
-                        .map(tile2 -> Arrays.stream(tile2)
-                                .map(tile3 -> tile3 != null ? new SceneTile(tile3) : null)
+                .map(tiles1 -> Arrays.stream(tiles1)
+                        .map(tiles2 -> Arrays.stream(tiles2)
+                                .map(peer -> peer != null ? new SceneTile(peer) : null)
                                 .toArray(SceneTile[]::new)
                         ).toArray(SceneTile[][]::new)
                 ).toArray(SceneTile[][][]::new);

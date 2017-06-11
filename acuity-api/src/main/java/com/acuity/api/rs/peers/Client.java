@@ -1,5 +1,6 @@
 package com.acuity.api.rs.peers;
 
+import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
 import com.acuity.api.rs.peers.mobile.Npc;
 import com.acuity.api.rs.peers.mobile.Player;
 import com.acuity.api.rs.peers.scene.Scene;
@@ -11,6 +12,7 @@ import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -54,6 +56,15 @@ public class Client {
     }
 
 
+    public InterfaceComponent[][] getInterfaces() {
+        logger.trace("Wrapping RSInterfaceComponent[][] from RSClient.");
+        return Arrays.stream(rsClient.getInterfaces())
+                .map(rsInterfaceComponents -> Arrays.stream(rsInterfaceComponents)
+                        .map(peer -> peer != null ? new InterfaceComponent(peer) : null)
+                        .toArray(InterfaceComponent[]::new)
+                ).toArray(InterfaceComponent[][]::new);
+    }
+
     public int getPlane() {
         return rsClient.getPlane();
     }
@@ -77,8 +88,6 @@ public class Client {
     public byte[][][] getSceneRenderRules() {
         return rsClient.getSceneRenderRules();
     }
-
-    public RSInterfaceComponent[][] getInterfaces() { return rsClient.getInterfaces(); }
 
     public int getCameraX() {
         return rsClient.getCameraX();

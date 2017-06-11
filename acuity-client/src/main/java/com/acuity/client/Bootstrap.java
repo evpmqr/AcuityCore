@@ -1,11 +1,6 @@
 package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.peers.Client;
-import com.acuity.api.rs.peers.interfaces.Interface;
-import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
-import com.acuity.api.rs.query.Interfaces;
-import com.acuity.rs.api.RSInterfaceComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,9 +22,6 @@ public class Bootstrap {
             frame.getContentPane().add(AcuityInstance.getApplet());
 
             AcuityInstance.loadClient();
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
