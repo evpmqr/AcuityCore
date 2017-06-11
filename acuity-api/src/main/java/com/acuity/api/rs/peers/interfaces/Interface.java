@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Created by maddev on 6/10/17.
+ * Created by MadDev, June 10, 2017
  */
 public class Interface {
 

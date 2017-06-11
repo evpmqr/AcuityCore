@@ -33,12 +33,12 @@ public class Interfaces {
      *
      * @return Null safe list of all the child components of the interfaces.
      */
-    public static InterfaceComponent[] getInterfaceComponents() {
+    public static List<InterfaceComponent> getInterfaceComponents() {
         final List<InterfaceComponent> components = new ArrayList<>();
         for (Interface parent : getInterfaces()) {
             components.addAll(parent.getComponents());
         }
-        return components.toArray(new InterfaceComponent[components.size()]);
+        return components;
     }
 
     /**

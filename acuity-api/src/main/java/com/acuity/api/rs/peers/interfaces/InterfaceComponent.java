@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Created by MadDev, June 10, 2017
+ */
 public class InterfaceComponent extends AbstractInterfaceComponent {
 
     private final Interface root;
