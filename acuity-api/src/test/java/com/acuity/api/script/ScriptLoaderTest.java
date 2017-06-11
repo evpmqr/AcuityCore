@@ -17,7 +17,7 @@ public class ScriptLoaderTest {
     @Test
     public void test(){
         try {
-            final AcuityScript script = new ScriptLoader().loadScriptAsJar(getClass().getResource("script-testing.jar").getFile());
+            final AcuityScript script = new ScriptLoader().loadScriptFromJar(getClass().getResource("script-testing.jar").getFile());
             if (script == null) {
                 logger.warn("No scripts found.");
                 return;
