@@ -5,9 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -21,11 +19,13 @@ public class ScriptLoader {
 
     private static Logger logger = LoggerFactory.getLogger(ScriptLoader.class);
 
-    private AcuityScript loadScriptAsJar(String path)
-            throws IllegalAccessException,
-            InvocationTargetException, InstantiationException,
-            IOException, ClassNotFoundException,
-            NoSuchMethodException {
+    /**
+     *
+     * @param path, the path to the Jar file.
+     * @return An AcuityScript instance of the jar file, if it contains a class extending AcuityScript.
+     */
+    public AcuityScript loadScriptFromJar(String path)
+            throws Exception {
 
         final File file = new File(path);
         final JarFile jar = new JarFile(file);
@@ -68,7 +68,7 @@ public class ScriptLoader {
 
         String path = System.getProperty("user.dir") + "/script-testing/out/script-testing.jar";
         try {
-            final AcuityScript script = new ScriptLoader().loadScriptAsJar(path);
+            final AcuityScript script = new ScriptLoader().loadScriptFromJar(path);
             if (script == null) {
                 logger.warn("No scripts found.");
                 return;

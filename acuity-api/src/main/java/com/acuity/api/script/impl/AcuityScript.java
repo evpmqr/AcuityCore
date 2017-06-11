@@ -2,17 +2,17 @@ package com.acuity.api.script.impl;
 
 public abstract class AcuityScript implements Loopable {
 
-    private boolean isPaused;
-    private boolean isStopped;
+    private ScriptState state = ScriptState.NO_SCRIPT;
 
     public void execute() {
         final Thread t = new Thread(script);
         t.setName("AcuityScriptRunner");
         t.start();
+        state = ScriptState.RUNNING;
     }
 
     private Runnable script = () -> {
-        while (!isStopped) {
+        while (state != ScriptState.NO_SCRIPT) {
             try {
                 doLoop();
             } catch (InterruptedException e) {
@@ -23,7 +23,7 @@ public abstract class AcuityScript implements Loopable {
 
     private void doLoop() throws InterruptedException {
         synchronized (this) {
-            if (isPaused) {
+            if (state == ScriptState.PAUSED) {
                 Thread.sleep(50);
                 return;
             }
@@ -31,16 +31,28 @@ public abstract class AcuityScript implements Loopable {
                 loop();
             } catch (Exception e) {
                 e.printStackTrace();
-                isStopped = true;
+                state = ScriptState.NO_SCRIPT;
             }
         }
     }
 
     public void stop() {
-        this.isStopped = true;
+        state = ScriptState.NO_SCRIPT;
     }
 
     public void pause() {
-        this.isPaused = true;
+        state = ScriptState.PAUSED;
+    }
+
+    public void resume() {
+        state = ScriptState.RUNNING;
+    }
+
+    public boolean isPaused() {
+        return state == ScriptState.PAUSED;
+    }
+
+    public ScriptState getState() {
+        return state;
     }
 }

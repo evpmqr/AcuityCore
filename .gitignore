@@ -6,3 +6,5 @@ project.properties
 *.iml
 .idea/
 .DS_Store
+*.class
+*.jfd

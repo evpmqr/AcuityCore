@@ -1,6 +1,7 @@
 package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.client.devgui.ScriptRunnerView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,10 @@ public class Bootstrap {
             frame.getContentPane().add(AcuityInstance.getApplet());
 
             AcuityInstance.loadClient();
+
+            new ScriptRunnerView().setVisible(true);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

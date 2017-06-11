@@ -3,6 +3,7 @@ package com.acuity.api;
 import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSStub;
 import com.acuity.api.rs.peers.Client;
+import com.acuity.api.script.ScriptManager;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.EventBus;
@@ -24,6 +25,7 @@ public class AcuityInstance {
     private static Applet applet;
     private static RSAppletLoader appletLoader;
     private static RSStub rsStub;
+    private static ScriptManager scriptManager;
 
     private static EventBus rsEventBus = new EventBus();
 
@@ -31,6 +33,7 @@ public class AcuityInstance {
         logger.info("Applet loading started.");
         appletLoader = new RSAppletLoader();
         applet = appletLoader.loadApplet();
+        scriptManager = new ScriptManager();
     }
 
     public static void loadClient(){
@@ -61,6 +64,10 @@ public class AcuityInstance {
 
     public static RSStub getRsStub() {
         return rsStub;
+    }
+
+    public static ScriptManager getScriptManager() {
+        return scriptManager;
     }
 
     @NotNull
