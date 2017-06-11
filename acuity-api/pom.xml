@@ -13,11 +13,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.acuity.rs</groupId>
-            <artifactId>rs-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.0</version>

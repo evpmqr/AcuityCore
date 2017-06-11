@@ -16,7 +16,6 @@
     <modules>
         <module>http-api</module>
         <module>http-service</module>
-        <module>rs-api</module>
         <module>acuity-client</module>
         <module>acuity-api</module>
     </modules>
