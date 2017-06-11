@@ -7,6 +7,7 @@ import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
 import com.acuity.rs.api.RSInterfaceComponent;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Interfaces {
 
@@ -16,15 +17,16 @@ public class Interfaces {
      * @return Null safe list of all the parent interfaces, containing
      * their sub components (Sub components may be null!).
      */
-    public static Interface[] getInterfaces() {
+    public static List<Interface> getInterfaces() {
         final Client client = AcuityInstance.getClient();
         final RSInterfaceComponent[][] interfaces = client.getInterfaces();
         if(interfaces == null || interfaces.length == 0) {
-            return new Interface[0];
+            return Collections.EMPTY_LIST;
         }
         return Arrays.stream(interfaces)
                 .filter(Objects::nonNull)
-                .map(Interface::new).toArray(Interface[]::new);
+                .map(Interface::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -34,7 +36,7 @@ public class Interfaces {
     public static InterfaceComponent[] getInterfaceComponents() {
         final List<InterfaceComponent> components = new ArrayList<>();
         for (Interface parent : getInterfaces()) {
-            components.addAll(Arrays.asList(parent.getComponents()));
+            components.addAll(parent.getComponents());
         }
         return components.toArray(new InterfaceComponent[components.size()]);
     }
@@ -47,11 +49,11 @@ public class Interfaces {
      * interface by index in the Interfaces, then the InterfaceComponent
      * is inside the array returned by the parent.
      */
-    public static Optional<InterfaceComponent> lookup(int parentIndex, int childIndex) {
+    public static Optional<InterfaceComponent> get(int parentIndex, int childIndex) {
         try {
-            final Interface[] parentInterfaces = getInterfaces();
-            final Interface parent = parentInterfaces[parentIndex];
-            return Optional.of(parent.getComponents()[childIndex]);
+            final List<Interface> parentInterfaces = getInterfaces();
+            final Interface parent = parentInterfaces.get(parentIndex);
+            return Optional.of(parent.getComponents().get(childIndex));
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
@@ -72,16 +74,11 @@ public class Interfaces {
      *
      * Parent -> Child -> GrandChild
      */
-    public static Optional<InterfaceComponent> lookup(int parentIndex, int childIndex, int grandchildIndex) {
-        final Optional<InterfaceComponent> component = lookup(parentIndex, childIndex);
-        if(component == null || !component.isPresent()) {
-            return Optional.empty();
-        }
-        try {
-            return Optional.of(component.get().getSubComponents()[grandchildIndex]);
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
+    public static Optional<InterfaceComponent> get(int parentIndex, int childIndex, int grandchildIndex) {
+        return Optional.ofNullable(get(parentIndex, childIndex)
+                .map(InterfaceComponent::getSubComponents)
+                .map(interfaceComponents -> interfaceComponents.get(grandchildIndex))
+                .orElse(null));
     }
 
 }

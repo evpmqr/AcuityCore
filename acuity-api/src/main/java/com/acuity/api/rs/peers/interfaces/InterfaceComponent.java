@@ -4,7 +4,9 @@ import com.acuity.api.rs.peers.interfaces.impl.AbstractInterfaceComponent;
 import com.acuity.rs.api.RSInterfaceComponent;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class InterfaceComponent extends AbstractInterfaceComponent {
 
@@ -22,11 +24,11 @@ public class InterfaceComponent extends AbstractInterfaceComponent {
     /**
      * @return A list of non null grand children of this sub-component.
      */
-    public InterfaceComponent[] getSubComponents() {
+    public List<InterfaceComponent> getSubComponents() {
         return Arrays.stream(this.child.getComponents())
                 .filter(Objects::nonNull)
                 .map(gc -> new InterfaceComponent(root, this, gc))
-                .toArray(InterfaceComponent[]::new);
+                .collect(Collectors.toList());
     }
 
     public InterfaceComponent getParent() {

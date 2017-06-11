@@ -3,7 +3,9 @@ package com.acuity.api.rs.peers.interfaces;
 import com.acuity.rs.api.RSInterfaceComponent;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by maddev on 6/10/17.
@@ -20,11 +22,11 @@ public class Interface {
      *
      * @return List of non-null components of the parent interface.
      */
-    public InterfaceComponent[] getComponents() {
+    public List<InterfaceComponent> getComponents() {
         return Arrays.stream(this.children)
                 .filter(Objects::nonNull)
                 .map(child -> new InterfaceComponent(this, null, child))
-                .toArray(InterfaceComponent[]::new);
+                .collect(Collectors.toList());
     }
 
     /**
@@ -34,7 +36,6 @@ public class Interface {
     public int getCountOfComponents() {
         return (int) Arrays.stream(this.children)
                 .filter(Objects::nonNull)
-                .map(child -> new InterfaceComponent(this, null, child))
                 .count();
     }
 }

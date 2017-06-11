@@ -1,204 +1,208 @@
 package com.acuity.api.rs.peers.interfaces.impl;
 
+import com.acuity.api.rs.peers.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
+import com.google.common.base.Preconditions;
 
 
-public abstract class AbstractInterfaceComponent {
+public abstract class AbstractInterfaceComponent extends Node {
 
-    private final RSInterfaceComponent component;
+    private final RSInterfaceComponent rsInterfaceComponent;
 
-    public AbstractInterfaceComponent(RSInterfaceComponent component) {
-        this.component = component;
+    public AbstractInterfaceComponent(RSInterfaceComponent peer) {
+        super(peer);
+        this.rsInterfaceComponent = Preconditions.checkNotNull(peer);
     }
 
     public String[] getActions() {
-        return component.getActions();
+        return rsInterfaceComponent.getActions();
     }
 
     public int getBorderThickness() {
-        return component.getBorderThickness();
+        return rsInterfaceComponent.getBorderThickness();
     }
 
     public int getBoundsIndex() {
-        return component.getBoundsIndex();
+        return rsInterfaceComponent.getBoundsIndex();
     }
 
     public int getComponentIndex() {
-        return component.getComponentIndex();
+        return rsInterfaceComponent.getComponentIndex();
     }
 
     public int getContentType() {
-        return component.getType();
+        return rsInterfaceComponent.getType();
     }
 
     public int getFondId() {
-        return component.getFondId();
+        return rsInterfaceComponent.getFondId();
     }
 
     public int getHeight() {
-        return component.getHeight();
+        return rsInterfaceComponent.getHeight();
     }
 
     public int getInsetY() {
-        return component.getInsetY();
+        return rsInterfaceComponent.getInsetY();
     }
 
     public int getItemId() {
-        return component.getItemId();
+        return rsInterfaceComponent.getItemId();
     }
 
     public int[] getItemIds() {
-        return component.getItemIds();
+        return rsInterfaceComponent.getItemIds();
     }
 
     public int getItemStackSize() {
-        return component.getItemStackSize();
+        return rsInterfaceComponent.getItemStackSize();
     }
 
     public int[] getItemStackSizes() {
-        return component.getItemStackSizes();
+        return rsInterfaceComponent.getItemStackSizes();
     }
 
     public int getModelId() {
-        return component.getModelId();
+        return rsInterfaceComponent.getModelId();
     }
 
     public int getModelType() {
-        return component.getModelType();
+        return rsInterfaceComponent.getModelType();
     }
 
     public String getName() {
-        return component.getName();
+        return rsInterfaceComponent.getName();
     }
 
     public String getNullSafeName() {
-        return component.getName() == null ? "" : component.getName();
+        return rsInterfaceComponent.getName() == null ? "" : rsInterfaceComponent.getName();
     }
 
     public int getOpacity() {
-        return component.getOpacity();
+        return rsInterfaceComponent.getOpacity();
     }
 
     public int getOriginalWidth() {
-        return component.getOriginalWidth();
+        return rsInterfaceComponent.getOriginalWidth();
     }
 
     public int getOriginalX() {
-        return component.getOriginalX();
+        return rsInterfaceComponent.getOriginalX();
     }
 
     public int getOriginalY() {
-        return component.getOriginalY();
+        return rsInterfaceComponent.getOriginalY();
     }
 
-
     public int getParentUid() {
-        return component.getParentUid();
+        return rsInterfaceComponent.getParentUid();
     }
 
     public int getRelativeX() {
-        return component.getRelativeX();
+        return rsInterfaceComponent.getRelativeX();
     }
 
     public int getRelativeY() {
-        return component.getRelativeY();
+        return rsInterfaceComponent.getRelativeY();
     }
 
     public int getRotationX() {
-        return component.getRotationX();
+        return rsInterfaceComponent.getRotationX();
     }
 
     public int getRotationY() {
-        return component.getRotationY();
+        return rsInterfaceComponent.getRotationY();
     }
 
     public int getRotationZ() {
-        return component.getRotationZ();
+        return rsInterfaceComponent.getRotationZ();
     }
 
     public int getScrollHeight() {
-        return component.getScrollHeight();
+        return rsInterfaceComponent.getScrollHeight();
     }
 
     public int getScrollWidth() {
-        return component.getScrollWidth();
+        return rsInterfaceComponent.getScrollWidth();
     }
 
     public int getScrollX() {
-        return component.getScrollX();
+        return rsInterfaceComponent.getScrollX();
     }
 
     public String getSelectedAction() {
-        return component.getSelectedAction();
+        return rsInterfaceComponent.getSelectedAction();
     }
 
     public int getShadowColor() {
-        return component.getShadowColor();
+        return rsInterfaceComponent.getShadowColor();
     }
 
     public int getSpriteId() {
-        return component.getSpriteId();
+        return rsInterfaceComponent.getSpriteId();
     }
 
     public String[] getTableActions() {
-        return component.getTableActions();
+        return rsInterfaceComponent.getTableActions();
     }
 
     public String getText() {
-        return component.getText();
+        return rsInterfaceComponent.getText();
     }
 
     public String getNullSafeText() {
-        return component.getText() == null ? "" : component.getText();
+        return rsInterfaceComponent.getText() == null ? "" : rsInterfaceComponent.getText();
     }
 
     public int getTextColor() {
-        return component.getTextColor();
+        return rsInterfaceComponent.getTextColor();
     }
 
     public String getTooltip() {
-        return component.getTooltip();
+        return rsInterfaceComponent.getTooltip();
     }
 
     public int getType() {
-        return component.getType();
+        return rsInterfaceComponent.getType();
     }
 
     public int getUid() {
-        return component.getUid();
+        return rsInterfaceComponent.getUid();
     }
 
     public int getWidth() {
-        return component.getWidth();
+        return rsInterfaceComponent.getWidth();
     }
 
     public int getXPadding() {
-        return component.getXPadding();
+        return rsInterfaceComponent.getXPadding();
     }
 
     public int getYPadding() {
-        return component.getYPadding();
+        return rsInterfaceComponent.getYPadding();
     }
 
     public boolean isFlippedHorizontally() {
-        return component.isFlippedHorizontally();
+        return rsInterfaceComponent.isFlippedHorizontally();
     }
 
     public boolean isFlippedVertically() {
-        return component.isFlippedVertically();
+        return rsInterfaceComponent.isFlippedVertically();
     }
 
     public boolean isHidden() {
-        return component.isHidden();
+        return rsInterfaceComponent.isHidden();
     }
 
     public boolean isVisible() {
-        return !component.isHidden();
+        return !rsInterfaceComponent.isHidden();
     }
 
     public boolean isScriptAvailable() {
-        return component.isScriptAvailable();
+        return rsInterfaceComponent.isScriptAvailable();
     }
 
-
+    public RSInterfaceComponent getRsComponent() {
+        return rsInterfaceComponent;
+    }
 }
