@@ -1,4 +1,4 @@
-package com.acuity.api.rs.peers;
+package com.acuity.api.rs.peers.engine;
 
 import com.acuity.rs.api.RSGameEngine;
 import com.google.common.base.Preconditions;

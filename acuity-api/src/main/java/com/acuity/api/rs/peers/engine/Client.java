@@ -1,18 +1,16 @@
-package com.acuity.api.rs.peers;
+package com.acuity.api.rs.peers.engine;
 
 import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
 import com.acuity.api.rs.peers.mobile.Npc;
 import com.acuity.api.rs.peers.mobile.Player;
 import com.acuity.api.rs.peers.scene.Scene;
 import com.acuity.rs.api.RSClient;
-import com.acuity.rs.api.RSInterfaceComponent;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Optional;
 

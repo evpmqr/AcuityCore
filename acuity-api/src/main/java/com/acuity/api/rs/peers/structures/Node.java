@@ -1,7 +1,6 @@
-package com.acuity.api.rs.peers;
+package com.acuity.api.rs.peers.structures;
 
 import com.acuity.rs.api.RSNode;
-import com.acuity.rs.api.RSSceneTile;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
@@ -19,7 +18,6 @@ public class Node {
     public Node(@NotNull RSNode peer) {
         this.rsNode = Preconditions.checkNotNull(peer);
     }
-
 
     public RSNode getRsNode() {
         return rsNode;
