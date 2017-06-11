@@ -22,14 +22,14 @@ public class Scene {
     }
 
     public SceneElement[] getElements(){
-        logger.trace("Wrapping SceneElement[] from RSScene.");
+        logger.trace("Wrapping RSSceneElement[] from RSScene.");
         return Arrays.stream(rsScene.getElements())
                 .map(peer -> peer != null ? new SceneElement(peer) : null)
                 .toArray(SceneElement[]::new);
     }
 
     public SceneTile[][][] getTiles(){
-        logger.trace("Wrapping SceneTile[][][] from RSScene.");
+        logger.trace("Wrapping RSSceneTile[][][] from RSScene.");
         return Arrays.stream(rsScene.getTiles())
                 .map(tiles1 -> Arrays.stream(tiles1)
                         .map(tiles2 -> Arrays.stream(tiles2)

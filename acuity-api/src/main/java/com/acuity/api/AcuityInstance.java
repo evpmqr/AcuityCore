@@ -2,7 +2,7 @@ package com.acuity.api;
 
 import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSStub;
-import com.acuity.api.rs.peers.Client;
+import com.acuity.api.rs.peers.engine.Client;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.EventBus;

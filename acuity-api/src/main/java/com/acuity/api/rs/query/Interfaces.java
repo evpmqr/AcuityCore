@@ -39,14 +39,14 @@ public class Interfaces {
         Preconditions.checkArgument(childPath.length >= 1, "Make sure you are passing a least one child index.");
 
         InterfaceComponent[][] interfaces = AcuityInstance.getClient().getInterfaces();
-        if (rootIndex < 0 || rootIndex > interfaces.length - 1){
+        if (interfaces == null || rootIndex < 0 || rootIndex > interfaces.length - 1){
             return Optional.empty();
         }
 
         InterfaceComponent result = null;
         InterfaceComponent[] interfaceComponents = interfaces[rootIndex];
         for (int childIndex : childPath) {
-            if (childIndex < 0 || childIndex > interfaceComponents.length - 1){
+            if (interfaceComponents == null || childIndex < 0 || childIndex > interfaceComponents.length - 1){
                 return Optional.empty();
             }
 
