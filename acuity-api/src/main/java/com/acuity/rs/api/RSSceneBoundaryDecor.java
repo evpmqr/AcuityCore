@@ -3,6 +3,8 @@ package com.acuity.rs.api;
 
 //Generated
 
+import com.acuity.api.rs.wrappers.rendering.scene.elements.SceneBoundaryDecor;
+
 public interface RSSceneBoundaryDecor {
 
     RSRenderable getEntity();
@@ -26,4 +28,6 @@ public interface RSSceneBoundaryDecor {
     int getSceneY();
 
     int getUid();
+
+    SceneBoundaryDecor getWrapper();
 }

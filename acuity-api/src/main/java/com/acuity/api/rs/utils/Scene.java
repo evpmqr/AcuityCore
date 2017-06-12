@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
@@ -40,6 +41,17 @@ public class Scene {
     }
 
     public static Optional<SceneTile[][][]> getTiles(){
-        return AcuityInstance.getClient().getScene().map(com.acuity.api.rs.wrappers.scene.Scene::getTiles);
+        return AcuityInstance.getClient().getScene()
+                .map(com.acuity.api.rs.wrappers.scene.Scene::getTiles)
+                .flatMap(Function.identity());
+    }
+
+    public Optional<SceneTile> getLoaded(int sceneX, int sceneY, int plane){
+        if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
+            return Optional.empty();
+        }
+
+        SceneTile[][][] sceneTiles = Scene.getTiles().orElseThrow(() -> new NullPointerException("Failed to load Scene"));
+        return Optional.ofNullable(sceneTiles[plane][sceneX][sceneY]);
     }
 }

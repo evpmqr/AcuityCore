@@ -3,6 +3,8 @@ package com.acuity.rs.api;
 
 //Generated
 
+import com.acuity.api.rs.wrappers.scene.elements.SceneTileDecor;
+
 public interface RSSceneTileDecor {
 
     RSRenderable getEntity();
@@ -16,4 +18,6 @@ public interface RSSceneTileDecor {
     int getSceneY();
 
     int getUid();
+
+    SceneTileDecor getWrapper();
 }

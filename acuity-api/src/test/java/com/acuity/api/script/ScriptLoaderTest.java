@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Function;
+
 import static org.junit.Assert.*;
 
 /**
@@ -26,5 +30,13 @@ public class ScriptLoaderTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test2(){
+        Optional<Optional<String>> xx = Optional.of(Optional.ofNullable(null));
+
+        Optional<String> optional = xx.flatMap(Function.identity());
+        System.out.println(optional.orElse(null));
     }
 }

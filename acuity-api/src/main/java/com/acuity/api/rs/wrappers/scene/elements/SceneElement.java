@@ -61,15 +61,15 @@ public class SceneElement implements Locatable{
     }
 
     public int getSceneX(){
-        return rsSceneElement.getPlane();
+        return rsSceneElement.getSceneX();
     }
 
     public int getSceneY(){
-        return rsSceneElement.getPlane();
+        return rsSceneElement.getSceneY();
     }
 
     public int getUID(){// TODO: 6/12/2017 Rename
-        return rsSceneElement.getPlane();
+        return rsSceneElement.getUid();
     }
 
     @NotNull
