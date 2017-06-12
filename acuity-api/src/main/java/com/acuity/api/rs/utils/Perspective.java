@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
@@ -29,11 +30,11 @@ public class Perspective {
         }
     }
 
-    public static Point worldToCanvas(int x, int y, int plane) {
+    public static Optional<Point> worldToCanvas(int x, int y, int plane) {
         return worldToCanvas(x, y, plane, 0);
     }
 
-    public static Point worldToCanvas(int x, int y, int plane, int zOffset) {
+    public static Optional<Point> worldToCanvas(int x, int y, int plane, int zOffset) {
         if (x >= 128 && y >= 128 && x <= 13056 && y <= 13056) {
             int z = getTileHeight(x, y, Scene.getPlane()) - plane;
             x -= Camera.getX();
@@ -59,18 +60,18 @@ public class Perspective {
                 Client client = AcuityInstance.getClient();
                 int pointX = client.getViewportHeight()  / 2 + x * client.getViewportScale() / y;
                 int pointY = var8 * client.getViewportScale() / y + client.getViewportWidth() / 2;
-                return new Point(pointX, pointY);
+                return Optional.of(new Point(pointX, pointY));
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
-    public static Point worldToMiniMap(int x, int y, int distance)
+    public static Optional<Point> worldToMiniMap(int x, int y, int distance)
     {
         int angle = MiniMap.getScale() + MiniMap.getRotation() & 0x7FF;
 
-        SceneLocation sceneLocation = LocalPlayer.getSceneLocation();
+        SceneLocation sceneLocation = LocalPlayer.getSceneLocation().orElseThrow(() -> new NullPointerException("LocalPlayer.getSceneLocation() failed to return a location."));
         x = x / 32 - sceneLocation.getSceneX() / 32;
         y = y / 32 - sceneLocation.getSceneY() / 32;
 
@@ -91,10 +92,10 @@ public class Perspective {
 
             x = (miniMapX + 167 / 2) + xx;
             y = (167 / 2 - 1) + yy;
-            return new Point(x, y);
+            return Optional.of(new Point(x, y));
         }
 
-        return new Point(-1, -1);
+        return Optional.empty();
     }
 
     public static int getTileHeight(int x, int y, int plane) {
@@ -119,18 +120,18 @@ public class Perspective {
         return 0;
     }
 
-    public static Point getCanvasTextLocation(Graphics2D graphics, Point localLocation, String text, int zOffset) {
+    public static Optional<Point> getCanvasTextLocation(Graphics2D graphics, Point localLocation, String text, int zOffset) {
         int plane = Scene.getPlane();
 
-        Point p = worldToCanvas((int) localLocation.getX(), (int) localLocation.getY(), plane, zOffset);
+        Point p = worldToCanvas((int) localLocation.getX(), (int) localLocation.getY(), plane, zOffset).orElse(null);
         if (p == null) {
-            return null;
+            return Optional.empty();
         }
 
         FontMetrics fm = graphics.getFontMetrics();
         Rectangle2D bounds = fm.getStringBounds(text, graphics);
         int xOffset = (int) (p.getX() - (int) (bounds.getWidth() / 2));
 
-        return new Point(xOffset, (int) p.getY());
+        return Optional.of(new Point(xOffset, (int) p.getY()));
     }
 }

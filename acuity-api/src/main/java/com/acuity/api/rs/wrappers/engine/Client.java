@@ -83,10 +83,10 @@ public class Client extends GameEngine {
     }
 
     public int[][][] getTileHeights() {
-        return rsClient.getTileHeights();
+        return rsClient.getTileHeights();// TODO: 6/12/2017 Can this be null?
     }
 
-    public byte[][][] getSceneRenderRules() {
+    public byte[][][] getSceneRenderRules() {// TODO: 6/12/2017 Can this be null?
         return rsClient.getSceneRenderRules();
     }
 

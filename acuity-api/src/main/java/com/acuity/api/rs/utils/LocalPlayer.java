@@ -22,19 +22,19 @@ public class LocalPlayer {
         return AcuityInstance.getClient().getLocalPlayer();
     }
 
-    public static WorldLocation getWorldLocation() {
-        return get().map(Locatable::getWorldLocation).orElse(null);
+    public static Optional<WorldLocation> getWorldLocation() {
+        return get().map(Player::getWorldLocation);
     }
 
-    public static SceneLocation getSceneLocation() {
-        return get().map(player -> getSceneLocation()).orElse(null);
+    public static Optional<SceneLocation> getSceneLocation() {
+        return get().map(Player::getSceneLocation);
     }
 
     public static boolean isAnimating() {
         return get().map(Actor::isAnimating).orElse(false);
     }
 
-    public static String getName() {
-        return get().map(Player::getName).orElse(null);
+    public static Optional<String> getName() {
+        return get().map(Player::getName);
     }
 }

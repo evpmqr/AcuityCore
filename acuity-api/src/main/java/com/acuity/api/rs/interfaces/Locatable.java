@@ -17,7 +17,7 @@ public interface Locatable {
     }
 
     default int distance() {
-        return distance(LocalPlayer.getWorldLocation());
+        return distance(LocalPlayer.getWorldLocation().orElse(null));
     }
 
     default boolean isOnMiniMap() {
@@ -29,7 +29,7 @@ public interface Locatable {
     }
 
     default double distancePrecise() {
-        return distancePrecise(LocalPlayer.getWorldLocation());
+        return distancePrecise(LocalPlayer.getWorldLocation().orElse(null));
     }
 
     default double distancePrecise(Locatable locatable) {
