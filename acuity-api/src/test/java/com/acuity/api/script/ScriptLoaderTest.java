@@ -34,9 +34,5 @@ public class ScriptLoaderTest {
 
     @Test
     public void test2(){
-        Optional<Optional<String>> xx = Optional.of(Optional.ofNullable(null));
-
-        Optional<String> optional = xx.flatMap(Function.identity());
-        System.out.println(optional.orElse(null));
     }
 }

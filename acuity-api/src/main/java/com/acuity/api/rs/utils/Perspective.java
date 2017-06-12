@@ -15,10 +15,9 @@ import java.util.Optional;
  */
 public class Perspective {
 
-    private static final Logger logger = LoggerFactory.getLogger(Perspective.class);
-
     public static final int[] SINE = new int[2048];
     public static final int[] COSINE = new int[2048];
+    private static final Logger logger = LoggerFactory.getLogger(Perspective.class);
     private static final double UNIT = Math.PI / 1024d;
     private static final int LOCAL_COORD_BITS = 7;
     public static final int LOCAL_TILE_SIZE = 1 << LOCAL_COORD_BITS;
@@ -58,7 +57,7 @@ public class Perspective {
 
             if (y >= 50) {
                 Client client = AcuityInstance.getClient();
-                int pointX = client.getViewportHeight()  / 2 + x * client.getViewportScale() / y;
+                int pointX = client.getViewportHeight() / 2 + x * client.getViewportScale() / y;
                 int pointY = var8 * client.getViewportScale() / y + client.getViewportWidth() / 2;
                 return Optional.of(new Point(pointX, pointY));
             }
@@ -67,8 +66,7 @@ public class Perspective {
         return Optional.empty();
     }
 
-    public static Optional<Point> worldToMiniMap(int x, int y, int distance)
-    {
+    public static Optional<Point> worldToMiniMap(int x, int y, int distance) {
         int angle = MiniMap.getScale() + MiniMap.getRotation() & 0x7FF;
 
         SceneLocation sceneLocation = LocalPlayer.getSceneLocation().orElseThrow(() -> new NullPointerException("LocalPlayer.getSceneLocation() failed to return a location."));
@@ -76,8 +74,7 @@ public class Perspective {
         y = y / 32 - sceneLocation.getSceneY() / 32;
 
         int dist = x * x + y * y;
-        if (dist < distance)
-        {
+        if (dist < distance) {
             int sin = SINE[angle];
             int cos = COSINE[angle];
 

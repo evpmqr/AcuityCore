@@ -1,5 +1,8 @@
 package com.acuity.inject.callbacks;
 
+import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
+import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,5 +15,10 @@ public class Hooks {
 
     public static void callHook(String name, int index, Object object){
         logger.trace("'{}' called with index={} and object={}", name, index, object);
+        switch (name){
+            case "playerPrayerChange":
+                AcuityInstance.getEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
+                break;
+        }
     }
 }

@@ -37,7 +37,8 @@ public class Scene {
     }
 
     public static Optional<SceneElement[]> getElements(){
-        return AcuityInstance.getClient().getScene().map(com.acuity.api.rs.wrappers.scene.Scene::getElements);
+        return AcuityInstance.getClient().getScene()
+                .map(com.acuity.api.rs.wrappers.scene.Scene::getElements);
     }
 
     public static Optional<SceneTile[][][]> getTiles(){
@@ -48,7 +49,7 @@ public class Scene {
 
     public Optional<SceneTile> getLoaded(int sceneX, int sceneY, int plane){
         if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
-            throw new IllegalArgumentException("Coordinates outside loaded scene,");
+            throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
         return Scene.getTiles().map(sceneTiles -> sceneTiles[plane][sceneX][sceneY]);
     }

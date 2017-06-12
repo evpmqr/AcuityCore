@@ -30,7 +30,7 @@ public class SceneElements {
 
     public static Stream<SceneElement> streamLoaded(int sceneX, int sceneY, int plane){
         if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
-            throw new IllegalArgumentException("Coordinates outside loaded scene,");
+            throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
 
         Optional<Stream<SceneElement>> sceneElements = Scene.getTiles()
