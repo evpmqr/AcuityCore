@@ -48,10 +48,8 @@ public class Scene {
 
     public Optional<SceneTile> getLoaded(int sceneX, int sceneY, int plane){
         if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
-            return Optional.empty();
+            throw new IllegalArgumentException("Coordinates outside loaded scene,");
         }
-
-        SceneTile[][][] sceneTiles = Scene.getTiles().orElseThrow(() -> new NullPointerException("Failed to load Scene"));
-        return Optional.ofNullable(sceneTiles[plane][sceneX][sceneY]);
+        return Scene.getTiles().map(sceneTiles -> sceneTiles[plane][sceneX][sceneY]);
     }
 }

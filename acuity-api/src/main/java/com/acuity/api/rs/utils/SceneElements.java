@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -21,7 +22,7 @@ public class SceneElements {
         int plane = Scene.getPlane();
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
-                streamBuilder.accept(streamLoaded(x, y, plane));
+                streamBuilder.add(streamLoaded(x, y, plane));
             }
         }
         return streamBuilder.build().flatMap(Function.identity());
@@ -32,14 +33,16 @@ public class SceneElements {
             throw new IllegalArgumentException("Coordinates outside loaded scene,");
         }
 
-        SceneTile[][][] sceneTiles = Scene.getTiles().orElseThrow(() -> new NullPointerException("Failed to load Scene"));
+        Optional<Stream<SceneElement>> sceneElements = Scene.getTiles()
+                .map(sceneTiles -> sceneTiles[plane][sceneX][sceneY])
+                .map(SceneTile::getMarkers)
+                .map(Arrays::stream);
 
-        SceneTile sceneTile = sceneTiles[plane][sceneX][sceneY];
-        if (sceneTile == null){
-            logger.warn("Failed to load SceneTile, returning empty Stream.");
+        if (!sceneElements.isPresent()){
+            logger.warn("Failed to load SceneElements at {}, {}, {}. Returning an empty Stream.", sceneX, sceneY, plane);
             return Stream.empty();
         }
 
-        return Arrays.stream(sceneTile.getMarkers());
+        return sceneElements.get();
     }
 }
