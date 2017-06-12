@@ -138,6 +138,38 @@ public class Client extends GameEngine {
         return rsClient.isResized();
     }
 
+    public void setUsername(String username){
+        rsClient.setUsername(username);
+    }
+
+    public void setPassword(String password){
+        rsClient.setPassword(password);
+    }
+
+    public void setLoginIndex(int index){
+        rsClient.setLoginIndex(index);
+    }
+
+    public String getLoginResponse1() {
+        return rsClient.getLoginResponse1();
+    }
+
+    public String getLoginResponse2() {
+        return rsClient.getLoginResponse2();
+    }
+
+    public String getLoginResponse3() {
+        return rsClient.getLoginResponse3();
+    }
+
+    public int getLoginIndex() {
+        return rsClient.getLoginIndex();
+    }
+
+    public int getLoginState() {
+        return rsClient.getLoginState();
+    }
+
     @NotNull
     public RSClient getRsClient(){
         return rsClient;
