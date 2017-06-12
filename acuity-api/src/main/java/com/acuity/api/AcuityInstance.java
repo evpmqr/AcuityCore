@@ -50,7 +50,7 @@ public class AcuityInstance {
         logger.info("Booting applet.");
         applet.init();
         applet.start();
-        client = new Client((RSClient) applet);
+        client = ((RSClient) applet).getWrapper();
         logger.debug("RSClient loading finished.");
     }
 

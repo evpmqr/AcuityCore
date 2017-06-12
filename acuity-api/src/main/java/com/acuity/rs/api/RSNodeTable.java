@@ -6,17 +6,15 @@ import com.acuity.api.rs.wrappers.structures.NodeTable;
 
 public interface RSNodeTable {
 
-    RSNodeQueue getQueue();
+    RSNode[] getBuckets();
 
-    RSHashTable getTable();
+    RSNode getHead();
+
+    int getIndex();
+
+    int getSize();
+
+    RSNode getTail();
 
     NodeTable getWrapper();
-
-    RSCacheableNode invokeGet(long var0);
-
-    void invokePut(RSCacheableNode var0, long var1);
-
-    void invokeRemove(long var0);
-
-    void invokeReset();
 }
