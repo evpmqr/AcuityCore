@@ -30,8 +30,6 @@ public class AcuityDB {
     public static void init() throws IOException {
         Properties properties = new Properties();
 
-
-
         try (InputStream input = AcuityDB.class.getClassLoader().getResourceAsStream("acuitydb.properties")){
             properties.load(input);
         }

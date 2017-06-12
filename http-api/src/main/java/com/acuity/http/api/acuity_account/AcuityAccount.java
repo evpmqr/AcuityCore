@@ -5,7 +5,7 @@ package com.acuity.http.api.acuity_account;
  */
 public class AcuityAccount {
 
-    private String _id = "asdad";
+    private String _id;
 
     private String displayName;
     private String email;

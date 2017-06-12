@@ -32,6 +32,9 @@ public class SparkApp implements SparkApplication {
     }
 
     public void setupRoutes(){
+        port(8080);
+        webSocket("/ws", SparkWS.class);
+
         path("/api", () -> {
             get("/version", (request, response) -> JsonUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));
 
@@ -47,5 +50,9 @@ public class SparkApp implements SparkApplication {
                 });
             });
         });
+    }
+
+    public static void main(String[] args) {
+        new SparkApp().init();
     }
 }
