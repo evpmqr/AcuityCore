@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene;
 
+import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import com.acuity.api.rs.wrappers.structures.Node;
 import com.acuity.rs.api.RSSceneTile;
 import com.google.common.base.Preconditions;

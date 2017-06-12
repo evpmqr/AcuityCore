@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Created by MadDev, June 10, 2017
@@ -22,10 +23,11 @@ public class InterfaceComponent extends Node {
         this.rsInterfaceComponent = peer;
     }
 
+    // TODO: 6/12/2017 Can this be null?
     public InterfaceComponent[] getComponents() {
         logger.trace("Wrapping RSInterfaceComponent[] from RSInterfaceComponent.");
         return Arrays.stream(rsInterfaceComponent.getComponents())
-                .map(child -> child != null ? new InterfaceComponent(child) : null)
+                .map(child -> child != null ? child.getWrapper() : null)
                 .toArray(InterfaceComponent[]::new);
     }
 
@@ -85,11 +87,11 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getModelType();
     }
 
-    public String getName() {
-        return rsInterfaceComponent.getName();
+    public Optional<String> getName() {
+        return Optional.ofNullable(rsInterfaceComponent.getName());
     }
 
-    public String getNullSafeName() {
+    public String getNullSafeName() {// TODO: 6/12/2017 Are we returning "null" or "" for nullsafe returns?
         return rsInterfaceComponent.getName() == null ? "" : rsInterfaceComponent.getName();
     }
 
@@ -141,8 +143,8 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getScrollX();
     }
 
-    public String getSelectedAction() {
-        return rsInterfaceComponent.getSelectedAction();
+    public Optional<String> getSelectedAction() {
+        return Optional.ofNullable(rsInterfaceComponent.getSelectedAction());
     }
 
     public int getShadowColor() {
@@ -157,11 +159,11 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getTableActions();
     }
 
-    public String getText() {
-        return rsInterfaceComponent.getText();
+    public Optional<String> getText() {
+        return Optional.ofNullable(rsInterfaceComponent.getText());
     }
 
-    public String getNullSafeText() {
+    public String getNullSafeText() {// TODO: 6/12/2017 Are we returning "null" or "" for nullsafe returns?
         return rsInterfaceComponent.getText() == null ? "" : rsInterfaceComponent.getText();
     }
 
@@ -169,8 +171,8 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getTextColor();
     }
 
-    public String getTooltip() {
-        return rsInterfaceComponent.getTooltip();
+    public Optional<String> getTooltip() {
+        return Optional.ofNullable(rsInterfaceComponent.getTooltip());
     }
 
     public int getType() {

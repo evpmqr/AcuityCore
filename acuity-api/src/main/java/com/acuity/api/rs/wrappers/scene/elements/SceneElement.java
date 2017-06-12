@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers.scene;
+package com.acuity.api.rs.wrappers.scene.elements;
 
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;

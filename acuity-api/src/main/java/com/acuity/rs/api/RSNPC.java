@@ -1,6 +1,6 @@
 package com.acuity.rs.api;
 
-import com.acuity.api.rs.wrappers.mobile.Npc;
+import com.acuity.api.rs.wrappers.scene.mobiles.Npc;
 
 //Generated
 

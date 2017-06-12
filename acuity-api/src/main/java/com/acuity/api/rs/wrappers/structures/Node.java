@@ -21,14 +21,16 @@ public class Node {
         this.rsNode = Preconditions.checkNotNull(peer);
     }
 
-    public Optional<Node> getNext(){
-        RSNode next = rsNode.getNext();
-        return next == null ? Optional.empty() : Optional.of(new Node(next));
+    public Optional<? extends Node> getNext(){
+        return Optional.ofNullable(rsNode.getNext()).map(RSNode::getWrapper);
     }
 
-    public Optional<Node> getPrevious(){
-        RSNode previous = rsNode.getPrevious();
-        return previous == null ? Optional.empty() : Optional.of(new Node(previous));
+    public Optional<? extends Node> getPrevious(){
+        return Optional.ofNullable(rsNode.getPrevious()).map(RSNode::getWrapper);
+    }
+
+    public long getKey(){
+        return rsNode.getKey();
     }
 
     public RSNode getRsNode() {

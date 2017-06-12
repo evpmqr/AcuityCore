@@ -1,13 +1,11 @@
 package com.acuity.api.rs.wrappers.engine;
 
 import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
-import com.acuity.api.rs.wrappers.mobile.Npc;
-import com.acuity.api.rs.wrappers.mobile.Player;
+import com.acuity.api.rs.wrappers.scene.mobiles.Npc;
+import com.acuity.api.rs.wrappers.scene.mobiles.Player;
 import com.acuity.api.rs.wrappers.scene.Scene;
-import com.acuity.api.rs.wrappers.structures.Node;
 import com.acuity.api.rs.wrappers.structures.HashTable;
-import com.acuity.rs.api.RSClient;
-import com.acuity.rs.api.RSPlayer;
+import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
@@ -15,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
@@ -31,39 +30,40 @@ public class Client extends GameEngine {
     }
 
     //init in loading screen, could technically be null before then
-    public Scene getScene(){
-        return new Scene(rsClient.getSceneGraph());
+    public Optional<Scene> getScene(){
+        return Optional.ofNullable(rsClient.getSceneGraph()).map(RSScene::getWrapper);
     }
 
     public Player[] getPlayers(){
         logger.trace("Wrapping RSPlayer[] from RSClient.");
         return Arrays.stream(rsClient.getPlayers())
-                .map(peer -> peer != null ? new Player(peer) : null)
+                .map(peer -> peer != null ? peer.getWrapper() : null)
                 .toArray(Player[]::new);
     }
 
     public Npc[] getNpcs(){
         logger.trace("Wrapping RSNpc[] from RSClient.");
         return Arrays.stream(rsClient.getNpcs())
-                .map(peer -> peer != null ? new Npc(peer) : null)
+                .map(peer -> peer != null ? peer.getWrapper() : null)
                 .toArray(Npc[]::new);
     }
 
     public Optional<Player> getLocalPlayer(){
         logger.trace("Wrapping RSPlayer-local from RSClient.");
-        final RSPlayer localPlayer = rsClient.getLocalPlayer();
-        if (localPlayer == null) return Optional.empty();
-        return Optional.of(new Player(localPlayer));
+        return Optional.ofNullable(rsClient.getLocalPlayer()).map(RSPlayer::getWrapper);
     }
-
 
     public InterfaceComponent[][] getInterfaces() {
         logger.trace("Wrapping RSInterfaceComponent[][] from RSClient.");
         return Arrays.stream(rsClient.getInterfaces())
                 .map(rsInterfaceComponents -> Arrays.stream(rsInterfaceComponents)
-                        .map(peer -> peer != null ? new InterfaceComponent(peer) : null)
+                        .map(peer -> peer != null ? peer.getWrapper() : null)
                         .toArray(InterfaceComponent[]::new)
                 ).toArray(InterfaceComponent[][]::new);
+    }
+
+    public Optional<HashTable> getInterfaceNodeTable() {
+        return Optional.ofNullable(rsClient.getInterfaceNodes()).map(RSHashTable::getWrapper);
     }
 
     public int getPlane() {
@@ -136,10 +136,6 @@ public class Client extends GameEngine {
 
     public boolean isResized() {
         return rsClient.isResized();
-    }
-
-    public HashTable getInterfaceNodeTable() {
-        return new HashTable(rsClient.getInterfaceNodes());
     }
 
     public RSClient getRsClient(){

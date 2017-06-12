@@ -1,6 +1,6 @@
 package com.acuity.rs.api;
 
-import com.acuity.api.rs.wrappers.scene.SceneElement;
+import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 
 //Generated
 

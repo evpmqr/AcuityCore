@@ -1,6 +1,6 @@
 package com.acuity.rs.api;
 
-import com.acuity.api.rs.wrappers.mobile.Actor;
+import com.acuity.api.rs.wrappers.scene.mobiles.Actor;
 import java.lang.String;
 
 //Generated

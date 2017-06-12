@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers.mobile;
+package com.acuity.api.rs.wrappers.scene.mobiles;
 
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
