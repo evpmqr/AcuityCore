@@ -149,7 +149,7 @@ public interface RSClient extends RSGameEngine {
     RSIndexData getIndexTextures();
 
     //Static field.
-    RSNodeTable getInterfaceFlags();
+    RSHashTable getInterfaceFlags();
 
     //Static field.
     int[] getInterfaceHeights();
@@ -158,7 +158,7 @@ public interface RSClient extends RSGameEngine {
     int[] getInterfaceItemTriggers();
 
     //Static field.
-    RSNodeTable getInterfaceNodes();
+    RSHashTable getInterfaceNodes();
 
     //Static field.
     int[] getInterfacePositionX();
@@ -176,16 +176,16 @@ public interface RSClient extends RSGameEngine {
     int[] getInterfaceWidths();
 
     //Static field.
-    RSNodeTable getItemContainers();
+    RSHashTable getItemContainers();
 
     //Static field.
-    Object getItemModelCache();
+    RSNodeTable getItemModelCache();
 
     //Static field.
     int getItemSelectionState();
 
     //Static field.
-    Object getItemSpriteCache();
+    RSNodeTable getItemSpriteCache();
 
     //Static field.
     long getLastClickTime();
@@ -275,7 +275,7 @@ public interface RSClient extends RSGameEngine {
     int[] getNpcIndices();
 
     //Static field.
-    Object getNpcModelCache();
+    RSNodeTable getNpcModelCache();
 
     //Static field.
     RSNPC[] getNpcs();
@@ -365,7 +365,7 @@ public interface RSClient extends RSGameEngine {
     int getSpellTargetFlags();
 
     //Static field.
-    Object getSpriteCache();
+    RSNodeTable getSpriteCache();
 
     //Static field.
     int[] getTempVarps();

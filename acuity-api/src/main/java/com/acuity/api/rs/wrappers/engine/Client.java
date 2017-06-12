@@ -5,7 +5,7 @@ import com.acuity.api.rs.wrappers.mobile.Npc;
 import com.acuity.api.rs.wrappers.mobile.Player;
 import com.acuity.api.rs.wrappers.scene.Scene;
 import com.acuity.api.rs.wrappers.structures.Node;
-import com.acuity.api.rs.wrappers.structures.NodeTable;
+import com.acuity.api.rs.wrappers.structures.HashTable;
 import com.acuity.rs.api.RSClient;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
@@ -138,8 +138,8 @@ public class Client extends GameEngine {
         return rsClient.isResized();
     }
 
-    public NodeTable<Node> getInterfaceNodeTable() {
-        return new NodeTable<>(rsClient.getInterfaceNodes());
+    public HashTable getInterfaceNodeTable() {
+        return new HashTable(rsClient.getInterfaceNodes());
     }
 
     public RSClient getRsClient(){

@@ -1,20 +1,19 @@
 package com.acuity.rs.api;
 
-import com.acuity.api.rs.wrappers.structures.NodeTable;
 
 //Generated
 
 public interface RSNodeTable {
 
-    RSNode[] getBuckets();
+    RSNodeQueue getQueue();
 
-    RSNode getHead();
+    RSHashTable getTable();
 
-    int getIndex();
+    RSCacheableNode invokeGet(long var0);
 
-    int getSize();
+    void invokePut(RSCacheableNode var0, long var1);
 
-    RSNode getTail();
+    void invokeRemove(long var0);
 
-    NodeTable getWrapper();
+    void invokeReset();
 }
