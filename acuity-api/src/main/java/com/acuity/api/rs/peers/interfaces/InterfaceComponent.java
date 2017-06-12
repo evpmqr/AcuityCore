@@ -220,4 +220,5 @@ public class InterfaceComponent extends Node {
     public RSInterfaceComponent getRsComponent() {
         return rsInterfaceComponent;
     }
+
 }
