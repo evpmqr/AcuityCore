@@ -18,7 +18,14 @@ public class SparkWS {
 
     @OnWebSocketConnect
     public void onConnect(Session user) throws Exception {
-        logger.info("New session {}", user);
+        logger.info("New session connection");
 
+        user.getRemote().sendString("Sup");
     }
+
+    @OnWebSocketClose
+    public void onClose(Session user, int statusCode, String reason) {
+        logger.info("Session closed.");
+    }
+
 }

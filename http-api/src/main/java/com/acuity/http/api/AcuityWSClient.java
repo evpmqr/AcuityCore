@@ -24,7 +24,7 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
 
     public void connect(){
         Request request = new Request.Builder()
-                .url("ws://localhost:8080/ws")
+                .url("ws://localhost:8080/api/ws")
                 .build();
 
         webSocket = client.newWebSocket(request, this);
@@ -32,7 +32,7 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
 
     @Override
     public void onMessage(WebSocket webSocket, String text) {
-
+        System.out.println(text);
     }
 
     @Override
