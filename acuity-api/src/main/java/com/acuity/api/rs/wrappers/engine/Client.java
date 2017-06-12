@@ -1,9 +1,9 @@
 package com.acuity.api.rs.wrappers.engine;
 
 import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
+import com.acuity.api.rs.wrappers.scene.Scene;
 import com.acuity.api.rs.wrappers.scene.mobiles.Npc;
 import com.acuity.api.rs.wrappers.scene.mobiles.Player;
-import com.acuity.api.rs.wrappers.scene.Scene;
 import com.acuity.api.rs.wrappers.structures.HashTable;
 import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
@@ -168,6 +167,10 @@ public class Client extends GameEngine {
 
     public int getLoginState() {
         return rsClient.getLoginState();
+    }
+
+    public int[] getVarps() {
+        return rsClient.getVarps();
     }
 
     @NotNull
