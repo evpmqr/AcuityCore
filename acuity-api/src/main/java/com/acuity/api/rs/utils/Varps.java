@@ -32,9 +32,9 @@ public class Varps {
 		return varps;
 	}
 
-	public static int get(final int index, final int defualt) {
+	public static int get(final int index, final int defaultValue) {
 		Preconditions.checkArgument(index < MAX_VARP && index > 0, "Bad index, min index: 1, max index: 1999");
-		return getAll().map(ints -> ints[index]).orElse(defualt);
+		return getAll().map(ints -> ints[index]).orElse(defaultValue);
 	}
 
 	public static boolean getBoolean(final int index) {
