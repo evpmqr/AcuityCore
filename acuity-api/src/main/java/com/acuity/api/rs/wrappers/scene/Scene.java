@@ -34,7 +34,7 @@ public class Scene {
         return Arrays.stream(rsScene.getTiles())
                 .map(tiles1 -> Arrays.stream(tiles1)
                         .map(tiles2 -> Arrays.stream(tiles2)
-                                .map(peer -> peer != null ? new SceneTile(peer) : null)
+                                .map(peer -> peer != null ? peer.getWrapper() : null)
                                 .toArray(SceneTile[]::new)
                         ).toArray(SceneTile[][]::new)
                 ).toArray(SceneTile[][][]::new);

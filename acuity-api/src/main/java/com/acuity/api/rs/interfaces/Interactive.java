@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public interface Interactive extends Nameable {
+public interface Interactive {
 
 	default List<String> getActions() {
 		return Collections.EMPTY_LIST;

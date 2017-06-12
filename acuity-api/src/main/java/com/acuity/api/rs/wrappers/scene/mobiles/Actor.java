@@ -1,9 +1,11 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
-import com.acuity.api.rs.wrappers.Renderable;
+import com.acuity.api.rs.wrappers.rendering.Renderable;
+import com.acuity.api.rs.wrappers.structures.CombatInfoList;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.google.common.base.Preconditions;
@@ -12,11 +14,13 @@ import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 /**
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Actor extends Renderable implements Locatable {
+public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     private static final Logger logger = LoggerFactory.getLogger(Actor.class);
 
@@ -79,8 +83,8 @@ public abstract class Actor extends Renderable implements Locatable {
         return rsActor.getActionFrame();
     }
 
-    public RSCombatInfoList getHealthBars() {
-        return rsActor.getHealthBars(); // TODO: 6/9/2017 Add wrapper
+    public Optional<CombatInfoList> getHealthBars() {
+        return Optional.ofNullable(rsActor.getHealthBars()).map(RSCombatInfoList::getWrapper);
     }
 
     public int getIdlePoseAnimation() {

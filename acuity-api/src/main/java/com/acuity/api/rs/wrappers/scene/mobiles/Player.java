@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
+import com.acuity.api.rs.wrappers.rendering.Model;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerComposite;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Eclipseop.
@@ -39,8 +41,8 @@ public class Player extends Actor {
 		return rsPlayer.getCombatLevel();
 	}
 
-	public RSModel getModel() {
-		return rsPlayer.getModel(); // TODO: 6/9/2017 Add wrapper
+	public Optional<Model> getModel() {
+		return Optional.ofNullable(rsPlayer.getModel()).map(RSModel::getWrapper);
 	}
 
 	/*

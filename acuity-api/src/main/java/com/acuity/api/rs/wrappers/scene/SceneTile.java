@@ -27,7 +27,7 @@ public class SceneTile extends Node {
     public SceneElement[] getSceneElements(){
         logger.trace("Wrapping RSSceneElement[] from RSSceneTile.");
         return Arrays.stream(rsSceneTile.getMarkers())
-                .map(peer -> peer != null ? new SceneElement(peer) : null)
+                .map(peer -> peer != null ? peer.getWrapper() : null)
                 .toArray(SceneElement[]::new);
     }
 

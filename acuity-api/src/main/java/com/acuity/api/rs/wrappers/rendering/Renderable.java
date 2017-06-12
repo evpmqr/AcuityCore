@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers;
+package com.acuity.api.rs.wrappers.rendering;
 
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.wrappers.structures.CacheableNode;
@@ -30,9 +30,9 @@ public abstract class Renderable extends CacheableNode implements Interactive {
 		return rsRenderable.getHeight();
 	}
 
-	public Optional<RSModel> invokeGetModel() {
+	public Optional<Model> invokeGetModel() {
 	    logger.trace("Invoking getModel() on RSModel.");
-		return Optional.ofNullable(rsRenderable.invokeGetModel());// TODO: 6/9/2017 Add wrapper
+		return Optional.ofNullable(rsRenderable.invokeGetModel()).map(RSModel::getWrapper);
     }
 
     public RSRenderable getRsRenderable() {

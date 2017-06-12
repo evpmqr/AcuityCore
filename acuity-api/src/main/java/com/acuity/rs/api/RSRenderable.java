@@ -1,6 +1,6 @@
 package com.acuity.rs.api;
 
-import com.acuity.api.rs.wrappers.Renderable;
+import com.acuity.api.rs.wrappers.rendering.Renderable;
 
 //Generated
 
