@@ -7,8 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Interfaces {
@@ -55,5 +58,13 @@ public class Interfaces {
         }
 
         return Optional.ofNullable(result);
+    }
+
+    public static List<InterfaceComponent> getLoaded(final Predicate<InterfaceComponent> predicate) {
+        return streamLoaded().filter(predicate).collect(Collectors.toList());
+    }
+
+    public static List<InterfaceComponent> getLoaded(final int rootIndex, final Predicate<InterfaceComponent> predicate) {
+        return streamLoaded(rootIndex).filter(predicate).collect(Collectors.toList());
     }
 }
