@@ -83,6 +83,7 @@ public class Player extends Actor {
 		return rsPlayer.getName();
 	}
 
+	@NotNull
     public RSPlayer getRsPlayer() {
         return rsPlayer;
     }

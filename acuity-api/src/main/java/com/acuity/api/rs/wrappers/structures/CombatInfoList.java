@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.structures;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.acuity.rs.api.RSNode;
 import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -25,5 +26,10 @@ public class CombatInfoList implements java.lang.Iterable{// TODO: 6/12/2017 Ren
     @Override
     public Iterator iterator() {
         return rsCombatInfoList.iterator();
+    }
+
+    @NotNull
+    public RSCombatInfoList getRsCombatInfoList() {
+        return rsCombatInfoList;
     }
 }

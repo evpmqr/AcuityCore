@@ -25,6 +25,7 @@ public class GameEngine {
         return rsGameEngine.getCanvas();
     }
 
+    @NotNull
     public RSGameEngine getRsGameEngine() {
         return rsGameEngine;
     }

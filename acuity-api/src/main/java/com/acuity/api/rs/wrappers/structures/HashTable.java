@@ -5,6 +5,7 @@ import com.acuity.rs.api.RSHashTable;
 import com.acuity.rs.api.RSNode;
 import com.acuity.rs.api.RSNodeTable;
 import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,7 @@ public class HashTable {
         return rsHashTable.getIndex();
     }
 
+    @NotNull
     public RSHashTable getRsHashTable() {
         return rsHashTable;
     }

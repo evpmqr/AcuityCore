@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.rendering;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 
 /**
  * Created by Zachary Herridge on 6/12/2017.
@@ -40,6 +41,7 @@ public class Model extends Renderable {
         return rsModel.getZTriangles();
     }
 
+    @NotNull
     public RSModel getRsModel() {
         return rsModel;
     }

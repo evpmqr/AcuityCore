@@ -215,6 +215,7 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.isScriptAvailable();
     }
 
+    @NotNull
     public RSInterfaceComponent getRsComponent() {
         return rsInterfaceComponent;
     }

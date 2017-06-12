@@ -6,6 +6,7 @@ import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,6 +72,7 @@ public class SceneElement implements Locatable{
         return rsSceneElement.getPlane();
     }
 
+    @NotNull
     public RSSceneElement getRsSceneElement() {
         return rsSceneElement;
     }

@@ -31,6 +31,7 @@ public class SceneTile extends Node {
                 .toArray(SceneElement[]::new);
     }
 
+    @NotNull
     public RSSceneTile getRsSceneTile() {
         return rsSceneTile;
     }

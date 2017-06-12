@@ -33,6 +33,7 @@ public class Node {
         return rsNode.getKey();
     }
 
+    @NotNull
     public RSNode getRsNode() {
         return rsNode;
     }

@@ -31,6 +31,7 @@ public class CacheableNode extends Node {
         return Optional.ofNullable(rsCacheableNode.getNext()).map(RSCacheableNode::getWrapper);
     }
 
+    @NotNull
     public RSCacheableNode getRsCacheableNode() {
         return rsCacheableNode;
     }

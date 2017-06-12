@@ -138,6 +138,7 @@ public class Client extends GameEngine {
         return rsClient.isResized();
     }
 
+    @NotNull
     public RSClient getRsClient(){
         return rsClient;
     }

@@ -4,6 +4,7 @@ package com.acuity.api.rs.wrappers.scene;
 import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import com.acuity.rs.api.RSScene;
 import com.google.common.base.Preconditions;
+import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,7 @@ public class Scene {
                 ).toArray(SceneTile[][][]::new);
     }
 
+    @NotNull
     public RSScene getRsScene() {
         return rsScene;
     }

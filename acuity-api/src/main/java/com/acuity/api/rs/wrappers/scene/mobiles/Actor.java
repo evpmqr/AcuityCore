@@ -130,6 +130,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return getSceneLocation().getWorldLocation();
     }
 
+    @NotNull
     public RSActor getRsActor() {
         return rsActor;
     }
