@@ -8,3 +8,4 @@ project.properties
 .DS_Store
 *.class
 *.jfd
+/http-service/src/main/resources/acuitydb.properties

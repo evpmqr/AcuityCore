@@ -16,23 +16,10 @@ import static org.junit.Assert.*;
  */
 public class ScriptLoaderTest {
 
-    private static Logger logger = LoggerFactory.getLogger(ScriptLoader.class);
+    private static Logger logger = LoggerFactory.getLogger(ScriptLoaderTest.class);
 
     @Test
-    public void test(){
-        try {
-            final AcuityScript script = new ScriptLoader().loadScriptFromJar(getClass().getResource("script-testing.jar").getFile());
-            if (script == null) {
-                logger.warn("No scripts found.");
-                return;
-            }
-            script.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void test2(){
+    public void test() throws Exception {
+        new ScriptLoader().loadScriptFromJar(getClass().getResource("script-testing.jar").getFile()).execute();
     }
 }

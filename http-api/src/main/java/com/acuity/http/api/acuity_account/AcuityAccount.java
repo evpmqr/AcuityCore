@@ -5,6 +5,8 @@ package com.acuity.http.api.acuity_account;
  */
 public class AcuityAccount {
 
+    private String _id = "asdad";
+
     private String displayName;
     private String email;
     private String passwordHash;
@@ -13,6 +15,9 @@ public class AcuityAccount {
         this.displayName = displayName;
         this.email = email;
         this.passwordHash = passwordHash;
+    }
+
+    public AcuityAccount() {
     }
 
     public String getDisplayName() {

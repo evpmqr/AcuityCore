@@ -14,4 +14,8 @@ public class JsonUtil {
     public static String toJSON(String key, Object value){
         return GSON.toJson(Collections.singletonMap(key, value));
     }
+
+    public static Gson getGSON() {
+        return GSON;
+    }
 }
