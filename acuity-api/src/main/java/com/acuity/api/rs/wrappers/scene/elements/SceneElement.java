@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.scene.elements;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
@@ -68,8 +69,12 @@ public class SceneElement implements Locatable{
         return rsSceneElement.getSceneY();
     }
 
-    public int getUID(){// TODO: 6/12/2017 Rename
-        return rsSceneElement.getUid();
+    public int getID(){
+        return getUID().getEntityID();
+    }
+
+    public UIDs.UID getUID(){// TODO: 6/12/2017 Rename
+        return new UIDs.UID(rsSceneElement.getUid());
     }
 
     @NotNull

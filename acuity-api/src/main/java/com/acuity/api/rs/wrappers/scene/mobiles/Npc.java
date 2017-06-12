@@ -18,7 +18,7 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc extends Actor implements Identifiable {
+public class Npc extends Actor implements Identifiable {// TODO: 6/12/2017 Rename class
 
     private static final Logger logger = LoggerFactory.getLogger(Npc.class);
 
@@ -37,8 +37,8 @@ public class Npc extends Actor implements Identifiable {
 
 	@Nullable
 	@Override
-	public Integer getId() {
-	    return getDefinition().map(RSNPCComposite::getId).orElse(null);
+	public Integer getId() {// TODO: 6/12/2017 Rename field ID
+        return getDefinition().map(RSNPCComposite::getId).orElse(null);
 	}
 
 	@Override
