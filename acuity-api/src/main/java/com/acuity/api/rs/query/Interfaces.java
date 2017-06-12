@@ -37,7 +37,7 @@ public class Interfaces {
      * interface by index in the Interfaces, then the InterfaceComponent
      * is inside the array returned by the parent.
      */
-    public static Optional<InterfaceComponent> get(int rootIndex, int... childPath) {
+    public static Optional<InterfaceComponent> getLoaded(int rootIndex, int... childPath) {
         Preconditions.checkNotNull(childPath, "Make sure you are passing a least one child index.");
         Preconditions.checkArgument(childPath.length >= 1, "Make sure you are passing a least one child index.");
 

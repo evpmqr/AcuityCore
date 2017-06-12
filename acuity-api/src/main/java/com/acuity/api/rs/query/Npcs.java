@@ -45,7 +45,7 @@ public class Npcs {
 
 	public static Optional<Npc> getNearest(final String name) {
 	    logger.debug("Returning nearest Ncp with name '{}'", name);
-		return getNearest(p -> p.getNullSafeName().equalsIgnoreCase(name));
+		return getNearest(p -> p.getNullSafeName().trim().equalsIgnoreCase(name));
 	}
 
 	public static Optional<Npc> getNearest(final int id) {
