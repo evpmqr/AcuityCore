@@ -35,7 +35,8 @@ public class AcuityAccount {
     @Override
     public String toString() {
         return "AcuityAccount{" +
-                "displayName='" + displayName + '\'' +
+                "_id='" + _id + '\'' +
+                ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 '}';

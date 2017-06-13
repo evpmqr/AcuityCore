@@ -1,27 +1,49 @@
 package com.acuity.http.service.acuity_account;
 
 import com.acuity.db.AcuityDB;
+import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.util.BCrypt;
 import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.acuity.http.service.util.JwtUtil;
+import com.acuity.http.service.util.PostUtil;
 import com.auth0.jwt.interfaces.Claim;
 import spark.Request;
 import spark.Response;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Function;
+
+import static spark.Spark.halt;
 
 /**
  * Created by Zachary Herridge on 6/1/2017.
  */
 public class AcuityAccountService {
 
-    public static  final AcuityAccount TEMP_ACC = new AcuityAccount("Zach", "zgherridge@gmail.com", BCrypt.hashpw("password123", BCrypt.gensalt()));
+    public static synchronized String postRegister(Request request, Response response){
+        PostUtil account = JsonUtil.getGSON().fromJson(request.body(), PostUtil.class);
 
-    public String login(Request request, Response response){
-        AcuityDB.getAccountCollection().drop();
-        AcuityDB.getAccountCollection().save(TEMP_ACC);
+        String email = account.getString("username");
+        String displayName = account.getString("displayName");
+        String password = account.getString("password");
 
+        if (email == null || displayName == null || password == null){
+            halt();
+        }
+
+        Optional<AcuityAccount> accountByEmail = findAccountByEmail(email);
+        if (accountByEmail.isPresent()) return JsonUtil.toJSON("result", "Email already in use");
+
+        Optional<AcuityAccount> accountByDisplayName = findAccountByDisplayName(displayName);
+        if (accountByDisplayName.isPresent()) return JsonUtil.toJSON("result", "Display name already in use");
+
+        AcuityDB.getAccountCollection().save(new AcuityAccount(displayName, email, BCrypt.hashpw(password, BCrypt.gensalt())));
+
+        return JsonUtil.toJSON("result", "Account registered");
+    }
+
+    public static String login(Request request, Response response){
         String testUsername = request.queryMap("username").value();
         String testPassword = request.queryMap("password").value();
 
@@ -37,7 +59,7 @@ public class AcuityAccountService {
                 .orElse("LOGIN_FAILED:Bad Login");
     }
 
-    public AcuityAccount findCurrentAccount(Request request, Response response){
+    public static AcuityAccount getCurrentAccount(Request request, Response response){
         return findAccountByHeader(request).orElse(null);
     }
 
@@ -51,6 +73,10 @@ public class AcuityAccountService {
 
     public static Optional<AcuityAccount> findAccountByEmail(String email){
         return Optional.ofNullable(AcuityDB.getAccountCollection().findOne("{email: #}", email).as(AcuityAccount.class));
+    }
+
+    public static Optional<AcuityAccount> findAccountByDisplayName(String displayName){
+        return Optional.ofNullable(AcuityDB.getAccountCollection().findOne("{displayName: #}", displayName).as(AcuityAccount.class));
     }
 
 }

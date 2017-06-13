@@ -42,6 +42,6 @@ public class PriceLookupClient {
         HttpUrl request = RSBUDDY_GE_URL.newBuilder()
                 .addQueryParameter("i", String.valueOf(itemId))
                 .build();
-        return AcuityHttpClient.makeCall(request, PriceLookup.class).orElse(null);
+        return AcuityHttpClient.makeCall(request, PriceLookup.class, false).orElse(null);
 	}
 }

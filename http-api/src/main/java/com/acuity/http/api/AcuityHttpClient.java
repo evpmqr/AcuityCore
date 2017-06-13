@@ -24,14 +24,17 @@ public class AcuityHttpClient {
 
     private static String jwtToken = null;
 
-    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> tClass){
-        try {
-            Response response = AcuityHttpClient.makeCall(url);
-            if (response.code() == 401) return Optional.empty();
 
+    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> tClass){
+        return makeCall(url, tClass, true);
+    }
+
+    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> mapJsonTo, boolean addAcuityAuth){
+        try {
+            Response response = AcuityHttpClient.makeCall(url, addAcuityAuth);
+            if (response.code() == 401) return Optional.empty();
             try (ResponseBody body = response.body()){
-                InputStream in = body.byteStream();
-                return Optional.of(JsonUtil.getGSON().fromJson(new InputStreamReader(in), tClass));
+                return Optional.of(JsonUtil.getGSON().fromJson(new InputStreamReader(body.byteStream()), mapJsonTo));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,6 +82,7 @@ public class AcuityHttpClient {
 
     public static void main(String[] args) {
         AcuityHttpClient.login("zgherridge@gmail.com", "password123");
+        System.out.println(AcuityAccountClient.findCurrentAccount());
         System.out.println(AcuityHttpClient.makeCall(API_BASE.newBuilder().addPathSegment("authed").addPathSegment("test").build(), HashMap.class));
     }
 }
