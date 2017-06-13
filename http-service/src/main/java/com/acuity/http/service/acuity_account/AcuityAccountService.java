@@ -4,12 +4,12 @@ import com.acuity.db.AcuityDB;
 import com.acuity.http.service.util.BCrypt;
 import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.acuity.http.service.util.JwtUtil;
+import com.auth0.jwt.interfaces.Claim;
 import spark.Request;
 import spark.Response;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Optional;
-import java.util.Random;
+import java.util.function.Function;
 
 /**
  * Created by Zachary Herridge on 6/1/2017.
@@ -25,29 +25,30 @@ public class AcuityAccountService {
         String testUsername = request.queryMap("username").value();
         String testPassword = request.queryMap("password").value();
 
-        AcuityAccount acuityAccount = AcuityDB.getAccountCollection().findOne("{email: #}", testUsername).as(AcuityAccount.class);
+        Optional<AcuityAccount> accountByEmail = findAccountByEmail(testUsername);
 
-        return Optional.ofNullable(acuityAccount)
+        if (!accountByEmail.isPresent()) return "LOGIN_FAILED:Bad Login";
+
+        return accountByEmail
                 .map(AcuityAccount::getPasswordHash)
                 .map(passwordHashFromDB -> BCrypt.checkpw(testPassword, passwordHashFromDB))
                 .filter(goodLogin -> goodLogin)
-                .map(goodLogin -> {
-                    try {
-                        return "LOGIN_SUCCESS:" + JwtUtil.build(acuityAccount);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        return "LOGIN_FAILED:" + e.getMessage();
-                    }
-                })
+                .map(goodLogin -> "LOGIN_SUCCESS:" + JwtUtil.build(accountByEmail.get()))
                 .orElse("LOGIN_FAILED:Bad Login");
     }
 
     public AcuityAccount findCurrentAccount(Request request, Response response){
-        if (new Random().nextBoolean()){
-            return TEMP_ACC;
-        }
+        String tooken = request.headers("ACUITY_AUTH");
+        if (tooken == null || tooken.equalsIgnoreCase("NO_AUTH")) return null;
+        return JwtUtil.decode(tooken).map(decodedJWT -> decodedJWT.getHeaderClaim("email"))
+                .map(Claim::asString)
+                .map(this::findAccountByEmail)
+                .flatMap(Function.identity())
+                .orElse(null);
+    }
 
-        return null;
+    public Optional<AcuityAccount> findAccountByEmail(String email){
+        return Optional.ofNullable(AcuityDB.getAccountCollection().findOne("{email: #}", email).as(AcuityAccount.class));
     }
 
 }

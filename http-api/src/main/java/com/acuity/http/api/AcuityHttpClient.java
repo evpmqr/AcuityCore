@@ -1,5 +1,7 @@
 package com.acuity.http.api;
 
+import com.acuity.http.api.acuity_account.AcuityAccount;
+import com.acuity.http.api.acuity_account.AcuityAccountClient;
 import com.acuity.http.api.util.JsonUtil;
 import okhttp3.*;
 
@@ -33,7 +35,7 @@ public class AcuityHttpClient {
     }
 
     @SuppressWarnings("unchecked")
-    public boolean login(String username, String password){
+    public static boolean login(String username, String password){
         HttpUrl login = AcuityHttpClient.API_BASE.newBuilder()
                 .addPathSegment("login")
                 .addQueryParameter("username", username)
@@ -46,8 +48,8 @@ public class AcuityHttpClient {
 
                 HashMap hashMap = JsonUtil.getGSON().fromJson(new InputStreamReader(in), HashMap.class);
                 String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
-                if (result.startsWith("OK|")){
-                    jwtToken = result.substring(3);
+                if (result.startsWith("LOGIN_SUCCESS:")){
+                    jwtToken = result.substring("LOGIN_SUCCESS:".length());
                     return true;
                 }
             }
@@ -63,5 +65,12 @@ public class AcuityHttpClient {
 
     public static OkHttpClient getClient() {
         return client;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(AcuityHttpClient.login("zgherridge@gmail.com", "password123"));
+        System.out.println(AcuityHttpClient.getAcuityAuth());
+        Optional<AcuityAccount> currentAccount = AcuityAccountClient.findCurrentAccount();
+        System.out.println(currentAccount);
     }
 }
