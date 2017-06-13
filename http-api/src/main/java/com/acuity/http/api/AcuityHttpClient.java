@@ -28,10 +28,11 @@ public class AcuityHttpClient {
 
     public static Response makeCall(HttpUrl url, boolean addAcuityAuth) throws IOException {
         Request.Builder request = new Request.Builder().url(url);
-        if (addAcuityAuth) request.addHeader("ACUITY_AUTH", Optional.ofNullable(jwtToken).orElse("NO_AUTH"));
+        if (addAcuityAuth) request.addHeader("ACUITY_AUTH", getAcuityAuth());
         return client.newCall(request.build()).execute();
     }
 
+    @SuppressWarnings("unchecked")
     public boolean login(String username, String password){
         HttpUrl login = AcuityHttpClient.API_BASE.newBuilder()
                 .addPathSegment("login")
@@ -54,6 +55,10 @@ public class AcuityHttpClient {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static String getAcuityAuth() {
+        return Optional.ofNullable(jwtToken).orElse("NO_AUTH");
     }
 
     public static OkHttpClient getClient() {
