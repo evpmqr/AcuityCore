@@ -1,8 +1,10 @@
-package com.acuity.http.api.websockets.message;
+package com.acuity.http.api.websockets;
 
 import com.acuity.http.api.AcuityHttpClient;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.api.websockets.AcuityWSClient;
+import com.acuity.http.api.websockets.message.Message;
+import com.acuity.http.api.websockets.message.MessageFuture;
 import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
@@ -13,12 +15,12 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by Zachary Herridge on 6/13/2017.
  */
-public class MessageManager {
+public class ClientMessageManager {
 
     private AcuityWSClient client;
     private Map<Integer, MessageFuture> futureMap = new ConcurrentHashMap<>();
 
-    public MessageManager(AcuityWSClient client) {
+    public ClientMessageManager(AcuityWSClient client) {
         this.client = client;
     }
 
@@ -30,7 +32,7 @@ public class MessageManager {
                 .ifPresent(messageFuture -> messageFuture.setResponse(message));
     }
     
-    int uid = 0;//Temp for example
+    int uid = 0;// TODO: 6/13/2017 Temp for example
     public MessageFuture sendWithFurute(Message message){
         Preconditions.checkNotNull(message);
 
