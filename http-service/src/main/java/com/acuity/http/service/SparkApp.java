@@ -1,16 +1,14 @@
 package com.acuity.http.service;
 
-import com.acuity.db.AcuityDB;
 import com.acuity.http.api.AcuityWebAPI;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import com.acuity.http.service.auth_filters.AdminFilter;
 import com.acuity.http.service.auth_filters.LoggedInFilter;
 import com.acuity.http.service.transformers.ObjectToJSONTransformer;
+import com.acuity.http.service.websockets.SocketServer;
 import spark.Filter;
 import spark.servlet.SparkApplication;
-
-import java.io.IOException;
 
 import static spark.Spark.*;
 
@@ -34,7 +32,7 @@ public class SparkApp implements SparkApplication {
     public void setupRoutes(){
         port(8080);
 
-        webSocket("/api/ws", SparkWS.class);
+        webSocket("/api/ws", SocketServer.class);
 
         path("/api", () -> {
             get("/version", (request, response) -> JsonUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));

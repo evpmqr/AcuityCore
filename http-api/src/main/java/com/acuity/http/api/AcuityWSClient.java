@@ -1,5 +1,6 @@
 package com.acuity.http.api;
 
+import com.acuity.http.api.util.JsonUtil;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +19,10 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
     private final OkHttpClient client = new OkHttpClient();
     private WebSocket webSocket;
 
-    public AcuityWSClient() {
-
-    }
-
     public void connect(){
         Request request = new Request.Builder()
                 .url("ws://localhost:8080/api/ws")
                 .build();
-
         webSocket = client.newWebSocket(request, this);
     }
 
@@ -38,6 +34,7 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         logger.info("Websocket {} opened", webSocket);
+        webSocket.send(JsonUtil.toJSON("header", "SupSon"));
     }
 
     @Override
