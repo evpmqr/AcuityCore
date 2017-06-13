@@ -14,6 +14,7 @@ import org.jongo.MongoCollection;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
 
 /**
@@ -40,13 +41,13 @@ public class AcuityDB {
         String ip = properties.getProperty("dbIP");
         String port = properties.getProperty("dbPort");
 
-        mongoClient = new MongoClient(new ServerAddress(ip, Integer.parseInt(port)), Arrays.asList(MongoCredential.createCredential(username, authDB, password.toCharArray())));
+        mongoClient = new MongoClient(new ServerAddress(ip, Integer.parseInt(port)), Collections.singletonList(MongoCredential.createCredential(username, authDB, password.toCharArray())));
         jongo = new Jongo(mongoClient.getDB("AcuityBotting-2-Prod"));
 
         acuityAccountMongoCollection = jongo.getCollection("Acuity-Accounts");
     }
 
-    public static MongoCollection getAcuityAccountCollection() {
+    public static MongoCollection getAccountCollection() {
         return acuityAccountMongoCollection;
     }
 }

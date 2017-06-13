@@ -1,6 +1,7 @@
 package com.acuity.http.service;
 
 import ch.qos.logback.classic.Level;
+import com.acuity.db.AcuityDB;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import com.acuity.http.service.auth_filters.AdminFilter;
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import spark.Filter;
 import spark.servlet.SparkApplication;
 import ch.qos.logback.classic.Logger;
+
+import java.io.IOException;
 
 import static spark.Spark.*;
 
@@ -29,12 +32,18 @@ public class SparkApp implements SparkApplication {
 
     @Override
     public void init() {
-        setupRoutes();
+        try {
+            setupRoutes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setupRoutes(){
+    public void setupRoutes() throws IOException {
         Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         logger.setLevel(Level.INFO);
+
+        AcuityDB.init();
 
         port(8080);
 

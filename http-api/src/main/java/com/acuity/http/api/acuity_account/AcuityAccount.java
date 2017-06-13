@@ -28,6 +28,10 @@ public class AcuityAccount {
         return email;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
     @Override
     public String toString() {
         return "AcuityAccount{" +
