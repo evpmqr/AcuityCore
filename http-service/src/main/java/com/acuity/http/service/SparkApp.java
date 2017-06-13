@@ -1,13 +1,17 @@
 package com.acuity.http.service;
 
+import ch.qos.logback.classic.Level;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import com.acuity.http.service.auth_filters.AdminFilter;
 import com.acuity.http.service.auth_filters.LoggedInFilter;
 import com.acuity.http.service.transformers.ObjectToJSONTransformer;
 import com.acuity.http.service.websockets.SocketServer;
+
+import org.slf4j.LoggerFactory;
 import spark.Filter;
 import spark.servlet.SparkApplication;
+import ch.qos.logback.classic.Logger;
 
 import static spark.Spark.*;
 
@@ -29,6 +33,9 @@ public class SparkApp implements SparkApplication {
     }
 
     public void setupRoutes(){
+        Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        logger.setLevel(Level.INFO);
+
         port(8080);
 
         webSocket("/api/ws", SocketServer.class);

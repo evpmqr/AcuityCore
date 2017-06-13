@@ -1,6 +1,7 @@
 package com.acuity.http.service.websockets;
 
 import com.acuity.http.api.util.JsonUtil;
+import com.acuity.http.api.websockets.message.Message;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.eclipse.jetty.websocket.api.Session;
@@ -28,10 +29,7 @@ public class SocketSession {
         System.out.println("Socket Opened");
     }
 
-    public void socketMessage(String message) {
-        Optional.ofNullable(JsonUtil.getGSON().fromJson(message, HashMap.class).get("header")).ifPresent(o -> {
-            String header = String.valueOf(o);
-            System.out.println(header);
-        });
+    public void socketMessage(Message message) {
+        System.out.println("Sever got: " + message);
     }
 }

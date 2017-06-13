@@ -1,5 +1,7 @@
 package com.acuity.http.service.websockets;
 
+import com.acuity.http.api.util.JsonUtil;
+import com.acuity.http.api.websockets.message.Message;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
@@ -44,7 +46,7 @@ public class SocketServer {
     public void onMessage(Session user, String message) {
         Optional.ofNullable(connections.get(user))
                 .orElseThrow(() -> new IllegalStateException("Message from session not in our known connections."))
-                .socketMessage(message);
+                .socketMessage(JsonUtil.getGSON().fromJson(message, Message.class));
     }
 
     public static BiMap<Session, SocketSession> getConnections() {

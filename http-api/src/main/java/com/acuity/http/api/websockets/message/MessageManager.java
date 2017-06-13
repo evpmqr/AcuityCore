@@ -15,14 +15,15 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MessageManager {
 
-
     private AcuityWSClient client;
     private Map<Integer, MessageFuture> futureMap = new ConcurrentHashMap<>();
-    
-    @SuppressWarnings("unchecked")
-    public void handleMessage(String messageJson){
-        Message message = JsonUtil.getGSON().fromJson(messageJson, Message.class);
 
+    public MessageManager(AcuityWSClient client) {
+        this.client = client;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void handleMessage(Message message){
         Optional.ofNullable(message.getHeaders().get("responseTarget"))
                 .map(o -> (int) o)
                 .map(futureMap::get)
@@ -30,7 +31,7 @@ public class MessageManager {
     }
     
     int uid = 0;//Temp for example
-    public MessageFuture sendExpectingResponse(Message message){
+    public MessageFuture sendWithFurute(Message message){
         Preconditions.checkNotNull(message);
 
         int id = uid++;
@@ -43,7 +44,8 @@ public class MessageManager {
     }
 
     public void send(Message message){
-        client.send(JsonUtil.toJSON(message
+        Preconditions.checkNotNull(message);
+        client.getWebSocket().send(JsonUtil.toJSON(message
                 .putHeader("ACUITY_AUTH", AcuityHttpClient.getAcuityAuth())
         ));
     }

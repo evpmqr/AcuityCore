@@ -37,4 +37,12 @@ public class Message {
     public HashMap<String, Object> getHeaders() {
         return headers;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "headers=" + headers +
+                ", bodyJson='" + bodyJson + '\'' +
+                '}';
+    }
 }

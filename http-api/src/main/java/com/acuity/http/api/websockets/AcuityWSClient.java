@@ -2,6 +2,8 @@ package com.acuity.http.api.websockets;
 
 import com.acuity.http.api.AcuityHttpClient;
 import com.acuity.http.api.util.JsonUtil;
+import com.acuity.http.api.websockets.message.Message;
+import com.acuity.http.api.websockets.message.MessageManager;
 import com.google.gson.JsonElement;
 import okhttp3.*;
 import org.slf4j.Logger;
@@ -19,27 +21,29 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
 
     private final OkHttpClient client = new OkHttpClient();
     private WebSocket webSocket;
+    private MessageManager messageManager;
 
     public void connect(){
         Request request = new Request.Builder()
                 .url(AcuityHttpClient.WS_BASE_URL)
                 .build();
         webSocket = client.newWebSocket(request, this);
+        messageManager = new MessageManager(this);
     }
 
-    public void send(String object){
-        webSocket.send(object);
+    public WebSocket getWebSocket() {
+        return webSocket;
     }
 
     @Override
     public void onMessage(WebSocket webSocket, String text) {
-        System.out.println(text);
+        if (messageManager != null) messageManager.handleMessage(JsonUtil.getGSON().fromJson(text, Message.class));
     }
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         logger.info("Websocket {} opened", webSocket);
-        webSocket.send(JsonUtil.toJSON("header", "SupSon"));
+        messageManager.send(new Message().putHeader("command", "sup").setBody("asdasdas"));
     }
 
     @Override
