@@ -23,12 +23,12 @@ import static spark.Spark.*;
  */
 public class SparkApp implements SparkApplication {
 
+    public static final  AcuityAccountService ACUITY_ACCOUNT_SERVICE = new AcuityAccountService();
+
     private final ObjectToJSONTransformer objectToJSONTransformer = new ObjectToJSONTransformer();
-
     private final Filter loggedInFilter = new LoggedInFilter();
-    private final Filter adminFilter = new AdminFilter();
 
-    private AcuityAccountService acuityAccountService = new AcuityAccountService();
+    private final Filter adminFilter = new AdminFilter();
 
     @Override
     public void init() {
@@ -52,11 +52,13 @@ public class SparkApp implements SparkApplication {
         path("/api", () -> {
             get("/version", (request, response) -> JsonUtil.toJSON("version", "1.0.01"));
 
-            get("/account", acuityAccountService::findCurrentAccount, objectToJSONTransformer);
-            get("/login", (request, response) -> JsonUtil.toJSON("result", acuityAccountService.login(request, response)));
+            get("/account", ACUITY_ACCOUNT_SERVICE::findCurrentAccount, objectToJSONTransformer);
+            get("/login", (request, response) -> JsonUtil.toJSON("result", ACUITY_ACCOUNT_SERVICE.login(request, response)));
 
             path("/authed", () -> {
                 before("/*", loggedInFilter);
+
+                get("/test", (request, response) -> JsonUtil.toJSON("result", "Working"));
 
                 path("/admin", () -> {
                     before("/*", adminFilter);

@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public class AcuityAccountService {
 
-    public static  final AcuityAccount TEMP_ACC = new AcuityAccount("Zach", "zgherridge@gmail.com", BCrypt.hashpw("password123",BCrypt.gensalt()));
+    public static  final AcuityAccount TEMP_ACC = new AcuityAccount("Zach", "zgherridge@gmail.com", BCrypt.hashpw("password123", BCrypt.gensalt()));
 
     public String login(Request request, Response response){
         AcuityDB.getAccountCollection().drop();
@@ -38,16 +38,18 @@ public class AcuityAccountService {
     }
 
     public AcuityAccount findCurrentAccount(Request request, Response response){
-        String tooken = request.headers("ACUITY_AUTH");
-        if (tooken == null || tooken.equalsIgnoreCase("NO_AUTH")) return null;
-        return JwtUtil.decode(tooken).map(decodedJWT -> decodedJWT.getHeaderClaim("email"))
-                .map(Claim::asString)
-                .map(this::findAccountByEmail)
-                .flatMap(Function.identity())
-                .orElse(null);
+        return findAccountByHeader(request).orElse(null);
     }
 
-    public Optional<AcuityAccount> findAccountByEmail(String email){
+    public static Optional<AcuityAccount> findAccountByHeader(Request request){
+        String tooken = request.headers("ACUITY_AUTH");
+        return JwtUtil.decode(tooken).map(decodedJWT -> decodedJWT.getHeaderClaim("email"))
+                .map(Claim::asString)
+                .map(AcuityAccountService::findAccountByEmail)
+                .flatMap(Function.identity());
+    }
+
+    public static Optional<AcuityAccount> findAccountByEmail(String email){
         return Optional.ofNullable(AcuityDB.getAccountCollection().findOne("{email: #}", email).as(AcuityAccount.class));
     }
 

@@ -69,8 +69,22 @@ public class AcuityHttpClient {
 
     public static void main(String[] args) {
         System.out.println(AcuityHttpClient.login("zgherridge@gmail.com", "password123"));
-        System.out.println(AcuityHttpClient.getAcuityAuth());
-        Optional<AcuityAccount> currentAccount = AcuityAccountClient.findCurrentAccount();
-        System.out.println(currentAccount);
+
+        try {
+            Response response = makeCall(API_BASE.newBuilder().addPathSegment("authed").addPathSegment("test").build());
+            if (response.code() == 401){
+                return;
+            }
+
+            try (ResponseBody body = response.body()) {
+                InputStream in = body.byteStream();
+
+                HashMap hashMap = JsonUtil.getGSON().fromJson(new InputStreamReader(in), HashMap.class);
+                System.out.println(hashMap);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

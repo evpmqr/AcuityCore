@@ -31,6 +31,7 @@ public class JwtUtil {
     }
 
     public static Optional<DecodedJWT> decode(String token){
+        if (token == null) return Optional.empty();
         try {
             return Optional.of(verifier.verify(token));
         } catch (JWTVerificationException exception){
