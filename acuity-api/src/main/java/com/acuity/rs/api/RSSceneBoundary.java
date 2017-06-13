@@ -1,9 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.scene.elements.SceneBoundary;
 
 //Generated
-
-import com.acuity.api.rs.wrappers.scene.elements.SceneBoundary;
 
 public interface RSSceneBoundary {
 

@@ -1,9 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.structures.CombatInfoList;
 
 //Generated
-
-import com.acuity.api.rs.wrappers.structures.CombatInfoList;
 
 public interface RSCombatInfoList extends java.lang.Iterable {
 

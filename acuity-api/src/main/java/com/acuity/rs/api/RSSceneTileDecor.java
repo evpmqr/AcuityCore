@@ -1,9 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.scene.elements.SceneTileDecor;
 
 //Generated
-
-import com.acuity.api.rs.wrappers.scene.elements.SceneTileDecor;
 
 public interface RSSceneTileDecor {
 
