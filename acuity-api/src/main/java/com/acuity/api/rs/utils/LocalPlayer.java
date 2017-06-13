@@ -1,7 +1,6 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.wrappers.scene.mobiles.Actor;
