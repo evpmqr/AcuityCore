@@ -8,10 +8,12 @@ import java.util.HashMap;
  */
 public class BotInstance {
 
-    private String botID;
+    private String _id;
     private String acuityAccountID;
 
     private HashMap<String, Object> botInstanceConfig = new HashMap<>();
 
     private Date connectionTimestamp = new Date();
+
+
 }

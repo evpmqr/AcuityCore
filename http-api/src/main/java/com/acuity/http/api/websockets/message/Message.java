@@ -3,6 +3,7 @@ package com.acuity.http.api.websockets.message;
 import com.acuity.http.api.util.JsonUtil;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 6/13/2017.
@@ -12,7 +13,6 @@ public class Message {
     private MessageFuture future;
     private HashMap<String, Object> headers = new HashMap<>();
     private String bodyJson;
-
 
     public MessageFuture getFuture(){
         if (future == null) future = new MessageFuture();
@@ -32,6 +32,12 @@ public class Message {
     public Message setBody(Object object){
         this.bodyJson = JsonUtil.toJSON(object);
         return this;
+    }
+
+    public <T> Optional<T> getHeader(String key, Class<T> tClass){
+        Object o = getHeaders().get(key);
+        if (o == null || !(tClass.isInstance(o))) return Optional.empty();
+        return Optional.of(tClass.cast(o));
     }
 
     public HashMap<String, Object> getHeaders() {

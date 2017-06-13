@@ -21,7 +21,7 @@ import static spark.Spark.halt;
  */
 public class AcuityAccountService {
 
-    public static synchronized String postRegister(Request request, Response response){
+    public static synchronized String postRegister(Request request, Response response){// TODO: 6/13/2017 Use set on insert to de synchronize this
         PostUtil account = JsonUtil.getGSON().fromJson(request.body(), PostUtil.class);
 
         String email = account.getString("username");
@@ -29,7 +29,7 @@ public class AcuityAccountService {
         String password = account.getString("password");
 
         if (email == null || displayName == null || password == null){
-            halt();
+            halt(400, "Invalid post params.");
         }
 
         Optional<AcuityAccount> accountByEmail = findAccountByEmail(email);
@@ -43,7 +43,7 @@ public class AcuityAccountService {
         return JsonUtil.toJSON("result", "Account registered");
     }
 
-    public static String login(Request request, Response response){
+    public static String login(Request request, Response response){// TODO: 6/13/2017 Rate limit this.
         String testUsername = request.queryMap("username").value();
         String testPassword = request.queryMap("password").value();
 
@@ -64,8 +64,8 @@ public class AcuityAccountService {
     }
 
     public static Optional<AcuityAccount> findAccountByHeader(Request request){
-        String tooken = request.headers("ACUITY_AUTH");
-        return JwtUtil.decode(tooken).map(decodedJWT -> decodedJWT.getHeaderClaim("email"))
+        String token = request.headers("ACUITY_AUTH");
+        return JwtUtil.decode(token).map(decodedJWT -> decodedJWT.getHeaderClaim("email"))
                 .map(Claim::asString)
                 .map(AcuityAccountService::findAccountByEmail)
                 .flatMap(Function.identity());

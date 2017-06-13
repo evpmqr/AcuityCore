@@ -7,8 +7,8 @@ public class AcuityAccount {
 
     private String _id;
 
-    private String displayName;
     private String email;
+    private String displayName;
     private String passwordHash;
 
     public AcuityAccount(String displayName, String email, String passwordHash) {
