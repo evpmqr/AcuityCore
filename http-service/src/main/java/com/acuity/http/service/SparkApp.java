@@ -1,6 +1,5 @@
 package com.acuity.http.service;
 
-import com.acuity.http.api.AcuityWebAPI;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import com.acuity.http.service.auth_filters.AdminFilter;
@@ -35,7 +34,7 @@ public class SparkApp implements SparkApplication {
         webSocket("/api/ws", SocketServer.class);
 
         path("/api", () -> {
-            get("/version", (request, response) -> JsonUtil.toJSON("version", AcuityWebAPI.INSTANCE.getVersion()));
+            get("/version", (request, response) -> JsonUtil.toJSON("version", "1.0.01"));
 
             get("/account", acuityAccountService::findCurrentAccount, objectToJSONTransformer);
             get("/login", (request, response) -> JsonUtil.toJSON("result", acuityAccountService.login(request, response)));

@@ -1,0 +1,62 @@
+package com.acuity.http.api;
+
+import com.acuity.http.api.util.JsonUtil;
+import okhttp3.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Optional;
+
+/**
+ * Created by Zachary Herridge on 6/13/2017.
+ */
+public class AcuityHttpClient {
+
+    public static final String WS_BASE_URL = "ws://localhost:8080/api/ws";
+    public static final String HTTP_BASE_URL = "http://localhost:8080";
+    public static final HttpUrl API_BASE = HttpUrl.parse(HTTP_BASE_URL + "/api");
+
+    private static final OkHttpClient client = new OkHttpClient();
+
+    private static String jwtToken = null;
+
+    public static Response makeCall(HttpUrl url) throws IOException {
+        return makeCall(url, true);
+    }
+
+    public static Response makeCall(HttpUrl url, boolean addAcuityAuth) throws IOException {
+        Request.Builder request = new Request.Builder().url(url);
+        if (addAcuityAuth) request.addHeader("ACUITY_AUTH", Optional.ofNullable(jwtToken).orElse("NO_AUTH"));
+        return client.newCall(request.build()).execute();
+    }
+
+    public boolean login(String username, String password){
+        HttpUrl login = AcuityHttpClient.API_BASE.newBuilder()
+                .addPathSegment("login")
+                .addQueryParameter("username", username)
+                .addQueryParameter("password", password)
+                .build();
+        try {
+            Response response = AcuityHttpClient.makeCall(login);
+            try (ResponseBody body = response.body()){
+                InputStream in = body.byteStream();
+
+                HashMap hashMap = JsonUtil.getGSON().fromJson(new InputStreamReader(in), HashMap.class);
+                String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
+                if (result.startsWith("OK|")){
+                    jwtToken = result.substring(3);
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static OkHttpClient getClient() {
+        return client;
+    }
+}

@@ -23,7 +23,6 @@ public class SocketServer {
 
     private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
-    private static EventBus eventBus = new EventBus();
     private static BiMap<Session, SocketSession> connections = Maps.synchronizedBiMap(HashBiMap.create());
 
     @OnWebSocketConnect
@@ -50,9 +49,5 @@ public class SocketServer {
 
     public static BiMap<Session, SocketSession> getConnections() {
         return connections;
-    }
-
-    public static EventBus getEventBus() {
-        return eventBus;
     }
 }

@@ -1,6 +1,6 @@
 package com.acuity.api.applet;
 
-import com.acuity.http.api.AcuityWebAPI;
+import com.acuity.http.api.AcuityHttpClient;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public class RSConfig {
 
     private RSConfig() throws IOException {
         logger.info("Starting config details load from '{}'.", CONFIG_URL);
-        try (Response response = AcuityWebAPI.INSTANCE.makeCall(CONFIG_URL);
+        try (Response response = AcuityHttpClient.makeCall(CONFIG_URL, false);
              BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()))) {
             String str;
             while ((str = reader.readLine()) != null) {

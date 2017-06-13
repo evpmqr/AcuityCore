@@ -1,5 +1,6 @@
-package com.acuity.http.api;
+package com.acuity.http.api.websockets;
 
+import com.acuity.http.api.AcuityHttpClient;
 import com.acuity.http.api.util.JsonUtil;
 import okhttp3.*;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class AcuityWSClient extends WebSocketListener implements AutoCloseable{
 
     public void connect(){
         Request request = new Request.Builder()
-                .url("ws://localhost:8080/api/ws")
+                .url(AcuityHttpClient.WS_BASE_URL)
                 .build();
         webSocket = client.newWebSocket(request, this);
     }
