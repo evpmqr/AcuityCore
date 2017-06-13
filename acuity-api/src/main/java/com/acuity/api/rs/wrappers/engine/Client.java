@@ -173,6 +173,18 @@ public class Client extends GameEngine {
         return rsClient.getVarps();
     }
 
+    public int[] getRealSkillLevels() {
+        return rsClient.getRealSkillLevels();
+    }
+
+    public int[] getBoostedSkillLevels() {
+        return rsClient.getBoostedSkillLevels();
+    }
+
+    public int[] getSkillExperiences() {
+        return rsClient.getSkillExperiences();
+    }
+
     @NotNull
     public RSClient getRsClient(){
         return rsClient;
