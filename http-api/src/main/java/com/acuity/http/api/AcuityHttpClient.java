@@ -24,6 +24,21 @@ public class AcuityHttpClient {
 
     private static String jwtToken = null;
 
+    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> tClass){
+        try {
+            Response response = AcuityHttpClient.makeCall(url);
+            if (response.code() == 401) return Optional.empty();
+
+            try (ResponseBody body = response.body()){
+                InputStream in = body.byteStream();
+                return Optional.of(JsonUtil.getGSON().fromJson(new InputStreamReader(in), tClass));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
     public static Response makeCall(HttpUrl url) throws IOException {
         return makeCall(url, true);
     }
@@ -41,22 +56,17 @@ public class AcuityHttpClient {
                 .addQueryParameter("username", username)
                 .addQueryParameter("password", password)
                 .build();
-        try {
-            Response response = AcuityHttpClient.makeCall(login);
-            try (ResponseBody body = response.body()){
-                InputStream in = body.byteStream();
 
-                HashMap hashMap = JsonUtil.getGSON().fromJson(new InputStreamReader(in), HashMap.class);
-                String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
-                if (result.startsWith("LOGIN_SUCCESS:")){
-                    jwtToken = result.substring("LOGIN_SUCCESS:".length());
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return makeCall(login, HashMap.class)
+                .map(hashMap -> {
+                    String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
+                    if (result.startsWith("LOGIN_SUCCESS:")){
+                        jwtToken = result.substring("LOGIN_SUCCESS:".length());
+                        return true;
+                    }
+                    return false;
+                })
+                .orElse(false);
     }
 
     public static String getAcuityAuth() {
@@ -68,23 +78,7 @@ public class AcuityHttpClient {
     }
 
     public static void main(String[] args) {
-        System.out.println(AcuityHttpClient.login("zgherridge@gmail.com", "password123"));
-
-        try {
-            Response response = makeCall(API_BASE.newBuilder().addPathSegment("authed").addPathSegment("test").build());
-            if (response.code() == 401){
-                return;
-            }
-
-            try (ResponseBody body = response.body()) {
-                InputStream in = body.byteStream();
-
-                HashMap hashMap = JsonUtil.getGSON().fromJson(new InputStreamReader(in), HashMap.class);
-                System.out.println(hashMap);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        AcuityHttpClient.login("zgherridge@gmail.com", "password123");
+        System.out.println(AcuityHttpClient.makeCall(API_BASE.newBuilder().addPathSegment("authed").addPathSegment("test").build(), HashMap.class));
     }
 }

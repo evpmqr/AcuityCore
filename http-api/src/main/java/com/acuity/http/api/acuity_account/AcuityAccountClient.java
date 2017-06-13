@@ -20,15 +20,6 @@ public class AcuityAccountClient {
         HttpUrl account = AcuityHttpClient.API_BASE.newBuilder()
                 .addPathSegment("account")
                 .build();
-        try {
-            Response execute = AcuityHttpClient.makeCall(account);
-            try (ResponseBody body = execute.body()){
-                InputStream in = body.byteStream();
-                return Optional.ofNullable(JsonUtil.getGSON().fromJson(new InputStreamReader(in), AcuityAccount.class));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+        return AcuityHttpClient.makeCall(account, AcuityAccount.class);
     }
 }

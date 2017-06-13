@@ -16,12 +16,12 @@ import static spark.Spark.halt;
  */
 public abstract class AuthFilter implements Filter{
 
-    public static final IllegalAccessError ILLEGAL_ACCESS_ERROR = new IllegalAccessError("Not authed.");
-
     @Override
     public void handle(Request request, Response response) throws Exception {
         Optional<AcuityAccount> currentAccount = AcuityAccountService.findAccountByHeader(request);
-        if (!currentAccount.isPresent() || !isAuthed(currentAccount.get())) halt(401, "You are not authenticated.");
+        if (!currentAccount.isPresent() || !isAuthed(currentAccount.get())) {
+            halt(401, "You are not authenticated.");
+        }
     }
 
     abstract boolean isAuthed(AcuityAccount acuityAccount);

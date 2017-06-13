@@ -42,16 +42,6 @@ public class PriceLookupClient {
         HttpUrl request = RSBUDDY_GE_URL.newBuilder()
                 .addQueryParameter("i", String.valueOf(itemId))
                 .build();
-        try {
-            Response execute = AcuityHttpClient.makeCall(request);
-            try (ResponseBody body = execute.body()){
-                InputStream in = body.byteStream();
-                return JsonUtil.getGSON().fromJson(new InputStreamReader(in), PriceLookup.class);
-            }
-        } catch (IOException e) {
-			logger.warn("Error loading RSExchange for item " + itemId);
-        }
-
-        return new PriceLookup();
+        return AcuityHttpClient.makeCall(request, PriceLookup.class).orElse(null);
 	}
 }
