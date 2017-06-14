@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.rendering.Model;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
@@ -24,6 +25,7 @@ public class Player extends Actor {
 
 	private RSPlayer rsPlayer;
 
+	@ClientInvoked
 	public Player(@NotNull final RSPlayer peer) {
 		super(peer);
 		this.rsPlayer = Preconditions.checkNotNull(peer);

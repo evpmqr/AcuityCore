@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.scene;
 
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import com.acuity.rs.api.RSScene;
 import com.acuity.rs.api.RSSceneTile;
@@ -21,6 +22,7 @@ public class Scene {
 
     private RSScene rsScene;
 
+    @ClientInvoked
     public Scene(RSScene peer) {
         this.rsScene = Preconditions.checkNotNull(peer);
     }

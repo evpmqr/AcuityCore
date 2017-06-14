@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.rendering.scene.elements;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
@@ -19,6 +20,7 @@ public class SceneBoundaryDecor implements Locatable{
 
     private RSSceneBoundaryDecor rsSceneBoundaryDecor;
 
+    @ClientInvoked
     public SceneBoundaryDecor(RSSceneBoundaryDecor peer) {
         this.rsSceneBoundaryDecor = Preconditions.checkNotNull(peer);
     }

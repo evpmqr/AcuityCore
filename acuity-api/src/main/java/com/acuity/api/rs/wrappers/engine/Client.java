@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.engine;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
 import com.acuity.api.rs.wrappers.scene.Scene;
 import com.acuity.api.rs.wrappers.scene.mobiles.Npc;
@@ -23,6 +24,7 @@ public class Client extends GameEngine {
 
     private final RSClient rsClient;
 
+    @ClientInvoked
     public Client(@NotNull RSClient peer) {
         super(peer);
         this.rsClient = Preconditions.checkNotNull(peer);

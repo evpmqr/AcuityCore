@@ -13,7 +13,6 @@ import java.net.URLClassLoader;
  */
 public class RSClassLoader extends URLClassLoader {
 
-
     private static final Logger logger = LoggerFactory.getLogger(RSClassLoader.class);
 
     public RSClassLoader(File file) throws MalformedURLException {

@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.structures;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSCacheableNode;
 import com.acuity.rs.api.RSNode;
 import com.google.common.base.Preconditions;
@@ -18,6 +19,7 @@ public class CacheableNode extends Node {
 
     private RSCacheableNode rsCacheableNode;
 
+    @ClientInvoked
     public CacheableNode(@NotNull RSCacheableNode peer) {
         super(peer);
         this.rsCacheableNode = Preconditions.checkNotNull(peer);

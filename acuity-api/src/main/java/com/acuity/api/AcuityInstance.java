@@ -27,7 +27,7 @@ public class AcuityInstance {
     private static RSStub rsStub;
     private static ScriptManager scriptManager;
 
-    private static EventBus rsEventBus = new EventBus();
+    private static EventBus rsEventBus = new EventBus();// TODO: 6/14/2017 Inject this?
 
     public static void init() throws Exception {
         logger.info("Applet loading started.");

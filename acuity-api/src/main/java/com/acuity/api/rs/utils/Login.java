@@ -21,7 +21,7 @@ public class Login {
 
     public static void setLoginIndex(int index){
         AcuityInstance.getClient().setLoginIndex(index);
-        logger.debug("Set login index to {}.", index);
+        logger.info("Set login index to {}.", index);
     }
 
     public static int getLoginIndex(){

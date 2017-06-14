@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.engine;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSGameEngine;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -17,6 +18,7 @@ public class GameEngine {
 
     private RSGameEngine rsGameEngine;
 
+    @ClientInvoked
     public GameEngine(@NotNull RSGameEngine peer) {
         this.rsGameEngine = Preconditions.checkNotNull(peer);
     }

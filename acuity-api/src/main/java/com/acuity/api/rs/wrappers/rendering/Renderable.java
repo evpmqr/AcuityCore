@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.rendering;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.wrappers.structures.CacheableNode;
 import com.acuity.rs.api.RSModel;
@@ -21,6 +22,7 @@ public abstract class Renderable extends CacheableNode implements Interactive {
 
 	protected RSRenderable rsRenderable;
 
+	@ClientInvoked
 	public Renderable(@NotNull final RSRenderable peer) {
         super(peer);
         this.rsRenderable = Preconditions.checkNotNull(peer);

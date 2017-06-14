@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.rendering;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;
@@ -12,6 +13,7 @@ public class Model extends Renderable {
 
     private RSModel rsModel;
 
+    @ClientInvoked
     public Model(RSModel peer) {
         super(peer);
         this.rsModel = Preconditions.checkNotNull(peer);

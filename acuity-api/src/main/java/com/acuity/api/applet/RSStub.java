@@ -1,5 +1,8 @@
 package com.acuity.api.applet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.applet.Applet;
 import java.applet.AppletContext;
 import java.applet.AppletStub;
@@ -10,6 +13,8 @@ import java.net.URL;
  * Created by Zachary Herridge on 6/1/2017.
  */
 public class RSStub implements AppletStub {
+
+    private static final Logger logger = LoggerFactory.getLogger(RSStub.class);
 
     private final RSConfig rsConfig;
     private final Applet applet;
@@ -50,6 +55,6 @@ public class RSStub implements AppletStub {
 
     @Override
     public void appletResize(int width, int height) {
-
+        logger.warn("Applet resized to {}, {}.", width, height);
     }
 }

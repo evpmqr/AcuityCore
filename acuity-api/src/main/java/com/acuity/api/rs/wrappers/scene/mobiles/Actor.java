@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.movement.SceneLocation;
@@ -26,6 +27,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     private RSActor rsActor;
 
+    @ClientInvoked
     public Actor(@NotNull final RSActor peer) {
         super(peer);
         this.rsActor = Preconditions.checkNotNull(peer);

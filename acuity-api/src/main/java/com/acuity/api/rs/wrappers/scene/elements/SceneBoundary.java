@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.elements;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSSceneBoundary;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -11,6 +12,7 @@ public class SceneBoundary {
 
     private RSSceneBoundary rsSceneBoundary;
 
+    @ClientInvoked
     public SceneBoundary(RSSceneBoundary peer) {
         this.rsSceneBoundary = Preconditions.checkNotNull(peer);
     }

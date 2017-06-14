@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.elements;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
@@ -20,6 +21,7 @@ public class SceneElement implements Locatable{
 
     private RSSceneElement rsSceneElement;
 
+    @ClientInvoked
     public SceneElement(RSSceneElement peer) {
         this.rsSceneElement = Preconditions.checkNotNull(peer);
     }

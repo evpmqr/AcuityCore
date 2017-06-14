@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.rendering.scene.elements.SceneBoundaryDecor;
 import com.acuity.api.rs.wrappers.scene.elements.SceneBoundary;
 import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
@@ -26,6 +27,7 @@ public class SceneTile extends Node {
 
     private RSSceneTile rsSceneTile;
 
+    @ClientInvoked
     public SceneTile(@NotNull RSSceneTile peer) {
         super(peer);
         this.rsSceneTile = Preconditions.checkNotNull(peer);

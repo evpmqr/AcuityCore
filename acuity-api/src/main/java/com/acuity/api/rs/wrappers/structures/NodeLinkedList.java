@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.structures;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSNode;
 import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
@@ -15,6 +16,7 @@ public class NodeLinkedList implements java.lang.Iterable{
 
     private RSNodeLinkedList rsNodeLinkedList;
 
+    @ClientInvoked
     public NodeLinkedList(RSNodeLinkedList peer) {
         this.rsNodeLinkedList = Preconditions.checkNotNull(peer);
     }

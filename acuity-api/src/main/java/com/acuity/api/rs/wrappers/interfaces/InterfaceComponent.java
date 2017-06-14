@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.interfaces;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
 import com.sun.istack.internal.NotNull;
@@ -18,6 +19,7 @@ public class InterfaceComponent extends Node {
 
     private final RSInterfaceComponent rsInterfaceComponent;
 
+    @ClientInvoked
     public InterfaceComponent(@NotNull RSInterfaceComponent peer) {
         super(peer);
         this.rsInterfaceComponent = peer;

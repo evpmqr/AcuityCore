@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.structures;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSNode;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -17,6 +18,7 @@ public class Node {
 
     private RSNode rsNode;
 
+    @ClientInvoked
     public Node(@NotNull RSNode peer) {
         this.rsNode = Preconditions.checkNotNull(peer);
     }

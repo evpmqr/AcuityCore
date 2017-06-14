@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.elements;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSSceneBoundaryDecor;
 import com.acuity.rs.api.RSSceneTileDecor;
 import com.google.common.base.Preconditions;
@@ -12,6 +13,7 @@ public class SceneTileDecor {
 
     private RSSceneTileDecor rsSceneTileDecor;
 
+    @ClientInvoked
     public SceneTileDecor(RSSceneTileDecor peer) {
         this.rsSceneTileDecor = Preconditions.checkNotNull(peer);
     }

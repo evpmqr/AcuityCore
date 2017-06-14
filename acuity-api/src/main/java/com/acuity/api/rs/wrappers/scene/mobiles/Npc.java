@@ -1,5 +1,6 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
 import com.acuity.rs.api.RSNpc;
 import com.acuity.rs.api.RSNPCComposite;
@@ -24,6 +25,7 @@ public class Npc extends Actor implements Identifiable {
 
 	private RSNpc rsNpc;
 
+	@ClientInvoked
 	public Npc(@NotNull RSNpc peer) {
 		super(peer);
         this.rsNpc = Preconditions.checkNotNull(peer);

@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.structures;
 
 
+import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSHashTable;
 import com.acuity.rs.api.RSNode;
 import com.acuity.rs.api.RSNodeTable;
@@ -21,6 +22,7 @@ public class HashTable {
 
     private RSHashTable rsHashTable;
 
+    @ClientInvoked
     public HashTable(RSHashTable peer) {
         this.rsHashTable = Preconditions.checkNotNull(peer);
     }
