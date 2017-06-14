@@ -1,7 +1,7 @@
 package com.acuity.api;
 
 import com.acuity.api.applet.RSAppletLoader;
-import com.acuity.api.applet.RSStub;
+import com.acuity.api.applet.RSAppletStub;
 import com.acuity.api.rs.wrappers.engine.Client;
 import com.acuity.api.script.ScriptManager;
 import com.acuity.rs.api.RSClient;
@@ -24,7 +24,7 @@ public class AcuityInstance {
 
     private static Applet applet;
     private static RSAppletLoader appletLoader;
-    private static RSStub rsStub;
+    private static RSAppletStub rsAppletStub;
     private static ScriptManager scriptManager;
 
     private static EventBus rsEventBus = new EventBus();// TODO: 6/14/2017 Inject this?
@@ -38,8 +38,8 @@ public class AcuityInstance {
 
     public static void loadClient(){
         logger.info("RSClient loading started.");
-        rsStub = new RSStub(appletLoader.getRsConfig(), applet);
-        applet.setStub(rsStub);
+        rsAppletStub = new RSAppletStub(appletLoader.getRsConfig(), applet);
+        applet.setStub(rsAppletStub);
 
         /*
           Temporary fix for mac / linux is fails to load
@@ -62,8 +62,8 @@ public class AcuityInstance {
         return appletLoader;
     }
 
-    public static RSStub getRsStub() {
-        return rsStub;
+    public static RSAppletStub getRsAppletStub() {
+        return rsAppletStub;
     }
 
     public static ScriptManager getScriptManager() {

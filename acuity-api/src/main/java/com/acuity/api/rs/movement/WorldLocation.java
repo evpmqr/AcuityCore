@@ -1,6 +1,5 @@
 package com.acuity.api.rs.movement;
 
-import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

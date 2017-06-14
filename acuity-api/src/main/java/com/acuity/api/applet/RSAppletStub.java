@@ -12,14 +12,14 @@ import java.net.URL;
 /**
  * Created by Zachary Herridge on 6/1/2017.
  */
-public class RSStub implements AppletStub {
+public class RSAppletStub implements AppletStub {
 
-    private static final Logger logger = LoggerFactory.getLogger(RSStub.class);
+    private static final Logger logger = LoggerFactory.getLogger(RSAppletStub.class);
 
-    private final RSConfig rsConfig;
+    private final RSAppletConfig rsConfig;
     private final Applet applet;
 
-    public RSStub(RSConfig rsConfig, Applet applet) {
+    public RSAppletStub(RSAppletConfig rsConfig, Applet applet) {
         this.rsConfig = rsConfig;
         this.applet = applet;
     }
@@ -37,7 +37,7 @@ public class RSStub implements AppletStub {
     @Override
     public URL getCodeBase() {
         try {
-            return new URL(rsConfig.getProperty(RSConfig.CODEBASE));
+            return new URL(rsConfig.getProperty(RSAppletConfig.CODEBASE));
         } catch (MalformedURLException ex) {
             return null;
         }

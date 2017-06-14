@@ -14,25 +14,25 @@ public class RSAppletLoader {
     private Logger logger = LoggerFactory.getLogger(RSAppletLoader.class);
 
     private boolean initialSetupComplete = false;
-    private RSConfig rsConfig;
+    private RSAppletConfig rsConfig;
     private RSClassLoader classLoader;
     private Class<?> appletClass;
     private Applet applet;
-    private static RSStub rsStub;
+    private static RSAppletStub rsAppletStub;
 
     public Applet loadApplet() throws Exception {
         if (!initialSetupComplete){
             logger.info("Applet class not initiated, starting load.");
-            rsConfig = RSConfig.load();
-            String initialClass = rsConfig.getProperty(RSConfig.INITIAL_CLASS).replace(".class", "");
+            rsConfig = RSAppletConfig.load();
+            String initialClass = rsConfig.getProperty(RSAppletConfig.INITIAL_CLASS).replace(".class", "");
             classLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
             appletClass = classLoader.loadClass(initialClass);
             initialSetupComplete = true;
         }
         logger.info("Applet class loaded creating new instance of applet.");
         applet = (Applet) appletClass.newInstance();
-        rsStub = new RSStub(rsConfig, applet);
-        applet.setStub(rsStub);
+        rsAppletStub = new RSAppletStub(rsConfig, applet);
+        applet.setStub(rsAppletStub);
         return applet;
     }
 
@@ -44,7 +44,7 @@ public class RSAppletLoader {
         return appletClass;
     }
 
-    public RSConfig getRsConfig() {
+    public RSAppletConfig getRsConfig() {
         return rsConfig;
     }
 
