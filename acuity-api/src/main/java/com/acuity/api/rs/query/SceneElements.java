@@ -1,5 +1,6 @@
-package com.acuity.api.rs.utils;
+package com.acuity.api.rs.query;
 
+import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.scene.SceneTile;
 import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import org.slf4j.Logger;

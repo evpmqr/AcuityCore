@@ -29,11 +29,11 @@ public class Perspective {
         }
     }
 
-    public static Optional<Point> worldToCanvas(int x, int y, int plane) {
-        return worldToCanvas(x, y, plane, 0);
+    public static Optional<Point> worldToScreen(int x, int y, int plane) {
+        return worldToScreen(x, y, plane, 0);
     }
 
-    public static Optional<Point> worldToCanvas(int x, int y, int plane, int zOffset) {
+    public static Optional<Point> worldToScreen(int x, int y, int plane, int zOffset) {
         if (x >= 128 && y >= 128 && x <= 13056 && y <= 13056) {
             int z = getTileHeight(x, y, Scene.getPlane()) - plane;
             x -= Camera.getX();
@@ -117,10 +117,10 @@ public class Perspective {
         return 0;
     }
 
-    public static Optional<Point> getCanvasTextLocation(Graphics2D graphics, Point localLocation, String text, int zOffset) {
+    public static Optional<Point> deriveCanvasTextLocation(Graphics2D graphics, Point localLocation, String text, int zOffset) {
         int plane = Scene.getPlane();
 
-        Point p = worldToCanvas((int) localLocation.getX(), (int) localLocation.getY(), plane, zOffset).orElse(null);
+        Point p = worldToScreen((int) localLocation.getX(), (int) localLocation.getY(), plane, zOffset).orElse(null);
         if (p == null) {
             return Optional.empty();
         }
