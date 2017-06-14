@@ -7,20 +7,27 @@ import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
+
 /**
  * Created by Zachary Herridge on 6/7/2017.
  */
-public class Hooks {
+public class CallBacks {
 
-    private static final Logger logger = LoggerFactory.getLogger(Hooks.class);
+    private static final Logger logger = LoggerFactory.getLogger(CallBacks.class);
 
     @ClientInvoked
-    public static void callHook(String name, int index, Object object){
+    public static void postFieldChangeCallback(String name, int index, Object object){
         logger.trace("'{}' called with index={} and object={}", name, index, object);
         switch (name){
             case "playerPrayerChange":
                 AcuityInstance.getEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
                 break;
         }
+    }
+
+    @ClientInvoked
+    public static void drawCallback(Image image){
+
     }
 }
