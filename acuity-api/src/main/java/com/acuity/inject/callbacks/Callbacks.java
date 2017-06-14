@@ -12,9 +12,9 @@ import java.awt.*;
 /**
  * Created by Zachary Herridge on 6/7/2017.
  */
-public class CallBacks {
+public class Callbacks {
 
-    private static final Logger logger = LoggerFactory.getLogger(CallBacks.class);
+    private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
 
     @ClientInvoked
     public static void postFieldChangeCallback(String name, int index, Object object){
