@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.rendering.scene.elements;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundaryDecor;
@@ -26,8 +27,8 @@ public class SceneBoundaryDecor implements Locatable{
         return Optional.ofNullable(rsSceneBoundaryDecor.getEntity()).map(RSRenderable::getWrapper);
     }
 
-    public int getLevel(){// TODO: 6/12/2017 Rename to plane
-        return rsSceneBoundaryDecor.getLevel();
+    public int getPlane(){
+        return rsSceneBoundaryDecor.getPlane();
     }
 
     public int getOffsetX(){
@@ -50,8 +51,8 @@ public class SceneBoundaryDecor implements Locatable{
         return rsSceneBoundaryDecor.getRenderInfoBitPacked();
     }
 
-    public int getRotation(){// TODO: 6/12/2017 Rename orientation
-        return rsSceneBoundaryDecor.getRotation();
+    public int getOrientation(){
+        return rsSceneBoundaryDecor.getOrientation();
     }
 
     public int getSceneX(){
@@ -62,8 +63,8 @@ public class SceneBoundaryDecor implements Locatable{
         return rsSceneBoundaryDecor.getSceneY();
     }
 
-    public int getUid(){// TODO: 6/12/2017 Rename UID
-        return rsSceneBoundaryDecor.getUid();
+    public UIDs.UID getUID(){
+        return new UIDs.UID(rsSceneBoundaryDecor.getUID());
     }
 
     @Override

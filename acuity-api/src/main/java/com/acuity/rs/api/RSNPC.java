@@ -4,7 +4,7 @@ import com.acuity.api.rs.wrappers.scene.mobiles.Npc;
 
 //Generated
 
-public interface RSNPC extends RSActor {
+public interface RSNpc extends RSActor {
 
     RSNPCComposite getDefinition();
 

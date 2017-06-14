@@ -1,9 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.rendering.Model;
 
 //Generated
-
-import com.acuity.api.rs.wrappers.rendering.Model;
 
 public interface RSModel extends RSRenderable {
 
@@ -13,11 +12,11 @@ public interface RSModel extends RSRenderable {
 
     int[] getVerticesZ();
 
+    Model getWrapper();
+
     int[] getXTriangles();
 
     int[] getYTriangles();
 
     int[] getZTriangles();
-
-    Model getWrapper();
 }

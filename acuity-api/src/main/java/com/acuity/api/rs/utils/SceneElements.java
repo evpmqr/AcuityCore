@@ -35,7 +35,7 @@ public class SceneElements {
 
         Optional<Stream<SceneElement>> sceneElements = Scene.getTiles()
                 .map(sceneTiles -> sceneTiles[plane][sceneX][sceneY])
-                .map(SceneTile::getMarkers)
+                .map(SceneTile::getElements)
                 .map(Arrays::stream);
 
         if (!sceneElements.isPresent()){

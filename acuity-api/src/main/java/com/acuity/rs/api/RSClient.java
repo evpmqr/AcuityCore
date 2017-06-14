@@ -278,7 +278,7 @@ public interface RSClient extends RSGameEngine {
     RSNodeTable getNpcModelCache();
 
     //Static field.
-    RSNPC[] getNpcs();
+    RSNpc[] getNpcs();
 
     //Static field.
     int getOnCursorCount();

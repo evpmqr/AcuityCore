@@ -35,18 +35,18 @@ public class SceneTile extends Node {
         return Optional.ofNullable(rsSceneTile.getBoundaryDecor()).map(RSSceneBoundaryDecor::getWrapper);
     }
 
-    public Optional<SceneTileDecor> getGroundObject(){// TODO: 6/12/2017 Rename field
-        return Optional.ofNullable(rsSceneTile.getGroundObject()).map(RSSceneTileDecor::getWrapper);
+    public Optional<SceneTileDecor> getTileDecor(){
+        return Optional.ofNullable(rsSceneTile.getTileDecor()).map(RSSceneTileDecor::getWrapper);
     }
 
-    public SceneElement[] getMarkers(){// TODO: 6/12/2017 Rename field
-        return Arrays.stream(rsSceneTile.getMarkers())// TODO: 6/12/2017 Can this be null?
+    public SceneElement[] getElements(){
+        return Arrays.stream(rsSceneTile.getElements())// TODO: 6/12/2017 Can this be null?
                 .map(rsSceneElement -> rsSceneElement != null ? rsSceneElement.getWrapper() : null)
                 .toArray(SceneElement[]::new);
     }
 
-    public Optional<SceneBoundary> getWallObjects(){// TODO: 6/12/2017 Rename field
-        return Optional.ofNullable(rsSceneTile.getWallObject()).map(RSSceneBoundary::getWrapper);
+    public Optional<SceneBoundary> getBoundary(){
+        return Optional.ofNullable(rsSceneTile.getBoundary()).map(RSSceneBoundary::getWrapper);
     }
 
     @NotNull

@@ -5,9 +5,9 @@ import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
-import com.acuity.api.rs.wrappers.structures.CombatInfoList;
+import com.acuity.api.rs.wrappers.structures.NodeLinkedList;
 import com.acuity.rs.api.RSActor;
-import com.acuity.rs.api.RSCombatInfoList;
+import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -83,8 +83,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getActionFrame();
     }
 
-    public Optional<CombatInfoList> getHealthBars() {
-        return Optional.ofNullable(rsActor.getHealthBars()).map(RSCombatInfoList::getWrapper);
+    public Optional<NodeLinkedList> getHealthBars() {
+        return Optional.ofNullable(rsActor.getHealthBars()).map(RSNodeLinkedList::getWrapper);
     }
 
     public int getIdlePoseAnimation() {

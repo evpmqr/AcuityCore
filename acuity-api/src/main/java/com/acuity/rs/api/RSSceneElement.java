@@ -12,7 +12,7 @@ public interface RSSceneElement {
 
     RSRenderable getEntity();
 
-    int getFlags();
+    int getFlag();
 
     int getHeight();
 
@@ -28,7 +28,7 @@ public interface RSSceneElement {
 
     int getSceneY();
 
-    int getUid();
+    int getUID();
 
     SceneElement getWrapper();
 }

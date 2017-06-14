@@ -7,5 +7,5 @@ public interface RSHealthBar extends RSNode {
 
     RSHealthBarComposite getDefinition();
 
-    RSCombatInfoList getHitsplats();
+    RSNodeLinkedList getHitsplats();
 }

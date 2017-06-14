@@ -32,8 +32,8 @@ public class SceneElement implements Locatable{
         return rsSceneElement.getEndSceneX();
     }
 
-    public int getFlag(){// TODO: 6/12/2017 Rename
-        return rsSceneElement.getFlags();
+    public int getFlag(){
+        return rsSceneElement.getFlag();
     }
 
     public int getHeight(){
@@ -73,8 +73,8 @@ public class SceneElement implements Locatable{
         return getUID().getEntityID();
     }
 
-    public UIDs.UID getUID(){// TODO: 6/12/2017 Rename
-        return new UIDs.UID(rsSceneElement.getUid());
+    public UIDs.UID getUID(){
+        return new UIDs.UID(rsSceneElement.getUID());
     }
 
     @NotNull

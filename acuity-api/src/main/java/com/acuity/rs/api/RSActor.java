@@ -15,7 +15,7 @@ public interface RSActor extends RSRenderable {
 
     int getAnimation();
 
-    RSCombatInfoList getHealthBars();
+    RSNodeLinkedList getHealthBars();
 
     int[] getHitsplatCycles();
 

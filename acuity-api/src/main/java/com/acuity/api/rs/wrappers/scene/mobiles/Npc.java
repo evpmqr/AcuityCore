@@ -1,7 +1,7 @@
 package com.acuity.api.rs.wrappers.scene.mobiles;
 
 import com.acuity.api.rs.interfaces.Identifiable;
-import com.acuity.rs.api.RSNPC;
+import com.acuity.rs.api.RSNpc;
 import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -18,13 +18,13 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Npc extends Actor implements Identifiable {// TODO: 6/12/2017 Rename class
+public class Npc extends Actor implements Identifiable {
 
     private static final Logger logger = LoggerFactory.getLogger(Npc.class);
 
-	private RSNPC rsNpc;
+	private RSNpc rsNpc;
 
-	public Npc(@NotNull RSNPC peer) {
+	public Npc(@NotNull RSNpc peer) {
 		super(peer);
         this.rsNpc = Preconditions.checkNotNull(peer);
 	}
@@ -51,7 +51,7 @@ public class Npc extends Actor implements Identifiable {// TODO: 6/12/2017 Renam
 	}
 
 	@NotNull
-    public RSNPC getRsNpc() {
+    public RSNpc getRsNpc() {
         return rsNpc;
     }
 }

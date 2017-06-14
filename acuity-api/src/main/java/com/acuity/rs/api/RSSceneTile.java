@@ -6,13 +6,13 @@ import com.acuity.api.rs.wrappers.scene.SceneTile;
 
 public interface RSSceneTile extends RSNode {
 
+    RSSceneBoundary getBoundary();
+
     RSSceneBoundaryDecor getBoundaryDecor();
 
-    RSSceneTileDecor getGroundObject();
+    RSSceneElement[] getElements();
 
     RSItemLayer getItemLayer();
-
-    RSSceneElement[] getMarkers();
 
     RSSceneTileModel getModel();
 
@@ -24,7 +24,7 @@ public interface RSSceneTile extends RSNode {
 
     int getSceneY();
 
-    RSSceneBoundary getWallObject();
+    RSSceneTileDecor getTileDecor();
 
     SceneTile getWrapper();
 }

@@ -10,7 +10,7 @@ public interface RSWorld {
 
     String getDomain();
 
-    int getId();
+    int getID();
 
     int getIndex();
 

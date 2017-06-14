@@ -1,19 +1,20 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.rendering.scene.elements.SceneBoundaryDecor;
 
 //Generated
-
-import com.acuity.api.rs.wrappers.rendering.scene.elements.SceneBoundaryDecor;
 
 public interface RSSceneBoundaryDecor {
 
     RSRenderable getEntity();
 
-    int getLevel();
-
     int getOffsetX();
 
     int getOffsetY();
+
+    int getOrientation();
+
+    int getPlane();
 
     RSRenderable getRenderable2();
 
@@ -21,13 +22,11 @@ public interface RSSceneBoundaryDecor {
 
     int getRenderInfoBitPacked();
 
-    int getRotation();
-
     int getSceneX();
 
     int getSceneY();
 
-    int getUid();
+    int getUID();
 
     SceneBoundaryDecor getWrapper();
 }
