@@ -32,7 +32,6 @@ public class Projection {
         return sceneToScreen(x, y, plane, 0);
     }
 
-
     public static Optional<Point> sceneToScreen(int sceneX, int sceneY, int plane, int zOffset) {
         if (sceneX >= 128 && sceneY >= 128 && sceneX <= 13056 && sceneY <= 13056) {
             int z = getSceneTileHeight(sceneX, sceneY, Scene.getPlane()) - plane;

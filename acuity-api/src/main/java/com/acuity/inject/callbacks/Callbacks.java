@@ -27,6 +27,11 @@ public class Callbacks {
     }
 
     @ClientInvoked
+    public static void tick(){
+
+    }
+
+    @ClientInvoked
     public static void drawCallback(Image image){
 
     }
