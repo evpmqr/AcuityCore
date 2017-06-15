@@ -2,11 +2,14 @@ package com.acuity.api;
 
 import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSAppletStub;
+import com.acuity.api.applet.input.MouseMiddleMan;
+import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.wrappers.engine.Client;
 import com.acuity.api.script.ScriptManager;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,23 +23,28 @@ public class AcuityInstance {
 
     private static final Logger logger = LoggerFactory.getLogger(AcuityInstance.class);
 
-    private static Client client;
+    private static AcuityInstance instance;
 
-    private static Applet applet;
-    private static RSAppletLoader appletLoader;
-    private static RSAppletStub rsAppletStub;
-    private static ScriptManager scriptManager;
+    private EventBus rsEventBus = new EventBus();// TODO: 6/14/2017 Inject this?
 
-    private static EventBus rsEventBus = new EventBus();// TODO: 6/14/2017 Inject this?
+    private Client client;
+    private Applet applet;
+    private RSAppletLoader appletLoader;
+    private RSAppletStub rsAppletStub;
 
-    public static void init() throws Exception {
+    private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
+
+    private ScriptManager scriptManager;
+
+    private AcuityInstance() throws Exception {
         logger.info("Applet loading started.");
+        rsEventBus.register(this);
         appletLoader = new RSAppletLoader();
         applet = appletLoader.loadApplet();
         scriptManager = new ScriptManager();
     }
 
-    public static void loadClient(){
+    private void load(){
         logger.info("RSClient loading started.");
         rsAppletStub = new RSAppletStub(appletLoader.getRsConfig(), applet);
         applet.setStub(rsAppletStub);
@@ -54,28 +62,43 @@ public class AcuityInstance {
         logger.debug("RSClient loading finished.");
     }
 
+    @Subscribe
+    public void gameStateChanged(GameStateChangeEvent changeEvent){
+        if (changeEvent.getPreviousGameState() == 5 && changeEvent.getGamestate() == 10){
+            mouseMiddleMan.replace(client.getCanvas());
+        }
+    }
+
+    public static void init() throws Exception {
+        instance = new AcuityInstance();
+    }
+
+    public static void loadClient(){
+        Preconditions.checkNotNull(instance, "Init the acuity instance before loading the client.").load();
+    }
+
     public static Applet getApplet() {
-        return applet;
+        return instance.applet;
     }
 
     public static RSAppletLoader getAppletLoader() {
-        return appletLoader;
+        return instance.appletLoader;
     }
 
     public static RSAppletStub getRsAppletStub() {
-        return rsAppletStub;
+        return instance.rsAppletStub;
     }
 
     public static ScriptManager getScriptManager() {
-        return scriptManager;
+        return instance.scriptManager;
     }
 
     @NotNull
     public static Client getClient(){
-        return Preconditions.checkNotNull(client, "Make sure the client is loaded before referencing it.");
+        return Preconditions.checkNotNull(instance.client, "Make sure the client is loaded before referencing it.");
     }
 
     public static EventBus getEventBus() {
-        return rsEventBus;
+        return instance.rsEventBus;
     }
 }

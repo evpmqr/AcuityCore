@@ -30,20 +30,20 @@ public class RSAppletConfig {
     private RSAppletConfig() throws IOException {
         logger.info("Starting config details load from '{}'.", CONFIG_URL);
         try (Response response = AcuityHttpClient.makeCall(CONFIG_URL, false); BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                logger.trace("Got line: '{}'.", line);
-                if (!line.contains("=")) continue;
-                String[] split = line.split("=");
-                switch (split[0]) {
+            String str;
+            while ((str = reader.readLine()) != null) {
+                logger.trace("Got line: '{}'.", str);
+                String[] in = str.split("=");
+                if (in.length == 0) continue;
+                switch (in[0]) {
                     case "msg":
                         // ignore
                         break;
                     case "param":
-                        appletProperties.put(split[0], split[1]);
+                        appletProperties.put(in[1], in.length < 3 ? "" : in[2]);
                         break;
                     default:
-                        properties.put(split[0], split[1]);
+                        properties.put(in[0], in[1]);
                         break;
                 }
             }

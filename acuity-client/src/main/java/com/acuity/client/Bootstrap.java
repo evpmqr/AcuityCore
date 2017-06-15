@@ -1,11 +1,13 @@
 package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.applet.input.MouseMiddleMan;
 import com.acuity.client.devgui.ScriptRunnerView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 /**
  * Created by Zach on 5/31/2017.
@@ -26,9 +28,9 @@ public class Bootstrap {
 
             new ScriptRunnerView().setVisible(true);
 
-            while (true){
-                Thread.sleep(1000);
-            }
+            MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
