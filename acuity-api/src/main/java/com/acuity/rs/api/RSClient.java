@@ -132,9 +132,6 @@ public interface RSClient extends RSGameEngine {
     int getHintArrowNpcIndex();
 
     //Static field.
-    int getHintArrowType();
-
-    //Static field.
     int getHintArrowX();
 
     //Static field.
@@ -193,9 +190,6 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     int getLatestSelectedItemIndex();
-
-    //Static field.
-    String getLatestSelectedItemName();
 
     //Static field.
     RSPlayer getLocalPlayer();
@@ -292,9 +286,6 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     RSPacketBuffer getPacket2();
-
-    //Static field.
-    int getPacketId();
 
     //Static field.
     int getPacketLength();
@@ -444,22 +435,4 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     boolean isViewportWalking();
-
-    //Static field.
-    void setLoginIndex(int loginIndex);
-
-    //Static field.
-    void setLoginResponse1(java.lang.String loginResponse1);
-
-    //Static field.
-    void setLoginResponse2(java.lang.String loginResponse2);
-
-    //Static field.
-    void setLoginResponse3(java.lang.String loginResponse3);
-
-    //Static field.
-    void setPassword(java.lang.String password);
-
-    //Static field.
-    void setUsername(java.lang.String username);
 }

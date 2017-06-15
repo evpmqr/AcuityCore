@@ -7,8 +7,6 @@ import java.lang.String;
 //Extends: RSNode
 public interface RSClanMember extends RSNode {
 
-    String getName();
-
     byte getRank();
 
     String getUsername();
