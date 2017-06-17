@@ -27,10 +27,6 @@ public class Bootstrap {
             AcuityInstance.loadClient();
 
             new ScriptRunnerView().setVisible(true);
-
-            MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

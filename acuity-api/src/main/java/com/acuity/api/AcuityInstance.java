@@ -2,6 +2,7 @@ package com.acuity.api;
 
 import com.acuity.api.applet.RSAppletLoader;
 import com.acuity.api.applet.RSAppletStub;
+import com.acuity.api.applet.input.KeyboardMiddleMan;
 import com.acuity.api.applet.input.MouseMiddleMan;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.wrappers.engine.Client;
@@ -33,6 +34,7 @@ public class AcuityInstance {
     private RSAppletStub rsAppletStub;
 
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
+    private KeyboardMiddleMan keyboardMiddleMan = new KeyboardMiddleMan();
 
     private ScriptManager scriptManager;
 
@@ -66,6 +68,7 @@ public class AcuityInstance {
     public void gameStateChanged(GameStateChangeEvent changeEvent){
         if (changeEvent.getPreviousGameState() == 5 && changeEvent.getGamestate() == 10){
             mouseMiddleMan.replace(client.getCanvas());
+            keyboardMiddleMan.replace(client.getCanvas());
         }
     }
 

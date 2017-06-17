@@ -44,14 +44,14 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener{
         logger.info("Replaced mouse of {}.", component);
     }
 
-    public void disptach(MouseEvent event){
+    public void dispatch(MouseEvent event){
         Preconditions.checkNotNull(event);
         component.dispatchEvent(event);
     }
 
     public void dispatchClick(int x, int y, boolean left){
-        disptach(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
-        disptach(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+        dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+        dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
     }
 
     @Override
