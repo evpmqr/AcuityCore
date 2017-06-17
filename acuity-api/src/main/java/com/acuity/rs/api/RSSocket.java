@@ -21,8 +21,6 @@ public interface RSSocket extends java.lang.Runnable {
 
     int invokeAvailable();
 
-    void invokeFinalize();
-
     void invokeQueueForWrite(byte var0, int var1, int var2);
 
     void invokeRead(byte var0, int var1, int var2);
