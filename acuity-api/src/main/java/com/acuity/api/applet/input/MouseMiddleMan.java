@@ -54,6 +54,10 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener{
         dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
     }
 
+    public void dispatchClick(Point point, boolean left) {
+        dispatchClick(point.x, point.x, left);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         output.mouseClicked(e);

@@ -1,5 +1,6 @@
 package com.acuity.api.rs.utils;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
 
@@ -40,6 +41,21 @@ public enum Tab {
 
 	public boolean isOpen() {
 		return getComponent().map(m -> m.getSpriteId() != -1).orElse(false);
+	}
+
+	public ActionResult open() {
+		if (isOpen()) {
+			return ActionResult.SUCCESS;
+		}
+
+		if (Varps.get(281, 0) >= 1000 && hotkey != -1) {
+			AcuityInstance.getAppletManager().getKeyboardMiddleMan().dispatchTypeKey((char) hotkey, 0);
+		} else {
+			getComponent()
+					.ifPresent(c -> AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(c.getPoint(), true));
+		}
+
+		return isOpen() ? ActionResult.SUCCESS : ActionResult.FAILURE;
 	}
 
 	public static Tab getOpen() {
