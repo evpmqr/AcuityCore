@@ -1,4 +1,4 @@
-package com.acuity.api.applet;
+package com.acuity.api.applet.loader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

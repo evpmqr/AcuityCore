@@ -1,6 +1,7 @@
 package com.acuity.inject.callbacks;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
@@ -22,10 +23,10 @@ public class Callbacks {
         logger.debug("'{}' called with index={} and object={}", name, index, object);
         switch (name){
             case "playerPrayerChange":
-                AcuityInstance.getEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
+                Events.getRsEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
                 break;
             case "gameStateChanged":
-                AcuityInstance.getEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
+                Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;
         }
     }

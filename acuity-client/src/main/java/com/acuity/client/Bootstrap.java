@@ -22,7 +22,7 @@ public class Bootstrap {
             frame.setVisible(true);
 
             AcuityInstance.init();
-            frame.getContentPane().add(AcuityInstance.getApplet());
+            frame.getContentPane().add(AcuityInstance.getAppletManager().getApplet());
 
             AcuityInstance.loadClient();
 

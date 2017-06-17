@@ -1,4 +1,4 @@
-package com.acuity.api.applet;
+package com.acuity.api.applet.loader;
 
 import com.acuity.http.api.AcuityHttpClient;
 import okhttp3.HttpUrl;

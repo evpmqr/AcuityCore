@@ -140,15 +140,15 @@ public class Client extends GameEngine {
     }
 
     public void setUsername(String username){
-        rsClient.setUsername(username);
+        //rsClient.setUsername(username);
     }
 
     public void setPassword(String password){
-        rsClient.setPassword(password);
+       // rsClient.setPassword(password);
     }
 
     public void setLoginIndex(int index){
-        rsClient.setLoginIndex(index);
+        //rsClient.setLoginIndex(index);
     }
 
     public String getLoginResponse1() {
