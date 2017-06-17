@@ -1,4 +1,4 @@
-package com.acuity.api.rs.utils.tab;
+package com.acuity.api.rs.utils;
 
 import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
