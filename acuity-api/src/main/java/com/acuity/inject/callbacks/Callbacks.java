@@ -4,14 +4,11 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
-import com.acuity.api.rs.utils.Login;
 import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.lang.reflect.Field;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
