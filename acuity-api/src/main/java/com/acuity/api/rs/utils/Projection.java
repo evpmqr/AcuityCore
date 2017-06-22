@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.Optional;
 
 /**
@@ -28,15 +27,19 @@ public class Projection {
         }
     }
 
-    public static Optional<Point> sceneToScreen(int x, int y, int plane) {
-        return sceneToScreen(x, y, plane, 0);
+    public static Optional<Point> sceneToScreen(int sceneX, int sceneY, int plane) {
+        return worldToScreen(sceneX * 128, sceneY * 128, plane, 0);
     }
 
-    public static Optional<Point> sceneToScreen(int sceneX, int sceneY, int plane, int zOffset) {
-        if (sceneX >= 128 && sceneY >= 128 && sceneX <= 13056 && sceneY <= 13056) {
-            int z = getSceneTileHeight(sceneX, sceneY, Scene.getPlane()) - plane;
-            sceneX -= Camera.getX();
-            sceneY -= Camera.getY();
+    public static Optional<Point> worldToScreen(int x, int y, int plane) {
+        return worldToScreen(x, y, plane, 0);
+    }
+
+    public static Optional<Point> worldToScreen(int strictX, int strictY, int plane, int zOffset) {
+        if (strictX >= 128 && strictY >= 128 && strictX <= 13056 && strictY <= 13056) {
+            int z = getSceneTileHeight(strictX, strictY, Scene.getPlane()) - plane;
+            strictX -= Camera.getX();
+            strictY -= Camera.getY();
             z -= Camera.getZ();
             z -= zOffset;
 
@@ -48,16 +51,16 @@ public class Projection {
             int yawSin = SINE[cameraYaw];
             int yawCos = COSINE[cameraYaw];
 
-            int _angle = yawCos * sceneX + sceneY * yawSin >> 16;
-            sceneY = yawCos * sceneY - yawSin * sceneX >> 16;
-            sceneX = _angle;
-            _angle = pitchCos * z - sceneY * pitchSin >> 16;
-            sceneY = z * pitchSin + sceneY * pitchCos >> 16;
+            int _angle = yawCos * strictX + strictY * yawSin >> 16;
+            strictY = yawCos * strictY - yawSin * strictX >> 16;
+            strictX = _angle;
+            _angle = pitchCos * z - strictY * pitchSin >> 16;
+            strictY = z * pitchSin + strictY * pitchCos >> 16;
 
-            if (sceneY >= 50) {
+            if (strictY >= 50) {
                 Client client = AcuityInstance.getClient();
-                int pointX = client.getViewportHeight() / 2 + sceneX * client.getViewportScale() / sceneY;
-                int pointY = _angle * client.getViewportScale() / sceneY + client.getViewportWidth() / 2;
+                int pointX = client.getViewportHeight() / 2 + strictX * client.getViewportScale() / strictY;
+                int pointY = _angle * client.getViewportScale() / strictY + client.getViewportWidth() / 2;
                 return Optional.of(new Point(pointX, pointY));
             }
         }

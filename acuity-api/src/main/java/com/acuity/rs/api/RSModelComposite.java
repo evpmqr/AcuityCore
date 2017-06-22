@@ -58,5 +58,5 @@ public interface RSModelComposite extends RSRenderable {
 
     void invokeComputeNormals();
 
-    RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
+    com.acuity.rs.api.RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
 }

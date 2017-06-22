@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.scene.elements;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class SceneElement implements Locatable{
+public class SceneElement implements Locatable, Interactive{
 
     private static final Logger logger = LoggerFactory.getLogger(SceneElement.class);
 

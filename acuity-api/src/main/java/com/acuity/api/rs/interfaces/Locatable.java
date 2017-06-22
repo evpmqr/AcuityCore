@@ -2,6 +2,7 @@ package com.acuity.api.rs.interfaces;
 
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.utils.LocalPlayer;
+import com.acuity.api.rs.utils.Scene;
 import com.google.common.base.Preconditions;
 
 /**
@@ -13,7 +14,7 @@ public interface Locatable {
     WorldLocation getWorldLocation();
 
     default int getPlane() {
-        return getWorldLocation().getPlane();
+        return Scene.getPlane();
     }
 
     default int distance() {

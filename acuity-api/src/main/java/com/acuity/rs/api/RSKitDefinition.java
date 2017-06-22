@@ -20,7 +20,7 @@ public interface RSKitDefinition extends RSCacheableNode {
 
     short[] getRetextureToReplace();
 
-    RSModelComposite invokeGetModelData();
+    com.acuity.rs.api.RSModelComposite invokeGetModelData();
 
     boolean invokeReady();
 

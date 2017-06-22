@@ -1,5 +1,7 @@
 package com.acuity.api.rs.interfaces;
 
+import com.acuity.api.rs.utils.ActionResult;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -29,5 +31,9 @@ public interface Interactive {
 				.filter(Objects::nonNull)
 				.filter(predicate)
 				.collect(Collectors.toList());
+	}
+
+	default ActionResult interact(String action){
+		return ActionResult.FAILURE;// TODO: 6/17/2017 Impl
 	}
 }

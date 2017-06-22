@@ -14,7 +14,7 @@ public interface RSPlayerComposite {
 
     int getTransformedNpcId();
 
-    RSModel invokeGetModel(RSAnimationSequence var0, int var1, RSAnimationSequence var2, int var3);
+    com.acuity.rs.api.RSModel invokeGetModel(RSAnimationSequence var0, int var1, RSAnimationSequence var2, int var3);
 
     boolean isFemale();
 }

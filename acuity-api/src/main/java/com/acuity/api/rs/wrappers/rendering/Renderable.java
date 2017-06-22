@@ -16,7 +16,7 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Renderable extends CacheableNode implements Interactive {
+public class Renderable extends CacheableNode implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(Renderable.class);
 
@@ -30,6 +30,10 @@ public abstract class Renderable extends CacheableNode implements Interactive {
 
 	public int getHeight() {
 		return rsRenderable.getHeight();
+	}
+
+	public Optional<Model> getCachedModel(){
+		return Optional.ofNullable(rsRenderable.getCachedModel()).map(RSModel::getWrapper);
 	}
 
 	public Optional<Model> invokeGetModel() {

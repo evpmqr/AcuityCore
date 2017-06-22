@@ -10,7 +10,7 @@ public interface RSNodeTable {
 
     RSHashTable getTable();
 
-    RSCacheableNode invokeGet(long var0);
+    com.acuity.rs.api.RSCacheableNode invokeGet(long var0);
 
     void invokePut(RSCacheableNode var0, long var1);
 

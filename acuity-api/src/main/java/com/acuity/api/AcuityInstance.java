@@ -11,6 +11,8 @@ import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.MalformedURLException;
+
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
@@ -32,10 +34,11 @@ public class AcuityInstance {
 
     public static void init() throws Exception {
         instance = new AcuityInstance();
+        getAppletManager().load();
     }
 
-    public static void loadClient(){
-        getAppletManager().load();
+    public static void boot(){
+        getAppletManager().boot();
     }
 
     public static AppletManager getAppletManager() {

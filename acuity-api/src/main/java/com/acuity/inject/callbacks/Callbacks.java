@@ -5,6 +5,8 @@ import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
+import com.acuity.api.rs.query.Npcs;
+import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,5 @@ public class Callbacks {
 
     @ClientInvoked
     public static void drawCallback(Image image){
-
     }
 }
