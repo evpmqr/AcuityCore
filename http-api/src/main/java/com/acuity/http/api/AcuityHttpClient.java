@@ -1,12 +1,10 @@
 package com.acuity.http.api;
 
-import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.acuity.http.api.acuity_account.AcuityAccountClient;
 import com.acuity.http.api.util.JsonUtil;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Optional;

@@ -87,9 +87,9 @@ public interface RSItemComposite extends RSCacheableNode {
 
     boolean invokeGetEquipmentModel(boolean var0);
 
-    RSModel invokeGetModel(int var0);
+    com.acuity.rs.api.RSModel invokeGetModel(int var0);
 
-    RSModelComposite invokeGetWornModelData(boolean var0);
+    com.acuity.rs.api.RSModelComposite invokeGetWornModelData(boolean var0);
 
     void invokeLoadBuffer(RSBuffer var0);
 

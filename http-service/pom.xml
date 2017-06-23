@@ -70,6 +70,11 @@
             <artifactId>java-jwt</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.acuity</groupId>
+            <artifactId>db</artifactId>
+            <version>1.0.00-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

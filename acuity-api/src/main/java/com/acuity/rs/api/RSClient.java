@@ -132,6 +132,9 @@ public interface RSClient extends RSGameEngine {
     int getHintArrowNpcIndex();
 
     //Static field.
+    int getHintArrowType();
+
+    //Static field.
     int getHintArrowX();
 
     //Static field.
@@ -190,6 +193,9 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     int getLatestSelectedItemIndex();
+
+    //Static field.
+    String getLatestSelectedItemName();
 
     //Static field.
     RSPlayer getLocalPlayer();
@@ -327,6 +333,9 @@ public interface RSClient extends RSGameEngine {
     int[] getRealSkillLevels();
 
     //Static field.
+    int getRenderMode();
+
+    //Static field.
     int getRights();
 
     //Static field.
@@ -398,7 +407,7 @@ public interface RSClient extends RSGameEngine {
     void invokeGameDraw(RSInterfaceComponent var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
 
     //Static method.
-    RSItemComposite invokeGetItemDefinition(int var0);
+    com.acuity.rs.api.RSItemComposite invokeGetItemDefinition(int var0);
 
     //Static method.
     void invokeGroundItemSpawned(int var0, int var1);
@@ -435,4 +444,7 @@ public interface RSClient extends RSGameEngine {
 
     //Static field.
     boolean isViewportWalking();
+
+    //Static field.
+    void setRenderMode(int renderMode);
 }

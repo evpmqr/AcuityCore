@@ -1,16 +1,15 @@
 package com.acuity.http.service.acuity_account;
 
 import com.acuity.db.AcuityDB;
+import com.acuity.db.entities.AcuityAccount;
 import com.acuity.http.api.util.JsonUtil;
 import com.acuity.http.service.util.BCrypt;
-import com.acuity.http.api.acuity_account.AcuityAccount;
 import com.acuity.http.service.util.JwtUtil;
 import com.acuity.http.service.util.PostUtil;
 import com.auth0.jwt.interfaces.Claim;
 import spark.Request;
 import spark.Response;
 
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Function;
 

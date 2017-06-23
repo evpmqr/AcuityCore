@@ -21,7 +21,7 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Actor extends Renderable implements Locatable, Nameable {
+public class Actor extends Renderable implements Locatable, Nameable {
 
     private static final Logger logger = LoggerFactory.getLogger(Actor.class);
 
@@ -135,5 +135,10 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     @NotNull
     public RSActor getRsActor() {
         return rsActor;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

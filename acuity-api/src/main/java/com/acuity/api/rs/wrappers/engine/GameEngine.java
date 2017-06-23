@@ -7,6 +7,7 @@ import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.applet.Applet;
 import java.awt.*;
 
 /**
@@ -25,6 +26,10 @@ public class GameEngine {
 
     public Canvas getCanvas(){
         return rsGameEngine.getCanvas();
+    }
+
+    public Applet getApplet(){
+        return (Applet) getRsGameEngine();
     }
 
     @NotNull

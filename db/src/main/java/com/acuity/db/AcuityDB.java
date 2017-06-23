@@ -1,19 +1,13 @@
 package com.acuity.db;
 
-import com.acuity.http.api.acuity_account.AcuityAccount;
-import com.acuity.http.api.util.JsonUtil;
-import com.acuity.http.service.acuity_account.AcuityAccountService;
-import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-import org.bson.Document;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 

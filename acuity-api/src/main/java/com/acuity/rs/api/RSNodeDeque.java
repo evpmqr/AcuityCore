@@ -10,7 +10,7 @@ public interface RSNodeDeque {
 
     RSNode getHead();
 
-    RSNode invokeCurrent();
+    com.acuity.rs.api.RSNode invokeCurrent();
 
-    RSNode invokeNext();
+    com.acuity.rs.api.RSNode invokeNext();
 }

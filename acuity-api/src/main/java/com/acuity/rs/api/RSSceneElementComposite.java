@@ -61,7 +61,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
     int getVarpIndex();
 
-    RSSceneElementComposite invokeGetImpostor();
+    com.acuity.rs.api.RSSceneElementComposite invokeGetImpostor();
 
     void invokeLoadData(RSBuffer var0, int var1);
 

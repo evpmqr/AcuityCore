@@ -1,6 +1,7 @@
 package com.acuity.http.service.auth_filters;
 
-import com.acuity.http.api.acuity_account.AcuityAccount;
+
+import com.acuity.db.entities.AcuityAccount;
 
 /**
  * Created by Zachary Herridge on 6/1/2017.
