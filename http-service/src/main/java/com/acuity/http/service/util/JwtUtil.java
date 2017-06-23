@@ -1,6 +1,7 @@
 package com.acuity.http.service.util;
 
-import com.acuity.http.api.acuity_account.AcuityAccount;
+
+import com.acuity.db.entities.AcuityAccount;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -43,7 +44,7 @@ public class JwtUtil {
     public static String build(AcuityAccount acuityAccount){
         Map<String, Object> headerClaims = new HashMap<>();
 
-        headerClaims.put("email", acuityAccount.getEmail());
+        headerClaims.put("email", acuityAccount.getEmailAddress());
         headerClaims.put("displayName", acuityAccount.getDisplayName());
 
         return JWT.create()

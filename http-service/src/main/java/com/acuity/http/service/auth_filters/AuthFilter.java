@@ -1,7 +1,7 @@
 package com.acuity.http.service.auth_filters;
 
-import com.acuity.http.api.acuity_account.AcuityAccount;
-import com.acuity.http.service.SparkApp;
+
+import com.acuity.db.entities.AcuityAccount;
 import com.acuity.http.service.acuity_account.AcuityAccountService;
 import spark.Filter;
 import spark.Request;

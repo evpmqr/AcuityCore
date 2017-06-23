@@ -18,6 +18,7 @@
         <module>http-service</module>
         <module>acuity-client</module>
         <module>acuity-api</module>
+        <module>db</module>
     </modules>
 
 </project>
