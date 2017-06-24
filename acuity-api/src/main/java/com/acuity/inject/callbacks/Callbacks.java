@@ -7,11 +7,14 @@ import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
 import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.utils.Game;
+import com.acuity.api.rs.wrappers.rendering.Model;
+import com.acuity.api.rs.wrappers.scene.mobiles.Actor;
 import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.util.function.Function;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -40,5 +43,14 @@ public class Callbacks {
 
     @ClientInvoked
     public static void drawCallback(Image image){
+/*        if (Game.getGameState() == Game.IN_GAME){
+            Npcs.getNearest("Goblin")
+                    .map(Actor::getCachedModel)
+                    .flatMap(Function.identity())
+                    .map(Model::getPolygons)
+                    .ifPresent(pointStream -> pointStream.forEach(point -> {
+                        image.getGraphics().drawPolygon(point);
+                    }));
+        }*/
     }
 }

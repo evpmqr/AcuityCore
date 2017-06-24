@@ -43,10 +43,6 @@ public class Player extends Actor {
 		return rsPlayer.getCombatLevel();
 	}
 
-	public Optional<Model> getModel() {
-		return Optional.ofNullable(rsPlayer.getModel()).map(RSModel::getWrapper);
-	}
-
 	/*
 	default = -1
 	magic = 2

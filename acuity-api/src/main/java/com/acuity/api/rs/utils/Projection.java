@@ -28,43 +28,37 @@ public class Projection {
     }
 
     public static Optional<Point> sceneToScreen(int sceneX, int sceneY, int plane) {
-        return worldToScreen(sceneX * 128, sceneY * 128, plane, 0);
+        return worldToScreen(sceneX * 128, sceneY * 128, plane);
     }
 
-    public static Optional<Point> worldToScreen(int x, int y, int plane) {
-        return worldToScreen(x, y, plane, 0);
-    }
-
-    public static Optional<Point> worldToScreen(int strictX, int strictY, int plane, int zOffset) {
-        if (strictX >= 128 && strictY >= 128 && strictX <= 13056 && strictY <= 13056) {
-            int z = getSceneTileHeight(strictX, strictY, Scene.getPlane()) - plane;
+    public static Optional<Point> worldToScreen(int strictX, int strictY, int height) {
+        if (strictX >= 128 && strictX <= 13056 && strictY >= 128 && strictY <= 13056) {
+            int alt = Camera.getPitch();
+            if (alt < 0) {
+                return Optional.empty();
+            }
+            int yaw = Camera.getYaw();
+            if (yaw < 0) {
+                return Optional.empty();
+            }
+            int elevation = getGroundHeight(strictX, strictY) - height;
             strictX -= Camera.getX();
             strictY -= Camera.getY();
-            z -= Camera.getZ();
-            z -= zOffset;
-
-            int cameraPitch = Camera.getPitch();
-            int cameraYaw = Camera.getYaw();
-
-            int pitchSin = SINE[cameraPitch];
-            int pitchCos = COSINE[cameraPitch];
-            int yawSin = SINE[cameraYaw];
-            int yawCos = COSINE[cameraYaw];
-
-            int _angle = yawCos * strictX + strictY * yawSin >> 16;
-            strictY = yawCos * strictY - yawSin * strictX >> 16;
-            strictX = _angle;
-            _angle = pitchCos * z - strictY * pitchSin >> 16;
-            strictY = z * pitchSin + strictY * pitchCos >> 16;
-
-            if (strictY >= 50) {
-                Client client = AcuityInstance.getClient();
-                int pointX = client.getViewportHeight() / 2 + strictX * client.getViewportScale() / strictY;
-                int pointY = _angle * client.getViewportScale() / strictY + client.getViewportWidth() / 2;
-                return Optional.of(new Point(pointX, pointY));
+            elevation -= Camera.getZ();
+            int altSin = SINE[alt];
+            int altCos = COSINE[alt];
+            int yawSin = SINE[yaw];
+            int yawCos = COSINE[yaw];
+            int angle = strictY * yawSin + strictX * yawCos >> 16;
+            strictY = strictY * yawCos - strictX * yawSin >> 16;
+            strictX = angle;
+            angle = elevation * altCos - strictY * altSin >> 16;
+            strictY = elevation * altSin + strictY * altCos >> 16;
+            if (strictY == 0) {
+                return Optional.empty();
             }
+            return Optional.of(new Point(256 + (strictX << 9) / strictY, (angle << 9) / strictY + 167));
         }
-
         return Optional.empty();
     }
 
@@ -101,26 +95,28 @@ public class Projection {
         return Optional.empty();
     }
 
-    public static int getSceneTileHeight(int x, int y, int plane) {
-        int xx = x >> 7;
-        int yy = y >> 7;
-
-        if (xx < 0 || yy < 0 || xx > 103 || yy > 103) {
-            throw new IllegalArgumentException("Coordinates outside loaded scene.");
+    public static int getGroundHeight(int x, int y) {
+        int x1 = x >> 7;
+        int y1 = y >> 7;
+        if (x1 < 0 || x1 > 103 || y1 < 0 || y1 > 103) {
+            return 0;
         }
-
-        byte[][][] tileSettings = Scene.getRenderRules();
-        int[][][] tileHeights = Scene.getTileHeights();
-
-        int var5 = plane;
-        if (plane < 3 && (tileSettings[1][xx][yy] & 2) == 2) {
-            var5 = plane + 1;
+        byte[][][] rules = Scene.getRenderRules();
+        if (rules == null) {
+            return 0;
         }
-
-        int var6 = x & 127;
-        int var7 = y & 127;
-        int var8 = var6 * tileHeights[var5][xx + 1][yy] + (128 - var6) * tileHeights[var5][xx][yy] >> 7;
-        int var9 = tileHeights[var5][xx][yy + 1] * (128 - var6) + var6 * tileHeights[var5][xx + 1][yy + 1] >> 7;
-        return (128 - var7) * var8 + var7 * var9 >> 7;
+        int[][][] heights = Scene.getTileHeights();
+        if (heights == null) {
+            return 0;
+        }
+        int plane = Scene.getPlane();
+        if (plane < 3 && (rules[1][x1][y1] & 0x2) == 2) {
+            plane++;
+        }
+        int x2 = x & 0x7F;
+        int y2 = y & 0x7F;
+        int h1 = heights[plane][x1][y1] * (128 - x2) + heights[plane][x1 + 1][y1] * x2 >> 7;
+        int h2 = heights[plane][x1][y1 + 1] * (128 - x2) + heights[plane][x1 + 1][y1 + 1] * x2 >> 7;
+        return h1 * (128 - y2) + h2 * y2 >> 7;
     }
 }

@@ -5,6 +5,7 @@ import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
+import com.acuity.api.rs.wrappers.rendering.Model;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.structures.NodeLinkedList;
 import com.acuity.rs.api.RSActor;
@@ -31,6 +32,11 @@ public class Actor extends Renderable implements Locatable, Nameable {
     public Actor(@NotNull final RSActor peer) {
         super(peer);
         this.rsActor = Preconditions.checkNotNull(peer);
+    }
+
+    @Override
+    public Optional<Model> getCachedModel() {
+        return super.getCachedModel().map(model -> model.place(getStrictX(), getStrictY())).map(model -> model.rotate(getOrientation()));
     }
 
     public int getSceneX() {
