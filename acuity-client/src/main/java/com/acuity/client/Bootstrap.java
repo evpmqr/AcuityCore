@@ -31,17 +31,7 @@ public class Bootstrap {
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
-
                 new ScriptRunnerView().setVisible(true);
-
-                while (true){
-                    Thread.sleep(500);
-                    Callbacks.postFieldChangeCallback("gameStateChanged", -1, null);
-                    if (Game.getGameState() == Game.LOGIN_SCREEN){
-                        break;
-                    }
-                }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
