@@ -35,7 +35,6 @@ public class SceneElement implements Locatable, Interactive, ISceneElement{
     }
 
     public Optional<Model> getModel(){
-
         return rsSceneElement.getEntity().getWrapper().getCachedModel()
                 .map(model -> model.place(getSceneX() * 128, getSceneY() * 128))
                 .map(model -> model.rotate(getOrientation()));
