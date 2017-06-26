@@ -1,6 +1,6 @@
 package com.acuity.api.applet.loader;
 
-import com.acuity.api.rs.wrappers.engine.GameEngine;
+import com.acuity.api.rs.wrappers.peers.engine.GameEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

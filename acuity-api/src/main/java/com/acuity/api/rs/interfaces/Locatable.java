@@ -1,6 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.rs.movement.WorldLocation;
+import com.acuity.api.rs.wrappers.common.WorldLocation;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.utils.Scene;
 import com.google.common.base.Preconditions;

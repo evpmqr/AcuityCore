@@ -2,7 +2,7 @@ package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.wrappers.scene.actors.impl.Npc;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

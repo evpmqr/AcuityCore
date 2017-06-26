@@ -1,8 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.wrappers.scene.elements.impl.SceneElement;
-import com.acuity.api.rs.wrappers.scene.SceneTile;
+import com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneElement;
+import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,19 +38,17 @@ public class Scene {
 
     public static Optional<SceneElement[]> getElements(){
         return AcuityInstance.getClient().getScene()
-                .map(com.acuity.api.rs.wrappers.scene.Scene::getElements);
+                .map(com.acuity.api.rs.wrappers.peers.scene.Scene::getElements);
     }
 
-    public static Optional<SceneTile[][][]> getTiles(){
-        return AcuityInstance.getClient().getScene()
-                .map(com.acuity.api.rs.wrappers.scene.Scene::getTiles)
-                .flatMap(Function.identity());
+    public static Optional<com.acuity.api.rs.wrappers.peers.scene.Scene> getCurrentScene(){
+        return AcuityInstance.getClient().getScene();
     }
 
-    public Optional<SceneTile> getLoaded(int sceneX, int sceneY, int plane){
+    public static Optional<SceneTile> getLoaded(int sceneX, int sceneY, int plane){
         if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
             throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
-        return Scene.getTiles().map(sceneTiles -> sceneTiles[plane][sceneX][sceneY]);
+        return getCurrentScene().map(scene -> scene.getTile(sceneX, sceneY, plane)).flatMap(Function.identity());
     }
 }

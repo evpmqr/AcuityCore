@@ -1,17 +1,12 @@
 package com.acuity.api;
 
 import com.acuity.api.applet.AppletManager;
-import com.acuity.api.rs.events.GameStateChangeEvent;
-import com.acuity.api.rs.wrappers.engine.Client;
+import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.script.ScriptManager;
 import com.google.common.base.Preconditions;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.net.MalformedURLException;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.

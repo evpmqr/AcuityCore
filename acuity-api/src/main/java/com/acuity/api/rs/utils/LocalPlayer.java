@@ -1,10 +1,10 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.movement.SceneLocation;
-import com.acuity.api.rs.movement.WorldLocation;
-import com.acuity.api.rs.wrappers.scene.actors.Actor;
-import com.acuity.api.rs.wrappers.scene.actors.impl.Player;
+import com.acuity.api.rs.wrappers.common.SceneLocation;
+import com.acuity.api.rs.wrappers.common.WorldLocation;
+import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

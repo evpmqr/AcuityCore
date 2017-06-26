@@ -7,9 +7,9 @@ import com.acuity.api.applet.loader.ClientConfig;
 import com.acuity.api.applet.loader.ClientEnviroment;
 import com.acuity.api.applet.loader.ClientStub;
 import com.acuity.api.applet.loader.RSClassLoader;
-import com.acuity.api.rs.events.GameStateChangeEvent;
+import com.acuity.api.rs.events.impl.GameStateChangeEvent;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.api.rs.wrappers.engine.Client;
+import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.rs.api.RSClient;
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.Subscribe;
@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 public class AppletManager {
 
     private static final Logger logger = LoggerFactory.getLogger(AppletManager.class);
-
 
     private RSClassLoader rsClassLoader;
 
