@@ -2,7 +2,7 @@ package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.query.Interfaces;
-import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
+import com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.Optional;

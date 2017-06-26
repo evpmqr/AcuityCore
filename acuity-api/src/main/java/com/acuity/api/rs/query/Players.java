@@ -1,7 +1,7 @@
 package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.wrappers.scene.actors.impl.Player;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import com.acuity.api.rs.utils.LocalPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,8 @@
 package com.acuity.api.rs.query;
 
-import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
-import com.acuity.rs.api.RSScene;
-import com.acuity.rs.api.RSSceneTile;
+import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
+import com.acuity.api.rs.wrappers.common.SceneElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,16 +30,6 @@ public class SceneElements {
         if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
             throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
-        RSScene sceneGraph = AcuityInstance.getClient().getRsClient().getSceneGraph();
-        if (sceneGraph != null){
-            RSSceneTile[][][] tiles = sceneGraph.getTiles();
-            if (tiles != null){
-                RSSceneTile rsSceneTile = tiles[plane][sceneX][sceneY];
-                if (rsSceneTile != null){
-                    return rsSceneTile.getWrapper().streamElements();
-                }
-            }
-        }
-        return Stream.empty();
+        return Scene.getLoaded(sceneX, sceneY, plane).map(SceneTile::streamElements).orElse(Stream.empty());
     }
 }
