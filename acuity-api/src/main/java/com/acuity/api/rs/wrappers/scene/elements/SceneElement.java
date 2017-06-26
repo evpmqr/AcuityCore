@@ -6,6 +6,7 @@ import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.utils.UIDs;
+import com.acuity.api.rs.wrappers.rendering.Model;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
@@ -13,10 +14,12 @@ import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class SceneElement implements Locatable, Interactive{
+public class SceneElement implements Locatable, Interactive, ISceneElement{
 
     private static final Logger logger = LoggerFactory.getLogger(SceneElement.class);
 
@@ -29,6 +32,13 @@ public class SceneElement implements Locatable, Interactive{
 
     public Renderable getEntity(){// TODO: 6/12/2017 Can this be null?
         return rsSceneElement.getEntity().getWrapper();
+    }
+
+    public Optional<Model> getModel(){
+
+        return rsSceneElement.getEntity().getWrapper().getCachedModel()
+                .map(model -> model.place(getSceneX() * 128, getSceneY() * 128))
+                .map(model -> model.rotate(getOrientation()));
     }
 
     public int getEndSceneX(){
