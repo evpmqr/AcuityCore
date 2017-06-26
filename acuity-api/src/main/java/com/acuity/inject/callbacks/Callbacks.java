@@ -5,22 +5,12 @@ import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
-import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.movement.SceneLocation;
-import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.api.rs.utils.LocalPlayer;
-import com.acuity.api.rs.wrappers.rendering.Model;
-import com.acuity.api.rs.wrappers.rendering.Renderable;
-import com.acuity.api.rs.wrappers.scene.elements.ISceneElement;
-import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.

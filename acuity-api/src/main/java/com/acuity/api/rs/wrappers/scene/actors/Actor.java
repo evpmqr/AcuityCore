@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers.scene.mobiles;
+package com.acuity.api.rs.wrappers.scene.actors;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;

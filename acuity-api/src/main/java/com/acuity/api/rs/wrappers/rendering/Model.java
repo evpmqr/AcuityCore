@@ -16,7 +16,6 @@ import java.util.stream.Stream;
  */
 public class Model extends Renderable {
 
-    private RSRenderable renderable;
     private RSModel rsModel;
 
     private int strictX, strictY;

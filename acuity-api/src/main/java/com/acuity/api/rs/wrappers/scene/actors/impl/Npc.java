@@ -1,7 +1,8 @@
-package com.acuity.api.rs.wrappers.scene.mobiles;
+package com.acuity.api.rs.wrappers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
+import com.acuity.api.rs.wrappers.scene.actors.Actor;
 import com.acuity.rs.api.RSNpc;
 import com.acuity.rs.api.RSNPCComposite;
 import com.google.common.base.Preconditions;

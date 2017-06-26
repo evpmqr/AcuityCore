@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers.rendering.scene.elements;
+package com.acuity.api.rs.wrappers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
@@ -8,7 +8,7 @@ import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.rendering.Model;
 import com.acuity.api.rs.wrappers.rendering.Renderable;
-import com.acuity.api.rs.wrappers.scene.elements.ISceneElement;
+import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundaryDecor;
 import com.google.common.base.Preconditions;
@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 6/12/2017.
  */
-public class SceneBoundaryDecor implements Locatable, Interactive, ISceneElement{
+public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement {
 
     private RSSceneBoundaryDecor rsSceneBoundaryDecor;
 
@@ -84,6 +84,8 @@ public class SceneBoundaryDecor implements Locatable, Interactive, ISceneElement
 
     @Override
     public Optional<Model> getModel() {
-        return Optional.ofNullable(rsSceneBoundaryDecor.getEntity().getCachedModel());
+        return Optional.ofNullable(rsSceneBoundaryDecor.getEntity().getCachedModel())
+                .map(model -> model.place(rsSceneBoundaryDecor.getSceneX() * 128, rsSceneBoundaryDecor.getSceneY() * 128))
+                .map(model -> model.rotate(rsSceneBoundaryDecor.getOrientation()));
     }
 }

@@ -1,7 +1,7 @@
 package com.acuity.api.rs.utils.prayer;
 
 import com.acuity.api.rs.utils.Varps;
-import com.acuity.api.rs.wrappers.scene.mobiles.Player;
+import com.acuity.api.rs.wrappers.scene.actors.impl.Player;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

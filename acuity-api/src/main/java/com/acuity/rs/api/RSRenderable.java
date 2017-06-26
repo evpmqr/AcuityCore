@@ -8,12 +8,11 @@ import com.acuity.api.rs.wrappers.rendering.Renderable;
 //Extends: RSCacheableNode
 public interface RSRenderable extends RSCacheableNode {
 
+    Model getCachedModel();
+
     int getHeight();
 
     Renderable getWrapper();
-
-
-    Model getCachedModel();
 
     com.acuity.rs.api.RSModel invokeGetModel();
 }
