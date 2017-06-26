@@ -1,5 +1,8 @@
 package com.acuity.api.applet.loader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +12,8 @@ import java.util.function.Consumer;
 
 public class ClientConfig implements Consumer<String> {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClientConfig.class);
+
     private static String OLDSCHOOL_JAV_CONFIG = "http://oldschool.runescape.com/jav_config.ws";
     private final Properties properties, parameters;
 
@@ -16,13 +21,15 @@ public class ClientConfig implements Consumer<String> {
         properties = parameters = new Properties();
         String url = OLDSCHOOL_JAV_CONFIG;
         if (world > 0 && world < 95) {
+            logger.info("Attempting to load into world {}.", 300 + world);
             url = url.replace("oldschool", "oldschool" + world);
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {
             reader.lines().forEach(this);
         } catch (IOException e) {
-
+            logger.error("Error during config reading", e);
         }
+        logger.info("Loaded RSConfig with {} properties and {} parameters.", properties.size(), parameters.size());
     }
 
     public String getDownloadPath() {

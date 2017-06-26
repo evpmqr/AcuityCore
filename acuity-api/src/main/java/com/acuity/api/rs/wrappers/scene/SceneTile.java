@@ -1,15 +1,12 @@
 package com.acuity.api.rs.wrappers.scene;
 
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.wrappers.rendering.scene.elements.SceneBoundaryDecor;
-import com.acuity.api.rs.wrappers.scene.elements.SceneBoundary;
+import com.acuity.api.rs.wrappers.scene.elements.impl.SceneBoundaryDecor;
 import com.acuity.api.rs.wrappers.scene.elements.SceneElement;
-import com.acuity.api.rs.wrappers.scene.elements.SceneTileDecor;
+import com.acuity.api.rs.wrappers.scene.elements.impl.SceneBoundary;
+import com.acuity.api.rs.wrappers.scene.elements.impl.SceneTileDecor;
 import com.acuity.api.rs.wrappers.structures.Node;
-import com.acuity.rs.api.RSSceneBoundary;
-import com.acuity.rs.api.RSSceneBoundaryDecor;
-import com.acuity.rs.api.RSSceneTile;
-import com.acuity.rs.api.RSSceneTileDecor;
+import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
@@ -17,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 6/9/2017.
@@ -33,6 +31,17 @@ public class SceneTile extends Node {
         this.rsSceneTile = Preconditions.checkNotNull(peer);
     }
 
+    public Stream<SceneElement> streamElements(){
+        Stream.Builder<SceneElement> builder = Stream.builder();
+        for (RSSceneElement rsSceneElement : rsSceneTile.getElements()) {
+            if (rsSceneElement != null) builder.accept(rsSceneElement.getWrapper());
+        }
+        getBoundary().ifPresent(builder::accept);
+        getTileDecor().ifPresent(builder::accept);
+        getBoundaryDecor().ifPresent(builder::accept);
+        return builder.build();
+    }
+
     public Optional<SceneBoundaryDecor> getBoundaryDecor(){
         return Optional.ofNullable(rsSceneTile.getBoundaryDecor()).map(RSSceneBoundaryDecor::getWrapper);
     }
@@ -41,10 +50,10 @@ public class SceneTile extends Node {
         return Optional.ofNullable(rsSceneTile.getTileDecor()).map(RSSceneTileDecor::getWrapper);
     }
 
-    public SceneElement[] getElements(){
+    public com.acuity.api.rs.wrappers.scene.elements.impl.SceneElement[] getElements(){
         return Arrays.stream(rsSceneTile.getElements())// TODO: 6/12/2017 Can this be null?
                 .map(rsSceneElement -> rsSceneElement != null ? rsSceneElement.getWrapper() : null)
-                .toArray(SceneElement[]::new);
+                .toArray(com.acuity.api.rs.wrappers.scene.elements.impl.SceneElement[]::new);
     }
 
     public Optional<SceneBoundary> getBoundary(){

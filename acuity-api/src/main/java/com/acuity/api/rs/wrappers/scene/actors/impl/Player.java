@@ -1,8 +1,7 @@
-package com.acuity.api.rs.wrappers.scene.mobiles;
+package com.acuity.api.rs.wrappers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.wrappers.rendering.Model;
-import com.acuity.rs.api.RSModel;
+import com.acuity.api.rs.wrappers.scene.actors.Actor;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerComposite;
 import com.google.common.base.Preconditions;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Eclipseop.
@@ -41,10 +39,6 @@ public class Player extends Actor {
 
 	public int getCombatLevel() {
 		return rsPlayer.getCombatLevel();
-	}
-
-	public Optional<Model> getModel() {
-		return Optional.ofNullable(rsPlayer.getModel()).map(RSModel::getWrapper);
 	}
 
 	/*

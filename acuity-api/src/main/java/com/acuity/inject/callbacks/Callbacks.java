@@ -5,7 +5,6 @@ import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.GameStateChangeEvent;
 import com.acuity.api.rs.events.OverheadPrayerChangeEvent;
-import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSPlayer;
 import org.slf4j.Logger;
@@ -21,9 +20,9 @@ public class Callbacks {
     private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
 
     @ClientInvoked
-    public static void postFieldChangeCallback(String name, int index, Object object){
+    public static void postFieldChangeCallback(String name, int index, Object object) {
         logger.debug("'{}' called with index={} and object={}", name, index, object);
-        switch (name){
+        switch (name) {
             case "playerPrayerChange":
                 Events.getRsEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
                 break;
@@ -34,11 +33,14 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void tick(){
+    public static void tick() {
 
     }
 
     @ClientInvoked
-    public static void drawCallback(Image image){
+    public static void drawCallback(Image image) {
+        if (Game.getGameState() == Game.IN_GAME) {
+
+        }
     }
 }

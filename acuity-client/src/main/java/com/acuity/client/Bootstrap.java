@@ -4,8 +4,10 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.applet.input.MouseMiddleMan;
 import com.acuity.api.rs.movement.WorldLocation;
 import com.acuity.api.rs.query.SceneElements;
+import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.Movement;
 import com.acuity.client.devgui.ScriptRunnerView;
+import com.acuity.inject.callbacks.Callbacks;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +30,6 @@ public class Bootstrap {
                 AcuityInstance.init();
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
-
 
                 new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {

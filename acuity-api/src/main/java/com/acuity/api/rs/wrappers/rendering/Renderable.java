@@ -33,14 +33,8 @@ public class Renderable extends CacheableNode implements Interactive {
 	}
 
 	public Optional<Model> getCachedModel(){
-		return Optional.ofNullable(rsRenderable.getCachedModel()).map(RSModel::getWrapper);
+		return Optional.ofNullable(rsRenderable.getCachedModel());
 	}
-
-	public Optional<Model> invokeGetModel() {
-	    logger.trace("Invoking getModel() on RSModel.");
-		return Optional.ofNullable(rsRenderable.invokeGetModel()).map(RSModel::getWrapper);
-    }
-
     @NotNull
     public RSRenderable getRsRenderable() {
         return rsRenderable;

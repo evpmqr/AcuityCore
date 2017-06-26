@@ -48,6 +48,7 @@ public class AppletManager {
         rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
         Class<?> client = rsClassLoader.loadClass("client");
         clientEnviroment = new ClientEnviroment(((RSClient) client.newInstance()).getWrapper());
+        clientEnviroment.getGameEngine().getRsClient().setRenderMode(2);
         clientStub = new ClientStub(clientConfig);
     }
 
@@ -60,7 +61,6 @@ public class AppletManager {
         if (changeEvent.getPreviousGameState() == Game.CLIENT_LOADING && changeEvent.getGamestate() == Game.LOGIN_SCREEN){
             mouseMiddleMan.replace(getClient().getCanvas());
             keyboardMiddleMan.replace(getClient().getCanvas());
-            getClient().getRsClient().setRenderMode(2);
         }
     }
 

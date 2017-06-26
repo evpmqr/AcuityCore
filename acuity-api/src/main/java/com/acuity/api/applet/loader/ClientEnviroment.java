@@ -1,6 +1,8 @@
 package com.acuity.api.applet.loader;
 
 import com.acuity.api.rs.wrappers.engine.GameEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 
@@ -8,6 +10,8 @@ import java.awt.*;
  * Created by Zach on 6/17/2017.
  */
 public class ClientEnviroment<T extends GameEngine> {
+
+    private static final Logger logger = LoggerFactory.getLogger(ClientEnviroment.class);
 
     private final T gameEngine;
 
@@ -21,6 +25,7 @@ public class ClientEnviroment<T extends GameEngine> {
     }
 
     public void boot(ClientStub stub){
+        logger.info("Booting client stub.");
         gameEngine.getApplet().setStub(stub);
         gameEngine.getApplet().init();
         gameEngine.getApplet().start();
@@ -28,7 +33,7 @@ public class ClientEnviroment<T extends GameEngine> {
 
     public void kill() {
         if (!isActive()) {
-            System.err.println("Game loader is inactive!");
+            logger.error("Game loader is inactive!");
             return;
         }
         gameEngine.getApplet().stop();
