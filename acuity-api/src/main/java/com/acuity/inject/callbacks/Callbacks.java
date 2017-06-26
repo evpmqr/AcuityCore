@@ -7,6 +7,7 @@ import com.acuity.api.rs.events.impl.GameStateChangeEvent;
 import com.acuity.api.rs.events.impl.OverheadPrayerChangeEvent;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSPlayer;
+import com.acuity.rs.api.RSRenderable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,11 @@ public class Callbacks {
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;
         }
+    }
+
+    @ClientInvoked
+    public static void cachedModelUpdated(RSRenderable rsRenderable){
+
     }
 
     @ClientInvoked
