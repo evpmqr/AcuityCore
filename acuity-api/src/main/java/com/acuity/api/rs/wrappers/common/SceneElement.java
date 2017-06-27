@@ -28,5 +28,4 @@ public interface SceneElement extends Locatable {
     }
 
     Optional<Model> getModel();
-
 }

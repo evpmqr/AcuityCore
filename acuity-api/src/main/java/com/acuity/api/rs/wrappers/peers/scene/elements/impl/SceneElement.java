@@ -3,11 +3,10 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.SceneLocation;
 import com.acuity.api.rs.wrappers.common.WorldLocation;
-import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -30,11 +29,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
         this.rsSceneElement = Preconditions.checkNotNull(peer);
     }
 
-    public Renderable getEntity(){// TODO: 6/12/2017 Can this be null?
-        return rsSceneElement.getEntity().getWrapper();
-    }
-
-    public Optional<Model> getModel(){
+    public Optional<Model> getModel() {
         return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
                 rsSceneElement.getEntity(),
                 rsSceneElement.getSceneX(),
@@ -42,52 +37,32 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
                 rsSceneElement.getOrientation());
     }
 
-    public int getEndSceneX(){
-        return rsSceneElement.getEndSceneX();
-    }
-
-    public int getFlag(){
+    public int getFlag() {
         return rsSceneElement.getFlag();
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return rsSceneElement.getHeight();
     }
 
-    public int getOffsetX(){
-        return rsSceneElement.getOffsetX();
-    }
-
-    public int getOffsetY(){
-        return rsSceneElement.getOffsetY();
-    }
-
-    public int getOrientation(){
+    public int getOrientation() {
         return rsSceneElement.getOrientation();
+    }
+
+    public SceneLocation getSceneLocation() {
+        return new SceneLocation(rsSceneElement.getSceneX(), rsSceneElement.getSceneY(), rsSceneElement.getPlane());
     }
 
     @Override
     public WorldLocation getWorldLocation() {
-        return new SceneLocation(getSceneX(), getSceneY(), getPlane()).getWorldLocation();
+        return getSceneLocation().getWorldLocation();
     }
 
-    public int getPlane(){
-        return rsSceneElement.getPlane();
-    }
-
-    public int getSceneX(){
-        return rsSceneElement.getSceneX();
-    }
-
-    public int getSceneY(){
-        return rsSceneElement.getSceneY();
-    }
-
-    public int getID(){
+    public int getID() {
         return getUID().getEntityID();
     }
 
-    public UIDs.UID getUID(){
+    public UIDs.UID getUID() {
         return new UIDs.UID(rsSceneElement.getUID());
     }
 

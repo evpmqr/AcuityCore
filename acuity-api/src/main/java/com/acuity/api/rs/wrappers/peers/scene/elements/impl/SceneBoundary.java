@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.*;
 import com.acuity.api.rs.wrappers.common.SceneElement;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
@@ -38,8 +39,20 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
                 null);
     }
 
+    public UIDs.UID getUID(){
+        return new UIDs.UID(rsSceneBoundary.getUid());
+    }
+
+    public int getID(){
+        return getUID().getEntityID();
+    }
+
+    public SceneLocation getSceneLocation(){
+        return new SceneLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getLevel());
+    }
+
     @Override
     public WorldLocation getWorldLocation() {
-        return new SceneLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY()).getWorldLocation();
+        return getSceneLocation().getWorldLocation();
     }
 }
