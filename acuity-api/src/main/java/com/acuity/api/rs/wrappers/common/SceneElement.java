@@ -20,7 +20,7 @@ public interface SceneElement extends Locatable {
         else lastModel = rsRenderable.getCachedModel();
 
         return Optional.of(lastModel)
-                .map(model -> model.place(sceneX * 128, sceneX * 128))
+                .map(model -> model.place(sceneX * 128, sceneY * 128))
                 .map(model -> {
                     if (orientation != null) model.rotate(orientation);
                     return model;
