@@ -36,7 +36,7 @@ public class Actor extends Renderable implements Locatable, Nameable {
 
     @Override
     public Optional<Model> getCachedModel() {
-        return super.getCachedModel().map(model -> model.place(getStrictX(), getStrictY())).map(model -> model.rotate(getOrientation()));
+        return super.getCachedModel().map(model -> model.place(getStrictX(), getStrictY())).map(model -> model.rotateTo(getOrientation()));
     }
 
     public int getSceneX() {

@@ -70,7 +70,7 @@ public class Model extends Renderable {
         return this;
     }
 
-    public Model rotate(int orientation) {
+    public Model rotateTo(int orientation) {
         initialXVertices = new int[xVertices.length];
         initialZVertices = new int[zVertices.length];
         initialXVertices = Arrays.copyOfRange(this.xVertices, 0, xVertices.length);
@@ -87,7 +87,7 @@ public class Model extends Renderable {
         return this;
     }
 
-    public Stream<Point> getPoints() {
+    public Stream<Point> streamPoints() {
         final Stream.Builder<Point> points = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
@@ -122,9 +122,8 @@ public class Model extends Renderable {
         return points.build();
     }
 
-    public Stream<Polygon> getPolygons() {
+    public Stream<Polygon> streamPolygons() {
         final Stream.Builder<Polygon> polygons = Stream.builder();
-
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
@@ -144,7 +143,10 @@ public class Model extends Renderable {
                     strictY + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
-            if (x != null && y != null && z != null && x.x > 0 && x.y > 0 && y.x > 0 && y.y > 0 && z.x > 0 && z.y > 0) {
+            if (x != null && y != null && z != null
+                    && x.x > 0 && x.y > 0
+                    && y.x > 0 && y.y > 0
+                    && z.x > 0 && z.y > 0) {
                 y.x += 4;
                 y.y += 4;
                 polygons.add(new Polygon(new int[]{x.x, y.x, z.x}, new int[]{x.y, y.y, z.y}, 3));

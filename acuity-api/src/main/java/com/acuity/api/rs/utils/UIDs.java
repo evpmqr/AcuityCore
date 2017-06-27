@@ -1,8 +1,5 @@
 package com.acuity.api.rs.utils;
 
-/**
- * Created by Zachary Herridge on 6/12/2017.
- */
 public class UIDs {
 
     // TODO: 6/12/2017 Convert to Enum?

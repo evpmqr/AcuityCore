@@ -22,7 +22,7 @@ public interface SceneElement extends Locatable {
         return Optional.of(lastModel)
                 .map(model -> model.place(sceneX * 128, sceneY * 128))
                 .map(model -> {
-                    if (orientation != null) model.rotate(orientation);
+                    if (orientation != null) model.rotateTo(orientation);
                     return model;
                 });
     }
