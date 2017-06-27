@@ -35,9 +35,11 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     }
 
     public Optional<Model> getModel(){
-        return rsSceneElement.getEntity().getWrapper().getCachedModel()
-                .map(model -> model.place(getSceneX() * 128, getSceneY() * 128))
-                .map(model -> model.rotate(getOrientation()));
+        return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
+                rsSceneElement.getEntity(),
+                rsSceneElement.getSceneX(),
+                rsSceneElement.getSceneY(),
+                rsSceneElement.getOrientation());
     }
 
     public int getEndSceneX(){

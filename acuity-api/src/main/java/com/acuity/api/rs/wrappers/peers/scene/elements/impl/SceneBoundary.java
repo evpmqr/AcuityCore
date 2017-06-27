@@ -2,7 +2,10 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.common.*;
+import com.acuity.api.rs.wrappers.common.SceneElement;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.rs.api.RSModel;
+import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundary;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -28,9 +31,11 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
 
     @Override
     public Optional<Model> getModel() {
-        Model eitherModel = Optional.ofNullable(rsSceneBoundary.getEntity().getCachedModel()).orElseGet(() -> rsSceneBoundary.getRenderable2().getCachedModel());
-        return Optional.ofNullable(eitherModel).map(model -> model
-                .place(rsSceneBoundary.getSceneX() * 128, rsSceneBoundary.getSceneY() * 128));
+        return SceneElement.getModel(
+                Optional.ofNullable(rsSceneBoundary.getEntity()).orElseGet(() -> rsSceneBoundary.getRenderable2()),
+                rsSceneBoundary.getSceneX(),
+                rsSceneBoundary.getSceneY(),
+                null);
     }
 
     @Override

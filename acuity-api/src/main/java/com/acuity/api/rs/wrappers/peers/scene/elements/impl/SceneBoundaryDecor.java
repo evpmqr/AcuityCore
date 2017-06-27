@@ -84,8 +84,10 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
 
     @Override
     public Optional<Model> getModel() {
-        return Optional.ofNullable(rsSceneBoundaryDecor.getEntity().getCachedModel())
-                .map(model -> model.place(rsSceneBoundaryDecor.getSceneX() * 128, rsSceneBoundaryDecor.getSceneY() * 128))
-                .map(model -> model.rotate(rsSceneBoundaryDecor.getOrientation()));
+        return SceneElement.getModel(
+                Optional.ofNullable(rsSceneBoundaryDecor.getEntity()).orElseGet(() -> rsSceneBoundaryDecor.getRenderable2()),
+                rsSceneBoundaryDecor.getSceneX(),
+                rsSceneBoundaryDecor.getSceneY(),
+                rsSceneBoundaryDecor.getOrientation());
     }
 }

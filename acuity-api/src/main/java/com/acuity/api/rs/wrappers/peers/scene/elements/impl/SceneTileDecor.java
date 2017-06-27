@@ -30,8 +30,11 @@ public class SceneTileDecor implements SceneElement {
 
     @Override
     public Optional<Model> getModel() {
-        return Optional.ofNullable(rsSceneTileDecor.getEntity().getCachedModel())
-                .map(model -> model.place(rsSceneTileDecor.getSceneX() * 128, rsSceneTileDecor.getSceneY() * 128));
+        return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
+                rsSceneTileDecor.getEntity(),
+                rsSceneTileDecor.getSceneX(),
+                rsSceneTileDecor.getSceneY(),
+                null);
     }
 
     @Override
