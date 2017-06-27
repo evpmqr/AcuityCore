@@ -1,12 +1,14 @@
 package com.acuity.api.rs.wrappers.peers.interfaces;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.Random;
 import com.acuity.api.rs.wrappers.peers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -222,4 +224,15 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent;
     }
 
+    public Point getPoint() {
+        return new Point(getX() + Random.mid(0, getWidth()), getY() + Random.mid(0, getHeight()));
+    }
+
+    public int getX() {
+        return getOriginalX() + getRelativeX();
+    }
+
+    public int getY() {
+        return getOriginalY() + getRelativeY();
+    }
 }
