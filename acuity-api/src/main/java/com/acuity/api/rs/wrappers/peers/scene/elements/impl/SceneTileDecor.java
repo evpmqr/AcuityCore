@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.SceneLocation;
 import com.acuity.api.rs.wrappers.common.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
@@ -23,19 +24,34 @@ public class SceneTileDecor implements SceneElement {
         this.rsSceneTileDecor = Preconditions.checkNotNull(peer);
     }
 
-    @NotNull
-    public RSSceneTileDecor getRsSceneTileDecor() {
-        return rsSceneTileDecor;
-    }
-
-    @Override
-    public Optional<Model> getModel() {
-        return Optional.ofNullable(rsSceneTileDecor.getEntity().getCachedModel())
-                .map(model -> model.place(rsSceneTileDecor.getSceneX() * 128, rsSceneTileDecor.getSceneY() * 128));
+    public SceneLocation getSceneLocation(){
+        return new SceneLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getLevel());
     }
 
     @Override
     public WorldLocation getWorldLocation() {
-        return new SceneLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY()).getWorldLocation();
+        return getSceneLocation().getWorldLocation();
+    }
+
+    public int getID(){
+        return getUID().getEntityID();
+    }
+
+    public UIDs.UID getUID() {
+        return new UIDs.UID(rsSceneTileDecor.getUid());
+    }
+
+    @Override
+    public Optional<Model> getModel() {
+        return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
+                rsSceneTileDecor.getEntity(),
+                rsSceneTileDecor.getSceneX(),
+                rsSceneTileDecor.getSceneY(),
+                null);
+    }
+
+    @NotNull
+    public RSSceneTileDecor getRsSceneTileDecor() {
+        return rsSceneTileDecor;
     }
 }

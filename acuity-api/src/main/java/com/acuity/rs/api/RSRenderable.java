@@ -15,4 +15,6 @@ public interface RSRenderable extends RSCacheableNode {
     Renderable getWrapper();
 
     com.acuity.rs.api.RSModel invokeGetModel();
+
+    void setCachedModel(com.acuity.api.rs.wrappers.peers.rendering.Model cachedModel);
 }

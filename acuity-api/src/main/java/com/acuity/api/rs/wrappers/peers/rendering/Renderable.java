@@ -19,21 +19,22 @@ public class Renderable extends CacheableNode implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(Renderable.class);
 
-	protected RSRenderable rsRenderable;
+    protected RSRenderable rsRenderable;
 
-	@ClientInvoked
-	public Renderable(@NotNull final RSRenderable peer) {
+    @ClientInvoked
+    public Renderable(@NotNull final RSRenderable peer) {
         super(peer);
         this.rsRenderable = Preconditions.checkNotNull(peer);
-	}
+    }
 
-	public int getHeight() {
-		return rsRenderable.getHeight();
-	}
+    public int getHeight() {
+        return rsRenderable.getHeight();
+    }
 
-	public Optional<Model> getCachedModel(){
-		return Optional.ofNullable(rsRenderable.getCachedModel());
-	}
+    public Optional<Model> getCachedModel() {
+        return Optional.ofNullable(rsRenderable.getCachedModel());
+    }
+
     @NotNull
     public RSRenderable getRsRenderable() {
         return rsRenderable;
