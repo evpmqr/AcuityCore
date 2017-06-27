@@ -14,4 +14,8 @@ public class HealthBarComposite extends CacheableNode{
         super(rsHealthBarComposite);
         this.rsHealthBarComposite = rsHealthBarComposite;
     }
+
+    public int getScale(){
+        return rsHealthBarComposite.getHealthScale();
+    }
 }

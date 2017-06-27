@@ -28,4 +28,8 @@ public class NpcComposite extends CacheableNode {
     public String[] getActions(){
         return rsnpcComposite.getActions();
     }
+
+    public RSNPCComposite getRsNpcComposite() {
+        return rsnpcComposite;
+    }
 }

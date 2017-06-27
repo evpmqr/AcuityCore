@@ -14,4 +14,8 @@ public class ItemComposite extends CacheableNode{
         super(rsItemComposite);
         this.rsItemComposite = rsItemComposite;
     }
+
+    public RSItemComposite getRsItemComposite() {
+        return rsItemComposite;
+    }
 }

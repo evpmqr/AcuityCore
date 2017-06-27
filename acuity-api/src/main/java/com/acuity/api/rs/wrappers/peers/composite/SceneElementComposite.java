@@ -14,4 +14,8 @@ public class SceneElementComposite extends CacheableNode{
         super(rsSceneElementComposite);
         this.rsSceneElementComposite = rsSceneElementComposite;
     }
+
+    public RSSceneElementComposite getRsSceneElementComposite() {
+        return rsSceneElementComposite;
+    }
 }
