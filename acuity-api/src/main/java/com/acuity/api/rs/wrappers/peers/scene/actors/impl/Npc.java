@@ -2,6 +2,7 @@ package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
+import com.acuity.api.rs.wrappers.peers.composite.NpcComposite;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
 import com.acuity.rs.api.RSNpc;
 import com.acuity.rs.api.RSNPCComposite;
@@ -35,22 +36,22 @@ public class Npc extends Actor implements Identifiable {
 	@Nullable
 	@Override
 	public String getName() {
-	    return getDefinition().map(RSNPCComposite::getName).orElse(null);
+	    return getDefinition().map(NpcComposite::getName).orElse(null);
 	}
 
 	@Nullable
 	@Override
 	public Integer getId() {// TODO: 6/12/2017 Rename field ID
-        return getDefinition().map(RSNPCComposite::getId).orElse(null);
+        return getDefinition().map(NpcComposite::getID).orElse(null);
 	}
 
 	@Override
 	public List<String> getActions() {
-        return getDefinition().map(RSNPCComposite::getActions).map(Arrays::asList).orElse(Collections.emptyList());
+        return getDefinition().map(NpcComposite::getActions).map(Arrays::asList).orElse(Collections.emptyList());
 	}
 
-	public Optional<RSNPCComposite> getDefinition() {
-		return Optional.ofNullable(rsNpc.getDefinition()); // TODO: 6/8/2017 add transform
+	public Optional<NpcComposite> getDefinition() {
+		return Optional.ofNullable(rsNpc.getDefinition()).map(RSNPCComposite::getWrapper); // TODO: 6/8/2017 add transform
 	}
 
 	@NotNull

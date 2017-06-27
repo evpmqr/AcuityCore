@@ -34,7 +34,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
                 rsSceneElement.getEntity(),
                 rsSceneElement.getSceneX(),
                 rsSceneElement.getSceneY(),
-                rsSceneElement.getOrientation());
+                getOrientation());
     }
 
     public int getFlag() {
