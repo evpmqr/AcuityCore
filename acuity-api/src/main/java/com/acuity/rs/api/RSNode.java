@@ -13,6 +13,10 @@ public interface RSNode {
 
 	com.acuity.api.rs.wrappers.peers.structures.Node getWrapper();
 
+	boolean invokeLinked();
+
+	void invokeUnlink();
+
 	void setKey(long var0);
 
 	void setNext(com.acuity.rs.api.RSNode var0);

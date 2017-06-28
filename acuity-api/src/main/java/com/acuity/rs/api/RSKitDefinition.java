@@ -19,6 +19,10 @@ public interface RSKitDefinition extends RSCacheableNode {
 
 	short[] getRetextureToReplace();
 
+	com.acuity.rs.api.RSModelComposite invokeGetModelData(byte var0);
+
+	boolean invokeReady(int var0);
+
 	boolean isNonSelectable();
 
 	void setBodyPartId(int var0);

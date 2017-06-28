@@ -373,6 +373,76 @@ public interface RSClient extends RSGameEngine {
 
 	int[][] getXteaKeys();
 
+	void invokeAbsoluteToViewport(int var0, int var1, int var2);
+
+	void invokeAddChatMessage(int var0, java.lang.String var1, java.lang.String var2, java.lang.String var3);
+
+	void invokeAddMenuEntry(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
+
+	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
+
+	void invokeGameDraw(com.acuity.rs.api.RSInterfaceComponent[] var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
+
+	com.acuity.rs.api.RSAnimationSequence invokeGetAnimation(int var0);
+
+	com.acuity.rs.api.RSDefinitionProperty invokeGetDefinitionProperty(int var0);
+
+	com.acuity.rs.api.RSFrames invokeGetFrames(int var0);
+
+	com.acuity.rs.api.RSSpotAnimation invokeGetGraphicDefinition(int var0);
+
+	com.acuity.rs.api.RSHitsplatDefinition invokeGetHitsplatDefinition(int var0);
+
+	com.acuity.rs.api.RSItemComposite invokeGetItemDefinition(int var0);
+
+	com.acuity.rs.api.RSSpritePixels invokeGetItemSprite(int var0, int var1, int var2, int var3, int var4, boolean var5);
+
+	com.acuity.rs.api.RSKitDefinition invokeGetKitDefinition(int var0);
+
+	com.acuity.rs.api.RSNPCComposite invokeGetNpcDefinition(int var0);
+
+	com.acuity.rs.api.RSSceneElementComposite invokeGetObjectDefinition(int var0);
+
+	com.acuity.rs.api.RSFileOnDisk invokeGetPreferencesFile(java.lang.String var0, java.lang.String var1, boolean var2);
+
+	com.acuity.rs.api.RSIndexData invokeGetReferenceTable(int var0, boolean var1, boolean var2, boolean var3);
+
+	int invokeGetVarpbit(int var0);
+
+	void invokeGroundItemSpawned(int var0, int var1);
+
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
+
+	boolean invokeLoadWorlds();
+
+	void invokeOnSceneXTEAKeyChange(boolean var0);
+
+	void invokePacketHandler(int var0);
+
+	void invokeProcessAction(int var0, int var1, int var2, int var3, java.lang.String var4, java.lang.String var5, int var6, int var7);
+
+	void invokeRasterFlat(int var0, int var1, int var2, int var3, int var4, int var5, int var6);
+
+	void invokeRasterGouraud(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
+
+	void invokeRasterTexture(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12, int var13, int var14, int var15, int var16, int var17, int var18);
+
+	void invokeRasterTextureAffine(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12, int var13, int var14, int var15, int var16, int var17, int var18);
+
+	void invokeResetDrawingArea();
+
+	void invokeSendGameMessage(int var0, java.lang.String var1, java.lang.String var2);
+
+	void invokeSetGameState(int var0);
+
+	void invokeSetRasterBuffer(int[] var0, int var1, int var2);
+
+	void invokeSetRasterClipping(int var0, int var1, int var2, int var3);
+
+	void invokeSetRasterClippingEnabled(int var0, int var1, int var2);
+
+	void invokeSetWorld(com.acuity.rs.api.RSWorld var0);
+
 	boolean isCameraLocked();
 
 	boolean isDrawingAABB();

@@ -63,6 +63,10 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite getWrapper();
 
+	com.acuity.rs.api.RSSceneElementComposite invokeGetImpostor(byte var0);
+
+	void invokeLoadData(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
+
 	boolean isClipped();
 
 	boolean isClipped1();

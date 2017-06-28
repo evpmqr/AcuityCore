@@ -7,5 +7,7 @@ public interface RSTextureProviderImpl {
 
 	com.acuity.rs.api.RSIndexDataBase getTable();
 
+	int[] invokeLoad(int var0, int var1);
+
 	void setTable(com.acuity.rs.api.RSIndexDataBase var0);
 }

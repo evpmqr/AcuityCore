@@ -17,6 +17,10 @@ public interface RSISAACCipher {
 
 	int getValuesRemaining();
 
+	void invokeGenerateMoreResults(byte var0);
+
+	int invokeNextInt(byte var0);
+
 	void setAccumulator(int var0);
 
 	void setCounter(int var0);

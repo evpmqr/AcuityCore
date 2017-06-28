@@ -9,6 +9,12 @@ public interface RSPacketBuffer extends RSBuffer {
 
 	com.acuity.rs.api.RSISAACCipher getCipher();
 
+	int invokeReadOpcode(byte var0);
+
+	void invokeSeed(int[] var0, int var1);
+
+	void invokeWriteHeader(int var0, byte var1);
+
 	void setBitOffset(int var0);
 
 	void setCipher(com.acuity.rs.api.RSISAACCipher var0);

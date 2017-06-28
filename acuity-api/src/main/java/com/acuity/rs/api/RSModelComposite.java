@@ -53,6 +53,12 @@ public interface RSModelComposite extends RSRenderable {
 
 	int[] getVertexZ();
 
+	void invokeComputeAnimationTables();
+
+	void invokeComputeNormals();
+
+	com.acuity.rs.api.RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
+
 	void setFaceAlphas(byte[] var0);
 
 	void setFaceColor(short[] var0);
