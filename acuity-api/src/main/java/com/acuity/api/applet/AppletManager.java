@@ -56,8 +56,8 @@ public class AppletManager {
     }
 
     @Subscribe
-    public void gameStateChanged(GameStateChangeEvent changeEvent){
-        if (changeEvent.getPreviousGameState() == Game.CLIENT_LOADING && changeEvent.getGamestate() == Game.LOGIN_SCREEN){
+    public void gameStateChanged(GameStateChangeEvent changeEvent) {
+        if (changeEvent.getPreviousGameState() == Game.CLIENT_LOADING && changeEvent.getGamestate() == Game.LOGIN_SCREEN) {
             mouseMiddleMan.replace(getClient().getCanvas());
             keyboardMiddleMan.replace(getClient().getCanvas());
         }

@@ -20,11 +20,11 @@ public class ClientEnviroment<T extends GameEngine> {
         this.gameEngine.getApplet().setSize(new Dimension(800, 600));
     }
 
-    public T getGameEngine(){
+    public T getGameEngine() {
         return gameEngine;
     }
 
-    public void boot(ClientStub stub){
+    public void boot(ClientStub stub) {
         logger.info("Booting client stub.");
         gameEngine.getApplet().setStub(stub);
         gameEngine.getApplet().init();

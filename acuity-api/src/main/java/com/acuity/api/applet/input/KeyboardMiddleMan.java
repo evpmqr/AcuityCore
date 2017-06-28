@@ -15,9 +15,9 @@ public class KeyboardMiddleMan implements KeyListener {
     private Component component;
     private KeyListener output;
 
-    public void replace(Component component){
+    public void replace(Component component) {
         this.component = component;
-        if (component.getKeyListeners().length > 0){
+        if (component.getKeyListeners().length > 0) {
             output = component.getKeyListeners()[0];
             for (KeyListener keyListener : component.getKeyListeners()) {
                 component.removeKeyListener(keyListener);
@@ -65,7 +65,7 @@ public class KeyboardMiddleMan implements KeyListener {
     }
 
 
-    public void dispatch(KeyEvent event){
+    public void dispatch(KeyEvent event) {
         Preconditions.checkNotNull(event);
         component.dispatchEvent(event);
     }
