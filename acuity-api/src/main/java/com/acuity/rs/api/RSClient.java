@@ -47,8 +47,6 @@ public interface RSClient extends RSGameEngine {
 
 	byte getClanChatRank();
 
-	int getClanMateCount();
-
 	com.acuity.rs.api.RSClanMember[] getClanMates();
 
 	com.acuity.rs.api.RSNodeLinkedList getClassStructures();
@@ -62,6 +60,8 @@ public interface RSClient extends RSGameEngine {
 	int[] getColorPalette();
 
 	int[] getCOSINE();
+
+	java.lang.String getCurrentDomain();
 
 	int getCurrentWorld();
 
@@ -89,9 +89,9 @@ public interface RSClient extends RSGameEngine {
 
 	int getEngineCycle();
 
-	com.acuity.rs.api.RSFont getFont_p12full();
+	com.acuity.rs.api.RSFont getFontp12full();
 
-	int getFps();
+	int getFPS();
 
 	int getFriendCount();
 
@@ -100,6 +100,8 @@ public interface RSClient extends RSGameEngine {
 	int getGameState();
 
 	com.acuity.rs.api.RSGrandExchangeOffer[] getGrandExchangeOffers();
+
+	com.acuity.rs.api.RSNodeDeque getGraphicsObjectDeque();
 
 	com.acuity.rs.api.RSNodeDeque[][][] getGroundItemDeque();
 
@@ -157,17 +159,17 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getIntStack();
 
-	com.acuity.rs.api.RSHashTable getItemContainers();
-
 	com.acuity.rs.api.RSNodeTable getItemModelCache();
 
 	int getItemSelectionState();
 
 	com.acuity.rs.api.RSNodeTable getItemSpriteCache();
 
-	com.acuity.rs.api.RSKeyboardListener getKeyboard();
+	com.acuity.rs.api.RSHashTable getItemTables();
 
 	int getKeyboardIdleTicks();
+
+	com.acuity.rs.api.RSKeyboardListener getKeyboardListener();
 
 	long getLastClickTime();
 
@@ -176,8 +178,6 @@ public interface RSClient extends RSGameEngine {
 	java.lang.String getLatestSelectedItemName();
 
 	com.acuity.rs.api.RSPlayer getLocalPlayer();
-
-	int getLoginIndex();
 
 	int getLoginIndex2();
 
@@ -188,6 +188,8 @@ public interface RSClient extends RSGameEngine {
 	java.lang.String getLoginResponse3();
 
 	int getLoginState();
+
+	int getLoginState2();
 
 	int getLoginWindowX();
 
@@ -309,8 +311,6 @@ public interface RSClient extends RSGameEngine {
 
 	java.math.BigInteger getRsaKeyModulus();
 
-	com.acuity.rs.api.RSSocket getRssocket();
-
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -337,8 +337,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getSkillExperiences();
 
-	com.acuity.rs.api.RSSocket getSocket();
-
 	int getSocketState();
 
 	int getSpellTargetFlags();
@@ -362,8 +360,6 @@ public interface RSClient extends RSGameEngine {
 	int getViewportWidth();
 
 	int getWeight();
-
-	java.lang.String getWorldDomain();
 
 	com.acuity.rs.api.RSWorld[] getWorlds();
 
@@ -417,7 +413,7 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeOnSceneXTEAKeyChange(boolean var0);
 
-	void invokePacketHandler(int var0);
+	void invokePacketHandler(short var0);
 
 	void invokeProcessAction(int var0, int var1, int var2, int var3, java.lang.String var4, java.lang.String var5, int var6, int var7);
 
@@ -449,11 +445,9 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
-	boolean isLowMemory();
-
 	boolean isMembersWorld();
 
-	boolean isMembersWorld1();
+	boolean isMembersWorld2();
 
 	boolean isMenuOpen();
 
@@ -521,8 +515,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setClanChatRank(byte var0);
 
-	void setClanMateCount(int var0);
-
 	void setClanMates(com.acuity.rs.api.RSClanMember[] var0);
 
 	void setClassStructures(com.acuity.rs.api.RSNodeLinkedList var0);
@@ -536,6 +528,8 @@ public interface RSClient extends RSGameEngine {
 	void setColorPalette(int[] var0);
 
 	void setCOSINE(int[] var0);
+
+	void setCurrentDomain(java.lang.String var0);
 
 	void setCurrentWorld(int var0);
 
@@ -567,9 +561,9 @@ public interface RSClient extends RSGameEngine {
 
 	void setEngineCycle(int var0);
 
-	void setFont_p12full(com.acuity.rs.api.RSFont var0);
+	void setFontp12full(com.acuity.rs.api.RSFont var0);
 
-	void setFps(int var0);
+	void setFPS(int var0);
 
 	void setFriendCount(int var0);
 
@@ -578,6 +572,8 @@ public interface RSClient extends RSGameEngine {
 	void setGameState(int var0);
 
 	void setGrandExchangeOffers(com.acuity.rs.api.RSGrandExchangeOffer[] var0);
+
+	void setGraphicsObjectDeque(com.acuity.rs.api.RSNodeDeque var0);
 
 	void setGroundItemDeque(com.acuity.rs.api.RSNodeDeque[][][] var0);
 
@@ -635,9 +631,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setIntStack(int[] var0);
 
-	void setIsMembersWorld1(boolean var0);
-
-	void setItemContainers(com.acuity.rs.api.RSHashTable var0);
+	void setIsMembersWorld2(boolean var0);
 
 	void setItemModelCache(com.acuity.rs.api.RSNodeTable var0);
 
@@ -645,9 +639,11 @@ public interface RSClient extends RSGameEngine {
 
 	void setItemSpriteCache(com.acuity.rs.api.RSNodeTable var0);
 
-	void setKeyboard(com.acuity.rs.api.RSKeyboardListener var0);
+	void setItemTables(com.acuity.rs.api.RSHashTable var0);
 
 	void setKeyboardIdleTicks(int var0);
+
+	void setKeyboardListener(com.acuity.rs.api.RSKeyboardListener var0);
 
 	void setLastClickTime(long var0);
 
@@ -656,8 +652,6 @@ public interface RSClient extends RSGameEngine {
 	void setLatestSelectedItemName(java.lang.String var0);
 
 	void setLocalPlayer(com.acuity.rs.api.RSPlayer var0);
-
-	void setLoginIndex(int var0);
 
 	void setLoginIndex2(int var0);
 
@@ -669,9 +663,9 @@ public interface RSClient extends RSGameEngine {
 
 	void setLoginState(int var0);
 
-	void setLoginWindowX(int var0);
+	void setLoginState2(int var0);
 
-	void setLowMemory(boolean var0);
+	void setLoginWindowX(int var0);
 
 	void setMapOffset(int var0);
 
@@ -807,8 +801,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setRsaKeyModulus(java.math.BigInteger var0);
 
-	void setRssocket(com.acuity.rs.api.RSSocket var0);
-
 	void setRunEnergy(int var0);
 
 	void setSceneGraph(com.acuity.rs.api.RSScene var0);
@@ -834,8 +826,6 @@ public interface RSClient extends RSGameEngine {
 	void setSINE(int[] var0);
 
 	void setSkillExperiences(int[] var0);
-
-	void setSocket(com.acuity.rs.api.RSSocket var0);
 
 	void setSocketState(int var0);
 
@@ -866,8 +856,6 @@ public interface RSClient extends RSGameEngine {
 	void setViewportWidth(int var0);
 
 	void setWeight(int var0);
-
-	void setWorldDomain(java.lang.String var0);
 
 	void setWorlds(com.acuity.rs.api.RSWorld[] var0);
 

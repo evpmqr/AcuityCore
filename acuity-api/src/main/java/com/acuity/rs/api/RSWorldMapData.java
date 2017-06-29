@@ -9,7 +9,7 @@ public interface RSWorldMapData {
 
 	int getFileId();
 
-	void invokeLoadMapData(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
+	void invokeLoadMapData(com.acuity.rs.api.RSBuffer var0, int var1, short var2);
 
 	void setActivity(java.lang.String var0);
 

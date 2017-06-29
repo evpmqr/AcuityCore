@@ -5,7 +5,7 @@ package com.acuity.rs.api;
 
 public interface RSHitsplatDefinition extends RSCacheableNode {
 
-	int getAmount();
+	java.lang.String getAmount();
 
 	int getComparisonType();
 
@@ -39,11 +39,11 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	com.acuity.rs.api.RSSpritePixels invokeGetLeftSprite(int var0);
 
-	com.acuity.rs.api.RSSpritePixels invokeGetMiddleSprite(int var0);
+	com.acuity.rs.api.RSSpritePixels invokeGetMiddleSprite(byte var0);
 
-	com.acuity.rs.api.RSSpritePixels invokeGetRightSprite(int var0);
+	com.acuity.rs.api.RSSpritePixels invokeGetRightSprite(byte var0);
 
-	void setAmount(int var0);
+	void setAmount(java.lang.String var0);
 
 	void setComparisonType(int var0);
 

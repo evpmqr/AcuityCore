@@ -15,6 +15,8 @@ public interface RSGraphicsObject extends RSRenderable {
 
 	int getSceneY();
 
+	com.acuity.rs.api.RSAnimationSequence getSequence();
+
 	void setHeight(int var0);
 
 	void setId(int var0);
@@ -24,4 +26,6 @@ public interface RSGraphicsObject extends RSRenderable {
 	void setSceneX(int var0);
 
 	void setSceneY(int var0);
+
+	void setSequence(com.acuity.rs.api.RSAnimationSequence var0);
 }

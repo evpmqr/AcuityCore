@@ -5,11 +5,11 @@ package com.acuity.rs.api;
 
 public interface RSDevelopmentStage {
 
-	int getID();
+	int getId();
 
 	java.lang.String getStage();
 
-	void setID(int var0);
+	void setId(int var0);
 
 	void setStage(java.lang.String var0);
 }

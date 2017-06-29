@@ -53,8 +53,6 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setId(int var0);
 
-	void setIsVisible1(boolean var0);
-
 	void setMinimapVisible(boolean var0);
 
 	void setModels(int[] var0);
@@ -74,6 +72,8 @@ public interface RSNPCComposite extends RSCacheableNode {
 	void setVarpIndex(int var0);
 
 	void setVisible(boolean var0);
+
+	void setVisible1(boolean var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.NpcComposite var0);
 }

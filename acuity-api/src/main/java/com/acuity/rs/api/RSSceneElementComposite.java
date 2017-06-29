@@ -63,7 +63,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite getWrapper();
 
-	com.acuity.rs.api.RSSceneElementComposite invokeGetImpostor(byte var0);
+	com.acuity.rs.api.RSSceneElementComposite invokeGetImpostor(int var0);
 
 	void invokeLoadData(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
 
@@ -98,8 +98,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setContrast(int var0);
 
 	void setId(int var0);
-
-	void setIsWalkable(boolean var0);
 
 	void setMapIconId(int var0);
 
@@ -146,6 +144,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setVarpId(int var0);
 
 	void setVarpIndex(int var0);
+
+	void setWalkable(boolean var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite var0);
 }

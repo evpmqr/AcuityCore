@@ -15,9 +15,9 @@ public interface RSDynamicObject extends RSRenderable {
 
 	int getSceneY();
 
-	int getType();
+	com.acuity.rs.api.RSAnimationSequence getSequence();
 
-	int getY();
+	int getType();
 
 	void setId(int var0);
 
@@ -29,7 +29,7 @@ public interface RSDynamicObject extends RSRenderable {
 
 	void setSceneY(int var0);
 
-	void setType(int var0);
+	void setSequence(com.acuity.rs.api.RSAnimationSequence var0);
 
-	void setY(int var0);
+	void setType(int var0);
 }

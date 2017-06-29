@@ -5,33 +5,5 @@ package com.acuity.rs.api;
 
 public interface RSSocket extends java.lang.Runnable {
 
-	java.io.InputStream getInputStream();
-
-	byte[] getOutbuffer();
-
-	int getOutbufLen();
-
-	java.io.OutputStream getOutputStream();
-
-	java.net.Socket getSocket();
-
-	int invokeAvailable(byte var0);
-
-	void invokeFinalize0();
-
-	void invokeQueueForWrite(byte[] var0, int var1, int var2, int var3);
-
-	void invokeRead(byte[] var0, int var1, int var2, int var3);
-
-	int invokeReadByte(int var0);
-
-	void setInputStream(java.io.InputStream var0);
-
-	void setOutbuffer(byte[] var0);
-
-	void setOutbufLen(int var0);
-
-	void setOutputStream(java.io.OutputStream var0);
-
-	void setSocket(java.net.Socket var0);
+	void invokeRead(byte[] var0, int var1, int var2, byte var3);
 }

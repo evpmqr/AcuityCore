@@ -164,7 +164,7 @@ public class Client extends GameEngine {
     }
 
     public int getLoginIndex() {
-        return rsClient.getLoginIndex();
+        return rsClient.getLoginState();
     }
 
     public int getLoginState() {

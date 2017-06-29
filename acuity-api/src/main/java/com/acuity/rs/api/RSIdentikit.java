@@ -7,11 +7,11 @@ public interface RSIdentikit {
 
 	int getId();
 
-	int[] getTranslator_x();
+	int[] getTranslatorx();
 
-	int[] getTranslator_y();
+	int[] getTranslatory();
 
-	int[] getTranslator_z();
+	int[] getTranslatorz();
 
 	boolean isShowing();
 
@@ -19,9 +19,9 @@ public interface RSIdentikit {
 
 	void setShowing(boolean var0);
 
-	void setTranslator_x(int[] var0);
+	void setTranslatorx(int[] var0);
 
-	void setTranslator_y(int[] var0);
+	void setTranslatory(int[] var0);
 
-	void setTranslator_z(int[] var0);
+	void setTranslatorz(int[] var0);
 }

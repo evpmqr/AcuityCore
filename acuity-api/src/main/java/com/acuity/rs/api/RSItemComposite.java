@@ -85,13 +85,13 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getZoom2d();
 
-	boolean invokeGetEquipmentModel(boolean var0, int var1);
+	boolean invokeGetEquipmentModel(boolean var0, byte var1);
 
-	com.acuity.rs.api.RSModel invokeGetModel(int var0, byte var1);
+	com.acuity.rs.api.RSModel invokeGetModel(int var0, int var1);
 
-	com.acuity.rs.api.RSModelComposite invokeGetWornModelData(boolean var0, int var1);
+	com.acuity.rs.api.RSModelComposite invokeGetWornModelData(boolean var0, byte var1);
 
-	void invokeLoadBuffer(com.acuity.rs.api.RSBuffer var0, byte var1);
+	void invokeLoadBuffer(com.acuity.rs.api.RSBuffer var0, int var1);
 
 	void invokePopulateFromBuffer(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
 
