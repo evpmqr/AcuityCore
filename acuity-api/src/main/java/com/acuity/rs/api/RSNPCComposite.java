@@ -7,6 +7,8 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	java.lang.String[] getActions();
 
+	short[] getColorsOther();
+
 	int getCombatLevel();
 
 	int getId();
@@ -15,7 +17,13 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	java.lang.String getName();
 
+	short[] getNewColorsOther();
+
+	short[] getNewTexturesOther();
+
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
+
+	short[] getTexturesOther();
 
 	int[] getTransformIds();
 
@@ -35,6 +43,8 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setClickable(boolean var0);
 
+	void setColorsOther(short[] var0);
+
 	void setCombatLevel(int var0);
 
 	void setId(int var0);
@@ -45,7 +55,13 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setName(java.lang.String var0);
 
+	void setNewColorsOther(short[] var0);
+
+	void setNewTexturesOther(short[] var0);
+
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
+
+	void setTexturesOther(short[] var0);
 
 	void setTransformIds(int[] var0);
 

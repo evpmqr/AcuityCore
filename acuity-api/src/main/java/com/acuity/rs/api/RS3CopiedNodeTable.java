@@ -15,7 +15,7 @@ public interface RS3CopiedNodeTable extends java.lang.Iterable {
 
 	com.acuity.rs.api.RSNode getTail();
 
-	com.acuity.rs.api.RSNode invokeLookup(long var0);
+	com.acuity.rs.api.RSNode invokeLookupOther(long var0);
 
 	void setBuckets(com.acuity.rs.api.RSNode[] var0);
 

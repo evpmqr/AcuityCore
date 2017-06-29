@@ -19,8 +19,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getBoostedSkillLevels();
 
-	com.acuity.rs.api.RSNodeLinkedList getBoundingBoxes();
-
 	int getCameraPitch();
 
 	int getCameraX();
@@ -47,17 +45,7 @@ public interface RSClient extends RSGameEngine {
 
 	byte getClanChatRank();
 
-	int getClanMateCountOther();
-
 	com.acuity.rs.api.RSClanMember[] getClanMates();
-
-	com.acuity.rs.api.RSNodeLinkedList getClassStructures();
-
-	int getClickX();
-
-	int getClickY();
-
-	com.acuity.rs.api.RSCollisionData[] getCollisionMaps();
 
 	int[] getColorPalette();
 
@@ -78,8 +66,6 @@ public interface RSClient extends RSGameEngine {
 	int getDrawingAreaBottom();
 
 	int getDrawingAreaHeight();
-
-	int getDrawingAreaLeft();
 
 	int[] getDrawingAreaPixels();
 
@@ -161,6 +147,8 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getIntStack();
 
+	int getIntStackSizeOther();
+
 	com.acuity.rs.api.RSNodeTable getItemModelCache();
 
 	int getItemSelectionState();
@@ -172,8 +160,6 @@ public interface RSClient extends RSGameEngine {
 	int getKeyboardIdleTicks();
 
 	java.lang.Object getKeyboardListener();
-
-	long getLastClickTime();
 
 	int getLatestSelectedItemIndex();
 
@@ -231,12 +217,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getMouseIdleTime();
 
-	com.acuity.rs.api.RSMouseRecorder getMouseRecorder();
-
-	int getMouseX();
-
-	int getMouseY();
-
 	com.acuity.rs.api.RSActionPrioritySetting getNpcActionPriority();
 
 	int[] getNpcIndices();
@@ -244,10 +224,6 @@ public interface RSClient extends RSGameEngine {
 	com.acuity.rs.api.RSNodeTable getNpcModelCache();
 
 	com.acuity.rs.api.RSNpc[] getNpcs();
-
-	int getOnCursorCount();
-
-	int[] getOnSursorUids();
 
 	byte[][][] getOverlayIds();
 
@@ -259,15 +235,9 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSPacketBuffer getPacket2();
 
-	int getPacketId();
-
 	int getPacketLength();
 
 	java.lang.String getPassword();
-
-	int getPendingClickX();
-
-	int getPendingClickY();
 
 	int getPendingMouseX();
 
@@ -286,8 +256,6 @@ public interface RSClient extends RSGameEngine {
 	int[] getPlayerMenuTypes();
 
 	com.acuity.rs.api.RSPlayer[] getPlayers();
-
-	com.acuity.rs.api.RSPreferences getPreferences();
 
 	com.acuity.rs.api.RSNodeDeque getProjectilesDeque();
 
@@ -313,11 +281,13 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSConnection getRssocket1();
 
+	com.acuity.rs.api.RSConnection getRssocket2();
+
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
 
-	byte[][][] getSceneRenderRules();
+	com.acuity.rs.api.RSCollisionData[] getSceneRenderRules();
 
 	int[] getScriptLocalInts();
 
@@ -349,6 +319,8 @@ public interface RSClient extends RSGameEngine {
 
 	int[][][] getTileHeights();
 
+	byte[][][] getTileSettings();
+
 	byte[][][] getUnderlayIds();
 
 	java.lang.String getUsername();
@@ -371,25 +343,15 @@ public interface RSClient extends RSGameEngine {
 
 	int[][] getXteaKeys();
 
-	void invokeAbsoluteToViewport(int var0, int var1, int var2);
-
 	void invokeAddChatMessage(int var0, java.lang.String var1, java.lang.String var2, java.lang.String var3);
 
 	void invokeAddMenuEntry(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
-
-	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
 	void invokeGameDraw(com.acuity.rs.api.RSInterfaceComponent[] var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
 
 	com.acuity.rs.api.RSAnimationSequence invokeGetAnimation(int var0);
 
-	com.acuity.rs.api.RSDefinitionProperty invokeGetDefinitionProperty(int var0);
-
 	com.acuity.rs.api.RSFrames invokeGetFrames(int var0);
-
-	com.acuity.rs.api.RSSpotAnimation invokeGetGraphicDefinition(int var0);
-
-	com.acuity.rs.api.RSHitsplatDefinition invokeGetHitsplatDefinition(int var0);
 
 	com.acuity.rs.api.RSItemComposite invokeGetItemDefinition(int var0);
 
@@ -403,13 +365,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSFileOnDisk invokeGetPreferencesFile(java.lang.String var0, java.lang.String var1, boolean var2);
 
-	com.acuity.rs.api.RSIndexData invokeGetReferenceTable(int var0, boolean var1, boolean var2, boolean var3);
-
-	int invokeGetVarpbit(int var0);
-
 	void invokeGroundItemSpawned(int var0, int var1);
-
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
 
 	boolean invokeLoadWorlds();
 
@@ -427,8 +383,6 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeRasterTextureAffine(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12, int var13, int var14, int var15, int var16, int var17, int var18);
 
-	void invokeResetDrawingArea();
-
 	void invokeSendGameMessage(int var0, java.lang.String var1, java.lang.String var2);
 
 	void invokeSetGameState(int var0);
@@ -439,17 +393,15 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeSetRasterClippingEnabled(int var0, int var1, int var2);
 
-	void invokeSetWorld(com.acuity.rs.api.RSWorld var0);
-
 	boolean isCameraLocked();
-
-	boolean isDrawingAABB();
 
 	boolean isDynamicRegion();
 
 	boolean isLowMemoryOther();
 
 	boolean isMembersWorld();
+
+	boolean isMembersWorld1();
 
 	boolean isMenuOpen();
 
@@ -485,8 +437,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setBoostedSkillLevels(int[] var0);
 
-	void setBoundingBoxes(com.acuity.rs.api.RSNodeLinkedList var0);
-
 	void setCameraLocked(boolean var0);
 
 	void setCameraPitch(int var0);
@@ -515,17 +465,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setClanChatRank(byte var0);
 
-	void setClanMateCountOther(int var0);
-
 	void setClanMates(com.acuity.rs.api.RSClanMember[] var0);
-
-	void setClassStructures(com.acuity.rs.api.RSNodeLinkedList var0);
-
-	void setClickX(int var0);
-
-	void setClickY(int var0);
-
-	void setCollisionMaps(com.acuity.rs.api.RSCollisionData[] var0);
 
 	void setColorPalette(int[] var0);
 
@@ -543,13 +483,9 @@ public interface RSClient extends RSGameEngine {
 
 	void setDestinationY(int var0);
 
-	void setDrawingAABB(boolean var0);
-
 	void setDrawingAreaBottom(int var0);
 
 	void setDrawingAreaHeight(int var0);
-
-	void setDrawingAreaLeft(int var0);
 
 	void setDrawingAreaPixels(int[] var0);
 
@@ -633,6 +569,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setIntStack(int[] var0);
 
+	void setIntStackSizeOther(int var0);
+
 	void setItemModelCache(com.acuity.rs.api.RSNodeTable var0);
 
 	void setItemSelectionState(int var0);
@@ -644,8 +582,6 @@ public interface RSClient extends RSGameEngine {
 	void setKeyboardIdleTicks(int var0);
 
 	void setKeyboardListener(java.lang.Object var0);
-
-	void setLastClickTime(long var0);
 
 	void setLatestSelectedItemIndex(int var0);
 
@@ -676,6 +612,8 @@ public interface RSClient extends RSGameEngine {
 	void setMapScale(int var0);
 
 	void setMembersWorld(boolean var0);
+
+	void setMembersWorld1(boolean var0);
 
 	void setMenuActions(java.lang.String[] var0);
 
@@ -709,12 +647,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setMouseIdleTime(int var0);
 
-	void setMouseRecorder(com.acuity.rs.api.RSMouseRecorder var0);
-
-	void setMouseX(int var0);
-
-	void setMouseY(int var0);
-
 	void setNpcActionPriority(com.acuity.rs.api.RSActionPrioritySetting var0);
 
 	void setNpcIndices(int[] var0);
@@ -722,10 +654,6 @@ public interface RSClient extends RSGameEngine {
 	void setNpcModelCache(com.acuity.rs.api.RSNodeTable var0);
 
 	void setNpcs(com.acuity.rs.api.RSNpc[] var0);
-
-	void setOnCursorCount(int var0);
-
-	void setOnSursorUids(int[] var0);
 
 	void setOverlayIds(byte[][][] var0);
 
@@ -737,15 +665,9 @@ public interface RSClient extends RSGameEngine {
 
 	void setPacket2(com.acuity.rs.api.RSPacketBuffer var0);
 
-	void setPacketId(int var0);
-
 	void setPacketLength(int var0);
 
 	void setPassword(java.lang.String var0);
-
-	void setPendingClickX(int var0);
-
-	void setPendingClickY(int var0);
 
 	void setPendingMouseX(int var0);
 
@@ -766,8 +688,6 @@ public interface RSClient extends RSGameEngine {
 	void setPlayerOptionsPriorities(boolean[] var0);
 
 	void setPlayers(com.acuity.rs.api.RSPlayer[] var0);
-
-	void setPreferences(com.acuity.rs.api.RSPreferences var0);
 
 	void setProjectilesDeque(com.acuity.rs.api.RSNodeDeque var0);
 
@@ -801,11 +721,13 @@ public interface RSClient extends RSGameEngine {
 
 	void setRssocket1(com.acuity.rs.api.RSConnection var0);
 
+	void setRssocket2(com.acuity.rs.api.RSConnection var0);
+
 	void setRunEnergy(int var0);
 
 	void setSceneGraph(com.acuity.rs.api.RSScene var0);
 
-	void setSceneRenderRules(byte[][][] var0);
+	void setSceneRenderRules(com.acuity.rs.api.RSCollisionData[] var0);
 
 	void setScriptLocalInts(int[] var0);
 
@@ -838,6 +760,8 @@ public interface RSClient extends RSGameEngine {
 	void setTempVarps(int[] var0);
 
 	void setTileHeights(int[][][] var0);
+
+	void setTileSettings(byte[][][] var0);
 
 	void setUnderlayIds(byte[][][] var0);
 

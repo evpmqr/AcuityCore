@@ -88,7 +88,7 @@ public class Client extends GameEngine {
     }
 
     public byte[][][] getSceneRenderRules() {// TODO: 6/12/2017 Can this be null?
-        return rsClient.getSceneRenderRules();
+        return rsClient.getTileSettings();
     }
 
     public int getCameraX() {
@@ -140,15 +140,15 @@ public class Client extends GameEngine {
     }
 
     public void setUsername(String username){
-        //rsClient.setUsername(username);
+        rsClient.setUsername(username);
     }
 
     public void setPassword(String password){
-       // rsClient.setPassword(password);
+        rsClient.setPassword(password);
     }
 
     public void setLoginIndex(int index){
-        //rsClient.setLoginIndex(index);
+        rsClient.setLoginState(index);
     }
 
     public String getLoginResponse1() {

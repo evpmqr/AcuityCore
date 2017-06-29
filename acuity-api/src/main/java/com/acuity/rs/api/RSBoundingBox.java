@@ -5,5 +5,5 @@ package com.acuity.rs.api;
 
 public interface RSBoundingBox extends RSNode {
 
-	void invokeDraw(int var0);
+	void invokeDrawOther(int var0);
 }

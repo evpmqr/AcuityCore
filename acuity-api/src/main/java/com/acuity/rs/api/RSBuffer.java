@@ -51,6 +51,8 @@ public interface RSBuffer extends RSNode {
 
 	int invokeReadVarInt(int var0);
 
+	void invokeWriteLEShortOther(int var0, int var1);
+
 	void setOffset(int var0);
 
 	void setPayload(byte[] var0);
