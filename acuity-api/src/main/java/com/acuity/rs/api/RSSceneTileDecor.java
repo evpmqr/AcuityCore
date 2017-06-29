@@ -7,7 +7,7 @@ public interface RSSceneTileDecor {
 
 	com.acuity.rs.api.RSRenderable getEntity();
 
-	int getLevel();
+	int getPlane();
 
 	int getRenderInfoBitPacked();
 
@@ -21,7 +21,7 @@ public interface RSSceneTileDecor {
 
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
-	void setLevel(int var0);
+	void setPlane(int var0);
 
 	void setRenderInfoBitPacked(int var0);
 

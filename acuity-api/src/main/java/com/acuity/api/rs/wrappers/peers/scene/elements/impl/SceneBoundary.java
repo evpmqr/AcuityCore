@@ -48,7 +48,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
     }
 
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getLevel());
+        return new SceneLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane());
     }
 
     @Override

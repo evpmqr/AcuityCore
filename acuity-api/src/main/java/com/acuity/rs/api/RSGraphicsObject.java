@@ -7,9 +7,9 @@ public interface RSGraphicsObject extends RSRenderable {
 
 	int getHeight();
 
-	int getId();
+	int getID();
 
-	int getLevel();
+	int getPlane();
 
 	int getSceneX();
 
@@ -19,9 +19,9 @@ public interface RSGraphicsObject extends RSRenderable {
 
 	void setHeight(int var0);
 
-	void setId(int var0);
+	void setID(int var0);
 
-	void setLevel(int var0);
+	void setPlane(int var0);
 
 	void setSceneX(int var0);
 

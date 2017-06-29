@@ -25,7 +25,7 @@ public class SceneTileDecor implements SceneElement {
     }
 
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getLevel());
+        return new SceneLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getPlane());
     }
 
     @Override

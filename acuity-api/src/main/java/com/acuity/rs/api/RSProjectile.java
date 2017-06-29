@@ -17,7 +17,7 @@ public interface RSProjectile extends RSRenderable {
 
 	double getHeightOffset();
 
-	int getId();
+	int getID();
 
 	int getInteracting();
 
@@ -61,7 +61,7 @@ public interface RSProjectile extends RSRenderable {
 
 	void setHeightOffset(double var0);
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setInteracting(int var0);
 

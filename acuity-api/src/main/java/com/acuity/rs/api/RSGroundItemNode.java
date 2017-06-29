@@ -5,11 +5,11 @@ package com.acuity.rs.api;
 
 public interface RSGroundItemNode extends RSRenderable {
 
-	int getId();
+	int getID();
 
 	int getStackSize();
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setStackSize(int var0);
 }

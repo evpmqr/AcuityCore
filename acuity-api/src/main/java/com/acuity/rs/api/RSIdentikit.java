@@ -5,7 +5,7 @@ package com.acuity.rs.api;
 
 public interface RSIdentikit {
 
-	int getId();
+	int getID();
 
 	int[] getTranslatorx();
 
@@ -15,7 +15,7 @@ public interface RSIdentikit {
 
 	boolean isShowing();
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setShowing(boolean var0);
 

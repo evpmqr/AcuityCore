@@ -31,7 +31,7 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	java.lang.String[] getGroundActions();
 
-	int getId();
+	int getID();
 
 	java.lang.String[] getInventoryActions();
 
@@ -125,7 +125,7 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setGroundActions(java.lang.String[] var0);
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setInventoryActions(java.lang.String[] var0);
 

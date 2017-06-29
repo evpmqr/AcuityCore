@@ -9,7 +9,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	int getCombatLevel();
 
-	int getId();
+	int getID();
 
 	int[] getModels();
 
@@ -37,7 +37,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setCombatLevel(int var0);
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setMinimapVisible(boolean var0);
 

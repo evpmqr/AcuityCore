@@ -7,7 +7,7 @@ public interface RSSceneBoundary {
 
 	com.acuity.rs.api.RSRenderable getEntity();
 
-	int getLevel();
+	int getPlane();
 
 	com.acuity.rs.api.RSRenderable getRenderable2();
 
@@ -21,7 +21,7 @@ public interface RSSceneBoundary {
 
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
-	void setLevel(int var0);
+	void setPlane(int var0);
 
 	void setRenderable2(com.acuity.rs.api.RSRenderable var0);
 

@@ -5,7 +5,7 @@ package com.acuity.rs.api;
 
 public interface RSActionPrioritySetting {
 
-	int getId();
+	int getID();
 
-	void setId(int var0);
+	void setID(int var0);
 }

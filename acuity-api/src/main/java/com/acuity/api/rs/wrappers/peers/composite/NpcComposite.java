@@ -22,7 +22,7 @@ public class NpcComposite extends CacheableNode {
     }
 
     public int getID(){
-        return rsnpcComposite.getId();
+        return rsnpcComposite.getID();
     }
 
     public String[] getActions(){

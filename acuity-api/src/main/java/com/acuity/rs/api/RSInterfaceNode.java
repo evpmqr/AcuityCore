@@ -5,11 +5,11 @@ package com.acuity.rs.api;
 
 public interface RSInterfaceNode extends RSNode {
 
-	int getId();
+	int getID();
 
 	int getState();
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setState(int var0);
 }

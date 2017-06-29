@@ -5,11 +5,11 @@ package com.acuity.rs.api;
 
 public interface RSDynamicObject extends RSRenderable {
 
-	int getId();
-
-	int getLevel();
+	int getID();
 
 	int getOrientation();
+
+	int getPlane();
 
 	int getSceneX();
 
@@ -19,11 +19,11 @@ public interface RSDynamicObject extends RSRenderable {
 
 	int getType();
 
-	void setId(int var0);
-
-	void setLevel(int var0);
+	void setID(int var0);
 
 	void setOrientation(int var0);
+
+	void setPlane(int var0);
 
 	void setSceneX(int var0);
 
