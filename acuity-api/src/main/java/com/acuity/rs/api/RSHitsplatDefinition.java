@@ -37,9 +37,9 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	com.acuity.rs.api.RSSpritePixels invokeGetIcon(int var0);
 
-	com.acuity.rs.api.RSSpritePixels invokeGetLeftSprite(int var0);
+	com.acuity.rs.api.RSSpritePixels invokeGetLeftSprite(short var0);
 
-	com.acuity.rs.api.RSSpritePixels invokeGetMiddleSprite(byte var0);
+	com.acuity.rs.api.RSSpritePixels invokeGetMiddleSprite(int var0);
 
 	com.acuity.rs.api.RSSpritePixels invokeGetRightSprite(byte var0);
 

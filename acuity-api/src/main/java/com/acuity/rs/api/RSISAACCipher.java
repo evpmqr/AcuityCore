@@ -5,12 +5,6 @@ package com.acuity.rs.api;
 
 public interface RSISAACCipher {
 
-	int getAccumulator();
-
-	int getCounter();
-
-	int getLast();
-
 	int[] getMm();
 
 	int[] getRandResult();
@@ -20,12 +14,6 @@ public interface RSISAACCipher {
 	void invokeGenerateMoreResults(int var0);
 
 	int invokeNextInt(int var0);
-
-	void setAccumulator(int var0);
-
-	void setCounter(int var0);
-
-	void setLast(int var0);
 
 	void setMm(int[] var0);
 

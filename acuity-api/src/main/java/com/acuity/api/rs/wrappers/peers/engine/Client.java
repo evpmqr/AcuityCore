@@ -136,7 +136,7 @@ public class Client extends GameEngine {
     }
 
     public boolean isResized() {
-        return rsClient.isResized();
+        return rsClient.isResizableMode();
     }
 
     public void setUsername(String username){

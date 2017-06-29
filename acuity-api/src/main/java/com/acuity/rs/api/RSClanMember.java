@@ -9,15 +9,11 @@ public interface RSClanMember extends RSNode {
 
 	byte getRank();
 
-	java.lang.String getUsername();
-
 	int getWorld();
 
 	void setName(java.lang.String var0);
 
 	void setRank(byte var0);
-
-	void setUsername(java.lang.String var0);
 
 	void setWorld(int var0);
 }

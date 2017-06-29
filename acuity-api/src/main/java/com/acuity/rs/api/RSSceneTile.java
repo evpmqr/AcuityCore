@@ -23,8 +23,6 @@ public interface RSSceneTile extends RSNode {
 
 	int getSceneY();
 
-	com.acuity.rs.api.RSSceneTile getTile();
-
 	com.acuity.rs.api.RSSceneTileDecor getTileDecor();
 
 	com.acuity.api.rs.wrappers.peers.scene.SceneTile getWrapper();
@@ -46,8 +44,6 @@ public interface RSSceneTile extends RSNode {
 	void setSceneX(int var0);
 
 	void setSceneY(int var0);
-
-	void setTile(com.acuity.rs.api.RSSceneTile var0);
 
 	void setTileDecor(com.acuity.rs.api.RSSceneTileDecor var0);
 

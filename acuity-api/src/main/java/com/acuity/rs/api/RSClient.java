@@ -47,6 +47,8 @@ public interface RSClient extends RSGameEngine {
 
 	byte getClanChatRank();
 
+	int getClanMateCountOther();
+
 	com.acuity.rs.api.RSClanMember[] getClanMates();
 
 	com.acuity.rs.api.RSNodeLinkedList getClassStructures();
@@ -169,7 +171,7 @@ public interface RSClient extends RSGameEngine {
 
 	int getKeyboardIdleTicks();
 
-	com.acuity.rs.api.RSKeyboardListener getKeyboardListener();
+	java.lang.Object getKeyboardListener();
 
 	long getLastClickTime();
 
@@ -192,8 +194,6 @@ public interface RSClient extends RSGameEngine {
 	int getLoginState2();
 
 	int getLoginWindowX();
-
-	int getMapOffset();
 
 	int[] getMapRegions();
 
@@ -227,7 +227,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSModIcon[] getModIcons();
 
-	com.acuity.rs.api.RSMouseListener getMouse();
+	java.lang.Object getMouse();
 
 	int getMouseIdleTime();
 
@@ -311,6 +311,8 @@ public interface RSClient extends RSGameEngine {
 
 	java.math.BigInteger getRsaKeyModulus();
 
+	com.acuity.rs.api.RSConnection getRssocket1();
+
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -363,7 +365,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSWorld[] getWorlds();
 
-	com.acuity.rs.api.RSURLDataLoader getWorldServersDownload();
+	java.lang.Object getWorldServersDownload();
 
 	com.acuity.api.rs.wrappers.peers.engine.Client getWrapper();
 
@@ -413,7 +415,7 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeOnSceneXTEAKeyChange(boolean var0);
 
-	void invokePacketHandler(short var0);
+	void invokePacketHandler(int var0);
 
 	void invokeProcessAction(int var0, int var1, int var2, int var3, java.lang.String var4, java.lang.String var5, int var6, int var7);
 
@@ -445,9 +447,9 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
-	boolean isMembersWorld();
+	boolean isLowMemoryOther();
 
-	boolean isMembersWorld2();
+	boolean isMembersWorld();
 
 	boolean isMenuOpen();
 
@@ -460,8 +462,6 @@ public interface RSClient extends RSGameEngine {
 	boolean[][] isRenderArea();
 
 	boolean isResizableMode();
-
-	boolean isResized();
 
 	boolean isSpellSelected();
 
@@ -514,6 +514,8 @@ public interface RSClient extends RSGameEngine {
 	void setClanChatOwner(java.lang.String var0);
 
 	void setClanChatRank(byte var0);
+
+	void setClanMateCountOther(int var0);
 
 	void setClanMates(com.acuity.rs.api.RSClanMember[] var0);
 
@@ -631,8 +633,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setIntStack(int[] var0);
 
-	void setIsMembersWorld2(boolean var0);
-
 	void setItemModelCache(com.acuity.rs.api.RSNodeTable var0);
 
 	void setItemSelectionState(int var0);
@@ -643,7 +643,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setKeyboardIdleTicks(int var0);
 
-	void setKeyboardListener(com.acuity.rs.api.RSKeyboardListener var0);
+	void setKeyboardListener(java.lang.Object var0);
 
 	void setLastClickTime(long var0);
 
@@ -667,7 +667,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setLoginWindowX(int var0);
 
-	void setMapOffset(int var0);
+	void setLowMemoryOther(boolean var0);
 
 	void setMapRegions(int[] var0);
 
@@ -705,7 +705,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setModIcons(com.acuity.rs.api.RSModIcon[] var0);
 
-	void setMouse(com.acuity.rs.api.RSMouseListener var0);
+	void setMouse(java.lang.Object var0);
 
 	void setMouseIdleTime(int var0);
 
@@ -791,8 +791,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setResizableMode(boolean var0);
 
-	void setResized(boolean var0);
-
 	void setRevision(int var0);
 
 	void setRights(int var0);
@@ -800,6 +798,8 @@ public interface RSClient extends RSGameEngine {
 	void setRsaKeyExponent(java.math.BigInteger var0);
 
 	void setRsaKeyModulus(java.math.BigInteger var0);
+
+	void setRssocket1(com.acuity.rs.api.RSConnection var0);
 
 	void setRunEnergy(int var0);
 
@@ -861,7 +861,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setWorldSelectShown(boolean var0);
 
-	void setWorldServersDownload(com.acuity.rs.api.RSURLDataLoader var0);
+	void setWorldServersDownload(java.lang.Object var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.engine.Client var0);
 

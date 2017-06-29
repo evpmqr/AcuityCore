@@ -9,15 +9,15 @@ public interface RSBuffer extends RSNode {
 
 	byte[] getPayload();
 
-	void invokeDecryptXtea(int[] var0, byte var1);
+	void invokeDecryptXtea(int[] var0, int var1);
 
 	void invokeEncryptXtea(int[] var0, int var1, int var2, int var3);
 
-	void invokeEncryptXtea2(int[] var0, int var1);
+	void invokeEncryptXtea2(int[] var0, byte var1);
 
-	void invokePut24bitInt(int var0, int var1);
+	void invokePut24bitInt(int var0, byte var1);
 
-	void invokePutByte(int var0, byte var1);
+	void invokePutByte(int var0, int var1);
 
 	void invokePutBytes(byte[] var0, int var1, int var2, int var3);
 
@@ -27,11 +27,11 @@ public interface RSBuffer extends RSNode {
 
 	void invokePutShort(int var0, int var1);
 
-	void invokePutVarInt(int var0, int var1);
+	void invokePutVarInt(int var0, byte var1);
 
-	int invokeRead24BitInt(short var0);
+	int invokeRead24BitInt(int var0);
 
-	byte invokeReadByte(int var0);
+	byte invokeReadByte(byte var0);
 
 	void invokeReadBytes(byte[] var0, int var1, int var2, int var3);
 
@@ -41,13 +41,13 @@ public interface RSBuffer extends RSNode {
 
 	int invokeReadShort(int var0);
 
-	int invokeReadShortSmart(byte var0);
+	int invokeReadShortSmart(int var0);
 
-	java.lang.String invokeReadString(byte var0);
+	java.lang.String invokeReadString(int var0);
 
-	int invokeReadUnsignedByte(int var0);
+	int invokeReadUnsignedByte(byte var0);
 
-	int invokeReadUnsignedShort(short var0);
+	int invokeReadUnsignedShort(int var0);
 
 	int invokeReadVarInt(int var0);
 

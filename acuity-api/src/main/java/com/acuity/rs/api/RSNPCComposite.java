@@ -9,19 +9,11 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	int getCombatLevel();
 
-	int getHeadIcon();
-
-	int[] getHeadIcons();
-
 	int getId();
 
 	int[] getModels();
 
-	short[] getModifiedColors();
-
 	java.lang.String getName();
-
-	short[] getOriginalColors();
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
@@ -39,17 +31,11 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	boolean isVisible();
 
-	boolean isVisible1();
-
 	void setActions(java.lang.String[] var0);
 
 	void setClickable(boolean var0);
 
 	void setCombatLevel(int var0);
-
-	void setHeadIcon(int var0);
-
-	void setHeadIcons(int[] var0);
 
 	void setId(int var0);
 
@@ -57,11 +43,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setModels(int[] var0);
 
-	void setModifiedColors(short[] var0);
-
 	void setName(java.lang.String var0);
-
-	void setOriginalColors(short[] var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
@@ -72,8 +54,6 @@ public interface RSNPCComposite extends RSCacheableNode {
 	void setVarpIndex(int var0);
 
 	void setVisible(boolean var0);
-
-	void setVisible1(boolean var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.NpcComposite var0);
 }

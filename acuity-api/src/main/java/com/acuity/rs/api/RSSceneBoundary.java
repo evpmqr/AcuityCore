@@ -5,15 +5,9 @@ package com.acuity.rs.api;
 
 public interface RSSceneBoundary {
 
-	int getBackupOrientation();
-
 	com.acuity.rs.api.RSRenderable getEntity();
 
-	int getFlags();
-
 	int getLevel();
-
-	int getOrientation();
 
 	com.acuity.rs.api.RSRenderable getRenderable2();
 
@@ -25,15 +19,9 @@ public interface RSSceneBoundary {
 
 	com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneBoundary getWrapper();
 
-	void setBackupOrientation(int var0);
-
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
-	void setFlags(int var0);
-
 	void setLevel(int var0);
-
-	void setOrientation(int var0);
 
 	void setRenderable2(com.acuity.rs.api.RSRenderable var0);
 

@@ -125,8 +125,6 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getUid();
 
-	int getVisibleTime();
-
 	int getWidth();
 
 	com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent getWrapper();
@@ -274,8 +272,6 @@ public interface RSInterfaceComponent extends RSNode {
 	void setType(int var0);
 
 	void setUid(int var0);
-
-	void setVisibleTime(int var0);
 
 	void setWidth(int var0);
 

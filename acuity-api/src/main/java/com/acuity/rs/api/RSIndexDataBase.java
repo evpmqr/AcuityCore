@@ -27,9 +27,9 @@ public interface RSIndexDataBase {
 
 	int getValidArchivesCount();
 
-	byte[] invokeUnpack(int var0, int var1, int var2);
+	byte[] invokeUnpack(int var0, int var1, byte var2);
 
-	byte[] invokeUnpack(int var0, int var1, int[] var2, byte var3);
+	byte[] invokeUnpack(int var0, int var1, int[] var2, int var3);
 
 	void setArchiveCrcs(int[] var0);
 

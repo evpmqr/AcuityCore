@@ -7,7 +7,7 @@ public interface RSMainBufferProvider extends RSBufferProvider {
 
 	java.awt.Image getImage();
 
-	void invokeDraw(java.awt.Graphics var0, int var1, int var2, short var3);
+	void invokeDraw(java.awt.Graphics var0, int var1, int var2, int var3);
 
 	void invokeDrawSub(java.awt.Graphics var0, int var1, int var2, int var3, int var4, int var5);
 

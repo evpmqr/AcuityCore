@@ -7,8 +7,6 @@ public interface RSScene {
 
 	com.acuity.rs.api.RSSceneElement[] getElements();
 
-	com.acuity.rs.api.RSSceneElement[] getInteractableObjects();
-
 	com.acuity.rs.api.RSSceneTile[][][] getTiles();
 
 	com.acuity.api.rs.wrappers.peers.scene.Scene getWrapper();
@@ -16,8 +14,6 @@ public interface RSScene {
 	void invokeGroundObjectSpawned(int var0, int var1, int var2, int var3, com.acuity.rs.api.RSRenderable var4, int var5, int var6);
 
 	void setElements(com.acuity.rs.api.RSSceneElement[] var0);
-
-	void setInteractableObjects(com.acuity.rs.api.RSSceneElement[] var0);
 
 	void setTiles(com.acuity.rs.api.RSSceneTile[][][] var0);
 
