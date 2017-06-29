@@ -147,8 +147,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getIntStack();
 
-	int getIntStackSizeOther();
-
 	com.acuity.rs.api.RSNodeTable getItemModelCache();
 
 	int getItemSelectionState();
@@ -397,8 +395,6 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
-	boolean isLowMemoryOther();
-
 	boolean isMembersWorld();
 
 	boolean isMembersWorld1();
@@ -569,8 +565,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setIntStack(int[] var0);
 
-	void setIntStackSizeOther(int var0);
-
 	void setItemModelCache(com.acuity.rs.api.RSNodeTable var0);
 
 	void setItemSelectionState(int var0);
@@ -602,8 +596,6 @@ public interface RSClient extends RSGameEngine {
 	void setLoginState2(int var0);
 
 	void setLoginWindowX(int var0);
-
-	void setLowMemoryOther(boolean var0);
 
 	void setMapRegions(int[] var0);
 

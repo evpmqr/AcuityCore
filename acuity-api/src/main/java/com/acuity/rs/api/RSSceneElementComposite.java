@@ -35,8 +35,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	short[] getNewColors();
 
-	short[] getNewTexturesOther();
-
 	int[] getObjectModels();
 
 	int[] getObjectTypes();
@@ -110,8 +108,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setName(java.lang.String var0);
 
 	void setNewColors(short[] var0);
-
-	void setNewTexturesOther(short[] var0);
 
 	void setNonFlatShading(boolean var0);
 
