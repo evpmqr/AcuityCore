@@ -5,7 +5,7 @@ package com.acuity.rs.api;
 
 public interface RSMessageNode extends RSCacheableNode {
 
-	int getId();
+	int getID();
 
 	java.lang.String getName();
 
@@ -17,7 +17,7 @@ public interface RSMessageNode extends RSCacheableNode {
 
 	java.lang.String getValue();
 
-	void setId(int var0);
+	void setID(int var0);
 
 	void setName(java.lang.String var0);
 

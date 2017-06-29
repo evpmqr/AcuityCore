@@ -13,11 +13,11 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	int getFade();
 
-	int getFontId();
+	int getFontID();
 
-	int getIconId();
+	int getIconID();
 
-	int getLeftSpriteId();
+	int getLeftSpriteID();
 
 	int getMiddleSpriteId();
 
@@ -29,7 +29,7 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	int getTextColor();
 
-	int[] getTransformIds();
+	int[] getTransformIDs();
 
 	int getVarpbitIndex();
 
@@ -43,11 +43,11 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	void setFade(int var0);
 
-	void setFontId(int var0);
+	void setFontID(int var0);
 
-	void setIconId(int var0);
+	void setIconID(int var0);
 
-	void setLeftSpriteId(int var0);
+	void setLeftSpriteID(int var0);
 
 	void setMiddleSpriteId(int var0);
 
@@ -59,7 +59,7 @@ public interface RSHitsplatDefinition extends RSCacheableNode {
 
 	void setTextColor(int var0);
 
-	void setTransformIds(int[] var0);
+	void setTransformIDs(int[] var0);
 
 	void setVarpbitIndex(int var0);
 

@@ -40,7 +40,7 @@ public enum Tab {
 	}
 
 	public boolean isOpen() {
-		return getComponent().map(m -> m.getSpriteId() != -1).orElse(false);
+		return getComponent().map(m -> m.getSpriteID() != -1).orElse(false);
 	}
 
 	public ActionResult open() {

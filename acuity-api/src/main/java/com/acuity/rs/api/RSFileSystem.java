@@ -9,11 +9,11 @@ public interface RSFileSystem extends RSNode {
 
 	com.acuity.rs.api.RSIndexFile getIndex();
 
-	com.acuity.rs.api.RSIndexData getTable();
+	com.acuity.rs.api.RSCacheReferenceTable getTable();
 
 	void setBuffer(byte[] var0);
 
 	void setIndex(com.acuity.rs.api.RSIndexFile var0);
 
-	void setTable(com.acuity.rs.api.RSIndexData var0);
+	void setTable(com.acuity.rs.api.RSCacheReferenceTable var0);
 }

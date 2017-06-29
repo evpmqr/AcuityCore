@@ -28,14 +28,14 @@ public class Model extends Renderable {
         super(peer);
         this.rsModel = Preconditions.checkNotNull(peer);
 
-        int count = peer.getVerticesX().length;
+        int count = peer.getXVertices().length;
         xTriangles = Arrays.copyOf(peer.getXTriangles(), count);
         yTriangles = Arrays.copyOf(peer.getYTriangles(), count);
         zTriangles = Arrays.copyOf(peer.getZTriangles(), count);
         count = peer.getXTriangles().length;
-        xVertices = Arrays.copyOf(peer.getVerticesX(), count);
-        yVertices = Arrays.copyOf(peer.getVerticesY(), count);
-        zVertices = Arrays.copyOf(peer.getVerticesZ(), count);
+        xVertices = Arrays.copyOf(peer.getXVertices(), count);
+        yVertices = Arrays.copyOf(peer.getYVertices(), count);
+        zVertices = Arrays.copyOf(peer.getZVertices(), count);
         initialXVertices = xVertices;
         initialZVertices = zVertices;
     }

@@ -15,7 +15,7 @@ public class PlayerComposite {
     }
 
     public int[] getEquipmentIDs(){// TODO: 6/27/2017 Wrap this in some object for slots and document what slot is what index
-        return rsPlayerComposite.getEquipmentIds();
+        return rsPlayerComposite.getEquipmentIDs();
     }
 
     public boolean isFemale(){

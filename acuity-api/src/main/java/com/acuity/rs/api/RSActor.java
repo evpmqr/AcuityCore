@@ -19,7 +19,7 @@ public interface RSActor extends RSRenderable {
 
 	int[] getHitsplatCycles();
 
-	int[] getHitsplatIds();
+	int[] getHitsplatIDs();
 
 	int[] getHitsplats();
 
@@ -41,7 +41,7 @@ public interface RSActor extends RSRenderable {
 
 	int[] getSpecialHitsplats();
 
-	int getSpellAnimationId();
+	int getSpellAnimationID();
 
 	int getStrictX();
 
@@ -69,7 +69,7 @@ public interface RSActor extends RSRenderable {
 
 	void setHitsplatCycles(int[] var0);
 
-	void setHitsplatIds(int[] var0);
+	void setHitsplatIDs(int[] var0);
 
 	void setHitsplats(int[] var0);
 
@@ -93,7 +93,7 @@ public interface RSActor extends RSRenderable {
 
 	void setSpecialHitsplats(int[] var0);
 
-	void setSpellAnimationId(int var0);
+	void setSpellAnimationID(int var0);
 
 	void setStrictX(int var0);
 

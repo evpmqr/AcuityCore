@@ -5,27 +5,27 @@ package com.acuity.rs.api;
 
 public interface RSPlayerComposite {
 
-	int[] getBodyPartColors();
+	int[] getBodyColors();
 
-	int[] getEquipmentIds();
+	int[] getEquipmentIDs();
 
-	long getHash();
+	long getModelID();
 
-	int getTransformedNpcId();
+	int getTransformedNpcID();
 
 	com.acuity.api.rs.wrappers.peers.composite.PlayerComposite getWrapper();
 
 	boolean isFemale();
 
-	void setBodyPartColors(int[] var0);
+	void setBodyColors(int[] var0);
 
-	void setEquipmentIds(int[] var0);
+	void setEquipmentIDs(int[] var0);
 
 	void setFemale(boolean var0);
 
-	void setHash(long var0);
+	void setModelID(long var0);
 
-	void setTransformedNpcId(int var0);
+	void setTransformedNpcID(int var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.PlayerComposite var0);
 }

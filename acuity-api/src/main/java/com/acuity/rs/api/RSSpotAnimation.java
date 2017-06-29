@@ -11,7 +11,7 @@ public interface RSSpotAnimation extends RSCacheableNode {
 
 	int getContrast();
 
-	int getModelId();
+	int getModelID();
 
 	int getOrientation();
 
@@ -25,7 +25,7 @@ public interface RSSpotAnimation extends RSCacheableNode {
 
 	void setContrast(int var0);
 
-	void setModelId(int var0);
+	void setModelID(int var0);
 
 	void setOrientation(int var0);
 

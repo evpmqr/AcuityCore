@@ -109,8 +109,8 @@ public class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getPoseAnimation();
     }
 
-    public int getSpellAnimationId() {
-        return rsActor.getSpellAnimationId();
+    public int getSpellAnimationID() {
+        return rsActor.getSpellAnimationID();
     }
 
     public int getSubAnimationFrame() {

@@ -5,9 +5,9 @@ package com.acuity.rs.api;
 
 public interface RSKitDefinition extends RSCacheableNode {
 
-	int getBodyPartId();
+	int getBodyPartID();
 
-	int[] getModelIds();
+	int[] getModelIDs();
 
 	int[] getModels();
 
@@ -25,9 +25,9 @@ public interface RSKitDefinition extends RSCacheableNode {
 
 	boolean isNonSelectable();
 
-	void setBodyPartId(int var0);
+	void setBodyPartID(int var0);
 
-	void setModelIds(int[] var0);
+	void setModelIDs(int[] var0);
 
 	void setModels(int[] var0);
 

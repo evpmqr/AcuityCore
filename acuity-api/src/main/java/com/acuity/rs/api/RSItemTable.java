@@ -5,11 +5,11 @@ package com.acuity.rs.api;
 
 public interface RSItemTable extends RSNode {
 
-	int[] getItemIds();
+	int[] getItemIDs();
 
 	int[] getStackSizes();
 
-	void setItemIds(int[] var0);
+	void setItemIDs(int[] var0);
 
 	void setStackSizes(int[] var0);
 }

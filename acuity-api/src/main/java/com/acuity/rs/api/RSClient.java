@@ -107,25 +107,25 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSIgnoreListMember[] getIgnores();
 
-	com.acuity.rs.api.RSIndexData getIndexInterfaces();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexInterfaces();
 
-	com.acuity.rs.api.RSIndexData getIndexMaps();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexMaps();
 
-	com.acuity.rs.api.RSIndexData getIndexModels();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexModels();
 
-	com.acuity.rs.api.RSIndexData getIndexScripts();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexScripts();
 
-	com.acuity.rs.api.RSIndexData getIndexSoundEffects();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexSoundEffects();
 
-	com.acuity.rs.api.RSIndexData getIndexSprites();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexSprites();
 
-	com.acuity.rs.api.RSIndexData getIndexTextures();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexTextures();
 
-	com.acuity.rs.api.RSIndexData getIndexTrack1();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexTrack1();
 
-	com.acuity.rs.api.RSIndexData getIndexTrack2();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexTrack2();
 
-	com.acuity.rs.api.RSIndexData getIndexWorldMap();
+	com.acuity.rs.api.RSCacheReferenceTable getIndexWorldMap();
 
 	com.acuity.rs.api.RSHashTable getInterfaceFlags();
 
@@ -223,7 +223,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSNpc[] getNpcs();
 
-	byte[][][] getOverlayIds();
+	byte[][][] getOverlayIDs();
 
 	byte[][][] getOverlayPaths();
 
@@ -277,10 +277,6 @@ public interface RSClient extends RSGameEngine {
 
 	java.math.BigInteger getRsaKeyModulus();
 
-	com.acuity.rs.api.RSConnection getRssocket1();
-
-	com.acuity.rs.api.RSConnection getRssocket2();
-
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -319,7 +315,7 @@ public interface RSClient extends RSGameEngine {
 
 	byte[][][] getTileSettings();
 
-	byte[][][] getUnderlayIds();
+	byte[][][] getUnderlayIDs();
 
 	java.lang.String getUsername();
 
@@ -525,25 +521,25 @@ public interface RSClient extends RSGameEngine {
 
 	void setIgnores(com.acuity.rs.api.RSIgnoreListMember[] var0);
 
-	void setIndexInterfaces(com.acuity.rs.api.RSIndexData var0);
+	void setIndexInterfaces(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexMaps(com.acuity.rs.api.RSIndexData var0);
+	void setIndexMaps(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexModels(com.acuity.rs.api.RSIndexData var0);
+	void setIndexModels(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexScripts(com.acuity.rs.api.RSIndexData var0);
+	void setIndexScripts(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexSoundEffects(com.acuity.rs.api.RSIndexData var0);
+	void setIndexSoundEffects(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexSprites(com.acuity.rs.api.RSIndexData var0);
+	void setIndexSprites(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexTextures(com.acuity.rs.api.RSIndexData var0);
+	void setIndexTextures(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexTrack1(com.acuity.rs.api.RSIndexData var0);
+	void setIndexTrack1(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexTrack2(com.acuity.rs.api.RSIndexData var0);
+	void setIndexTrack2(com.acuity.rs.api.RSCacheReferenceTable var0);
 
-	void setIndexWorldMap(com.acuity.rs.api.RSIndexData var0);
+	void setIndexWorldMap(com.acuity.rs.api.RSCacheReferenceTable var0);
 
 	void setInterfaceFlags(com.acuity.rs.api.RSHashTable var0);
 
@@ -647,7 +643,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setNpcs(com.acuity.rs.api.RSNpc[] var0);
 
-	void setOverlayIds(byte[][][] var0);
+	void setOverlayIDs(byte[][][] var0);
 
 	void setOverlayPaths(byte[][][] var0);
 
@@ -711,10 +707,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setRsaKeyModulus(java.math.BigInteger var0);
 
-	void setRssocket1(com.acuity.rs.api.RSConnection var0);
-
-	void setRssocket2(com.acuity.rs.api.RSConnection var0);
-
 	void setRunEnergy(int var0);
 
 	void setSceneGraph(com.acuity.rs.api.RSScene var0);
@@ -755,7 +747,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setTileSettings(byte[][][] var0);
 
-	void setUnderlayIds(byte[][][] var0);
+	void setUnderlayIDs(byte[][][] var0);
 
 	void setUsername(java.lang.String var0);
 

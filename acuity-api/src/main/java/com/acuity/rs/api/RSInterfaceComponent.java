@@ -27,9 +27,9 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int[][] getDynamicValues();
 
-	int getEnabledMaterialId();
+	int getEnabledMaterialID();
 
-	int getFondId();
+	int getFondID();
 
 	int getHeight();
 
@@ -37,17 +37,17 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getInsetY();
 
-	int getItemId();
+	int getItemID();
 
-	int[] getItemIds();
+	int[] getItemIDs();
 
 	int getItemStackSize();
 
 	int[] getItemStackSizes();
 
-	int getMaterialId();
+	int getMaterialID();
 
-	int getModelId();
+	int getModelID();
 
 	int getModelOffsetX();
 
@@ -73,7 +73,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	com.acuity.rs.api.RSInterfaceComponent getParent();
 
-	int getParentUid();
+	int getParentUID();
 
 	int getRelativeX();
 
@@ -105,7 +105,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int[] getSkillTriggers();
 
-	int getSpriteId();
+	int getSpriteID();
 
 	int[] getTableActionInts();
 
@@ -123,7 +123,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getType();
 
-	int getUid();
+	int getUID();
 
 	int getWidth();
 
@@ -165,13 +165,13 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setDynamicValues(int[][] var0);
 
-	void setEnabledMaterialId(int var0);
+	void setEnabledMaterialID(int var0);
 
 	void setFlippedHorizontally(boolean var0);
 
 	void setFlippedVertically(boolean var0);
 
-	void setFondId(int var0);
+	void setFondID(int var0);
 
 	void setHeight(int var0);
 
@@ -181,17 +181,17 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setInsetY(int var0);
 
-	void setItemId(int var0);
+	void setItemID(int var0);
 
-	void setItemIds(int[] var0);
+	void setItemIDs(int[] var0);
 
 	void setItemStackSize(int var0);
 
 	void setItemStackSizes(int[] var0);
 
-	void setMaterialId(int var0);
+	void setMaterialID(int var0);
 
-	void setModelId(int var0);
+	void setModelID(int var0);
 
 	void setModelOffsetX(int var0);
 
@@ -217,7 +217,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setParent(com.acuity.rs.api.RSInterfaceComponent var0);
 
-	void setParentUid(int var0);
+	void setParentUID(int var0);
 
 	void setRelativeX(int var0);
 
@@ -251,7 +251,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setSkillTriggers(int[] var0);
 
-	void setSpriteId(int var0);
+	void setSpriteID(int var0);
 
 	void setTableActionInts(int[] var0);
 
@@ -271,7 +271,7 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setType(int var0);
 
-	void setUid(int var0);
+	void setUID(int var0);
 
 	void setWidth(int var0);
 

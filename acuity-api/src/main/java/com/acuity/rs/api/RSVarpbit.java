@@ -5,15 +5,15 @@ package com.acuity.rs.api;
 
 public interface RSVarpbit extends RSCacheableNode {
 
-	int getLeastSignificantBit();
+	int getLower();
 
-	int getMostSignificantBit();
+	int getUpper();
 
 	int getVarpIndex();
 
-	void setLeastSignificantBit(int var0);
+	void setLower(int var0);
 
-	void setMostSignificantBit(int var0);
+	void setUpper(int var0);
 
 	void setVarpIndex(int var0);
 }

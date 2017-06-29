@@ -5,9 +5,9 @@ package com.acuity.rs.api;
 
 public interface RSWorldMapData {
 
-	int getFileId();
+	int getFileID();
 
 	void invokeLoadMapData(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
 
-	void setFileId(int var0);
+	void setFileID(int var0);
 }

@@ -17,7 +17,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
-	int[] getTransformIds();
+	int[] getTransformIDs();
 
 	int getVarpbitIndex();
 
@@ -47,7 +47,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
-	void setTransformIds(int[] var0);
+	void setTransformIDs(int[] var0);
 
 	void setVarpbitIndex(int var0);
 

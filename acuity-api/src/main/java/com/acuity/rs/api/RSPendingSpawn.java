@@ -9,11 +9,11 @@ public interface RSPendingSpawn extends RSNode {
 
 	int getHitpoints();
 
-	int getId();
-
-	int getLevel();
+	int getID();
 
 	int getOrientation();
+
+	int getPlane();
 
 	int getSceneX();
 
@@ -25,11 +25,11 @@ public interface RSPendingSpawn extends RSNode {
 
 	void setHitpoints(int var0);
 
-	void setId(int var0);
-
-	void setLevel(int var0);
+	void setID(int var0);
 
 	void setOrientation(int var0);
+
+	void setPlane(int var0);
 
 	void setSceneX(int var0);
 

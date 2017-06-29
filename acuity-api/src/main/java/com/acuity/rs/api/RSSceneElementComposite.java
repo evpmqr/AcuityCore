@@ -9,9 +9,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getAmbient();
 
-	int getAmbientSoundId();
-
-	int getAnimationId();
+	int getAnimationID();
 
 	int getClipType();
 
@@ -19,11 +17,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getContrast();
 
-	int getId();
+	int getID();
 
-	int getMapIconId();
+	int getMapIconID();
 
-	int getMapSceneId();
+	int getMapSceneID();
 
 	int getModelSizeHeight();
 
@@ -53,9 +51,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getSizeY();
 
-	int[] getTransformIds();
+	int[] getTransformIDs();
 
-	int getVarpId();
+	int getVarpbitIndex();
 
 	int getVarpIndex();
 
@@ -67,8 +65,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	boolean isClipped();
 
-	boolean isClipped1();
-
 	boolean isNonFlatShading();
 
 	boolean isRotated();
@@ -79,13 +75,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setAmbient(int var0);
 
-	void setAmbientSoundId(int var0);
-
-	void setAnimationId(int var0);
+	void setAnimationID(int var0);
 
 	void setClipped(boolean var0);
-
-	void setClipped1(boolean var0);
 
 	void setClipType(int var0);
 
@@ -93,11 +85,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setContrast(int var0);
 
-	void setId(int var0);
+	void setID(int var0);
 
-	void setMapIconId(int var0);
+	void setMapIconID(int var0);
 
-	void setMapSceneId(int var0);
+	void setMapSceneID(int var0);
 
 	void setModelSizeHeight(int var0);
 
@@ -133,9 +125,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setSolid(boolean var0);
 
-	void setTransformIds(int[] var0);
+	void setTransformIDs(int[] var0);
 
-	void setVarpId(int var0);
+	void setVarpbitIndex(int var0);
 
 	void setVarpIndex(int var0);
 

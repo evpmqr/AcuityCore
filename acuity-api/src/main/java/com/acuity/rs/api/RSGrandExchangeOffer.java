@@ -5,7 +5,7 @@ package com.acuity.rs.api;
 
 public interface RSGrandExchangeOffer {
 
-	int getItemId();
+	int getItemID();
 
 	int getItemQuantity();
 
@@ -17,7 +17,7 @@ public interface RSGrandExchangeOffer {
 
 	byte getStatus();
 
-	void setItemId(int var0);
+	void setItemID(int var0);
 
 	void setItemQuantity(int var0);
 

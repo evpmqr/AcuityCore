@@ -55,8 +55,8 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getType();
     }
 
-    public int getFondId() {
-        return rsInterfaceComponent.getFondId();
+    public int getFondID() {
+        return rsInterfaceComponent.getFondID();
     }
 
     public int getHeight() {
@@ -68,11 +68,11 @@ public class InterfaceComponent extends Node {
     }
 
     public int getItemId() {
-        return rsInterfaceComponent.getItemId();
+        return rsInterfaceComponent.getItemID();
     }
 
     public int[] getItemIds() {
-        return rsInterfaceComponent.getItemIds();
+        return rsInterfaceComponent.getItemIDs();
     }
 
     public int getItemStackSize() {
@@ -84,7 +84,7 @@ public class InterfaceComponent extends Node {
     }
 
     public int getModelId() {
-        return rsInterfaceComponent.getModelId();
+        return rsInterfaceComponent.getModelID();
     }
 
     public int getModelType() {
@@ -155,8 +155,8 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getShadowColor();
     }
 
-    public int getSpriteId() {
-        return rsInterfaceComponent.getSpriteId();
+    public int getSpriteID() {
+        return rsInterfaceComponent.getSpriteID();
     }
 
     public String[] getTableActions() {
@@ -183,8 +183,8 @@ public class InterfaceComponent extends Node {
         return rsInterfaceComponent.getType();
     }
 
-    public int getUid() {
-        return rsInterfaceComponent.getUid();
+    public int getUID() {
+        return rsInterfaceComponent.getUID();
     }
 
     public int getWidth() {

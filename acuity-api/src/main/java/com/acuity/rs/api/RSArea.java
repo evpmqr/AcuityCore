@@ -7,9 +7,9 @@ public interface RSArea extends RSCacheableNode {
 
 	java.lang.String getName();
 
-	int getSpriteId();
+	int getSpriteID();
 
 	void setName(java.lang.String var0);
 
-	void setSpriteId(int var0);
+	void setSpriteID(int var0);
 }
