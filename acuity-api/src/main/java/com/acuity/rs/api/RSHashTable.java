@@ -17,6 +17,8 @@ public interface RSHashTable {
 
 	com.acuity.api.rs.wrappers.peers.structures.HashTable getWrapper();
 
+	com.acuity.rs.api.RSNode invokeLookup(long var0);
+
 	void setBuckets(com.acuity.rs.api.RSNode[] var0);
 
 	void setHead(com.acuity.rs.api.RSNode var0);
