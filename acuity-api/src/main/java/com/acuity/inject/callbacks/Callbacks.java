@@ -13,6 +13,7 @@ import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
+import com.acuity.rs.api.RSSceneElementComposite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,20 +52,26 @@ public class Callbacks {
 
     @ClientInvoked
     public static void drawCallback(Image image) {
-/*        try {
+        try {
             if (Game.getGameState() == Game.IN_GAME) {
-                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
+
+                for (int i = 0; i < 2000; i++) {
+                    RSSceneElementComposite rsSceneElementComposite = AcuityInstance.getClient().getRsClient().invokeGetObjectDefinition(i);
+                    System.out.println(rsSceneElementComposite.getID() + ": " + rsSceneElementComposite.getName());
+                }
+
+/*                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
                     sceneElement.getModel().ifPresent(model -> {
                         model.streamPolygons().forEach(polygon -> {
                             image.getGraphics().drawPolygon(polygon);
                         });
 
                     });
-                });
+                });*/
             }
         }
         catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
     }
 }

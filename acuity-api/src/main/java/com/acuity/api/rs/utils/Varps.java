@@ -42,4 +42,8 @@ public class Varps {
 	public static boolean getBoolean(final int index) {
 		return get(index, 0) == 1;
 	}
+
+	public static void getBit(int varpbitIndex) {
+		return AcuityInstance.getClient().getRsClient().invokeget;
+	}
 }
