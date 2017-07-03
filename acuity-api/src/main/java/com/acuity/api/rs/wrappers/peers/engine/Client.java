@@ -88,7 +88,7 @@ public class Client extends GameEngine {
     }
 
     public byte[][][] getSceneRenderRules() {// TODO: 6/12/2017 Can this be null?
-        return rsClient.getTileSettings();
+        return rsClient.getSceneRenderRules();
     }
 
     public int getCameraX() {

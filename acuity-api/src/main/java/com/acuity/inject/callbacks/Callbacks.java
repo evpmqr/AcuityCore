@@ -13,6 +13,8 @@ import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
+import com.acuity.rs.api.RSSceneElementComposite;
+import com.acuity.rs.api.RSVarpbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +43,11 @@ public class Callbacks {
     }
 
     @ClientInvoked
+    public static void varpbitTest(RSVarpbit rsVarpbit){
+
+    }
+
+    @ClientInvoked
     public static void cachedModelUpdated(RSRenderable rsRenderable){
     }
 
@@ -51,20 +58,20 @@ public class Callbacks {
 
     @ClientInvoked
     public static void drawCallback(Image image) {
-/*        try {
+        try {
             if (Game.getGameState() == Game.IN_GAME) {
-                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
+/*                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
                     sceneElement.getModel().ifPresent(model -> {
                         model.streamPolygons().forEach(polygon -> {
                             image.getGraphics().drawPolygon(polygon);
                         });
 
                     });
-                });
+                });*/
             }
         }
         catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
     }
 }
