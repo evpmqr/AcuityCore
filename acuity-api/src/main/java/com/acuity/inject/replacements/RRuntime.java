@@ -9,9 +9,9 @@ import java.io.IOException;
 /**
  * Created by Zachary Herridge on 7/3/2017.
  */
-public class ARuntime {
+public class RRuntime {
 
-    private static final Logger logger = LoggerFactory.getLogger(ARuntime.class);
+    private static final Logger logger = LoggerFactory.getLogger(RRuntime.class);
 
     @ClientInvoked
     public static Process exec(String command) throws IOException {

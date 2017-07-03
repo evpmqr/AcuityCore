@@ -6,15 +6,14 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Zachary Herridge on 6/30/2017.
  */
-public class Memory {
+public class RGarbageCollector {
 
-    private static final Logger logger = LoggerFactory.getLogger(Memory.class);
+    private static final Logger logger = LoggerFactory.getLogger(RGarbageCollector.class);
 
     @ClientInvoked
     public static GarbageCollectorMXBean gcBean;
