@@ -20,12 +20,12 @@ public class RGarbageCollector {
 
     @ClientInvoked
     public static List<GarbageCollectorMXBean> getBeans(){
-        logger.trace("RS requested all gc beans.");
+        logger.debug("RS requested all gc beans.");
         return ManagementFactory.getGarbageCollectorMXBeans();
     }
 
     @ClientInvoked
     public static void gcBeanUpdated(){
-        logger.trace("GC bean updated.");
+        logger.debug("GC bean updated.");
     }
 }
