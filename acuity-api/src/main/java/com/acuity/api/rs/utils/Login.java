@@ -11,8 +11,6 @@ public class Login {
 
     private static final Logger logger = LoggerFactory.getLogger(Login.class);
 
-    // TODO: 6/12/2017 Document login index values and states
-
     public static void setLoginInfo(String username, String password){
         AcuityInstance.getClient().setUsername(username);
         AcuityInstance.getClient().setPassword(password);
@@ -28,11 +26,40 @@ public class Login {
         return AcuityInstance.getClient().getLoginIndex();
     }
 
-    public static int getLoginState(){
-        return AcuityInstance.getClient().getLoginState().getValue();
+    public static LoginState getLoginState(){
+        return LoginState.fromValue(AcuityInstance.getClient().getLoginState());
     }
 
     public static String getLoginMessage(){
         return AcuityInstance.getClient().getLoginResponse1() + " " + AcuityInstance.getClient().getLoginResponse2();
+    }
+
+    public enum LoginState {
+        INITIAL(0),
+        LEGACY(1), //http://i.imgur.com/y6Kko5v.png
+        ENTER_CREDENTIALS(2),
+        INVALID_CREDENTIALS(3),
+        AUTHENTICATOR(4),
+        FORGOTTEN_PASSWORD(5),
+        EMPTY(6);
+
+        private final int value;
+
+        LoginState(final int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        private static LoginState fromValue(final int value) {
+            for (LoginState loginState : values()) {
+                if (loginState.value == value) {
+                    return loginState;
+                }
+            }
+            return null;
+        }
     }
 }

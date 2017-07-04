@@ -171,8 +171,8 @@ public class Client extends GameEngine {
         return rsClient.getLoginState();
     }
 
-    public LoginState getLoginState() {
-        return LoginState.fromValue(rsClient.getLoginState());
+    public int getLoginState() {
+        return rsClient.getLoginState();
     }
 
     public int[] getVarps() {
@@ -194,34 +194,5 @@ public class Client extends GameEngine {
     @NotNull
     public RSClient getRsClient(){
         return rsClient;
-    }
-
-    public enum LoginState {
-        INITIAL(0),
-        LEGACY(1), //http://i.imgur.com/y6Kko5v.png
-        ENTER_CREDENTIALS(2),
-        INVALID_CREDENTIALS(3),
-        AUTHENTICATOR(4),
-        FORGOTTEN_PASSWORD(5),
-        EMPTY(6);
-
-        private final int value;
-
-        LoginState(final int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        private static LoginState fromValue(final int value) {
-            for (LoginState loginState : values()) {
-                if (loginState.value == value) {
-                    return loginState;
-                }
-            }
-            return null;
-        }
     }
 }
