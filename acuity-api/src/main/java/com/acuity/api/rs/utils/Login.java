@@ -29,7 +29,7 @@ public class Login {
     }
 
     public static int getLoginState(){
-        return AcuityInstance.getClient().getLoginState();
+        return AcuityInstance.getClient().getLoginState().getValue();
     }
 
     public static String getLoginMessage(){

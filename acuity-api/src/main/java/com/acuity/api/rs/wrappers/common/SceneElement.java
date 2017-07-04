@@ -4,6 +4,7 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
+import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
@@ -41,7 +42,7 @@ public interface SceneElement extends Locatable {
         if (transformIDs != null){
             int index = -1;
             if (varpbitIndex != -1){
-                Varps.getBit(varpbitIndex);
+                Optional<Varpbit> varpBit = Varps.getVarpBit(varpbitIndex);
             }
 
         }

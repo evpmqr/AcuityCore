@@ -67,6 +67,10 @@ public class Client extends GameEngine {
         return Optional.ofNullable(rsClient.getInterfaceNodes()).map(RSHashTable::getWrapper);
     }
 
+    public Optional<Varpbit> loadVarpbit(int id){
+        return Optional.ofNullable(rsClient.invokeLoadVarpbit(id)).map(RSVarpbit::getWrapper).map(varpbit -> varpbit.setID(id));
+    }
+
     public int getPlane() {
         return rsClient.getPlane();
     }

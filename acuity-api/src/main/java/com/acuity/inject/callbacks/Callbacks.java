@@ -10,6 +10,8 @@ import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.utils.Varps;
+import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
@@ -60,6 +62,8 @@ public class Callbacks {
     public static void drawCallback(Image image) {
         try {
             if (Game.getGameState() == Game.IN_GAME) {
+               // image.getGraphics().drawString("Index: " + Varps.getVarpBit(4150).map(Varpbit::getValue).orElse(-1), 100, 100);
+
 /*                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
                     sceneElement.getModel().ifPresent(model -> {
                         model.streamPolygons().forEach(polygon -> {

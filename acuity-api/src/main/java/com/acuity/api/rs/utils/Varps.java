@@ -1,6 +1,7 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class Varps {
 		return get(index, 0) == 1;
 	}
 
-	public static void getBit(int varpbitIndex) {
-
+	public static Optional<Varpbit> getVarpBit(int varpbitIndex) {
+		return AcuityInstance.getClient().loadVarpbit(varpbitIndex);
 	}
 }
