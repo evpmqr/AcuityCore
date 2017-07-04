@@ -19,6 +19,14 @@ public class SceneElementComposite extends CacheableNode{
         this.rsSceneElementComposite = rsSceneElementComposite;
     }
 
+    public String[] getActions(){
+        return rsSceneElementComposite.getActions();
+    }
+
+    public String getName(){
+        return rsSceneElementComposite.getName();
+    }
+
     @NotNull
     public RSSceneElementComposite getRsSceneElementComposite() {
         return rsSceneElementComposite;

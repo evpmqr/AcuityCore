@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public interface Interactive {
 
-	default List<String> getActions() {
+	default List getActions() {
 		return Collections.EMPTY_LIST;
 	}
 

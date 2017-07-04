@@ -60,6 +60,11 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     }
 
     @Override
+    public int getID() {
+        return getUID().getEntityID();
+    }
+
+    @Override
     public Optional<Model> getModel() {
         return SceneElement.getModel(
                 Optional.ofNullable(rsSceneBoundaryDecor.getEntity()).orElseGet(() -> rsSceneBoundaryDecor.getRenderable2()),

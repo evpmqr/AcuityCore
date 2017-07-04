@@ -6,12 +6,14 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
 import com.acuity.api.rs.events.impl.OverheadPrayerChangeEvent;
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
+import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
@@ -23,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -64,11 +68,16 @@ public class Callbacks {
             if (Game.getGameState() == Game.IN_GAME) {
                // image.getGraphics().drawString("Index: " + Varps.getVarpBit(4150).map(Varpbit::getValue).orElse(-1), 100, 100);
 
-/*                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
-                    sceneElement.getModel().ifPresent(model -> {
-                        model.streamPolygons().forEach(polygon -> {
-                            image.getGraphics().drawPolygon(polygon);
-                        });
+/*                Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
+                    npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(point -> {
+                        image.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), (int) point.getX(), (int) point.getY());
+                    });
+
+                });
+
+                SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getName() != null).sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(sceneElement -> {
+                    sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(point -> {
+                        image.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions(), (int) point.getX(), (int) point.getY());
 
                     });
                 });*/
