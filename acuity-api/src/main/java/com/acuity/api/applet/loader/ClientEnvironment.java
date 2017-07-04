@@ -9,13 +9,13 @@ import java.awt.*;
 /**
  * Created by Zach on 6/17/2017.
  */
-public class ClientEnviroment<T extends GameEngine> {
+public class ClientEnvironment<T extends GameEngine> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClientEnviroment.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientEnvironment.class);
 
     private final T gameEngine;
 
-    public ClientEnviroment(T gameEngine) {
+    public ClientEnvironment(T gameEngine) {
         this.gameEngine = gameEngine;
         this.gameEngine.getApplet().setSize(new Dimension(800, 600));
     }

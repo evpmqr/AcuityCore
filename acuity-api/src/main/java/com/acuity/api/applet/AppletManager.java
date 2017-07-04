@@ -4,7 +4,7 @@ import com.acuity.api.Events;
 import com.acuity.api.applet.input.KeyboardMiddleMan;
 import com.acuity.api.applet.input.MouseMiddleMan;
 import com.acuity.api.applet.loader.ClientConfig;
-import com.acuity.api.applet.loader.ClientEnviroment;
+import com.acuity.api.applet.loader.ClientEnvironment;
 import com.acuity.api.applet.loader.ClientStub;
 import com.acuity.api.applet.loader.RSClassLoader;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
@@ -29,7 +29,7 @@ public class AppletManager {
     private RSClassLoader rsClassLoader;
 
     private ClientConfig clientConfig;
-    private ClientEnviroment<Client> clientEnviroment;
+    private ClientEnvironment<Client> ClientEnvironment;
     private ClientStub clientStub;
 
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
@@ -46,13 +46,13 @@ public class AppletManager {
         clientConfig = new ClientConfig(1);
         rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
         Class<?> client = rsClassLoader.loadClass("client");
-        clientEnviroment = new ClientEnviroment(((RSClient) client.newInstance()).getWrapper());
-        clientEnviroment.getGameEngine().getRsClient().setRedrawMode(2);
+        ClientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
+        ClientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
         clientStub = new ClientStub(clientConfig);
     }
 
     public void boot() {
-        clientEnviroment.boot(clientStub);
+        ClientEnvironment.boot(clientStub);
     }
 
     @Subscribe
@@ -64,7 +64,7 @@ public class AppletManager {
     }
 
     public Client getClient() {
-        return Preconditions.checkNotNull(clientEnviroment, "Load the RS client before referencing it.").getGameEngine();
+        return Preconditions.checkNotNull(ClientEnvironment, "Load the RS client before referencing it.").getGameEngine();
     }
 
     public MouseMiddleMan getMouseMiddleMan() {
