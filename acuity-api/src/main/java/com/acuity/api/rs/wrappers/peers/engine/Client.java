@@ -197,7 +197,9 @@ public class Client extends GameEngine {
         LEGACY(1), //http://i.imgur.com/y6Kko5v.png
         ENTER_CREDENTIALS(2),
         INVALID_CREDENTIALS(3),
-        FORGOTTEN_PASSWORD(5);
+        AUTHENTICATOR(4),
+        FORGOTTEN_PASSWORD(5),
+        EMPTY(6);
 
         private final int value;
 
