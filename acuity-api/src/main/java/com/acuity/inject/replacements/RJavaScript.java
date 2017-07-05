@@ -15,8 +15,8 @@ public class RJavaScript {
     private static final Logger logger = LoggerFactory.getLogger(RJavaScript.class);
 
     @ClientInvoked
-    public static JSObject getWindow(Applet applet){//Should always throw an error
-        JSObject window = JSObject.getWindow(applet);
+    public static JSObject getWindow(Applet applet){
+        JSObject window = JSObject.getWindow(applet);//Should always throw an error
         logger.warn("RS obtained a JS window.");
         return window;
     }

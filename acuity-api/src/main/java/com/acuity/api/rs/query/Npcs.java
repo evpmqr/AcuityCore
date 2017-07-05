@@ -50,6 +50,6 @@ public class Npcs {
 
 	public static Optional<Npc> getNearest(final int id) {
         logger.debug("Returning nearest Ncp with id '{}'", id);
-		return getNearest(p -> p.getId() == id);
+		return getNearest(p -> p.getID() == id);
 	}
 }

@@ -36,13 +36,18 @@ public class Callbacks {
     private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
 
     @ClientInvoked
-    public static void postFieldChangeCallback(String name, int index, Object object) {
-        logger.debug("'{}' called with index={} and object={}", name, index, object);
+    public static void fieldChanging(String name, int index, Object object) {
+        logger.debug("Field Changing '{}' with index={} and object={}", name, index, object);
         switch (name) {
-            case "playerPrayerChange":
-                Events.getRsEventBus().post(new OverheadPrayerChangeEvent(((RSPlayer) object).getWrapper()));
-                break;
-            case "gameStateChanged":
+
+        }
+    }
+
+    @ClientInvoked
+    public static void fieldChanged(String name, int index, Object object) {
+        logger.debug("Field Changed '{}' with index={} and object={}", name, index, object);
+        switch (name) {
+            case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;
         }

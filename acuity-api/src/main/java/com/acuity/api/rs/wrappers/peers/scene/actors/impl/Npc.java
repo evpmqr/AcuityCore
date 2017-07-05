@@ -41,7 +41,7 @@ public class Npc extends Actor implements Identifiable {
 
 	@Nullable
 	@Override
-	public Integer getId() {// TODO: 6/12/2017 Rename field ID
+	public Integer getID() {// TODO: 6/12/2017 Rename field ID
         return getDefinition().map(NpcComposite::getID).orElse(null);
 	}
 
