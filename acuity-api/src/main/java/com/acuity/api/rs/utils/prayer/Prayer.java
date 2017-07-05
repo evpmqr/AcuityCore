@@ -63,7 +63,7 @@ public enum Prayer {
 	}
 
 	public boolean isActive() {
-		return (Prayers.getVarp() & bits) != 0;
+		return (Prayers.getCurrentVarp() & bits) != 0;
 	}
 
 	@Override

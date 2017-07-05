@@ -18,8 +18,8 @@ public class SceneElements {
     public static Stream<SceneElement> streamLoaded(){
         Stream.Builder<SceneElement> streamBuilder = Stream.builder();
         int plane = Scene.getPlane();
-        for (int x = 0; x < 104; x++) {
-            for (int y = 0; y < 104; y++) {
+        for (int x = 0; x < Scene.SIZE; x++) {
+            for (int y = 0; y < Scene.SIZE; y++) {
                 streamLoaded(x, y, plane).forEach(streamBuilder);
             }
         }
@@ -27,7 +27,7 @@ public class SceneElements {
     }
 
     public static Stream<SceneElement> streamLoaded(int sceneX, int sceneY, int plane){
-        if (sceneX > 104 || sceneX < 0 || sceneY > 104 || sceneY < 0 || plane < 0 || plane > 3) {
+        if (sceneX > Scene.SIZE || sceneX < 0 || sceneY > Scene.SIZE || sceneY < 0 || plane < 0 || plane > 3) {
             throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
         return Scene.getLoaded(sceneX, sceneY, plane).map(SceneTile::streamElements).orElse(Stream.empty());

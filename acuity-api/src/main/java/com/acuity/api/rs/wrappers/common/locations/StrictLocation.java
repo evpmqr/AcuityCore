@@ -39,7 +39,7 @@ public class StrictLocation implements Locatable{
     }
 
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(x / 128, y / 128, plane, baseX, baseY);
+        return new SceneLocation(x / Projection.TILE_PIXEL_SIZE, y / Projection.TILE_PIXEL_SIZE, plane, baseX, baseY);
     }
 
     @Override

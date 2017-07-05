@@ -20,6 +20,8 @@ public class Prayers {
 
 	private static final Logger logger = LoggerFactory.getLogger(Prayers.class);
 
+	public static final int VARP_INDEX = 83;
+
 	public static Stream<Prayer> stream() {
 		return Arrays.stream(Prayer.values());
 	}
@@ -28,16 +30,16 @@ public class Prayers {
 		return stream().filter(Prayer::isActive).collect(Collectors.toList());
 	}
 
-	public static int getVarp() {
-		return Varps.get(83, 0);
+	public static int getCurrentVarp() {
+		return Varps.get(VARP_INDEX, 0);
 	}
 
-	public static int getTotalActive() {
-		return Integer.bitCount(getVarp());
+	public static int getActiveCount() {
+		return Integer.bitCount(getCurrentVarp());
 	}
 
 	public static boolean isAnyActivated() {
-		return getVarp() != 0;
+		return getCurrentVarp() != 0;
 	}
 
 	public static boolean isAllDeactivated() {
@@ -45,7 +47,7 @@ public class Prayers {
 	}
 
 	public static Optional<Prayer> fromOverhead(final Player player) {
-		Preconditions.checkNotNull(player, "Null player");
+		Preconditions.checkNotNull(player, "Pass in a non null player.");
 		final int value = player.getPrayerIcon();
 		return stream().filter(p -> p.getOverheadValue() == value).findFirst();
 	}

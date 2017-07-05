@@ -18,8 +18,9 @@ import java.util.Optional;
 public class Projection {
 
     private static final Logger logger = LoggerFactory.getLogger(Projection.class);
-
     public static final Rectangle GAMESCREEN = new Rectangle(4, 4, 512, 334);
+
+    public static final int TILE_PIXEL_SIZE = 128;
     public static final int[] SINE = new int[2048];
     public static final int[] COSINE = new int[2048];
 
@@ -30,7 +31,7 @@ public class Projection {
         }
     }
 
-    public static Optional<ScreenLocation> worldToScreen(WorldLocation worldLocation){
+    public static Optional<ScreenLocation> worldToScreen(WorldLocation worldLocation) {
         return sceneToScreen(worldLocation.toCurrentSceneLocation());
     }
 
@@ -43,7 +44,7 @@ public class Projection {
     }
 
     public static Optional<ScreenLocation> strictToScreen(int strictX, int strictY, int height) {
-        if (strictX >= 128 && strictX <= 13056 && strictY >= 128 && strictY <= 13056) {
+        if (strictX >= TILE_PIXEL_SIZE && strictX <= 13056 && strictY >= TILE_PIXEL_SIZE && strictY <= 13056) {
             int alt = Camera.getPitch();
             if (alt < 0) {
                 return Optional.empty();
@@ -52,7 +53,7 @@ public class Projection {
             if (yaw < 0) {
                 return Optional.empty();
             }
-            int elevation = getGroundHeight(strictX, strictY) - height;
+            int elevation = Scene.getGroundHeight(strictX, strictY).orElse(0) - height;
             strictX -= Camera.getX();
             strictY -= Camera.getY();
             elevation -= Camera.getZ();
@@ -73,11 +74,11 @@ public class Projection {
         return Optional.empty();
     }
 
-    public static Optional<Point> sceneToMiniMap(int sceneX, int sceneY) {
+    public static Optional<ScreenLocation> sceneToMiniMap(int sceneX, int sceneY) {
         return sceneToMiniMap(sceneX, sceneY, null);
     }
 
-    public static Optional<Point> sceneToMiniMap(int sceneX, int sceneY, Integer distanceFilter) {
+    public static Optional<ScreenLocation> sceneToMiniMap(int sceneX, int sceneY, Integer distanceFilter) {
         int angle = MiniMap.getScale() + MiniMap.getRotation() & 0x7FF;
 
         SceneLocation sceneLocation = LocalPlayer.getSceneLocation().orElseThrow(() -> new NullPointerException("LocalPlayer.getSceneLocation() failed to return a location."));
@@ -100,34 +101,9 @@ public class Projection {
 
             sceneX = (miniMapX + 167 / 2) + xx;
             sceneY = (167 / 2 - 1) + yy;
-            return Optional.of(new Point(sceneX, sceneY));
+            return Optional.of(new ScreenLocation(sceneX, sceneY));
         }
 
         return Optional.empty();
-    }
-
-    public static int getGroundHeight(int x, int y) {
-        int x1 = x >> 7;
-        int y1 = y >> 7;
-        if (x1 < 0 || x1 > 103 || y1 < 0 || y1 > 103) {
-            return 0;
-        }
-        byte[][][] rules = Scene.getRenderRules();
-        if (rules == null) {
-            return 0;
-        }
-        int[][][] heights = Scene.getTileHeights();
-        if (heights == null) {
-            return 0;
-        }
-        int plane = Scene.getPlane();
-        if (plane < 3 && (rules[1][x1][y1] & 0x2) == 2) {
-            plane++;
-        }
-        int x2 = x & 0x7F;
-        int y2 = y & 0x7F;
-        int h1 = heights[plane][x1][y1] * (128 - x2) + heights[plane][x1 + 1][y1] * x2 >> 7;
-        int h2 = heights[plane][x1][y1 + 1] * (128 - x2) + heights[plane][x1 + 1][y1 + 1] * x2 >> 7;
-        return h1 * (128 - y2) + h2 * y2 >> 7;
     }
 }

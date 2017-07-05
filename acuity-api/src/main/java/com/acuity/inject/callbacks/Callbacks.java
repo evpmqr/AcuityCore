@@ -57,20 +57,17 @@ public class Callbacks {
     public static void drawCallback(Image image) {
         try {
             if (Game.getGameState() == Game.IN_GAME) {
-                SceneElements.streamLoaded().forEach(element -> {
-
-                });
 
 /*                Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
-                    npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(point -> {
-                        image.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), (int) point.getX(), (int) point.getY());
+                    npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
+                        image.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), screenLocation.getX(), screenLocation.getY());
                     });
 
                 });
 
                 SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getName() != null).sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(sceneElement -> {
-                    sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(point -> {
-                        image.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions(), (int) point.getX(), (int) point.getY());
+                    sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
+                        image.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions(), screenLocation.getX(), screenLocation.getY());
 
                     });
                 });*/

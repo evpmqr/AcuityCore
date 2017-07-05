@@ -59,7 +59,7 @@ public class SceneLocation implements Locatable {
 	}
 
 	public StrictLocation getStrictLocation(){
-        return new StrictLocation(getSceneX() * 128, getSceneY() * 128, getPlane(), getBaseX(), getBaseY());
+        return new StrictLocation(getSceneX() * Projection.TILE_PIXEL_SIZE, getSceneY() * Projection.TILE_PIXEL_SIZE, getPlane(), getBaseX(), getBaseY());
     }
 
 	@Override
