@@ -4,6 +4,7 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.peers.composite.PlayerComposite;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
 import com.acuity.rs.api.RSPlayer;
+import com.acuity.rs.api.RSPlayerComposite;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Eclipseop.
@@ -33,8 +35,8 @@ public class Player extends Actor {
 		return getSkullIcon() == 0;
 	}
 
-	public PlayerComposite getAppearance() {
-		return rsPlayer.getAppearance().getWrapper();
+	public Optional<PlayerComposite> getAppearance() {
+		return Optional.ofNullable(rsPlayer.getAppearance()).map(RSPlayerComposite::getWrapper);
 	}
 
 	public int getCombatLevel() {
