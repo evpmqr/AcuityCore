@@ -20,8 +20,8 @@ public class PlayerEquipment {
 	public final static int SLOTS_LEGS = 7;
 	public final static int SLOTS_HANDS = 9;
 	public final static int SLOTS_FEET = 10;
-	public final static int SLOTS_RING = 12;
-	public final static int SLOTS_AMMO = 13;
+	//public final static int SLOTS_RING = 12;
+	//public final static int SLOTS_AMMO = 13;
 
 	private int[] equipment;
 
