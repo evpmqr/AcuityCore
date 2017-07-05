@@ -15,10 +15,7 @@ import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
-import com.acuity.rs.api.RSPlayer;
-import com.acuity.rs.api.RSRenderable;
-import com.acuity.rs.api.RSSceneElementComposite;
-import com.acuity.rs.api.RSVarpbit;
+import com.acuity.rs.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +56,7 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void queueForWriteCallback(Object connectionInstance, byte[] writeBuffer, int offset, int length){
+    public static void queueForWriteCallback(RSConnection connectionInstance, byte[] writeBuffer, int offset, int length){
         logger.debug("Queued for write buffer={} offset={} length={}", writeBuffer == null ? "null" : "[" + writeBuffer.length + "]", offset, length);
     }
 
