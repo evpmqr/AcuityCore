@@ -60,6 +60,7 @@ public class AppletManager {
         if (changeEvent.getPreviousGameState() == Game.CLIENT_LOADING && changeEvent.getGamestate() == Game.LOGIN_SCREEN) {
             mouseMiddleMan.replace(getClient().getCanvas());
             keyboardMiddleMan.replace(getClient().getCanvas());
+            Events.getRsEventBus().unregister(this);
         }
     }
 

@@ -2,6 +2,8 @@ package com.acuity.api.applet.input;
 
 import com.acuity.api.rs.utils.Random;
 import com.google.common.base.Preconditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -11,6 +13,8 @@ import java.awt.event.KeyListener;
  * Created by Zach on 6/17/2017.
  */
 public class KeyboardMiddleMan implements KeyListener {
+
+    private static Logger logger = LoggerFactory.getLogger(KeyboardMiddleMan.class);
 
     private Component component;
     private KeyListener output;
@@ -24,6 +28,7 @@ public class KeyboardMiddleMan implements KeyListener {
             }
         }
         component.addKeyListener(this);
+        logger.info("Replaced keyboard of {}.", component);
     }
 
     public synchronized void pressEnter() {

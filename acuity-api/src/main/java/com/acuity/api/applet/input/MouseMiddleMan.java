@@ -40,7 +40,6 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
 
         component.addMouseListener(this);
         component.addMouseMotionListener(this);
-
         logger.info("Replaced mouse of {}.", component);
     }
 

@@ -37,7 +37,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdating(String name, int index, Object instance) {
-        logger.debug("Field Updating: '{}' with index={} and object={}", name, index, instance);
+        logger.debug("Field Updating: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
 
         }
@@ -45,7 +45,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdated(String name, int index, Object instance) {
-        logger.debug("Field Updated: '{}' with index={} and object={}", name, index, instance);
+        logger.debug("Field Updated: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
@@ -56,6 +56,11 @@ public class Callbacks {
     @ClientInvoked
     public static void tick() {
 
+    }
+
+    @ClientInvoked
+    public static void queueForWriteCallback(Object connectionInstance, byte[] writeBuffer, int offset, int length){
+        logger.debug("Queued for write buffer={} offset={} length={}", writeBuffer == null ? "null" : "[" + writeBuffer.length + "]", offset, length);
     }
 
     @ClientInvoked
