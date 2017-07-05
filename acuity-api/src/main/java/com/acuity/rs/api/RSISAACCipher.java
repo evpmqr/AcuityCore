@@ -11,9 +11,9 @@ public interface RSISAACCipher {
 
 	int getValuesRemaining();
 
-	void invokeGenerateMoreResults(int var0);
+	void invokeGenerateMoreResults();
 
-	int invokeNextInt(int var0);
+	int invokeNextInt();
 
 	void setMm(int[] var0);
 

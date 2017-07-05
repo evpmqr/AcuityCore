@@ -27,9 +27,9 @@ public interface RSReferenceTable {
 
 	int getValidArchivesCount();
 
-	byte[] invokeGetConfigData(int var0, int var1, byte var2);
+	byte[] invokeUnpack(int var0, int var1);
 
-	byte[] invokeUnpack(int var0, int var1, int[] var2, int var3);
+	byte[] invokeUnpack(int var0, int var1, int[] var2);
 
 	void setArchiveCrcs(int[] var0);
 

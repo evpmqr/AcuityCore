@@ -5,9 +5,9 @@ package com.acuity.rs.api;
 
 public interface RSConnection extends java.lang.Runnable {
 
-	void invokeQueueForWrite(byte[] var0, int var1, int var2, int var3);
+	void invokeQueueForWrite(byte[] var0, int var1, int var2);
 
-	int invokeReadByte(int var0);
+	int invokeReadByte();
 
-	void invokeReadInto(byte[] var0, int var1, int var2, int var3);
+	void invokeReadInto(byte[] var0, int var1, int var2);
 }

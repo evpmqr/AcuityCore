@@ -7,7 +7,7 @@ public interface RSWorldMapData {
 
 	int getFileID();
 
-	void invokeLoadMapData(com.acuity.rs.api.RSBuffer var0, int var1, int var2);
+	void invokeLoadMapData(com.acuity.rs.api.RSBuffer var0, int var1);
 
 	void setFileID(int var0);
 }

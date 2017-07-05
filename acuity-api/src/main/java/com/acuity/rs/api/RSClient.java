@@ -413,7 +413,7 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeOnSceneXTEAKeyChange(boolean var0);
 
-	void invokePacketHandler(int var0);
+	void invokePacketHandler();
 
 	void invokeProcessAction(int var0, int var1, int var2, int var3, java.lang.String var4, java.lang.String var5, int var6, int var7);
 
