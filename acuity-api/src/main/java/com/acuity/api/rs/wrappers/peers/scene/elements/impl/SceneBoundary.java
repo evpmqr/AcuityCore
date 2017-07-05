@@ -2,11 +2,11 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.UIDs;
-import com.acuity.api.rs.wrappers.common.*;
 import com.acuity.api.rs.wrappers.common.SceneElement;
+import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
+import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
+import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.rs.api.RSModel;
-import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundary;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;

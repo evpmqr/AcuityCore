@@ -1,9 +1,12 @@
-package com.acuity.api.rs.wrappers.common;
+package com.acuity.api.rs.wrappers.common.locations;
 
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.utils.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
 
 /**
  * Created by Eclipseop.
@@ -62,5 +65,10 @@ public class SceneLocation implements Locatable {
 	@Override
 	public WorldLocation getWorldLocation() {
 		return new WorldLocation(getSceneX() + getBaseX(), getSceneY() + getBaseY(), getPlane());
+	}
+
+	@Override
+	public Optional<ScreenLocation> getScreenLocation() {
+		return Projection.sceneToScreen(this);
 	}
 }

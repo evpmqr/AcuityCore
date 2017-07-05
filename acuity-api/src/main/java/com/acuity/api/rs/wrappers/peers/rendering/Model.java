@@ -2,6 +2,7 @@ package com.acuity.api.rs.wrappers.peers.rendering;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.Projection;
+import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -93,33 +94,33 @@ public class Model extends Renderable {
         return this;
     }
 
-    public Stream<Point> streamPoints() {
-        final Stream.Builder<Point> points = Stream.builder();
+    public Stream<ScreenLocation> streamPoints() {
+        final Stream.Builder<ScreenLocation> points = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
-            Point x = Projection.worldToScreen(
+            ScreenLocation x = Projection.strictToScreen(
                     strictX + xVertices[xTriangles[i]],
                     strictY + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
-            Point y = Projection.worldToScreen(
+            ScreenLocation y = Projection.strictToScreen(
                     strictX + xVertices[yTriangles[i]],
                     strictY + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
-            Point z = Projection.worldToScreen(
+            ScreenLocation z = Projection.strictToScreen(
                     strictX + xVertices[zTriangles[i]],
                     strictY + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null
-                    && x.x > 0 && x.y > 0
-                    && y.x > 0 && y.y > 0
-                    && z.x > 0 && z.y > 0) {
-        /*        y.x += 4;
-                y.y += 4;*/
+                    && x.getX() > 0 && x.getY() > 0
+                    && y.getX() > 0 && y.getY() > 0
+                    && z.getX() > 0 && z.getY() > 0) {
+                y.increment(0, 4);
+                x.increment(0, 4);
                 points.add(x);
                 points.add(y);
                 points.add(z);
@@ -136,28 +137,28 @@ public class Model extends Renderable {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
-            Point x = Projection.worldToScreen(
+            ScreenLocation x = Projection.strictToScreen(
                     strictX + xVertices[xTriangles[i]],
                     strictY + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
-            Point y = Projection.worldToScreen(
+            ScreenLocation y = Projection.strictToScreen(
                     strictX + xVertices[yTriangles[i]],
                     strictY + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
-            Point z = Projection.worldToScreen(
+            ScreenLocation z = Projection.strictToScreen(
                     strictX + xVertices[zTriangles[i]],
                     strictY + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null
-                    && x.x > 0 && x.y > 0
-                    && y.x > 0 && y.y > 0
-                    && z.x > 0 && z.y > 0) {
-                y.x += 4;
-                y.y += 4;
-                polygons.add(new Polygon(new int[]{x.x, y.x, z.x}, new int[]{x.y, y.y, z.y}, 3));
+                    && x.getX() > 0 && x.getY() > 0
+                    && y.getX() > 0 && y.getY() > 0
+                    && z.getX() > 0 && z.getY() > 0) {
+                y.increment(0, 4);
+                x.increment(0, 4);
+                polygons.add(new Polygon(new int[]{x.getX(), y.getX(), z.getX()}, new int[]{x.getY(), y.getY(), z.getY()}, 3));
             }
         }
         return polygons.build();

@@ -1,4 +1,4 @@
-package com.acuity.api.rs.utils;
+package com.acuity.api.rs.wrappers.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ public class PlayerEquipment {
 
 	private static final Logger logger = LoggerFactory.getLogger(PlayerEquipment.class);
 
+	// TODO: 7/5/2017 Enum?
 	public final static int SLOTS_HELMET = 0;
 	public final static int SLOTS_CAPE = 1;
 	public final static int SLOTS_NECKLACE = 2;

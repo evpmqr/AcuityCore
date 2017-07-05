@@ -49,15 +49,6 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void varpbitTest(RSVarpbit rsVarpbit){
-
-    }
-
-    @ClientInvoked
-    public static void cachedModelUpdated(RSRenderable rsRenderable){
-    }
-
-    @ClientInvoked
     public static void tick() {
 
     }
@@ -66,7 +57,9 @@ public class Callbacks {
     public static void drawCallback(Image image) {
         try {
             if (Game.getGameState() == Game.IN_GAME) {
-               // image.getGraphics().drawString("Index: " + Varps.getVarpBit(4150).map(Varpbit::getValue).orElse(-1), 100, 100);
+                SceneElements.streamLoaded().forEach(element -> {
+
+                });
 
 /*                Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
                     npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(point -> {

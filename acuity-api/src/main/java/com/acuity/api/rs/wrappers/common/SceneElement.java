@@ -5,6 +5,7 @@ import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Varps;
+import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;

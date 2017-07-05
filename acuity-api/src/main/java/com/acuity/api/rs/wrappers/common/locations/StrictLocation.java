@@ -1,11 +1,15 @@
-package com.acuity.api.rs.wrappers.common;
+package com.acuity.api.rs.wrappers.common.locations;
 
+import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.utils.Scene;
+
+import java.util.Optional;
 
 /**
  * Created by Zach on 7/1/2017.
  */
-public class StrictLocation {
+public class StrictLocation implements Locatable{
 
     private int x, y, plane;
     private int baseX, baseY;
@@ -22,6 +26,10 @@ public class StrictLocation {
         this.baseY = baseY;
     }
 
+    public int getPlane() {
+        return plane;
+    }
+
     public int getX() {
         return x;
     }
@@ -34,7 +42,15 @@ public class StrictLocation {
         return new SceneLocation(x / 128, y / 128, plane, baseX, baseY);
     }
 
+    @Override
     public WorldLocation getWorldLocation(){
         return getSceneLocation().getWorldLocation();
     }
+
+    @Override
+    public Optional<ScreenLocation> getScreenLocation() {
+        return Projection.strictToScreen(this);
+    }
+
+
 }

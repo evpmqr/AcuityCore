@@ -29,7 +29,7 @@ public class AppletManager {
     private RSClassLoader rsClassLoader;
 
     private ClientConfig clientConfig;
-    private ClientEnvironment<Client> ClientEnvironment;
+    private ClientEnvironment<Client> clientEnvironment;
     private ClientStub clientStub;
 
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
@@ -46,13 +46,13 @@ public class AppletManager {
         clientConfig = new ClientConfig(1);
         rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
         Class<?> client = rsClassLoader.loadClass("client");
-        ClientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
-        ClientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
+        clientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
+        clientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
         clientStub = new ClientStub(clientConfig);
     }
 
     public void boot() {
-        ClientEnvironment.boot(clientStub);
+        clientEnvironment.boot(clientStub);
     }
 
     @Subscribe
@@ -64,7 +64,7 @@ public class AppletManager {
     }
 
     public Client getClient() {
-        return Preconditions.checkNotNull(ClientEnvironment, "Load the RS client before referencing it.").getGameEngine();
+        return Preconditions.checkNotNull(clientEnvironment, "Load the RS client before referencing it.").getGameEngine();
     }
 
     public MouseMiddleMan getMouseMiddleMan() {

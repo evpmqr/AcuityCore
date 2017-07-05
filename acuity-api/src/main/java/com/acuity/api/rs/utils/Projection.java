@@ -1,7 +1,10 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.wrappers.common.SceneLocation;
+import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
+import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
+import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +30,19 @@ public class Projection {
         }
     }
 
-    public static Optional<Point> sceneToScreen(int sceneX, int sceneY, int plane) {
-        return worldToScreen(sceneX * 128, sceneY * 128, plane);
+    public static Optional<ScreenLocation> worldToScreen(WorldLocation worldLocation){
+        return sceneToScreen(worldLocation.toCurrentSceneLocation());
     }
 
-    public static Optional<Point> worldToScreen(int strictX, int strictY, int height) {
+    public static Optional<ScreenLocation> sceneToScreen(SceneLocation sceneLocation) {
+        return strictToScreen(sceneLocation.getStrictLocation());
+    }
+
+    public static Optional<ScreenLocation> strictToScreen(StrictLocation strictLocation) {
+        return strictToScreen(strictLocation.getX(), strictLocation.getY(), strictLocation.getPlane());
+    }
+
+    public static Optional<ScreenLocation> strictToScreen(int strictX, int strictY, int height) {
         if (strictX >= 128 && strictX <= 13056 && strictY >= 128 && strictY <= 13056) {
             int alt = Camera.getPitch();
             if (alt < 0) {
@@ -57,7 +68,7 @@ public class Projection {
             if (strictY == 0) {
                 return Optional.empty();
             }
-            return Optional.of(new Point(256 + (strictX << 9) / strictY, (angle << 9) / strictY + 167));
+            return Optional.of(new ScreenLocation(256 + (strictX << 9) / strictY, (angle << 9) / strictY + 167));
         }
         return Optional.empty();
     }
