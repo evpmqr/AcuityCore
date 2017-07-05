@@ -9,6 +9,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getAmbient();
 
+	int getAmbientSoundId();
+
 	int getAnimationID();
 
 	int getClipType();
@@ -67,6 +69,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	boolean isClipped();
 
+	boolean isClipped1();
+
 	boolean isNonFlatShading();
 
 	boolean isRotated();
@@ -77,9 +81,13 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setAmbient(int var0);
 
+	void setAmbientSoundId(int var0);
+
 	void setAnimationID(int var0);
 
 	void setClipped(boolean var0);
+
+	void setClipped1(boolean var0);
 
 	void setClipType(int var0);
 

@@ -47,6 +47,8 @@ public interface RSClient extends RSGameEngine {
 
 	byte getClanChatRank();
 
+	int getClanMateCount();
+
 	com.acuity.rs.api.RSClanMember[] getClanMates();
 
 	com.acuity.rs.api.RSNodeLinkedList getClassStructures();
@@ -58,6 +60,8 @@ public interface RSClient extends RSGameEngine {
 	com.acuity.rs.api.RSCollisionData[] getCollisionMaps();
 
 	int[] getColorPalette();
+
+	com.acuity.rs.api.RSConnection getConnection();
 
 	int[] getCOSINE();
 
@@ -198,6 +202,8 @@ public interface RSClient extends RSGameEngine {
 	int getMapRotation();
 
 	int getMapScale();
+
+	int getMapState();
 
 	java.lang.String[] getMenuActions();
 
@@ -445,6 +451,8 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
+	boolean isLowMemory();
+
 	boolean isMembersWorld();
 
 	boolean isMembersWorld1();
@@ -513,6 +521,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setClanChatRank(byte var0);
 
+	void setClanMateCount(int var0);
+
 	void setClanMates(com.acuity.rs.api.RSClanMember[] var0);
 
 	void setClassStructures(com.acuity.rs.api.RSNodeLinkedList var0);
@@ -524,6 +534,8 @@ public interface RSClient extends RSGameEngine {
 	void setCollisionMaps(com.acuity.rs.api.RSCollisionData[] var0);
 
 	void setColorPalette(int[] var0);
+
+	void setConnection(com.acuity.rs.api.RSConnection var0);
 
 	void setCOSINE(int[] var0);
 
@@ -661,6 +673,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setLoginWindowX(int var0);
 
+	void setLowMemory(boolean var0);
+
 	void setMapOffset(int var0);
 
 	void setMapRegions(int[] var0);
@@ -668,6 +682,8 @@ public interface RSClient extends RSGameEngine {
 	void setMapRotation(int var0);
 
 	void setMapScale(int var0);
+
+	void setMapState(int var0);
 
 	void setMembersWorld(boolean var0);
 
