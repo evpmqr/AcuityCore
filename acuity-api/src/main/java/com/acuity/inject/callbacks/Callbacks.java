@@ -36,16 +36,16 @@ public class Callbacks {
     private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
 
     @ClientInvoked
-    public static void fieldChanging(String name, int index, Object object) {
-        logger.debug("Field Changing '{}' with index={} and object={}", name, index, object);
+    public static void fieldUpdating(String name, int index, Object instance) {
+        logger.debug("Field Updating: '{}' with index={} and object={}", name, index, instance);
         switch (name) {
 
         }
     }
 
     @ClientInvoked
-    public static void fieldChanged(String name, int index, Object object) {
-        logger.debug("Field Changed '{}' with index={} and object={}", name, index, object);
+    public static void fieldUpdated(String name, int index, Object instance) {
+        logger.debug("Field Updated: '{}' with index={} and object={}", name, index, instance);
         switch (name) {
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
