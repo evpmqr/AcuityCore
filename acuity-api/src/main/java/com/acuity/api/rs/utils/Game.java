@@ -14,8 +14,6 @@ public class Game {
     public static final int LOADING_SCREEN = 25;
     public static final int IN_GAME = 30;
 
-
-
     public static int getGameState(){
         return AcuityInstance.getClient().getGameState();
     }

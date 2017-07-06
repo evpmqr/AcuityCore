@@ -14,8 +14,32 @@ public class RRuntime {
     private static final Logger logger = LoggerFactory.getLogger(RRuntime.class);
 
     @ClientInvoked
-    public static Process exec(String command) throws IOException {
+    public static Process exec(Runtime runtime, String command) throws IOException {
         logger.warn("RS executing command '{}' via Runtime.", command);
-        return Runtime.getRuntime().exec(command);
+        return runtime.exec(command);
+    }
+
+    @ClientInvoked
+    public static long totalMemory(Runtime runtime){
+        logger.debug("RS requesting total memory via Runtime.");
+        return runtime.totalMemory();
+    }
+
+    @ClientInvoked
+    public static long maxMemory(Runtime runtime){
+        logger.debug("RS requesting max memory via Runtime.");
+        return runtime.maxMemory();
+    }
+
+    @ClientInvoked
+    public static int availableProcessors(Runtime runtime){
+        logger.debug("RS requesting available processors via Runtime.");
+        return runtime.availableProcessors();
+    }
+
+    @ClientInvoked
+    public static long freeMemory(Runtime runtime){
+        logger.debug("RS requesting free memory via Runtime.");
+        return runtime.freeMemory();
     }
 }
