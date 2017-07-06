@@ -52,6 +52,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void tick() {
+        Game.incrementTick();
         Events.getRsEventBus().post(GAME_TICK_EVENT);
     }
 
