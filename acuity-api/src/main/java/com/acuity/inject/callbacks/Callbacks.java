@@ -36,6 +36,10 @@ public class Callbacks {
         }
     }
 
+    public static void processActionCallback(int var0, int var1, int var2, int var3, String var4, String var5, int var6, int var7, int var8){
+
+    }
+
     @ClientInvoked
     public static void tick() {
 
