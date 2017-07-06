@@ -1,6 +1,8 @@
 package com.acuity.api.meta;
 
 import com.acuity.api.Events;
+import com.acuity.api.rs.events.impl.ActionEvent;
+import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.google.common.eventbus.Subscribe;
 
 import java.awt.event.MouseEvent;
@@ -13,7 +15,17 @@ public class MouseDataCollector {
     public static final MouseDataCollector INSTANCE = new MouseDataCollector();
 
     @Subscribe
-    public void processCanvasEvent(MouseEvent mouseEvent){
+    public void processCanvasEvent(MouseEvent event){
+
+    }
+
+    @Subscribe
+    public void processRecorderUpdate(MouseRecorderUpdateEvent event){
+
+    }
+
+    @Subscribe
+    public void processAction(ActionEvent event){
 
     }
 

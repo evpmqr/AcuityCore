@@ -5,7 +5,10 @@ import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.impl.ActionEvent;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
+import com.acuity.api.rs.events.impl.GameTickEvent;
 import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
+import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
+import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSConnection;
 import org.slf4j.Logger;
@@ -19,6 +22,8 @@ import java.awt.*;
 public class Callbacks {
 
     private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
+
+    private static final GameTickEvent GAME_TICK_EVENT = new GameTickEvent();
 
     @ClientInvoked
     public static void fieldUpdating(String name, int index, Object instance) {
@@ -47,7 +52,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void tick() {
-
+        Events.getRsEventBus().post(GAME_TICK_EVENT);
     }
 
     @ClientInvoked
@@ -59,24 +64,14 @@ public class Callbacks {
     public static void drawCallback(Image image) {
         try {
             if (Game.getGameState() == Game.IN_GAME) {
-
-/*                Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
-                    npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-                        image.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), screenLocation.getX(), screenLocation.getY());
-                    });
-
-                });
-
-                SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getName() != null).sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(sceneElement -> {
-                    sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-                        image.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions(), screenLocation.getX(), screenLocation.getY());
-
-                    });
-                });*/
+                Events.getRsEventBus().post(new InGameDrawEvent(image));
+            }
+            else {
+                Events.getRsEventBus().post(new GameDrawEvent(image));
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            logger.error("Error during drawing.", e);
         }
     }
 }
