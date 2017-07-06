@@ -8,8 +8,13 @@ import com.google.common.eventbus.EventBus;
 public class Events {
 
     private static EventBus rsEventBus = new EventBus();
+    private static EventBus acuityEventBus = new EventBus();
 
     public static EventBus getRsEventBus(){
         return rsEventBus;
+    }
+
+    public static EventBus getAcuityEventBus() {
+        return acuityEventBus;
     }
 }

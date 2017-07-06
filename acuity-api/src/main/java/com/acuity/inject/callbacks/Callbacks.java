@@ -3,7 +3,9 @@ package com.acuity.inject.callbacks;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.events.impl.ActionEvent;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
+import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSConnection;
 import org.slf4j.Logger;
@@ -33,11 +35,14 @@ public class Callbacks {
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;
+            case "mouseRecorderAccessed":
+                Events.getRsEventBus().post(new MouseRecorderUpdateEvent());
+                break;
         }
     }
 
-    public static void processActionCallback(int var0, int var1, int var2, int var3, String var4, String var5, int var6, int var7, int var8){
-
+    public static void processActionCallback(int arg2, int arg3, int opcode, int arg1, String action, String target, int clickX, int clickY){
+        Events.getRsEventBus().post(new ActionEvent(opcode, arg1, arg2, arg3, action, target, clickX, clickY));
     }
 
     @ClientInvoked

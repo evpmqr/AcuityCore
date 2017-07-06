@@ -1,5 +1,6 @@
 package com.acuity.api.applet.input;
 
+import com.acuity.api.Events;
 import com.acuity.api.rs.utils.Random;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
@@ -77,16 +78,19 @@ public class KeyboardMiddleMan implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        Events.getAcuityEventBus().post(e);
         output.keyTyped(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        Events.getAcuityEventBus().post(e);
         output.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        Events.getAcuityEventBus().post(e);
         output.keyReleased(e);
     }
 }

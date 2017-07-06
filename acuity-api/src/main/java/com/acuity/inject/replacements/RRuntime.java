@@ -15,8 +15,7 @@ public class RRuntime {
 
     @ClientInvoked
     public static Process exec(String command) throws IOException {
-        logger.info("RS executing command '{}' via Runtime.", command);
+        logger.warn("RS executing command '{}' via Runtime.", command);
         return Runtime.getRuntime().exec(command);
     }
-
 }

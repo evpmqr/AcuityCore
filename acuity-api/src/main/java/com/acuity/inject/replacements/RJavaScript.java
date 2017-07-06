@@ -20,5 +20,4 @@ public class RJavaScript {
         logger.warn("RS obtained a JS window.");
         return window;
     }
-
 }
