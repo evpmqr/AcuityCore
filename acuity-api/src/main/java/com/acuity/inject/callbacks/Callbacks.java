@@ -23,7 +23,7 @@ public class Callbacks {
 
     private static final Logger logger = LoggerFactory.getLogger(Callbacks.class);
 
-    private static final GameTickEvent GAME_TICK_EVENT = new GameTickEvent();
+    public static final GameTickEvent GAME_TICK_EVENT = new GameTickEvent();
 
     @ClientInvoked
     public static void fieldUpdating(String name, int index, Object instance) {
@@ -52,7 +52,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void tick() {
-        Game.incrementTick();
+        GameTickEvent.incrementTick();
         Events.getRsEventBus().post(GAME_TICK_EVENT);
     }
 
