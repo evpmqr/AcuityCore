@@ -54,7 +54,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     }
 
     public SceneLocation getSceneLocation() {
-        return new SceneLocation(rsSceneElement.getSceneX(), rsSceneElement.getSceneY(), rsSceneElement.getPlane());
+        return getStrictLocation().getSceneLocation();
     }
 
     @Override
