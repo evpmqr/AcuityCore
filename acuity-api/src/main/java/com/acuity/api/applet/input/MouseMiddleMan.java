@@ -61,48 +61,48 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.mouseClicked(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         lastPressedLocation = new Point(e.getX(), e.getY());
         output.mousePressed(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         lastReleasedLocation = new Point(e.getX(), e.getY());
         output.mouseReleased(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.mouseEntered(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.mouseExited(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         lastLocation = new Point(e.getX(), e.getY());
         outputMotion.mouseDragged(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Events.getAcuityEventBus().post(e);
         lastLocation = new Point(e.getX(), e.getY());
         outputMotion.mouseMoved(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     public Point getLastPressedLocation() {

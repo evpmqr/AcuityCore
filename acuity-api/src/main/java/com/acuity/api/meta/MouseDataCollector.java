@@ -26,7 +26,7 @@ public class MouseDataCollector {
 
     @Subscribe
     public void processAction(ActionEvent event){
-
+        System.out.println(event);
     }
 
     public void start(){

@@ -19,7 +19,7 @@ public class RReflection {
     @ClientInvoked
     public static Class<?> findClass(String className) throws ClassNotFoundException {
         logger.debug("RS-Reflection finding class '{}'.", className);
-        return Class.forName(className);
+        return Class.forName(className);//http://i.imgur.com/sO0wCM1.png
     }
 
     @ClientInvoked

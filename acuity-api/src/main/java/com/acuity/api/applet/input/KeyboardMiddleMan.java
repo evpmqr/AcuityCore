@@ -78,19 +78,19 @@ public class KeyboardMiddleMan implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.keyTyped(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.keyPressed(e);
+        Events.getAcuityEventBus().post(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        Events.getAcuityEventBus().post(e);
         output.keyReleased(e);
+        Events.getAcuityEventBus().post(e);
     }
 }

@@ -56,4 +56,18 @@ public class ActionEvent {
     public int getClickY() {
         return clickY;
     }
+
+    @Override
+    public String toString() {
+        return "ActionEvent{" +
+                "opcode=" + opcode +
+                ", arg0=" + arg0 +
+                ", arg1=" + arg1 +
+                ", arg3=" + arg3 +
+                ", action='" + action + '\'' +
+                ", target='" + target + '\'' +
+                ", clickX=" + clickX +
+                ", clickY=" + clickY +
+                '}';
+    }
 }
