@@ -19,7 +19,11 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getBoostedSkillLevels();
 
+	int getBootState();
+
 	com.acuity.rs.api.RSNodeLinkedList getBoundingBoxes();
+
+	com.acuity.rs.api.RSCameraCapture[] getCameraCaptures();
 
 	int getCameraPitch();
 
@@ -177,6 +181,8 @@ public interface RSClient extends RSGameEngine {
 
 	long getLastClickTime();
 
+	int getLatestSelectedItemIndex();
+
 	java.lang.String getLatestSelectedItemName();
 
 	com.acuity.rs.api.RSPlayer getLocalPlayer();
@@ -194,8 +200,6 @@ public interface RSClient extends RSGameEngine {
 	int getLoginState2();
 
 	int getLoginWindowX();
-
-	int getMapOffset();
 
 	int[] getMapRegions();
 
@@ -375,6 +379,8 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeAbsoluteToViewport(int var0, int var1, int var2);
 
+	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3, int var4);
+
 	void invokeAddChatMessage(int var0, java.lang.String var1, java.lang.String var2, java.lang.String var3);
 
 	void invokeAddMenuEntry(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
@@ -382,6 +388,8 @@ public interface RSClient extends RSGameEngine {
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
 	void invokeGameDraw(com.acuity.rs.api.RSInterfaceComponent[] var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
+
+	void invokeGenerateLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4, int var5, int var6);
 
 	com.acuity.rs.api.RSAnimationSequence invokeGetAnimation(int var0);
 
@@ -451,8 +459,6 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
-	boolean isLowMemory();
-
 	boolean isMembersWorld();
 
 	boolean isMembersWorld1();
@@ -491,7 +497,11 @@ public interface RSClient extends RSGameEngine {
 
 	void setBoostedSkillLevels(int[] var0);
 
+	void setBootState(int var0);
+
 	void setBoundingBoxes(com.acuity.rs.api.RSNodeLinkedList var0);
+
+	void setCameraCaptures(com.acuity.rs.api.RSCameraCapture[] var0);
 
 	void setCameraLocked(boolean var0);
 
@@ -655,6 +665,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setLastClickTime(long var0);
 
+	void setLatestSelectedItemIndex(int var0);
+
 	void setLatestSelectedItemName(java.lang.String var0);
 
 	void setLocalPlayer(com.acuity.rs.api.RSPlayer var0);
@@ -672,10 +684,6 @@ public interface RSClient extends RSGameEngine {
 	void setLoginState2(int var0);
 
 	void setLoginWindowX(int var0);
-
-	void setLowMemory(boolean var0);
-
-	void setMapOffset(int var0);
 
 	void setMapRegions(int[] var0);
 

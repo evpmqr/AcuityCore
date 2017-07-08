@@ -47,13 +47,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
+	short[] getRecolorToFind();
+
 	int getSizeX();
 
 	int getSizeY();
-
-	short[] getTextureToFind();
-
-	short[] getTextureToReplace();
 
 	int[] getTransformIDs();
 
@@ -125,6 +123,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
+	void setRecolorToFind(short[] var0);
+
 	void setRotated(boolean var0);
 
 	void setSizeX(int var0);
@@ -132,10 +132,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setSizeY(int var0);
 
 	void setSolid(boolean var0);
-
-	void setTextureToFind(short[] var0);
-
-	void setTextureToReplace(short[] var0);
 
 	void setTransformIDs(int[] var0);
 
