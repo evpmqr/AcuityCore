@@ -57,7 +57,6 @@ public class Bootstrap {
         });
 
         Events.getRsEventBus().register(this);
-        MouseDataCollector.INSTANCE.start();
     }
 
     public static void main(String[] args) {
