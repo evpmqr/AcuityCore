@@ -1,5 +1,6 @@
 package com.acuity.api.applet.input;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.meta.MouseDataCollector;
 import com.google.common.base.Preconditions;
@@ -25,19 +26,15 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
     private Point lastPressedLocation, lastReleasedLocation, lastLocation;
 
     public void replace(Component component) {
+        AcuityInstance.getClient().getRsClient().setDrawingAABB(true);
+
         this.component = component;
         if (component.getMouseListeners().length > 0) {
             output = component.getMouseListeners()[0];
-            for (MouseListener mouseListener : component.getMouseListeners()) {
-                component.removeMouseListener(mouseListener);
-            }
         }
 
         if (component.getMouseMotionListeners().length > 0) {
             outputMotion = component.getMouseMotionListeners()[0];
-            for (MouseMotionListener mouseMotionListener : component.getMouseMotionListeners()) {
-                component.removeMouseMotionListener(mouseMotionListener);
-            }
         }
 
         component.addMouseListener(this);
@@ -51,8 +48,8 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
     }
 
     public void dispatchClick(int x, int y, boolean left) {
-        dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
-        dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+        dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), + 10, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+        dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 20, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
     }
 
     public void dispatchClick(Point point, boolean left) {
@@ -61,48 +58,41 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        output.mouseClicked(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         lastPressedLocation = new Point(e.getX(), e.getY());
-        output.mousePressed(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         lastReleasedLocation = new Point(e.getX(), e.getY());
-        output.mouseReleased(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        output.mouseEntered(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        output.mouseExited(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
         lastLocation = new Point(e.getX(), e.getY());
-        outputMotion.mouseDragged(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         lastLocation = new Point(e.getX(), e.getY());
-        outputMotion.mouseMoved(e);
-        Events.getAcuityEventBus().post(e);
+        MouseDataCollector.INSTANCE.processCanvasEvent(e);
     }
 
     public Point getLastPressedLocation() {

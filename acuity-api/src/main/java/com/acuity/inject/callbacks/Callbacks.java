@@ -3,6 +3,7 @@ package com.acuity.inject.callbacks;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.meta.MouseDataCollector;
 import com.acuity.api.rs.events.impl.ActionEvent;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
 import com.acuity.api.rs.events.impl.GameTickEvent;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -46,6 +48,7 @@ public class Callbacks {
         }
     }
 
+    @ClientInvoked
     public static void processActionCallback(int arg2, int arg3, int opcode, int arg1, String action, String target, int clickX, int clickY){
         Events.getRsEventBus().post(new ActionEvent(opcode, arg1, arg2, arg3, action, target, clickX, clickY));
     }
