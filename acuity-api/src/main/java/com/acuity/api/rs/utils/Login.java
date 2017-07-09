@@ -1,6 +1,7 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.utils.task.login.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +18,17 @@ public class Login {
         logger.info("Set username={} and password.", username);
     }
 
+    public static void setLoginInfo(final Account account) {
+        setLoginInfo(account.getUsername(), account.getPassword());
+    }
+
     public static void setLoginIndex(int index){
         AcuityInstance.getClient().setLoginIndex(index);
         logger.info("Set login index to {}.", index);
+    }
+
+    public static void setLoginIndex(final LoginState state) {
+        setLoginIndex(state.getValue());
     }
 
     public static int getLoginIndex(){

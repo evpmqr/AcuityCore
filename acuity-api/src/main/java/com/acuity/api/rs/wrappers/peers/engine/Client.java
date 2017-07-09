@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.peers.engine;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.task.TaskManager;
 import com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent;
 import com.acuity.api.rs.wrappers.peers.scene.Scene;
 import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
@@ -23,11 +24,19 @@ public class Client extends GameEngine {
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
     private final RSClient rsClient;
+    private final TaskManager taskManager;
 
     @ClientInvoked
     public Client(@NotNull RSClient peer) {
         super(peer);
         this.rsClient = Preconditions.checkNotNull(peer);
+        this.taskManager = new TaskManager();
+
+        taskManager.start();
+    }
+
+    public TaskManager getTaskManager() {
+        return taskManager;
     }
 
     //init in loading screen, could technically be null before then

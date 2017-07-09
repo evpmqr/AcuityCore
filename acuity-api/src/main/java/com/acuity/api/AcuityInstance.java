@@ -1,6 +1,7 @@
 package com.acuity.api;
 
 import com.acuity.api.applet.AppletManager;
+import com.acuity.api.rs.utils.task.login.Account;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.script.ScriptManager;
 import com.google.common.base.Preconditions;
@@ -19,6 +20,12 @@ public class AcuityInstance {
 
     private AppletManager appletManager;
     private ScriptManager scriptManager;
+
+    private static Account rsAccount = new Account("test", "test"); // TODO: 7/8/2017 change
+
+    public static Account getRsAccount() {
+        return rsAccount;
+    }
 
     private AcuityInstance() throws Exception {
         logger.info("Applet loading started.");
