@@ -9,6 +9,7 @@ import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.devgui.ScriptRunnerView;
+import com.acuity.rs.api.RSNode;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
@@ -27,6 +28,8 @@ public class Bootstrap {
         Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
             npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
                 event.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), screenLocation.getX(), screenLocation.getY());
+
+
             });
 
         });

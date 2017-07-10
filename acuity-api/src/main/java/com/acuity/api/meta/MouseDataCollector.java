@@ -21,7 +21,7 @@ public class MouseDataCollector {
     private PrintWriter printWriter;
 
     public void processCanvasEvent(MouseEvent event){
-        printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
+        //printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
     }
 
     @Subscribe
@@ -31,7 +31,7 @@ public class MouseDataCollector {
 
     @Subscribe
     public void processAction(ActionEvent event){
-        printWriter.write(System.currentTimeMillis() + ":actionEvent:" + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
+       // printWriter.write(System.currentTimeMillis() + ":actionEvent:" + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
     }
 
     public void start(){

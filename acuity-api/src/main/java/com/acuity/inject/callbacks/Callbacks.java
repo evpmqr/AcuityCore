@@ -11,11 +11,15 @@ import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSConnection;
+import com.acuity.rs.api.RSModel;
+import com.acuity.rs.api.RSRenderable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +66,18 @@ public class Callbacks {
     @ClientInvoked
     public static void queueForWriteCallback(RSConnection connectionInstance, byte[] writeBuffer, int offset, int length){
         logger.trace("Queued for write buffer={} offset={} length={}", writeBuffer == null ? "null" : "[" + writeBuffer.length + "]", offset, length);
+    }
+
+    public static void addAxisAlignedBoundingBoxCallback(RSModel rsModel, int i, int i2, int i3, int i4){
+        System.out.println();
+    }
+
+    public static void generateLegacy2DBoundingBoxCallback(int i, int i2, int i3, int i4, int i5, int i6, int i7){
+        System.out.println();
+    }
+
+    public static void boundingBoxUpdated(RSRenderable rsRenderable, RSAxisAlignedBoundingBox rsAxisAlignedBoundingBox){
+        System.out.println();
     }
 
     @ClientInvoked

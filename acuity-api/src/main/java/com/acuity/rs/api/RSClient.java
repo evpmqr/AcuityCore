@@ -21,7 +21,13 @@ public interface RSClient extends RSGameEngine {
 
 	int getBootState();
 
+	com.acuity.rs.api.RSBoundingBoxDrawType getBoundingBoxDrawType();
+
 	com.acuity.rs.api.RSNodeLinkedList getBoundingBoxes();
+
+	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWALL();
+
+	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWMOUSEOVER();
 
 	com.acuity.rs.api.RSCameraCapture[] getCameraCaptures();
 
@@ -499,7 +505,13 @@ public interface RSClient extends RSGameEngine {
 
 	void setBootState(int var0);
 
+	void setBoundingBoxDrawType(com.acuity.rs.api.RSBoundingBoxDrawType var0);
+
 	void setBoundingBoxes(com.acuity.rs.api.RSNodeLinkedList var0);
+
+	void setBOUNDINGDRAWALL(com.acuity.rs.api.RSBoundingBoxDrawType var0);
+
+	void setBOUNDINGDRAWMOUSEOVER(com.acuity.rs.api.RSBoundingBoxDrawType var0);
 
 	void setCameraCaptures(com.acuity.rs.api.RSCameraCapture[] var0);
 

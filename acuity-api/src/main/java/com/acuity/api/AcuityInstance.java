@@ -21,7 +21,7 @@ public class AcuityInstance {
     private AppletManager appletManager;
     private ScriptManager scriptManager;
 
-    private static Account rsAccount = new Account("test", "test"); // TODO: 7/8/2017 change
+    private static Account rsAccount = new Account("Test", "Test"); // TODO: 7/8/2017 change
 
     public static Account getRsAccount() {
         return rsAccount;

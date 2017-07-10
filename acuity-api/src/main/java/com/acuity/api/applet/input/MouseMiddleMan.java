@@ -26,8 +26,6 @@ public class MouseMiddleMan implements MouseListener, MouseMotionListener {
     private Point lastPressedLocation, lastReleasedLocation, lastLocation;
 
     public void replace(Component component) {
-        AcuityInstance.getClient().getRsClient().setDrawingAABB(true);
-
         this.component = component;
         if (component.getMouseListeners().length > 0) {
             output = component.getMouseListeners()[0];
