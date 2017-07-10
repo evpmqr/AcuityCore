@@ -6,8 +6,8 @@ import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Varps;
-import com.acuity.api.rs.utils.direct_input.ScreenTarget;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
@@ -48,7 +48,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     }
 
     @Override
-    default Supplier<Optional<ScreenTarget>> getScreenTargetSupplier(){
+    default Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier(){
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
             return getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).orElse(Clickable.EMPTY_SUPPLIER);
         }

@@ -1,6 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.rs.utils.direct_input.ScreenTarget;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -10,8 +10,7 @@ import java.util.function.Supplier;
  */
 public interface Clickable {
 
-    Supplier<Optional<ScreenTarget>> EMPTY_SUPPLIER = Optional::empty;
+    Supplier<Optional<ScreenLocationShape>> EMPTY_SUPPLIER = Optional::empty;
 
-    Supplier<Optional<ScreenTarget>> getScreenTargetSupplier();
-
+    Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier();
 }

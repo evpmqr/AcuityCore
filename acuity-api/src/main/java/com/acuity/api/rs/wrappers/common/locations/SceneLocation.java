@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.common.locations;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

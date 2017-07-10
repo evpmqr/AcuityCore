@@ -1,4 +1,4 @@
-package com.acuity.api.rs.wrappers.common.locations;
+package com.acuity.api.rs.wrappers.common.locations.screen;
 
 import java.awt.*;
 
@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class ScreenLocation {
 
-    private int x, y;
+    protected int x, y;
 
     public ScreenLocation(int x, int y) {
         this.x = x;

@@ -1,10 +1,10 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.rs.utils.Projection;
-import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.utils.LocalPlayer;
+import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.google.common.base.Preconditions;
 
 import java.util.Optional;

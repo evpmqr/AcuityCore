@@ -6,10 +6,10 @@ import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.utils.direct_input.ScreenTarget;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
@@ -126,7 +126,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     @Override
-    public Supplier<Optional<ScreenTarget>> getScreenTargetSupplier() {
+    public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
             return getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).orElse(Clickable.EMPTY_SUPPLIER);
         }

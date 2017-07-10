@@ -4,8 +4,8 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.utils.Projection;
-import com.acuity.api.rs.utils.direct_input.ScreenTarget;
-import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -56,7 +56,7 @@ public class Model extends Renderable {
     }
 
     @Override
-    public Supplier<Optional<ScreenTarget>> getScreenTargetSupplier() {
+    public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
         return Clickable.EMPTY_SUPPLIER; // TODO: 7/10/2017 Impl
     }
 

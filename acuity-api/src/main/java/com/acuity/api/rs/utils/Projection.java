@@ -2,10 +2,12 @@ package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +25,23 @@ public class Projection {
     public static final int TILE_PIXEL_SIZE = 128;
     public static final int[] SINE = new int[2048];
     public static final int[] COSINE = new int[2048];
+
+    public static final int[][] SIDES = {
+            {0, 1, 2, 3},
+            {4, 5, 6, 7},
+
+            {0, 4, 5, 1},
+            {2, 6, 7, 3},
+
+            {1, 5, 6, 2},
+            {3, 7, 4, 0}
+    };
+
+    public static final int[][] TRIANGLES = {
+            {0, 1, 3},
+            {2, 3, 1},
+    };
+
 
     static {
         for (int i = 0; i < SINE.length; i++) {
@@ -105,5 +124,24 @@ public class Projection {
         }
 
         return Optional.empty();
+    }
+
+    /**
+     * @author Dogerina
+     */
+    public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox){
+        ScreenLocation3D[] vertices = boundingBox.getVertices();
+
+        int[][][] model = new int[SIDES.length * TRIANGLES.length][3][3];
+        for (int[] side : SIDES) {
+            for (int face = 0; face < TRIANGLES.length; face++) {
+                int[] triangle = TRIANGLES[face];
+                model[face][0] = vertices[side[triangle[0]]].toArray();
+                model[face][1] = vertices[side[triangle[1]]].toArray();
+                model[face][2] = vertices[side[triangle[2]]].toArray();
+            }
+        }
+
+        return model;
     }
 }
