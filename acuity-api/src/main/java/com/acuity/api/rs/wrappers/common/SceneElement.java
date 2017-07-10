@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.common;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
@@ -10,6 +11,7 @@ import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneElementComposite;
@@ -18,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Created by Zach on 6/24/2017.
@@ -45,9 +48,14 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     }
 
     @Override
-    default ScreenTarget getScreenTarget(){
-        return null; // TODO: 7/10/2017 Impl
+    default Supplier<Optional<ScreenTarget>> getScreenTargetSupplier(){
+        if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
+            return getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).orElse(Clickable.EMPTY_SUPPLIER);
+        }
+        return Clickable.EMPTY_SUPPLIER;
     }
+
+    Optional<AxisAlignedBoundingBox> getBoundingBox();
 
     Optional<Model> getModel();
 

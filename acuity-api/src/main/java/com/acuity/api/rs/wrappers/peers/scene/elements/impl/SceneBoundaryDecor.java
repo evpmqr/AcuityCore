@@ -3,12 +3,15 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.utils.UIDs;
+import com.acuity.api.rs.wrappers.common.SceneElement;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
-import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.api.rs.wrappers.common.SceneElement;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundaryDecor;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -63,10 +66,20 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     }
 
     @Override
+    public Optional<AxisAlignedBoundingBox> getBoundingBox() {
+        return getRenderable().map(RSRenderable::getBoundingBox).map(RSAxisAlignedBoundingBox::getWrapper);
+    }
+
+    @Override
     public Optional<Model> getModel() {
         return SceneElement.getModel(
-                Optional.ofNullable(rsSceneBoundaryDecor.getEntity()).orElseGet(() -> rsSceneBoundaryDecor.getRenderable2()),
+                getRenderable().orElse(null),
                 getStrictLocation(),
                 getOrientation());
+    }
+
+    private Optional<RSRenderable> getRenderable(){
+        RSRenderable entity = rsSceneBoundaryDecor.getEntity();
+        return Optional.ofNullable(entity != null ? entity : rsSceneBoundaryDecor.getRenderable2());
     }
 }

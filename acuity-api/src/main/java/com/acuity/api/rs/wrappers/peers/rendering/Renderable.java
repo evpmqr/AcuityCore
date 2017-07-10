@@ -2,7 +2,9 @@ package com.acuity.api.rs.wrappers.peers.rendering;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import com.acuity.api.rs.wrappers.peers.structures.CacheableNode;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -33,6 +35,10 @@ public abstract class Renderable extends CacheableNode implements Interactive {
 
     public Optional<Model> getCachedModel() {
         return Optional.ofNullable(rsRenderable.getCachedModel());
+    }
+
+    public Optional<AxisAlignedBoundingBox> getBoundingBox(){
+        return Optional.ofNullable(rsRenderable.getBoundingBox()).map(RSAxisAlignedBoundingBox::getWrapper);
     }
 
     @NotNull

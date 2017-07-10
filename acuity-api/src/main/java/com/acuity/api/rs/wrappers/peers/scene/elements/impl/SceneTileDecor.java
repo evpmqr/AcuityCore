@@ -2,11 +2,14 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.UIDs;
+import com.acuity.api.rs.wrappers.common.SceneElement;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.api.rs.wrappers.common.SceneElement;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneTileDecor;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -44,6 +47,11 @@ public class SceneTileDecor implements SceneElement {
 
     public UIDs.UID getUID() {
         return new UIDs.UID(rsSceneTileDecor.getUid());
+    }
+
+    @Override
+    public Optional<AxisAlignedBoundingBox> getBoundingBox() {
+        return Optional.ofNullable(rsSceneTileDecor.getEntity()).map(RSRenderable::getBoundingBox).map(RSAxisAlignedBoundingBox::getWrapper);
     }
 
     @Override

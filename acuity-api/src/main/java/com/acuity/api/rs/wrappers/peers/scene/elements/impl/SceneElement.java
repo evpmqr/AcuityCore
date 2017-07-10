@@ -8,6 +8,9 @@ import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -28,6 +31,11 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     @ClientInvoked
     public SceneElement(RSSceneElement peer) {
         this.rsSceneElement = Preconditions.checkNotNull(peer);
+    }
+
+    @Override
+    public Optional<AxisAlignedBoundingBox> getBoundingBox() {
+        return Optional.ofNullable(rsSceneElement.getEntity()).map(RSRenderable::getBoundingBox).map(RSAxisAlignedBoundingBox::getWrapper);
     }
 
     public Optional<Model> getModel() {

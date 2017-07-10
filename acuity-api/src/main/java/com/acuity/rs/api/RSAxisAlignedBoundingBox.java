@@ -20,6 +20,8 @@ public interface RSAxisAlignedBoundingBox extends RSBoundingBox {
 
 	int getMinZ();
 
+	com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox getWrapper();
+
 	void setColor(int var0);
 
 	void setMaxX(int var0);
@@ -33,4 +35,6 @@ public interface RSAxisAlignedBoundingBox extends RSBoundingBox {
 	void setMinY(int var0);
 
 	void setMinZ(int var0);
+
+	void setWrapper(com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox var0);
 }

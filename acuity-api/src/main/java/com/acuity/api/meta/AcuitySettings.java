@@ -6,6 +6,7 @@ package com.acuity.api.meta;
 public class AcuitySettings {
 
     private boolean modelCachingEnabled = true;
+    private boolean modelInteractionsEnabled = true;
 
 
     public boolean isModelCachingEnabled() {
@@ -14,6 +15,14 @@ public class AcuitySettings {
 
     public void setModelCachingEnabled(boolean modelCachingEnabled) {
         this.modelCachingEnabled = modelCachingEnabled;
+    }
+
+    public boolean isModelInteractionsEnabled() {
+        return modelInteractionsEnabled;
+    }
+
+    public void setModelInteractionsEnabled(boolean modelInteractionsEnabled) {
+        this.modelInteractionsEnabled = modelInteractionsEnabled;
     }
 }
 

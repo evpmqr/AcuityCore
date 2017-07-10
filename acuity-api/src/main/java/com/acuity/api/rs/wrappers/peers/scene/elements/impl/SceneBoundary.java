@@ -7,6 +7,9 @@ import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundary;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -30,10 +33,20 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         return rsSceneBoundary;
     }
 
+    private Optional<RSRenderable> getRenderable(){
+        RSRenderable entity = rsSceneBoundary.getEntity();
+        return Optional.ofNullable(entity != null ? entity : rsSceneBoundary.getRenderable2());
+    }
+
+    @Override
+    public Optional<AxisAlignedBoundingBox> getBoundingBox() {
+        return getRenderable().map(RSRenderable::getBoundingBox).map(RSAxisAlignedBoundingBox::getWrapper);
+    }
+
     @Override
     public Optional<Model> getModel() {
         return SceneElement.getModel(
-                Optional.ofNullable(rsSceneBoundary.getEntity()).orElseGet(() -> rsSceneBoundary.getRenderable2()),
+                getRenderable().orElse(null),
                 getStrictLocation(),
                 null);
     }
