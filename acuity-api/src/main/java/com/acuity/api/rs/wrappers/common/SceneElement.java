@@ -1,7 +1,6 @@
 package com.acuity.api.rs.wrappers.common;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
@@ -50,9 +49,9 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     @Override
     default Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier(){
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).orElse(Clickable.EMPTY_SUPPLIER);
+            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
         }
-        return Clickable.EMPTY_SUPPLIER;
+        return () -> getModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
     }
 
     Optional<AxisAlignedBoundingBox> getBoundingBox();

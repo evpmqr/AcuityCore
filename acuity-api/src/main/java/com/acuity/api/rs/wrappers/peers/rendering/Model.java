@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 /**
  * Created by Zachary Herridge on 6/12/2017.
  */
-public class Model extends Renderable {
+public class Model extends Renderable{
 
     private static final Logger logger = LoggerFactory.getLogger(Model.class);
 

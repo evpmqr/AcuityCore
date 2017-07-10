@@ -2,7 +2,6 @@ package com.acuity.api.rs.wrappers.peers.scene.actors;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Scene;
@@ -128,8 +127,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     @Override
     public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).orElse(Clickable.EMPTY_SUPPLIER);
+            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
         }
-        return Clickable.EMPTY_SUPPLIER;
+        return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
     }
 }
