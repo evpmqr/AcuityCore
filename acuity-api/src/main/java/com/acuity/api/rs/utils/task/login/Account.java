@@ -48,4 +48,19 @@ public class Account {
 	public void setLocked(boolean locked) {
 		this.locked = locked;
 	}
+
+	public boolean isValid() {
+		return !banned && !wrongLogin && !locked;
+	}
+
+	@Override
+	public String toString() {
+		return "Account{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", wrongLogin=" + wrongLogin +
+				", banned=" + banned +
+				", locked=" + locked +
+				'}';
+	}
 }

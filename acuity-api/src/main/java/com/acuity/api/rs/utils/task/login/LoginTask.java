@@ -38,13 +38,14 @@ public class LoginTask extends Task {
 		}
 
 		final Account account = AcuityInstance.getRsAccount();
-		if (account != null) {
+		if (account != null && account.isValid()) {
 			switch (Login.getLoginState()) {
 				case ENTER_CREDENTIALS:
 
 					final String loginMessage = Login.getLoginMessage();
 					if (loginMessage.contains("many login attempts")) {
 						logger.info("Too many login attempts! Sleeping for 2 minutes.");
+						AcuityInstance.getClient().getRsClient().setLoginResponse1("Waiting...");
 						tooManyLogins.restart(120000);
 					} else if (loginMessage.contains("disabled")) {
 						logger.info("Account " + account.getUsername() + " is disabled. :(");
