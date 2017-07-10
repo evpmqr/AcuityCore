@@ -9,6 +9,8 @@ public class Account {
 	private final String username;
 	private final String password;
 	private boolean wrongLogin;
+	private boolean banned;
+	private boolean locked;
 
 	public Account(String username, String password) {
 		this.username = username;
@@ -27,7 +29,23 @@ public class Account {
 		return wrongLogin;
 	}
 
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
 	public void setWrongLogin(boolean wrongLogin) {
 		this.wrongLogin = wrongLogin;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 }

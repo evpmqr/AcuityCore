@@ -200,6 +200,10 @@ public class Client extends GameEngine {
         return rsClient.getSkillExperiences();
     }
 
+    public boolean isWorldSelectOpen() {
+    	return rsClient.isWorldSelectShown();
+	}
+
     @NotNull
     public RSClient getRsClient(){
         return rsClient;
