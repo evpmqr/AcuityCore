@@ -2,7 +2,6 @@ package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
-import com.acuity.api.meta.MouseDataCollector;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.query.Npcs;
