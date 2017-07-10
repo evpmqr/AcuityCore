@@ -5,6 +5,7 @@ import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Varps;
+import com.acuity.api.rs.utils.direct_input.ScreenTarget;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
@@ -41,6 +42,11 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     @SuppressWarnings("unchecked")
     default List<String> getActions(){
         return getComposite().map(SceneElementComposite::getActions).map(Arrays::asList).orElse(Collections.EMPTY_LIST);
+    }
+
+    @Override
+    default ScreenTarget getScreenTarget(){
+        return null; // TODO: 7/10/2017 Impl
     }
 
     Optional<Model> getModel();

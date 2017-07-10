@@ -15,7 +15,7 @@ import java.util.Optional;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public class Renderable extends CacheableNode implements Interactive {
+public abstract class Renderable extends CacheableNode implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(Renderable.class);
 

@@ -1,11 +1,15 @@
 package com.acuity.api.rs.wrappers.peers.rendering;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.Projection;
+import com.acuity.api.rs.utils.direct_input.ScreenTarget;
 import com.acuity.api.rs.wrappers.common.locations.ScreenLocation;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -16,21 +20,24 @@ import java.util.stream.Stream;
  */
 public class Model extends Renderable {
 
+    private static final Logger logger = LoggerFactory.getLogger(Model.class);
+
     private RSModel rsModel;
 
-    private int strictX, strictY;
+    private int strictXCached, strictYCached;
 
-    private boolean inited = false;
+    private boolean modelCached = false;
     private int[] xVertices, yVertices, zVertices;
     private int[] xTriangles, yTriangles, zTriangles;
     private int[] initialXVertices, initialZVertices;
+    private int orientationCached = 0;
 
     @ClientInvoked
     public Model(RSModel peer) {
         super(peer);
         this.rsModel = Preconditions.checkNotNull(peer);
 
-        if (peer.getXTriangles() != null && peer.getXVertices() != null){
+        if (AcuityInstance.getSettings().isModelCachingEnabled() && peer.getXTriangles() != null && peer.getXVertices() != null){
             int count = peer.getXVertices().length;
             xTriangles = Arrays.copyOf(peer.getXTriangles(), count);
             yTriangles = Arrays.copyOf(peer.getYTriangles(), count);
@@ -41,20 +48,32 @@ public class Model extends Renderable {
             zVertices = Arrays.copyOf(peer.getZVertices(), count);
             initialXVertices = xVertices;
             initialZVertices = zVertices;
-            inited = true;
+            modelCached = true;
         }
-
     }
 
-    public int[] getXVertices(){// TODO: 6/12/2017 Rename
+    @Override
+    public ScreenTarget getScreenTarget() {
+        return null; // TODO: 7/10/2017 Impl
+    }
+
+    public int getCachedStrictX() {
+        return strictXCached;
+    }
+
+    public int getCachedStrictY() {
+        return strictYCached;
+    }
+
+    public int[] getXVertices(){
         return xVertices;
     }
 
-    public int[] getYVertices(){// TODO: 6/12/2017 Rename
+    public int[] getYVertices(){
         return yVertices;
     }
 
-    public int[] getZVertices(){// TODO: 6/12/2017 Rename
+    public int[] getZVertices(){
         return zVertices;
     }
 
@@ -70,14 +89,21 @@ public class Model extends Renderable {
         return zTriangles;
     }
 
+    public boolean isValid() {
+        return modelCached;
+    }
+
     public Model place(int strictX, int strictY) {
-        this.strictX = strictX;
-        this.strictY = strictY;
+        this.strictXCached = strictX;
+        this.strictYCached = strictY;
         return this;
     }
 
     public Model rotateTo(int orientation) {
-        if (!inited) return this;
+        this.orientationCached = orientation;
+
+        if (!isValid()) return this;
+
         initialXVertices = new int[xVertices.length];
         initialZVertices = new int[zVertices.length];
         initialXVertices = Arrays.copyOfRange(this.xVertices, 0, xVertices.length);
@@ -91,28 +117,35 @@ public class Model extends Renderable {
             xVertices[i] = (initialXVertices[i] * cos + initialZVertices[i] * sin >> 15) >> 1;
             zVertices[i] = (initialZVertices[i] * cos - initialXVertices[i] * sin >> 15) >> 1;
         }
+
         return this;
     }
 
+    public int getCachedOrientation() {
+        return orientationCached;
+    }
+
     public Stream<ScreenLocation> streamPoints() {
+        if (!isValid()) throw new IllegalStateException("Cannot stream model as points when model was not cached.");
+
         final Stream.Builder<ScreenLocation> points = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
             ScreenLocation x = Projection.strictToScreen(
-                    strictX + xVertices[xTriangles[i]],
-                    strictY + zVertices[xTriangles[i]],
+                    strictXCached + xVertices[xTriangles[i]],
+                    strictYCached + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
             ScreenLocation y = Projection.strictToScreen(
-                    strictX + xVertices[yTriangles[i]],
-                    strictY + zVertices[yTriangles[i]],
+                    strictXCached + xVertices[yTriangles[i]],
+                    strictYCached + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
             ScreenLocation z = Projection.strictToScreen(
-                    strictX + xVertices[zTriangles[i]],
-                    strictY + zVertices[zTriangles[i]],
+                    strictXCached + xVertices[zTriangles[i]],
+                    strictYCached + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null
@@ -130,26 +163,26 @@ public class Model extends Renderable {
     }
 
     public Stream<Polygon> streamPolygons() {
-        final Stream.Builder<Polygon> polygons = Stream.builder();
-        if (!inited) return polygons.build();
+        if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
 
+        final Stream.Builder<Polygon> polygons = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
             ScreenLocation x = Projection.strictToScreen(
-                    strictX + xVertices[xTriangles[i]],
-                    strictY + zVertices[xTriangles[i]],
+                    strictXCached + xVertices[xTriangles[i]],
+                    strictYCached + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
             ScreenLocation y = Projection.strictToScreen(
-                    strictX + xVertices[yTriangles[i]],
-                    strictY + zVertices[yTriangles[i]],
+                    strictXCached + xVertices[yTriangles[i]],
+                    strictYCached + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
             ScreenLocation z = Projection.strictToScreen(
-                    strictX + xVertices[zTriangles[i]],
-                    strictY + zVertices[zTriangles[i]],
+                    strictXCached + xVertices[zTriangles[i]],
+                    strictYCached + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null

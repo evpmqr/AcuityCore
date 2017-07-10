@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public interface Interactive {
+public interface Interactive extends Clickable{
 
 	default List getActions() {
 		return Collections.EMPTY_LIST;
