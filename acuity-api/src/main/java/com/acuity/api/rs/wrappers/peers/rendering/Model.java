@@ -5,6 +5,7 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
@@ -12,7 +13,6 @@ import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -157,6 +157,7 @@ public class Model extends Renderable{
                     && z.getX() > 0 && z.getY() > 0) {
                 y.increment(0, 4);
                 x.increment(0, 4);
+
                 points.add(x);
                 points.add(y);
                 points.add(z);
@@ -165,10 +166,10 @@ public class Model extends Renderable{
         return points.build();
     }
 
-    public Stream<Polygon> streamPolygons() {
+    public Stream<ScreenLocationShape<ScreenLocation3D>> streamScreenShapes() {
         if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
 
-        final Stream.Builder<Polygon> polygons = Stream.builder();
+        final Stream.Builder<ScreenLocationShape<ScreenLocation3D>> locationShapeBuilder = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
@@ -194,10 +195,15 @@ public class Model extends Renderable{
                     && z.getX() > 0 && z.getY() > 0) {
                 y.increment(0, 4);
                 x.increment(0, 4);
-                polygons.add(new Polygon(new int[]{x.getX(), y.getX(), z.getX()}, new int[]{x.getY(), y.getY(), z.getY()}, 3));
+
+                locationShapeBuilder.add(new ScreenLocationShape<>(
+                        new ScreenLocation3D(x.getX(), y.getX(), z.getX()),
+                        new ScreenLocation3D(x.getY(), y.getY(), z.getY())
+                ));
             }
         }
-        return polygons.build();
+
+        return locationShapeBuilder.build();
     }
 
 

@@ -131,7 +131,6 @@ public class Projection {
      */
     public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox){
         ScreenLocation3D[] vertices = boundingBox.getVertices();
-
         int[][][] model = new int[SIDES.length * TRIANGLES.length][3][3];
         for (int[] side : SIDES) {
             for (int face = 0; face < TRIANGLES.length; face++) {
@@ -141,7 +140,6 @@ public class Projection {
                 model[face][2] = vertices[side[triangle[2]]].toArray();
             }
         }
-
         return model;
     }
 }
