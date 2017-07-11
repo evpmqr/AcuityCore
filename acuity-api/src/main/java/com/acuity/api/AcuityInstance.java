@@ -1,7 +1,6 @@
 package com.acuity.api;
 
 import com.acuity.api.applet.AppletManager;
-import com.acuity.api.meta.AcuitySettings;
 import com.acuity.api.rs.utils.task.login.Account;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.script.ScriptManager;
@@ -21,9 +20,8 @@ public class AcuityInstance {
 
     private AppletManager appletManager;
     private ScriptManager scriptManager;
-    private AcuitySettings acuitySettings;
 
-    private static Account rsAccount = new Account("Test", "Test"); // TODO: 7/8/2017 change
+    private static Account rsAccount = new Account("chromatosph@yahoo.org", "123123"); // TODO: 7/8/2017 change
 
     public static Account getRsAccount() {
         return rsAccount;
@@ -32,7 +30,6 @@ public class AcuityInstance {
     private AcuityInstance() throws Exception {
         logger.info("Applet loading started.");
         scriptManager = new ScriptManager();
-        acuitySettings = new AcuitySettings();
         appletManager = new AppletManager();
     }
 
@@ -47,10 +44,6 @@ public class AcuityInstance {
 
     public static AppletManager getAppletManager() {
         return Preconditions.checkNotNull(instance, "Init the AcuityInstance before referencing it.").appletManager;
-    }
-
-    public static AcuitySettings getSettings() {
-        return Preconditions.checkNotNull(instance, "Init the AcuityInstance before referencing it.").acuitySettings;
     }
 
     public static ScriptManager getScriptManager() {

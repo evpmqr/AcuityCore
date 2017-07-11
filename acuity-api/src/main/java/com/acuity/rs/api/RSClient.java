@@ -208,6 +208,8 @@ public interface RSClient extends RSGameEngine {
 
 	int getLoginWindowX();
 
+	int getMapOffset();
+
 	int[] getMapRegions();
 
 	int getMapRotation();
@@ -384,6 +386,8 @@ public interface RSClient extends RSGameEngine {
 
 	int[][] getXteaKeys();
 
+	boolean invokeAabbMouseTargetCalc(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3);
+
 	void invokeAbsoluteToViewport(int var0, int var1, int var2);
 
 	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3, int var4);
@@ -465,6 +469,8 @@ public interface RSClient extends RSGameEngine {
 	boolean isDrawingAABB();
 
 	boolean isDynamicRegion();
+
+	boolean isLowMemory();
 
 	boolean isMembersWorld();
 
@@ -697,6 +703,10 @@ public interface RSClient extends RSGameEngine {
 	void setLoginState2(int var0);
 
 	void setLoginWindowX(int var0);
+
+	void setLowMemory(boolean var0);
+
+	void setMapOffset(int var0);
 
 	void setMapRegions(int[] var0);
 

@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +74,19 @@ public class Callbacks {
     }
 
     public static void generateLegacy2DBoundingBoxCallback(int i, int i2, int i3, int i4, int i5, int i6, int i7){
+        System.out.println();
+    }
+
+    public static void aabbMouseTargetCalcCallBack(RSModel rsModel, int i, int i2, int i3){
+        try {
+            Field ah = rsModel.getClass().getField("ah");
+            ah.setBoolean(rsModel, true);
+            System.out.println("set");
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         System.out.println();
     }
 
