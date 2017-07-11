@@ -18,4 +18,9 @@ public class Mouse {
     public static void click(ScreenLocation screenLocation, boolean leftClick){
         mouseDriver.click(screenLocation, leftClick, Random.nextInt(10, 25));
     }
+
+    public static void move(ScreenLocation screenLocation){
+        mouseDriver.move(screenLocation, Random.nextInt(10, 25));
+    }
+
 }

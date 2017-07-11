@@ -9,4 +9,5 @@ public interface MouseDriver {
 
     void click(ScreenLocation screenLocation, boolean leftClick, int delayMills);
 
+    void move(ScreenLocation screenLocation, int delay);
 }

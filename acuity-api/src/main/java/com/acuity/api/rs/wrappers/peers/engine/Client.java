@@ -176,6 +176,18 @@ public class Client extends GameEngine {
         return rsClient.getLoginResponse3();
     }
 
+    public String[] getContenxtMenuActions(){
+        return rsClient.getMenuActions();
+    }
+
+    public String[] getContenxtMenuTargets(){
+        return rsClient.getMenuTargets();
+    }
+
+    public int getContextMenurRowCount(){
+        return rsClient.getMenuRowCount();
+    }
+
     public int getLoginIndex() {
         return rsClient.getLoginState();
     }
