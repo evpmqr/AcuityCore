@@ -1,8 +1,8 @@
-package com.acuity.api.rs.utils.direct_input.mouse.impl;
+package com.acuity.api.input.direct.mouse.impl;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.input.direct.mouse.MouseDriver;
 import com.acuity.api.rs.utils.Time;
-import com.acuity.api.rs.utils.direct_input.mouse.MouseDriver;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
 /**

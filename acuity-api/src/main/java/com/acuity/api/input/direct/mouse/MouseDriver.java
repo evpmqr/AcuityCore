@@ -1,4 +1,4 @@
-package com.acuity.api.rs.utils.direct_input.mouse;
+package com.acuity.api.input.direct.mouse;
 
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 

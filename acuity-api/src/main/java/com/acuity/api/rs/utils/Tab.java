@@ -1,8 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.input.direct.keyboard.Keyboard;
 import com.acuity.api.rs.query.Interfaces;
-import com.acuity.api.rs.utils.direct_input.keyboard.Keyboard;
 import com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent;
 
 import java.awt.event.KeyEvent;

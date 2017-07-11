@@ -1,11 +1,11 @@
 package com.acuity.api.rs.utils.task.login;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.input.direct.mouse.Mouse;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.Login;
 import com.acuity.api.rs.utils.Time;
 import com.acuity.api.rs.utils.Timer;
-import com.acuity.api.rs.utils.direct_input.mouse.Mouse;
 import com.acuity.api.rs.utils.task.Task;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package com.acuity.api.rs.utils.direct_input.keyboard.impl;
+package com.acuity.api.input.direct.keyboard.impl;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.utils.direct_input.keyboard.KeyboardDriver;
+import com.acuity.api.input.direct.keyboard.KeyboardDriver;
 
 /**
  * Created by Zachary Herridge on 7/11/2017.
