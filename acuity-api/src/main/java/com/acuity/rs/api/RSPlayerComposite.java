@@ -10,8 +10,6 @@ public interface RSPlayerComposite {
 
 	int[] getEquipmentIDs();
 
-	long getModelID();
-
 	int getTransformedNpcID();
 
 	com.acuity.api.rs.wrappers.peers.composite.PlayerComposite getWrapper();
@@ -25,8 +23,6 @@ public interface RSPlayerComposite {
 	void setEquipmentIDs(int[] var0);
 
 	void setFemale(boolean var0);
-
-	void setModelID(long var0);
 
 	void setTransformedNpcID(int var0);
 

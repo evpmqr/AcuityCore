@@ -12,8 +12,6 @@ public interface RSProjectile extends RSRenderable {
 
 	int getCycle();
 
-	int getFloor();
-
 	int getHeight();
 
 	double getHeightOffset();
@@ -27,8 +25,6 @@ public interface RSProjectile extends RSRenderable {
 	double getSpeedX();
 
 	double getSpeedY();
-
-	int getStartTime();
 
 	int getStrictX();
 
@@ -46,8 +42,6 @@ public interface RSProjectile extends RSRenderable {
 
 	int getYRotation();
 
-	double getZ();
-
 	boolean isMoving();
 
 	void setAnimationSequence(com.acuity.rs.api.RSAnimationSequence var0);
@@ -55,8 +49,6 @@ public interface RSProjectile extends RSRenderable {
 	void setCurrentY(double var0);
 
 	void setCycle(int var0);
-
-	void setFloor(int var0);
 
 	void setHeight(int var0);
 
@@ -74,8 +66,6 @@ public interface RSProjectile extends RSRenderable {
 
 	void setSpeedY(double var0);
 
-	void setStartTime(int var0);
-
 	void setStrictX(int var0);
 
 	void setStrictY(int var0);
@@ -91,6 +81,4 @@ public interface RSProjectile extends RSRenderable {
 	void setXRotation(int var0);
 
 	void setYRotation(int var0);
-
-	void setZ(double var0);
 }

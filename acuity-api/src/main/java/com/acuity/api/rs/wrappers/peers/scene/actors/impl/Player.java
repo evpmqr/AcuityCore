@@ -63,7 +63,8 @@ public class Player extends Actor {
 
 	//default value = 0
 	public int getTeam() {
-		return rsPlayer.getTeam();
+		// TODO: 7/11/2017  return rsPlayer.getTeam();
+		return 0;
 	}
 
 	public int getTotalLevel() {

@@ -5,8 +5,4 @@ package com.acuity.rs.api;
 
 //Extends com/acuity/rs/api/RSReferenceTable
 public interface RSCacheReferenceTable extends RSReferenceTable {
-
-	int getIndex();
-
-	void setIndex(int var0);
 }

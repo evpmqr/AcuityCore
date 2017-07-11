@@ -7,51 +7,17 @@ package com.acuity.rs.api;
 //Extends java/lang/Object
 public interface RSReferenceTable {
 
-	int[] getArchiveCrcs();
-
-	int[][] getArchiveFileIDs();
-
-	int[][] getArchiveFileNames();
-
-	int[] getArchiveIDs();
-
-	int[] getArchiveNames();
-
-	int[] getArchiveNumberOfFiles();
-
-	int[] getArchiveRevisions();
-
 	java.lang.Object[][] getBuffer();
 
 	com.acuity.rs.api.RSIdentityTable[] getChildren();
 
 	com.acuity.rs.api.RSIdentityTable getEntry();
 
-	int getValidArchivesCount();
-
-	byte[] invokeUnpack(int var0, int var1);
-
 	byte[] invokeUnpack(int var0, int var1, int[] var2);
-
-	void setArchiveCrcs(int[] var0);
-
-	void setArchiveFileIDs(int[][] var0);
-
-	void setArchiveFileNames(int[][] var0);
-
-	void setArchiveIDs(int[] var0);
-
-	void setArchiveNames(int[] var0);
-
-	void setArchiveNumberOfFiles(int[] var0);
-
-	void setArchiveRevisions(int[] var0);
 
 	void setBuffer(java.lang.Object[][] var0);
 
 	void setChildren(com.acuity.rs.api.RSIdentityTable[] var0);
 
 	void setEntry(com.acuity.rs.api.RSIdentityTable var0);
-
-	void setValidArchivesCount(int var0);
 }

@@ -8,27 +8,15 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getAmbient();
 
-	short[] getColourToReplace();
-
-	short[] getColourToReplaceWith();
-
 	int getContrast();
-
-	int[] getCountCo();
-
-	int[] getCountObj();
 
 	int getFemaleHeadModel();
 
 	int getFemaleHeadModel2();
 
-	int getFemaleModel();
-
 	int getFemaleModel1();
 
 	int getFemaleModel2();
-
-	int getFemaleOffset();
 
 	java.lang.String[] getGroundActions();
 
@@ -42,19 +30,15 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getMaleHeadModel2();
 
-	int getMaleModel();
-
 	int getMaleModel1();
 
 	int getMaleModel2();
-
-	int getMaleOffset();
 
 	java.lang.String getName();
 
 	int getNote();
 
-	int getNotedTemplate();
+	int getNoteTemplateId();
 
 	int getOffsetX2d();
 
@@ -72,10 +56,6 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getTeam();
 
-	short[] getTextToReplaceWith();
-
-	short[] getTextureToReplace();
-
 	com.acuity.api.rs.wrappers.peers.composite.ItemComposite getWrapper();
 
 	int getXan2d();
@@ -90,39 +70,21 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	com.acuity.rs.api.RSModel invokeGetModel(int var0);
 
-	boolean invokeIsReadyWorn(boolean var0);
-
-	void invokeLoadBuffer(com.acuity.rs.api.RSBuffer var0);
-
-	void invokePopulateFromBuffer(com.acuity.rs.api.RSBuffer var0, int var1);
-
 	boolean isMembers();
 
 	int isStackable();
 
 	void setAmbient(int var0);
 
-	void setColourToReplace(short[] var0);
-
-	void setColourToReplaceWith(short[] var0);
-
 	void setContrast(int var0);
-
-	void setCountCo(int[] var0);
-
-	void setCountObj(int[] var0);
 
 	void setFemaleHeadModel(int var0);
 
 	void setFemaleHeadModel2(int var0);
 
-	void setFemaleModel(int var0);
-
 	void setFemaleModel1(int var0);
 
 	void setFemaleModel2(int var0);
-
-	void setFemaleOffset(int var0);
 
 	void setGroundActions(java.lang.String[] var0);
 
@@ -138,13 +100,9 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setMaleHeadModel2(int var0);
 
-	void setMaleModel(int var0);
-
 	void setMaleModel1(int var0);
 
 	void setMaleModel2(int var0);
-
-	void setMaleOffset(int var0);
 
 	void setMembers(boolean var0);
 
@@ -152,7 +110,7 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setNote(int var0);
 
-	void setNotedTemplate(int var0);
+	void setNoteTemplateId(int var0);
 
 	void setOffsetX2d(int var0);
 
@@ -169,10 +127,6 @@ public interface RSItemComposite extends RSCacheableNode {
 	void setResizeZ(int var0);
 
 	void setTeam(int var0);
-
-	void setTextToReplaceWith(short[] var0);
-
-	void setTextureToReplace(short[] var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.ItemComposite var0);
 

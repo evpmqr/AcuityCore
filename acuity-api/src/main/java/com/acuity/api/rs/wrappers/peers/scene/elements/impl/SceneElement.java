@@ -46,7 +46,8 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     }
 
     public int getFlag() {
-        return rsSceneElement.getFlag();
+        // TODO: 7/11/2017  return rsSceneElement.getFlag();
+        return 0;
     }
 
     public int getHeight() {

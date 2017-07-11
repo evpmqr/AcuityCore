@@ -1,5 +1,6 @@
 package com.acuity.api.input.direct.mouse;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.impl.BasicMouseDriver;
 import com.acuity.api.rs.utils.Random;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
@@ -23,4 +24,11 @@ public class Mouse {
         mouseDriver.move(screenLocation, Random.nextInt(10, 25));
     }
 
+    public static int[] getHoveredUIDs(){
+        return AcuityInstance.getClient().getHoveredUIDs();
+    }
+
+    public static int getHoveredCount(){
+        return AcuityInstance.getClient().getHoveredCount();
+    }
 }

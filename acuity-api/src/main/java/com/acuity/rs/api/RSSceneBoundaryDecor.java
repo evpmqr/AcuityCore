@@ -16,11 +16,9 @@ public interface RSSceneBoundaryDecor {
 
 	int getPlane();
 
-	com.acuity.rs.api.RSRenderable getRenderable2();
-
 	int getRenderFlag();
 
-	int getRenderInfoBitPacked();
+	int getRenderInfo();
 
 	int getSceneX();
 
@@ -40,11 +38,9 @@ public interface RSSceneBoundaryDecor {
 
 	void setPlane(int var0);
 
-	void setRenderable2(com.acuity.rs.api.RSRenderable var0);
-
 	void setRenderFlag(int var0);
 
-	void setRenderInfoBitPacked(int var0);
+	void setRenderInfo(int var0);
 
 	void setSceneX(int var0);
 

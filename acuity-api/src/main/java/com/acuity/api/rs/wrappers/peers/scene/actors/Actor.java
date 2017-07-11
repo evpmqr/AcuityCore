@@ -49,11 +49,11 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int[] getPathX() {
-        return rsActor.getPathX();
+        return rsActor.getPathXQueue();
     }
 
     public int[] getPathY() {
-        return rsActor.getPathY();
+        return rsActor.getPathYQueue();
     }
 
     public int getOrientation() {
@@ -64,9 +64,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getTargetIndex();
     }
 
-    public int getAngle() {
-        return rsActor.getAngle();
-    }
 
     public int getAnimation() {
         return rsActor.getAnimation();

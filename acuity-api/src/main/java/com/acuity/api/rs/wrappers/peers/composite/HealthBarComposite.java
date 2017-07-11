@@ -19,7 +19,8 @@ public class HealthBarComposite extends CacheableNode{
     }
 
     public int getScale(){
-        return rsHealthBarComposite.getHealthScale();
+        // TODO: 7/11/2017   return rsHealthBarComposite.getHealthScale();
+        return -1;
     }
 
     @NotNull
