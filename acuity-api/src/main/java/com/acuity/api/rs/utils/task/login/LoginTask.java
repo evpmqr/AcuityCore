@@ -5,7 +5,9 @@ import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.Login;
 import com.acuity.api.rs.utils.Time;
 import com.acuity.api.rs.utils.Timer;
+import com.acuity.api.rs.utils.direct_input.mouse.Mouse;
 import com.acuity.api.rs.utils.task.Task;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +34,7 @@ public class LoginTask extends Task {
 	@Override
 	public int loop() {
 		if (AcuityInstance.getClient().isWorldSelectOpen()) {
-			AcuityInstance.getAppletManager().getMouseMiddleMan()
-					.dispatchClick(741, 11, true);
+			Mouse.click(new ScreenLocation(741, 11));
 			Time.sleepUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
 		}
 
@@ -55,8 +56,8 @@ public class LoginTask extends Task {
 						account.setLocked(true);
 					} else {
 						Login.setLoginInfo(account);
-						AcuityInstance.getAppletManager().getMouseMiddleMan()
-								.dispatchClick((int) (235 + (Math.random() * (370 - 235))), (int) (305 + (Math.random() * (335 - 305))), true);
+						ScreenLocation screenLocation = new ScreenLocation((int) (235 + (Math.random() * (370 - 235))), (int) (305 + (Math.random() * (335 - 305))));
+						Mouse.click(screenLocation);
 					}
 
 					break;
