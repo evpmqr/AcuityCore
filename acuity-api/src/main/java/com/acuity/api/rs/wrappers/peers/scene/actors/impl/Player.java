@@ -11,7 +11,7 @@ import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,7 +63,8 @@ public class Player extends Actor {
 
 	//default value = 0
 	public int getTeam() {
-		return rsPlayer.getTeam();
+		// TODO: 7/11/2017  return rsPlayer.getTeam();
+		return 0;
 	}
 
 	public int getTotalLevel() {
@@ -76,7 +77,8 @@ public class Player extends Actor {
 
 	@Override
 	public List<String> getActions() {
-		return Arrays.asList(rsPlayer.getActions());
+		// TODO: 7/12/2017  return Arrays.asList(rsPlayer.getActions());
+		return Collections.emptyList();
 	}
 
 	@Nullable
