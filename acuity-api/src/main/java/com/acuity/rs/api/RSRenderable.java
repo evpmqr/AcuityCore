@@ -13,8 +13,6 @@ public interface RSRenderable extends RSCacheableNode {
 
 	int getHeight();
 
-	com.acuity.rs.api.RSModel invokeGetModel();
-
 	void setBoundingBox(com.acuity.rs.api.RSAxisAlignedBoundingBox var0);
 
 	void setCachedModel(com.acuity.api.rs.wrappers.peers.rendering.Model var0);

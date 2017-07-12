@@ -5,36 +5,4 @@ package com.acuity.rs.api;
 
 //Extends com/acuity/rs/api/RSCacheableNode
 public interface RSScript extends RSCacheableNode {
-
-	int[] getInstructions();
-
-	int[] getIntOperands();
-
-	int getIntStackCount();
-
-	int getLocalIntCount();
-
-	int getLocalStringCount();
-
-	java.lang.String[] getStringOperands();
-
-	int getStringStackCount();
-
-	com.acuity.rs.api.RS3CopiedNodeTable[] getSwitches();
-
-	void setInstructions(int[] var0);
-
-	void setIntOperands(int[] var0);
-
-	void setIntStackCount(int var0);
-
-	void setLocalIntCount(int var0);
-
-	void setLocalStringCount(int var0);
-
-	void setStringOperands(java.lang.String[] var0);
-
-	void setStringStackCount(int var0);
-
-	void setSwitches(com.acuity.rs.api.RS3CopiedNodeTable[] var0);
 }

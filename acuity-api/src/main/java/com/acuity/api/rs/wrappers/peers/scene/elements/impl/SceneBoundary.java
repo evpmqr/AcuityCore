@@ -35,7 +35,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
 
     private Optional<RSRenderable> getRenderable(){
         RSRenderable entity = rsSceneBoundary.getEntity();
-        return Optional.ofNullable(entity != null ? entity : rsSceneBoundary.getRenderable2());
+        return Optional.ofNullable(entity != null ? entity : rsSceneBoundary.getLinkedEntity());
     }
 
     @Override

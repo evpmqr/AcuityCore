@@ -5,8 +5,4 @@ package com.acuity.rs.api;
 
 //Extends java/lang/Object
 public interface RSIndexFile {
-
-	int getIndex();
-
-	void setIndex(int var0);
 }

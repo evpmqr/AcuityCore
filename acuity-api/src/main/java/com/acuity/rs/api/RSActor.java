@@ -7,13 +7,11 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSRenderable
 public interface RSActor extends RSRenderable {
 
-	int getActionAnimationDisable();
-
 	int getActionFrame();
 
-	int getAngle();
-
 	int getAnimation();
+
+	int getGraphic();
 
 	com.acuity.rs.api.RSNodeLinkedList getHealthBars();
 
@@ -25,25 +23,19 @@ public interface RSActor extends RSRenderable {
 
 	int[] getHitsplats();
 
-	int[] getHitsplatTypes();
-
 	int getIdlePoseAnimation();
 
 	int getOrientation();
 
-	java.lang.String getOverhead();
+	int getPathQueueSize();
 
-	int[] getPathX();
+	int[] getPathXQueue();
 
-	int[] getPathY();
+	int[] getPathYQueue();
 
 	int getPoseAnimation();
 
-	int getQueueSize();
-
 	int[] getSpecialHitsplats();
-
-	int getSpellAnimationID();
 
 	int getStrictX();
 
@@ -53,15 +45,11 @@ public interface RSActor extends RSRenderable {
 
 	int getTargetIndex();
 
-	boolean isInSequence();
-
-	void setActionAnimationDisable(int var0);
-
 	void setActionFrame(int var0);
 
-	void setAngle(int var0);
-
 	void setAnimation(int var0);
+
+	void setGraphic(int var0);
 
 	void setHealthBars(com.acuity.rs.api.RSNodeLinkedList var0);
 
@@ -73,27 +61,19 @@ public interface RSActor extends RSRenderable {
 
 	void setHitsplats(int[] var0);
 
-	void setHitsplatTypes(int[] var0);
-
 	void setIdlePoseAnimation(int var0);
-
-	void setInSequence(boolean var0);
 
 	void setOrientation(int var0);
 
-	void setOverhead(java.lang.String var0);
+	void setPathQueueSize(int var0);
 
-	void setPathX(int[] var0);
+	void setPathXQueue(int[] var0);
 
-	void setPathY(int[] var0);
+	void setPathYQueue(int[] var0);
 
 	void setPoseAnimation(int var0);
 
-	void setQueueSize(int var0);
-
 	void setSpecialHitsplats(int[] var0);
-
-	void setSpellAnimationID(int var0);
 
 	void setStrictX(int var0);
 

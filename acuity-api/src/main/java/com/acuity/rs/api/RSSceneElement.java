@@ -12,13 +12,9 @@ public interface RSSceneElement {
 
 	com.acuity.rs.api.RSRenderable getEntity();
 
-	int getFlag();
+	int getFlags();
 
 	int getHeight();
-
-	int getOffsetX();
-
-	int getOffsetY();
 
 	int getOrientation();
 
@@ -38,13 +34,9 @@ public interface RSSceneElement {
 
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
-	void setFlag(int var0);
+	void setFlags(int var0);
 
 	void setHeight(int var0);
-
-	void setOffsetX(int var0);
-
-	void setOffsetY(int var0);
 
 	void setOrientation(int var0);
 

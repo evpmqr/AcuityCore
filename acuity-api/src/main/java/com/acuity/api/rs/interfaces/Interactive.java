@@ -1,5 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
+import com.acuity.api.input.interactor.Interactor;
 import com.acuity.api.rs.utils.ActionResult;
 
 import java.util.Collections;
@@ -34,6 +35,6 @@ public interface Interactive extends Clickable{
 	}
 
 	default ActionResult interact(String action){
-		return ActionResult.FAILURE;// TODO: 6/17/2017 Impl
+		return Interactor.interact(this, action);
 	}
 }

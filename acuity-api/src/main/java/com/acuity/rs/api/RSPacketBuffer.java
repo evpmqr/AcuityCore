@@ -6,13 +6,5 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSBuffer
 public interface RSPacketBuffer extends RSBuffer {
 
-	com.acuity.rs.api.RSISAACCipher getCipher();
-
-	int invokeReadOpcode();
-
-	void invokeSeed(int[] var0);
-
 	void invokeWriteHeader(int var0);
-
-	void setCipher(com.acuity.rs.api.RSISAACCipher var0);
 }

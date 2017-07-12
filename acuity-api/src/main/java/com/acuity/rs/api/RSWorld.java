@@ -12,8 +12,6 @@ public interface RSWorld {
 
 	int getID();
 
-	int getIndex();
-
 	int getLocation();
 
 	int getMask();
@@ -25,8 +23,6 @@ public interface RSWorld {
 	void setDomain(java.lang.String var0);
 
 	void setID(int var0);
-
-	void setIndex(int var0);
 
 	void setLocation(int var0);
 

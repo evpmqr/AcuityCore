@@ -80,6 +80,6 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
 
     private Optional<RSRenderable> getRenderable(){
         RSRenderable entity = rsSceneBoundaryDecor.getEntity();
-        return Optional.ofNullable(entity != null ? entity : rsSceneBoundaryDecor.getRenderable2());
+        return Optional.ofNullable(entity != null ? entity : rsSceneBoundaryDecor.getLinkedEntity());
     }
 }

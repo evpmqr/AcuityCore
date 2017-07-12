@@ -12,8 +12,6 @@ public interface RSPlayer extends RSActor {
 
 	int getCombatLevel();
 
-	com.acuity.rs.api.RSModel getModel();
-
 	java.lang.String getName();
 
 	int getPrayerIcon();
@@ -23,6 +21,8 @@ public interface RSPlayer extends RSActor {
 	int getTeam();
 
 	int getTotalLevel();
+
+	com.acuity.rs.api.RSModel getTransformedNpcModel();
 
 	com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player getWrapper();
 
@@ -36,8 +36,6 @@ public interface RSPlayer extends RSActor {
 
 	void setHidden(boolean var0);
 
-	void setModel(com.acuity.rs.api.RSModel var0);
-
 	void setName(java.lang.String var0);
 
 	void setPrayerIcon(int var0);
@@ -47,6 +45,8 @@ public interface RSPlayer extends RSActor {
 	void setTeam(int var0);
 
 	void setTotalLevel(int var0);
+
+	void setTransformedNpcModel(com.acuity.rs.api.RSModel var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player var0);
 }

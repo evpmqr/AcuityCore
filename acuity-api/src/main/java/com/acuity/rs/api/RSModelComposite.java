@@ -6,47 +6,7 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSRenderable
 public interface RSModelComposite extends RSRenderable {
 
-	byte[] getFaceAlphas();
-
-	short[] getFaceColor();
-
-	com.acuity.rs.api.RSNormalFace[] getFaceNormals();
-
-	byte[] getFaceRenderPriorities();
-
-	byte[] getFaceRenderType();
-
-	short[] getFaceTextures();
-
-	com.acuity.rs.api.RSNormalVertex[] getNormals();
-
 	byte getPriority();
-
-	short[] getTexTriangleX();
-
-	short[] getTexTriangleY();
-
-	short[] getTexTriangleZ();
-
-	byte[] getTextureCoords();
-
-	short[] getTexturePrimaryColor();
-
-	byte[] getTextureRenderTypes();
-
-	int getTriangleFaceCount();
-
-	int[] getTrianglePointsX();
-
-	int[] getTrianglePointsY();
-
-	int[] getTrianglePointsZ();
-
-	int[] getTriangleSkinValues();
-
-	int getVertexCount();
-
-	int[] getVertexSkins();
 
 	int[] getVertexX();
 
@@ -54,53 +14,9 @@ public interface RSModelComposite extends RSRenderable {
 
 	int[] getVertexZ();
 
-	void invokeComputeAnimationTables();
-
-	void invokeComputeNormals();
-
 	com.acuity.rs.api.RSModel invokeLight(int var0, int var1, int var2, int var3, int var4);
 
-	void setFaceAlphas(byte[] var0);
-
-	void setFaceColor(short[] var0);
-
-	void setFaceNormals(com.acuity.rs.api.RSNormalFace[] var0);
-
-	void setFaceRenderPriorities(byte[] var0);
-
-	void setFaceRenderType(byte[] var0);
-
-	void setFaceTextures(short[] var0);
-
-	void setNormals(com.acuity.rs.api.RSNormalVertex[] var0);
-
 	void setPriority(byte var0);
-
-	void setTexTriangleX(short[] var0);
-
-	void setTexTriangleY(short[] var0);
-
-	void setTexTriangleZ(short[] var0);
-
-	void setTextureCoords(byte[] var0);
-
-	void setTexturePrimaryColor(short[] var0);
-
-	void setTextureRenderTypes(byte[] var0);
-
-	void setTriangleFaceCount(int var0);
-
-	void setTrianglePointsX(int[] var0);
-
-	void setTrianglePointsY(int[] var0);
-
-	void setTrianglePointsZ(int[] var0);
-
-	void setTriangleSkinValues(int[] var0);
-
-	void setVertexCount(int var0);
-
-	void setVertexSkins(int[] var0);
 
 	void setVertexX(int[] var0);
 

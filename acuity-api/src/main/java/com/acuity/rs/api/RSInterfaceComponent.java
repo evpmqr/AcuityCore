@@ -62,16 +62,6 @@ public interface RSInterfaceComponent extends RSNode {
 
 	java.lang.Object[] getMouseExitListeners();
 
-	java.lang.String getName();
-
-	int getOpacity();
-
-	int getOriginalWidth();
-
-	int getOriginalX();
-
-	int getOriginalY();
-
 	com.acuity.rs.api.RSInterfaceComponent getParent();
 
 	int getParentUID();
@@ -108,8 +98,6 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getSpriteID();
 
-	int[] getTableActionInts();
-
 	java.lang.String[] getTableActions();
 
 	java.lang.Object[] getTableListenerArgs();
@@ -119,8 +107,6 @@ public interface RSInterfaceComponent extends RSNode {
 	java.lang.String getText();
 
 	int getTextColor();
-
-	java.lang.String getTooltip();
 
 	int getType();
 
@@ -139,8 +125,6 @@ public interface RSInterfaceComponent extends RSNode {
 	boolean isFlippedVertically();
 
 	boolean isHidden();
-
-	boolean isScriptAvailable();
 
 	boolean isTextShadowed();
 
@@ -206,16 +190,6 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setMouseExitListeners(java.lang.Object[] var0);
 
-	void setName(java.lang.String var0);
-
-	void setOpacity(int var0);
-
-	void setOriginalWidth(int var0);
-
-	void setOriginalX(int var0);
-
-	void setOriginalY(int var0);
-
 	void setParent(com.acuity.rs.api.RSInterfaceComponent var0);
 
 	void setParentUID(int var0);
@@ -233,8 +207,6 @@ public interface RSInterfaceComponent extends RSNode {
 	void setRotationY(int var0);
 
 	void setRotationZ(int var0);
-
-	void setScriptAvailable(boolean var0);
 
 	void setScrollHeight(int var0);
 
@@ -254,8 +226,6 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setSpriteID(int var0);
 
-	void setTableActionInts(int[] var0);
-
 	void setTableActions(java.lang.String[] var0);
 
 	void setTableListenerArgs(java.lang.Object[] var0);
@@ -267,8 +237,6 @@ public interface RSInterfaceComponent extends RSNode {
 	void setTextColor(int var0);
 
 	void setTextShadowed(boolean var0);
-
-	void setTooltip(java.lang.String var0);
 
 	void setType(int var0);
 
