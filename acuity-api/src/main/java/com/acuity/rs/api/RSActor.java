@@ -11,6 +11,8 @@ public interface RSActor extends RSRenderable {
 
 	int getAnimation();
 
+	int getGraphic();
+
 	com.acuity.rs.api.RSNodeLinkedList getHealthBars();
 
 	byte getHitsplatCount();
@@ -46,6 +48,8 @@ public interface RSActor extends RSRenderable {
 	void setActionFrame(int var0);
 
 	void setAnimation(int var0);
+
+	void setGraphic(int var0);
 
 	void setHealthBars(com.acuity.rs.api.RSNodeLinkedList var0);
 

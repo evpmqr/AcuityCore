@@ -318,7 +318,7 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isLowMemory();
 
-	boolean isMembersWorldlowMemory();
+	boolean isMembersWorld();
 
 	boolean isMenuOpen();
 
@@ -490,7 +490,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setMapState(int var0);
 
-	void setMembersWorldlowMemory(boolean var0);
+	void setMembersWorld(boolean var0);
 
 	void setMenuActions(java.lang.String[] var0);
 
