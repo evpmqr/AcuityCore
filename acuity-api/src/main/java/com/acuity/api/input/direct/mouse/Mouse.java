@@ -21,6 +21,7 @@ public class Mouse {
     }
 
     public static void move(ScreenLocation screenLocation){
+        //Test
         mouseDriver.move(screenLocation, Random.nextInt(10, 25));
     }
 
