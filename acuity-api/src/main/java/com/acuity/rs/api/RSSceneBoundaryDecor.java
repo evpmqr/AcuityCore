@@ -8,6 +8,8 @@ public interface RSSceneBoundaryDecor {
 
 	com.acuity.rs.api.RSRenderable getEntity();
 
+	com.acuity.rs.api.RSRenderable getLinkedEntity();
+
 	int getOffsetX();
 
 	int getOffsetY();
@@ -29,6 +31,8 @@ public interface RSSceneBoundaryDecor {
 	com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneBoundaryDecor getWrapper();
 
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
+
+	void setLinkedEntity(com.acuity.rs.api.RSRenderable var0);
 
 	void setOffsetX(int var0);
 

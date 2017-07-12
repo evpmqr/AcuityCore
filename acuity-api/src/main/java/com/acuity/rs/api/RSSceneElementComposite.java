@@ -62,7 +62,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	boolean isClipped();
 
-	boolean isClipped1();
+	boolean isProjectileClipped();
 
 	boolean isRotated();
 
@@ -77,8 +77,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setAnimationId(int var0);
 
 	void setClipped(boolean var0);
-
-	void setClipped1(boolean var0);
 
 	void setClipType(int var0);
 
@@ -109,6 +107,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setOffsetY(int var0);
 
 	void setOffsetZ(int var0);
+
+	void setProjectileClipped(boolean var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 

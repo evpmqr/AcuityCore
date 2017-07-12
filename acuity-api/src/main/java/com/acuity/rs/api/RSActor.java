@@ -21,7 +21,7 @@ public interface RSActor extends RSRenderable {
 
 	int[] getHitsplats();
 
-	int getIdlePoseAnimationID();
+	int getIdlePoseAnimation();
 
 	int getOrientation();
 
@@ -31,7 +31,7 @@ public interface RSActor extends RSRenderable {
 
 	int[] getPathYQueue();
 
-	int getPoseAnimationID();
+	int getPoseAnimation();
 
 	int[] getSpecialHitsplats();
 
@@ -57,7 +57,7 @@ public interface RSActor extends RSRenderable {
 
 	void setHitsplats(int[] var0);
 
-	void setIdlePoseAnimationID(int var0);
+	void setIdlePoseAnimation(int var0);
 
 	void setOrientation(int var0);
 
@@ -67,7 +67,7 @@ public interface RSActor extends RSRenderable {
 
 	void setPathYQueue(int[] var0);
 
-	void setPoseAnimationID(int var0);
+	void setPoseAnimation(int var0);
 
 	void setSpecialHitsplats(int[] var0);
 

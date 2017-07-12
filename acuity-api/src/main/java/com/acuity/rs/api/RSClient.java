@@ -316,6 +316,8 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
+	boolean isLowMemory();
+
 	boolean isMembersWorldlowMemory();
 
 	boolean isMenuOpen();
@@ -477,6 +479,8 @@ public interface RSClient extends RSGameEngine {
 	void setLoginResponse3(java.lang.String var0);
 
 	void setLoginState(int var0);
+
+	void setLowMemory(boolean var0);
 
 	void setMapRegions(int[] var0);
 

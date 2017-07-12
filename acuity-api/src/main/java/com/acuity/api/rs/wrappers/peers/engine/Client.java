@@ -217,7 +217,7 @@ public class Client extends GameEngine {
 	}
 
 	public int[] getHoveredUIDs(){
-        return rsClient.getOnSursorUIDs();
+        return rsClient.getHoveredUIDs();
     }
 
     public int getHoveredCount(){

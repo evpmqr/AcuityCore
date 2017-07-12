@@ -10,6 +10,8 @@ public interface RSSceneBoundary {
 
 	int getHeight();
 
+	com.acuity.rs.api.RSRenderable getLinkedEntity();
+
 	int getLinkedOrientation();
 
 	int getOrientation();
@@ -27,6 +29,8 @@ public interface RSSceneBoundary {
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
 	void setHeight(int var0);
+
+	void setLinkedEntity(com.acuity.rs.api.RSRenderable var0);
 
 	void setLinkedOrientation(int var0);
 
