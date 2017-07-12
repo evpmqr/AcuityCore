@@ -12,7 +12,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getAmbientSoundId();
 
-	int getAnimationID();
+	int getAnimationId();
 
 	int getClipType();
 
@@ -24,9 +24,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getMapIconID();
 
-	int getMapSceneID();
+	int getMapSceneId();
 
-	int getModelSizeHeight();
+	int getModelHeight();
 
 	int getModelSizeX();
 
@@ -36,23 +36,21 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	short[] getNewColors();
 
-	int[] getObjectModels();
-
-	int[] getObjectTypes();
-
-	int getOffsetHeight();
+	short[] getNewTextures();
 
 	int getOffsetX();
 
 	int getOffsetY();
 
-	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
+	int getOffsetZ();
 
-	short[] getRecolorToFind();
+	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
 	int getSizeX();
 
 	int getSizeY();
+
+	short[] getTextures();
 
 	int[] getTransformIDs();
 
@@ -62,15 +60,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite getWrapper();
 
-	com.acuity.rs.api.RSSceneElementComposite invokeGetImpostor();
-
-	void invokeLoadData(com.acuity.rs.api.RSBuffer var0, int var1);
-
 	boolean isClipped();
 
-	boolean isClipped1();
-
-	boolean isNonFlatShading();
+	boolean isProjectileClipped();
 
 	boolean isRotated();
 
@@ -82,11 +74,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setAmbientSoundId(int var0);
 
-	void setAnimationID(int var0);
+	void setAnimationId(int var0);
 
 	void setClipped(boolean var0);
-
-	void setClipped1(boolean var0);
 
 	void setClipType(int var0);
 
@@ -98,9 +88,9 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setMapIconID(int var0);
 
-	void setMapSceneID(int var0);
+	void setMapSceneId(int var0);
 
-	void setModelSizeHeight(int var0);
+	void setModelHeight(int var0);
 
 	void setModelSizeX(int var0);
 
@@ -110,21 +100,17 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setNewColors(short[] var0);
 
-	void setNonFlatShading(boolean var0);
-
-	void setObjectModels(int[] var0);
-
-	void setObjectTypes(int[] var0);
-
-	void setOffsetHeight(int var0);
+	void setNewTextures(short[] var0);
 
 	void setOffsetX(int var0);
 
 	void setOffsetY(int var0);
 
-	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
+	void setOffsetZ(int var0);
 
-	void setRecolorToFind(short[] var0);
+	void setProjectileClipped(boolean var0);
+
+	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
 	void setRotated(boolean var0);
 
@@ -133,6 +119,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setSizeY(int var0);
 
 	void setSolid(boolean var0);
+
+	void setTextures(short[] var0);
 
 	void setTransformIDs(int[] var0);
 

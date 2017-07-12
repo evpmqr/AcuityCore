@@ -18,6 +18,10 @@ public interface RSModel extends RSRenderable {
 
 	int[] getZVertices();
 
+	boolean isAabbEnabled();
+
+	void setAabbEnabled(boolean var0);
+
 	void setXTriangles(int[] var0);
 
 	void setXVertices(int[] var0);

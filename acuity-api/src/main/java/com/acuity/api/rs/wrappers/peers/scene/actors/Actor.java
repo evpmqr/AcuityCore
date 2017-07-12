@@ -49,11 +49,11 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int[] getPathX() {
-        return rsActor.getPathX();
+        return rsActor.getPathXQueue();
     }
 
     public int[] getPathY() {
-        return rsActor.getPathY();
+        return rsActor.getPathYQueue();
     }
 
     public int getOrientation() {
@@ -64,9 +64,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getTargetIndex();
     }
 
-    public int getAngle() {
-        return rsActor.getAngle();
-    }
 
     public int getAnimation() {
         return rsActor.getAnimation();
@@ -83,7 +80,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     //null when no overhead text
     @Nullable
     public String getOverhead() {
-        return rsActor.getOverhead();
+        //// TODO: 7/12/2017  return rsActor.getOverhead();
+        return null;
     }
 
     public int getPoseAnimation() {
@@ -91,11 +89,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int getSpellAnimationID() {
-        return rsActor.getSpellAnimationID();
-    }
-
-    public boolean isInAnimationSequence() {
-        return rsActor.isInSequence();
+        // TODO: 7/12/2017  return rsActor.getSpellAnimationID();
+        return -1;
     }
 
     public int[] getHitsplatCycles() {
@@ -103,7 +98,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public boolean isAnimating() {
-        return rsActor.getAnimation() != rsActor.getIdlePoseAnimation();
+        return getAnimation() != getIdlePoseAnimation();
     }
 
     public StrictLocation getStrictLocation(){

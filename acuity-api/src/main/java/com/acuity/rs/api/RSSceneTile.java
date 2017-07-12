@@ -12,11 +12,11 @@ public interface RSSceneTile extends RSNode {
 
 	com.acuity.rs.api.RSSceneElement[] getElements();
 
-	com.acuity.rs.api.RSItemLayer getItemLayer();
-
 	com.acuity.rs.api.RSSceneTileModel getModel();
 
 	com.acuity.rs.api.RSSceneTilePaint getPaint();
+
+	com.acuity.rs.api.RSPickableDecor getPickableDecor();
 
 	int getPlane();
 
@@ -34,11 +34,11 @@ public interface RSSceneTile extends RSNode {
 
 	void setElements(com.acuity.rs.api.RSSceneElement[] var0);
 
-	void setItemLayer(com.acuity.rs.api.RSItemLayer var0);
-
 	void setModel(com.acuity.rs.api.RSSceneTileModel var0);
 
 	void setPaint(com.acuity.rs.api.RSSceneTilePaint var0);
+
+	void setPickableDecor(com.acuity.rs.api.RSPickableDecor var0);
 
 	void setPlane(int var0);
 

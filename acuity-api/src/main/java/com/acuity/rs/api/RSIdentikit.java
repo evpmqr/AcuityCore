@@ -8,21 +8,9 @@ public interface RSIdentikit {
 
 	int getID();
 
-	int[] getTranslatorx();
-
-	int[] getTranslatory();
-
-	int[] getTranslatorz();
-
 	boolean isShowing();
 
 	void setID(int var0);
 
 	void setShowing(boolean var0);
-
-	void setTranslatorx(int[] var0);
-
-	void setTranslatory(int[] var0);
-
-	void setTranslatorz(int[] var0);
 }

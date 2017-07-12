@@ -8,13 +8,9 @@ public interface RSHitBar extends RSNode {
 
 	int getCycle();
 
-	int getHealth();
-
 	int getHealthRatio();
 
 	void setCycle(int var0);
-
-	void setHealth(int var0);
 
 	void setHealthRatio(int var0);
 }

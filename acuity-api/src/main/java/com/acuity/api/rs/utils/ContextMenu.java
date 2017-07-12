@@ -27,7 +27,7 @@ public class ContextMenu {
     }
 
     public static Stream<String> streamChildren(){
-        return Streams.zip(streamActions(), streamTargets(),(s, s2) -> s + " " + s2);
+        return Streams.zip(streamActions(), streamTargets(),(action, target) -> action + " " + target);
     }
 
     public static int getRowCount(){

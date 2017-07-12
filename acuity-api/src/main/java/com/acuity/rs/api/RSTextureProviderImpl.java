@@ -9,7 +9,5 @@ public interface RSTextureProviderImpl {
 
 	com.acuity.rs.api.RSReferenceTable getTable();
 
-	int[] invokeLoad(int var0);
-
 	void setTable(com.acuity.rs.api.RSReferenceTable var0);
 }

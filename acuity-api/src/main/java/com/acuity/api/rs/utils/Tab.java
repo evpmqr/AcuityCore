@@ -1,6 +1,5 @@
 package com.acuity.api.rs.utils;
 
-import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.keyboard.Keyboard;
 import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent;
@@ -52,8 +51,7 @@ public enum Tab {
 		if (Varps.get(281, 0) >= 1000 && hotkey != -1) {
 			Keyboard.type((char) hotkey);
 		} else {
-			getComponent()
-					.ifPresent(component -> AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(component.getPoint(), true));
+			// TODO: 7/11/2017  getComponent().ifPresent(component -> AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(component.getPoint(), true));
 		}
 
 		return isOpen() ? ActionResult.SUCCESS : ActionResult.FAILURE;

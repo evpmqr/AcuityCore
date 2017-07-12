@@ -15,4 +15,9 @@ public class BasicMouseDriver implements MouseDriver {
         Time.sleep(delayMills);
         AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(screenLocation.getX(), screenLocation.getY(), leftClick);
     }
+
+    @Override
+    public void move(ScreenLocation screenLocation, int delay) {
+
+    }
 }

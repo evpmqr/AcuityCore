@@ -10,7 +10,7 @@ public interface RSSceneTileDecor {
 
 	int getPlane();
 
-	int getRenderInfoBitPacked();
+	int getRenderInfo();
 
 	int getSceneX();
 
@@ -24,7 +24,7 @@ public interface RSSceneTileDecor {
 
 	void setPlane(int var0);
 
-	void setRenderInfoBitPacked(int var0);
+	void setRenderInfo(int var0);
 
 	void setSceneX(int var0);
 

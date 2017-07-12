@@ -216,6 +216,14 @@ public class Client extends GameEngine {
     	return rsClient.isWorldSelectShown();
 	}
 
+	public int[] getHoveredUIDs(){
+        return rsClient.getHoveredUIDs();
+    }
+
+    public int getHoveredCount(){
+	    return rsClient.getOnCursorCount();
+    }
+
     @NotNull
     public RSClient getRsClient(){
         return rsClient;
