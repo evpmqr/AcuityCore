@@ -1,7 +1,7 @@
 package com.acuity.api.applet.input;
 
-import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
+import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.utils.Random;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
@@ -82,8 +82,10 @@ public class KeyboardMiddleMan implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == 'a'){
-            AcuityInstance.getClient().getRsClient().setDrawingAABB(!AcuityInstance.getClient().getRsClient().isDrawingAABB());
-            AcuityInstance.getClient().getRsClient().setBoundingBoxDrawType(AcuityInstance.getClient().getRsClient().getBOUNDINGDRAWALL());
+            TileDumper.execute();
+        }
+        if (e.getKeyChar() == 'c'){
+            TileDumper.clear();
         }
         Events.getAcuityEventBus().post(e);
     }

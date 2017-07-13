@@ -24,8 +24,6 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWALL();
 
-	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWMOUSEOVER();
-
 	com.acuity.rs.api.RSCameraCapture[] getCameraCaptures();
 
 	int getCameraPitch();
@@ -244,8 +242,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getSkillExperiences();
 
-	int getSocketState();
-
 	int getSpellTargetFlags();
 
 	int[] getTempVarps();
@@ -316,8 +312,6 @@ public interface RSClient extends RSGameEngine {
 
 	boolean isDynamicRegion();
 
-	boolean isLowMemory();
-
 	boolean isMembersWorld();
 
 	boolean isMenuOpen();
@@ -351,8 +345,6 @@ public interface RSClient extends RSGameEngine {
 	void setBoundingBoxes(com.acuity.rs.api.RSNodeLinkedList var0);
 
 	void setBOUNDINGDRAWALL(com.acuity.rs.api.RSBoundingBoxDrawType var0);
-
-	void setBOUNDINGDRAWMOUSEOVER(com.acuity.rs.api.RSBoundingBoxDrawType var0);
 
 	void setCameraCaptures(com.acuity.rs.api.RSCameraCapture[] var0);
 
@@ -480,8 +472,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setLoginState(int var0);
 
-	void setLowMemory(boolean var0);
-
 	void setMapRegions(int[] var0);
 
 	void setMapRotation(int var0);
@@ -587,8 +577,6 @@ public interface RSClient extends RSGameEngine {
 	void setSelectedRegionTileY(int var0);
 
 	void setSkillExperiences(int[] var0);
-
-	void setSocketState(int var0);
 
 	void setSpellSelected(boolean var0);
 

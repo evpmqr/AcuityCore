@@ -36,15 +36,11 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	java.lang.String getName();
 
-	int getNote();
-
 	int getNoteTemplateId();
 
 	int getOffsetX2d();
 
 	int getOffsetY2d();
-
-	int getPrice();
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
@@ -108,15 +104,11 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setName(java.lang.String var0);
 
-	void setNote(int var0);
-
 	void setNoteTemplateId(int var0);
 
 	void setOffsetX2d(int var0);
 
 	void setOffsetY2d(int var0);
-
-	void setPrice(int var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
