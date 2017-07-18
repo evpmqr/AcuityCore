@@ -9,6 +9,7 @@ import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -65,13 +66,32 @@ public class TileDumper {
 
                         SceneElements.streamLoaded(x, y, plane)
                                 .forEach(sceneElement -> collectedSEs.add(new DumpSE(sceneElement, dumpTile.getX(), dumpTile.getY(), dumpTile.getPlane())));
-
-                        Npcs.streamLoaded(new SceneLocation(x, y, plane))
-                                .forEach(npc -> collectedNPCs.add(new DumpNPC(npc, dumpTile.getX(), dumpTile.getY(), dumpTile.getPlane())));
                     }
                 }
             }
         }
+
+
+        Document append = new Document()
+                .append("x", new Document("$lte", baseX + 98).append("$gte", baseX + 3))
+                .append("y", new Document("$gte", baseY + 3).append("$lte", baseY + 98))
+                .append("z", plane);
+
+        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("TileData").deleteMany(append);
+        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("SEData").deleteMany(append);
+        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("NPCData").deleteMany(append);
+
+        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("Captures").insertOne(
+                new Document("_id", baseX + ":" + baseY + ":" + plane)
+                        .append("x", baseX)
+                        .append("y", baseY)
+                        .append("z", plane)
+                        .append("w", 98)
+                        .append("h", 98)
+        );
+
+        Npcs.streamLoaded().forEach(npc -> collectedNPCs.add(new DumpNPC(npc,
+                npc.getWorldLocation().getWorldX(), npc.getWorldLocation().getWorldY(), npc.getWorldLocation().getPlane())));
 
         executor.execute(() -> {
             List<UpdateOneModel<Document>> collect = collectedNPCs.build().map(document -> new UpdateOneModel<Document>(
@@ -80,7 +100,7 @@ public class TileDumper {
                             new UpdateOptions().upsert(true)
                     )
             ).collect(Collectors.toList());
-            logger.debug("Saving {} dumped SEs.", collect.size());
+            logger.debug("Saving {} dumped NPCs.", collect.size());
             AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("NPCData").bulkWrite(collect);
         });
 
