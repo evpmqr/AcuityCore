@@ -62,6 +62,11 @@ public class SceneTileDecor implements SceneElement {
                 null);
     }
 
+    @Override
+    public int getOrientation() {
+        return 0;
+    }
+
     @NotNull
     public RSSceneTileDecor getRsSceneTileDecor() {
         return rsSceneTileDecor;

@@ -58,6 +58,8 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
 
     Optional<Model> getModel();
 
+    int getOrientation();
+
     int getID();
 
     default String getName(){

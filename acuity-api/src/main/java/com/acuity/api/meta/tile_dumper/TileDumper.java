@@ -1,15 +1,12 @@
 package com.acuity.api.meta.tile_dumper;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.query.Npcs;
+import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.mongodb.BasicDBObject;
-import com.mongodb.WriteConcern;
-import com.mongodb.client.model.BulkWriteOptions;
-import com.mongodb.client.model.InsertManyOptions;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
@@ -19,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -47,7 +43,10 @@ public class TileDumper {
     }
 
     public static void execute(){
-        Stream.Builder<DumpTile> collected = Stream.builder();
+        Stream.Builder<DumpTile> collectedTiles = Stream.builder();
+        Stream.Builder<DumpSE> collectedSEs = Stream.builder();
+        Stream.Builder<DumpNPC> collectedNPCs = Stream.builder();
+
         int baseX = Scene.getBaseX();
         int baseY = Scene.getBaseY();
         int plane = Scene.getPlane();
@@ -61,16 +60,43 @@ public class TileDumper {
                     if (x <= 98 && y <= 98){
                         DumpTile dumpTile = new DumpTile(x + baseX, y + baseY, plane, tiles[y]);
                         if (dumpTile.getFlag() != 0){
-                            collected.add(dumpTile);
+                            collectedTiles.add(dumpTile);
                         }
+
+                        SceneElements.streamLoaded(x, y, plane)
+                                .forEach(sceneElement -> collectedSEs.add(new DumpSE(sceneElement, dumpTile.getX(), dumpTile.getY(), dumpTile.getPlane())));
+
+                        Npcs.streamLoaded(new SceneLocation(x, y, plane))
+                                .forEach(npc -> collectedNPCs.add(new DumpNPC(npc, dumpTile.getX(), dumpTile.getY(), dumpTile.getPlane())));
                     }
                 }
             }
         }
 
+        executor.execute(() -> {
+            List<UpdateOneModel<Document>> collect = collectedNPCs.build().map(document -> new UpdateOneModel<Document>(
+                            new Document("_id", document.getID()),
+                            document.toUpdate(),
+                            new UpdateOptions().upsert(true)
+                    )
+            ).collect(Collectors.toList());
+            logger.debug("Saving {} dumped SEs.", collect.size());
+            AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("NPCData").bulkWrite(collect);
+        });
 
         executor.execute(() -> {
-            List<UpdateOneModel<Document>> collect = collected.build().map(document -> new UpdateOneModel<Document>(
+            List<UpdateOneModel<Document>> collect = collectedSEs.build().map(document -> new UpdateOneModel<Document>(
+                            new Document("_id", document.getID()),
+                            document.toUpdate(),
+                            new UpdateOptions().upsert(true)
+                    )
+            ).collect(Collectors.toList());
+            logger.debug("Saving {} dumped SEs.", collect.size());
+            AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("SEData").bulkWrite(collect);
+        });
+
+        executor.execute(() -> {
+            List<UpdateOneModel<Document>> collect = collectedTiles.build().map(document -> new UpdateOneModel<Document>(
                     new Document("_id", document.getID()),
                     document.toUpdate(),
                     new UpdateOptions().upsert(true)
