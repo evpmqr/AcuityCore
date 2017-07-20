@@ -34,6 +34,7 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
         return rsSceneBoundaryDecor.getRenderFlag();
     }
 
+    @Override
     public int getOrientation(){
         return rsSceneBoundaryDecor.getOrientation();
     }

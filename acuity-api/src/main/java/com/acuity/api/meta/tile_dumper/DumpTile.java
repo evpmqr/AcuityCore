@@ -1,7 +1,6 @@
 package com.acuity.api.meta.tile_dumper;
 
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 /**
  * Created by Zach on 7/12/2017.
@@ -13,11 +12,11 @@ public class DumpTile {
     private int flag;
 
     public DumpTile(int x, int y, int z, int flag) {
-        this._id = x + ":" + y + ":" + z;
         this.x = x;
         this.y = y;
         this.z = z;
         this.flag = flag;
+        this._id = x + ":" + y + ":" + z;
     }
 
     public int getFlag() {
@@ -36,6 +35,18 @@ public class DumpTile {
 
     public String getID() {
         return _id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getPlane() {
+        return z;
     }
 
     @Override

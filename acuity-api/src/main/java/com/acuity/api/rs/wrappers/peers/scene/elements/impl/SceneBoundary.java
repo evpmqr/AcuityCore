@@ -51,6 +51,11 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
                 null);
     }
 
+    @Override
+    public int getOrientation() {
+        return 0;
+    }
+
     public UIDs.UID getUID(){
         return new UIDs.UID(rsSceneBoundary.getUid());
     }

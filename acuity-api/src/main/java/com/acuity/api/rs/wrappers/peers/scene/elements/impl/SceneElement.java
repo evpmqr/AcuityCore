@@ -54,6 +54,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
         return rsSceneElement.getHeight();
     }
 
+    @Override
     public int getOrientation() {
         return rsSceneElement.getOrientation();
     }

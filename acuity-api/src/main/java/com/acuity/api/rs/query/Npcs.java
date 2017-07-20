@@ -2,6 +2,7 @@ package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,12 @@ public class Npcs {
 	public static Stream<Npc> streamLoaded() {
 		return Arrays.stream(AcuityInstance.getClient().getNpcs())
                 .filter(Objects::nonNull);
+	}
+
+	public static Stream<Npc> streamLoaded(SceneLocation sceneLocation) {
+		return Arrays.stream(AcuityInstance.getClient().getNpcs())
+				.filter(Objects::nonNull)
+				.filter(npc -> sceneLocation.equals(npc.getSceneLocation()));
 	}
 
 	public static List<Npc> getLoaded() {
