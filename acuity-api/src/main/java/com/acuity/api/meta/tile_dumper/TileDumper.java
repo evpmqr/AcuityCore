@@ -4,22 +4,21 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.UpdateOptions;
-import com.mongodb.client.result.DeleteResult;
+import com.orientechnologies.orient.graph.batch.OGraphBatchInsert;
+import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import org.bson.Document;
-import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,14 +32,14 @@ public class TileDumper {
     private static Executor executor;
 
     static {
-        try {
+     /*   try {
             AcuityDB.init();
             Jongo jongo = new Jongo(AcuityDB.getMongoClient().getDB("TileDB"));
             tileData = jongo.getCollection("TileData");
             executor = Executors.newSingleThreadExecutor();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static void execute(){
@@ -129,5 +128,43 @@ public class TileDumper {
 
     public static void clear() {
         tileData.drop();
+    }
+
+    public static void main(String[] args) {
+        OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "=");
+
+
+        OGraphBatchInsert batch = new OGraphBatchInsert("remote:acuitybotting.com/MapData", "root", "");
+        try {
+            batch.begin();
+            batch.setVertexClass("Tile");
+            batch.createVertex(0L);
+
+            Map<String, Object> vertexProps = new HashMap<>();
+            vertexProps.put("x", 1000);
+            vertexProps.put("y", 2313);
+            vertexProps.put("plane", 0);
+            vertexProps.put("flag", 11111);
+            batch.setVertexProperties(0L, vertexProps);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            batch.end();
+        }
+
+
+
+
+
+  /*      try {
+            OrientVertex orientVertex = graph.addVertex("class:Tile", "x", 1000, "y", 2313, "plane", 0, "flag", 11111);
+
+
+
+        } finally {
+            graph.shutdown();
+        }*/
     }
 }
