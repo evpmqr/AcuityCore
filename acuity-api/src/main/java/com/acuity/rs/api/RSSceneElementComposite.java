@@ -12,8 +12,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getAmbientSoundId();
 
-	int getAnimationId();
-
 	int getClipType();
 
 	short[] getColors();
@@ -26,23 +24,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getMapSceneId();
 
-	int getModelHeight();
-
-	int getModelSizeX();
-
-	int getModelSizeY();
-
 	java.lang.String getName();
 
 	short[] getNewColors();
 
 	short[] getNewTextures();
-
-	int getOffsetX();
-
-	int getOffsetY();
-
-	int getOffsetZ();
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
@@ -74,8 +60,6 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setAmbientSoundId(int var0);
 
-	void setAnimationId(int var0);
-
 	void setClipped(boolean var0);
 
 	void setClipType(int var0);
@@ -90,23 +74,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setMapSceneId(int var0);
 
-	void setModelHeight(int var0);
-
-	void setModelSizeX(int var0);
-
-	void setModelSizeY(int var0);
-
 	void setName(java.lang.String var0);
 
 	void setNewColors(short[] var0);
 
 	void setNewTextures(short[] var0);
-
-	void setOffsetX(int var0);
-
-	void setOffsetY(int var0);
-
-	void setOffsetZ(int var0);
 
 	void setProjectileClipped(boolean var0);
 

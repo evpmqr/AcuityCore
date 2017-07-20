@@ -136,16 +136,8 @@ public class Client extends GameEngine {
         return rsClient.getViewportWidth();
     }
 
-    public int getMapScale() {
-        return rsClient.getMapScale();
-    }
-
     public int getMapRotation() {
         return rsClient.getMapRotation();
-    }
-
-    public int getMinimapOffset() {
-        return rsClient.getMinimapOffset();
     }
 
     public boolean isResized() {

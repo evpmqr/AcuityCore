@@ -48,14 +48,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
                 .map(model -> model.rotateTo(getOrientation()));
     }
 
-    public int[] getPathX() {
-        return rsActor.getPathXQueue();
-    }
-
-    public int[] getPathY() {
-        return rsActor.getPathYQueue();
-    }
-
     public int getOrientation() {
         return rsActor.getOrientation();
     }
@@ -74,7 +66,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int getIdlePoseAnimation() {
-        return rsActor.getIdlePoseAnimation();
+        // TODO: 7/20/2017  return rsActor.getIdlePoseAnimation();
+        return 0;
     }
 
     //null when no overhead text
@@ -85,7 +78,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int getPoseAnimation() {
-        return rsActor.getPoseAnimation();
+        // TODO: 7/20/2017  return rsActor.getPoseAnimation();
+        return 0;
     }
 
     public int getSpellAnimationID() {

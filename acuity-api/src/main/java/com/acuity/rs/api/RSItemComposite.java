@@ -24,8 +24,6 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	java.lang.String[] getInventoryActions();
 
-	int getInventoryModel();
-
 	int getMaleHeadModel();
 
 	int getMaleHeadModel2();
@@ -38,10 +36,6 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getNoteTemplateId();
 
-	int getOffsetX2d();
-
-	int getOffsetY2d();
-
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
 	int getResizeX();
@@ -53,14 +47,6 @@ public interface RSItemComposite extends RSCacheableNode {
 	int getTeam();
 
 	com.acuity.api.rs.wrappers.peers.composite.ItemComposite getWrapper();
-
-	int getXan2d();
-
-	int getYan2d();
-
-	int getZan2d();
-
-	int getZoom2d();
 
 	com.acuity.rs.api.RSModelComposite invokeGetEquipmentModel(boolean var0);
 
@@ -88,8 +74,6 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setInventoryActions(java.lang.String[] var0);
 
-	void setInventoryModel(int var0);
-
 	void setIsStackable(int var0);
 
 	void setMaleHeadModel(int var0);
@@ -106,10 +90,6 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setNoteTemplateId(int var0);
 
-	void setOffsetX2d(int var0);
-
-	void setOffsetY2d(int var0);
-
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
 	void setResizeX(int var0);
@@ -121,12 +101,4 @@ public interface RSItemComposite extends RSCacheableNode {
 	void setTeam(int var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.ItemComposite var0);
-
-	void setXan2d(int var0);
-
-	void setYan2d(int var0);
-
-	void setZan2d(int var0);
-
-	void setZoom2d(int var0);
 }
