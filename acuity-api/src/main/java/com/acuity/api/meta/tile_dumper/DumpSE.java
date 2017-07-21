@@ -25,6 +25,30 @@ public class DumpSE {
         this._id = x + ":" + y + ":" + z + ":" + name + ":" + seID + ":" + rotation;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public int getSeID() {
+        return seID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRotation() {
+        return rotation;
+    }
+
     public Document toUpdate(){
         Document update =  new Document("$set",
                 new Document()

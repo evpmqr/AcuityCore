@@ -26,6 +26,26 @@ public class DumpNPC {
         this._id = x + ":" + y + ":" + z + ":" + name + ":" + npcID;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getNpcID() {
+        return npcID;
+    }
+
     public Document toUpdate(){
         Document update =  new Document("$set",
                 new Document()

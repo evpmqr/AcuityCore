@@ -87,11 +87,9 @@ public class Callbacks {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        System.out.println();
     }
 
     public static void boundingBoxUpdated(RSRenderable rsRenderable, RSAxisAlignedBoundingBox rsAxisAlignedBoundingBox){
-        System.out.println();
     }
 
     @ClientInvoked

@@ -24,18 +24,9 @@ public class Bootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
-        Npcs.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(npc -> {
-            npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-                event.getGraphics().drawString(npc.getNullSafeName() + npc.getActions(), screenLocation.getX(), screenLocation.getY());
-
-
-            });
-
-        });
-
-        SceneElements.streamLoaded().filter(sceneElement -> !sceneElement.getNullSafeName().equals("null")).sorted(Comparator.comparingInt(Locatable::distance)).limit(20).forEach(sceneElement -> {
+        SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getNullSafeName().equals("Door")).forEach(sceneElement -> {
             sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-                event.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions(), screenLocation.getX(), screenLocation.getY());
+                event.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions() + " " + sceneElement.getOrientation(), screenLocation.getX(), screenLocation.getY());
             });
         });
     }

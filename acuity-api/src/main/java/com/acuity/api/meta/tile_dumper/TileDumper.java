@@ -8,8 +8,11 @@ import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.UpdateOptions;
+import com.orientechnologies.orient.core.command.OCommandRequest;
+import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.orientechnologies.orient.graph.batch.OGraphBatchInsert;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientGraphCommand;
 import org.bson.Document;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
@@ -19,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,10 +40,11 @@ public class TileDumper {
             AcuityDB.init();
             Jongo jongo = new Jongo(AcuityDB.getMongoClient().getDB("TileDB"));
             tileData = jongo.getCollection("TileData");
-            executor = Executors.newSingleThreadExecutor();
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+
+        executor = Executors.newSingleThreadExecutor();
     }
 
     public static void execute(){
@@ -70,8 +75,73 @@ public class TileDumper {
             }
         }
 
+        Npcs.streamLoaded().forEach(npc -> collectedNPCs.add(new DumpNPC(npc, npc.getWorldLocation().getWorldX(), npc.getWorldLocation().getWorldY(), npc.getWorldLocation().getPlane())));
 
-        Document append = new Document()
+        executor.execute(() -> {
+            logger.info("Starting dump");
+            OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "");
+            try {
+
+                Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
+                Object deleteNpcs = graph.command(new OCommandSQL("delete vertex from NPC where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
+                Object deleteSEs = graph.command(new OCommandSQL("delete vertex from SceneElement where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
+
+
+                logger.debug("Deleted {} tiles.", deleteTiles);
+                logger.debug("Deleted {} npcs.", deleteNpcs);
+                logger.debug("Deleted {} scene elements.", deleteSEs);
+
+                graph.addVertex("class:Capture", "lowerX", baseX + 3, "lowerY", baseY + 3, "upperX", baseX + 98, "upperY", baseY + 98, "plane", plane);
+
+                collectedTiles.build().forEach(dumpTile -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpTile.getX());
+                    vertexProps.put("y", dumpTile.getY());
+                    vertexProps.put("plane", dumpTile.getPlane());
+                    vertexProps.put("flag", dumpTile.getFlag());
+                    graph.addVertex("class:Tile", vertexProps);
+                });
+
+                collectedSEs.build().forEach(dumpSE -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpSE.getX());
+                    vertexProps.put("y", dumpSE.getY());
+                    vertexProps.put("plane", dumpSE.getZ());
+                    vertexProps.put("name", dumpSE.getName());
+                    vertexProps.put("orientation", dumpSE.getRotation());
+                    vertexProps.put("sceneElementID", dumpSE.getSeID());
+                    graph.addVertex("class:SceneElement", vertexProps);
+
+                });
+
+                collectedNPCs.build().forEach(dumpNPC -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpNPC.getX());
+                    vertexProps.put("y", dumpNPC.getY());
+                    vertexProps.put("plane", dumpNPC.getZ());
+                    vertexProps.put("name", dumpNPC.getName());
+                    vertexProps.put("npcID", dumpNPC.getNpcID());
+                    graph.addVertex("class:NPC", vertexProps);
+                });
+
+
+
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                graph.rollback();
+            }
+            finally {
+                graph.shutdown();
+                logger.info("Dump complete.");
+            }
+        });
+
+
+
+
+       /* Document append = new Document()
                 .append("x", new Document("$lte", baseX + 98).append("$gte", baseX + 3))
                 .append("y", new Document("$gte", baseY + 3).append("$lte", baseY + 98))
                 .append("z", plane);
@@ -123,48 +193,10 @@ public class TileDumper {
             ).collect(Collectors.toList());
             logger.debug("Saving {} dumped tiles.", collect.size());
             AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("TileData").bulkWrite(collect);
-        });
+        });*/
     }
 
     public static void clear() {
         tileData.drop();
-    }
-
-    public static void main(String[] args) {
-        OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "=");
-
-
-        OGraphBatchInsert batch = new OGraphBatchInsert("remote:acuitybotting.com/MapData", "root", "");
-        try {
-            batch.begin();
-            batch.setVertexClass("Tile");
-            batch.createVertex(0L);
-
-            Map<String, Object> vertexProps = new HashMap<>();
-            vertexProps.put("x", 1000);
-            vertexProps.put("y", 2313);
-            vertexProps.put("plane", 0);
-            vertexProps.put("flag", 11111);
-            batch.setVertexProperties(0L, vertexProps);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        finally {
-            batch.end();
-        }
-
-
-
-
-
-  /*      try {
-            OrientVertex orientVertex = graph.addVertex("class:Tile", "x", 1000, "y", 2313, "plane", 0, "flag", 11111);
-
-
-
-        } finally {
-            graph.shutdown();
-        }*/
     }
 }
