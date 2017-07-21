@@ -3,11 +3,14 @@ package com.acuity.api.meta.tile_dumper;
 import com.acuity.api.rs.wrappers.common.SceneElement;
 import org.bson.Document;
 
+import java.util.List;
+
 /**
  * Created by Zachary Herridge on 7/18/2017.
  */
 public class DumpSE {
 
+    private final List<String> actions;
     private String _id;
     private int x,y,z;
     private int seID;
@@ -21,6 +24,7 @@ public class DumpSE {
         this.name = sceneElement.getName();
         this.seID = sceneElement.getID();
         this.rotation = sceneElement.getOrientation();
+        this.actions = sceneElement.getActions();
 
         this._id = x + ":" + y + ":" + z + ":" + name + ":" + seID + ":" + rotation;
     }
@@ -39,6 +43,10 @@ public class DumpSE {
 
     public int getSeID() {
         return seID;
+    }
+
+    public List<String> getActions() {
+        return actions;
     }
 
     public String getName() {

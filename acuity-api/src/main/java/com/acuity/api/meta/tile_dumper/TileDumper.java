@@ -4,26 +4,17 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
-import com.mongodb.client.model.UpdateOneModel;
-import com.mongodb.client.model.UpdateOptions;
-import com.orientechnologies.orient.core.command.OCommandRequest;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
-import com.orientechnologies.orient.graph.batch.OGraphBatchInsert;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
-import com.tinkerpop.blueprints.impls.orient.OrientGraphCommand;
-import org.bson.Document;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -108,6 +99,7 @@ public class TileDumper {
                     vertexProps.put("y", dumpSE.getY());
                     vertexProps.put("plane", dumpSE.getZ());
                     vertexProps.put("name", dumpSE.getName());
+                    vertexProps.put("actions", dumpSE.getActions());
                     vertexProps.put("orientation", dumpSE.getRotation());
                     vertexProps.put("sceneElementID", dumpSE.getSeID());
                     graph.addVertex("class:SceneElement", vertexProps);
@@ -119,14 +111,11 @@ public class TileDumper {
                     vertexProps.put("x", dumpNPC.getX());
                     vertexProps.put("y", dumpNPC.getY());
                     vertexProps.put("plane", dumpNPC.getZ());
+                    vertexProps.put("actions", dumpNPC.getActions());
                     vertexProps.put("name", dumpNPC.getName());
                     vertexProps.put("npcID", dumpNPC.getNpcID());
                     graph.addVertex("class:NPC", vertexProps);
                 });
-
-
-
-
             }
             catch (Exception e){
                 e.printStackTrace();

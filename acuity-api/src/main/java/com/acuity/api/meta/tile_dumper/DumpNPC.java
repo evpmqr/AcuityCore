@@ -3,11 +3,14 @@ package com.acuity.api.meta.tile_dumper;
 import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
 import org.bson.Document;
 
+import java.util.List;
+
 /**
  * Created by Zachary Herridge on 7/18/2017.
  */
 public class DumpNPC {
 
+    private final List<String> actions;
     private String _id;
 
     private int x;
@@ -23,6 +26,7 @@ public class DumpNPC {
         this.z = plane;
         this.name = npc.getName();
         this.npcID = npc.getID();
+        this.actions = npc.getActions();
         this._id = x + ":" + y + ":" + z + ":" + name + ":" + npcID;
     }
 
@@ -36,6 +40,10 @@ public class DumpNPC {
 
     public int getZ() {
         return z;
+    }
+
+    public List<String> getActions() {
+        return actions;
     }
 
     public String getName() {
