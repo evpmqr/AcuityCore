@@ -7,6 +7,7 @@ import com.acuity.api.rs.utils.Scene;
 import com.acuity.rs.api.RSCollisionData;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +83,7 @@ public class TileDumper {
                 logger.debug("Deleted {} npcs.", deleteNpcs);
                 logger.debug("Deleted {} scene elements.", deleteSEs);
 
-                graph.addVertex("class:Capture", "lowerX", baseX + 3, "lowerY", baseY + 3, "upperX", baseX + 98, "upperY", baseY + 98, "plane", plane);
+                OrientVertex capture = graph.addVertex("class:Capture", "lowerX", baseX + 3, "lowerY", baseY + 3, "upperX", baseX + 98, "upperY", baseY + 98, "plane", plane, "timestamp", System.currentTimeMillis());
 
                 collectedTiles.build().forEach(dumpTile -> {
                     Map<String, Object> vertexProps = new HashMap<>();
@@ -90,7 +91,8 @@ public class TileDumper {
                     vertexProps.put("y", dumpTile.getY());
                     vertexProps.put("plane", dumpTile.getPlane());
                     vertexProps.put("flag", dumpTile.getFlag());
-                    graph.addVertex("class:Tile", vertexProps);
+                    OrientVertex orientVertex = graph.addVertex("class:Tile", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:captured");
                 });
 
                 collectedSEs.build().forEach(dumpSE -> {
@@ -102,7 +104,8 @@ public class TileDumper {
                     vertexProps.put("actions", dumpSE.getActions());
                     vertexProps.put("orientation", dumpSE.getRotation());
                     vertexProps.put("sceneElementID", dumpSE.getSeID());
-                    graph.addVertex("class:SceneElement", vertexProps);
+                    OrientVertex orientVertex = graph.addVertex("class:SceneElement", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:captured");
 
                 });
 
@@ -114,7 +117,8 @@ public class TileDumper {
                     vertexProps.put("actions", dumpNPC.getActions());
                     vertexProps.put("name", dumpNPC.getName());
                     vertexProps.put("npcID", dumpNPC.getNpcID());
-                    graph.addVertex("class:NPC", vertexProps);
+                    OrientVertex orientVertex = graph.addVertex("class:NPC", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:captured");
                 });
             }
             catch (Exception e){
