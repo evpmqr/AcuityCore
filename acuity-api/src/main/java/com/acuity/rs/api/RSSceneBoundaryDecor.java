@@ -18,10 +18,6 @@ public interface RSSceneBoundaryDecor {
 
 	int getPlane();
 
-	int getRenderFlag();
-
-	int getRenderInfo();
-
 	int getSceneX();
 
 	int getSceneY();
@@ -41,10 +37,6 @@ public interface RSSceneBoundaryDecor {
 	void setOrientation(int var0);
 
 	void setPlane(int var0);
-
-	void setRenderFlag(int var0);
-
-	void setRenderInfo(int var0);
 
 	void setSceneX(int var0);
 

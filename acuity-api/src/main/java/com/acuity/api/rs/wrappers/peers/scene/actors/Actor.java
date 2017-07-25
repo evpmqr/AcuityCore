@@ -66,8 +66,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int getIdlePoseAnimation() {
-        // TODO: 7/20/2017  return rsActor.getIdlePoseAnimation();
-        return 0;
+        return rsActor.getIdlePoseAnimation();
     }
 
     //null when no overhead text
@@ -78,8 +77,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     public int getPoseAnimation() {
-        // TODO: 7/20/2017  return rsActor.getPoseAnimation();
-        return 0;
+        return rsActor.getPoseAnimation();
     }
 
     public int getSpellAnimationID() {

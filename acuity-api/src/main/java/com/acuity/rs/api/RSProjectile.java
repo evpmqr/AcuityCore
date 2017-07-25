@@ -10,8 +10,6 @@ public interface RSProjectile extends RSRenderable {
 
 	double getCurrentY();
 
-	int getCycle();
-
 	int getHeight();
 
 	double getHeightOffset();
@@ -47,8 +45,6 @@ public interface RSProjectile extends RSRenderable {
 	void setAnimationSequence(com.acuity.rs.api.RSAnimationSequence var0);
 
 	void setCurrentY(double var0);
-
-	void setCycle(int var0);
 
 	void setHeight(int var0);
 

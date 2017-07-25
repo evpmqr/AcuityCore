@@ -46,7 +46,8 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     }
 
     public int getFlag() {
-        return rsSceneElement.getFlags();
+        //// TODO: 7/25/2017 Add flag hook
+        return 0;
     }
 
     public int getHeight() {
@@ -59,7 +60,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     }
 
     public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsSceneElement.getEndSceneX(), rsSceneElement.getEndSceneY(), rsSceneElement.getPlane()); // TODO: 7/1/2017 Rename
+        return new StrictLocation(rsSceneElement.getEndSceneX(), rsSceneElement.getEndSceneY(), rsSceneElement.getPlane());
     }
 
     public SceneLocation getSceneLocation() {

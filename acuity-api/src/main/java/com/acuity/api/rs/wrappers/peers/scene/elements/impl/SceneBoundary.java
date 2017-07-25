@@ -70,7 +70,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
     }
 
     public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane()); // TODO: 7/1/2017 Rename
+        return new StrictLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane());
     }
 
     public SceneLocation getSceneLocation(){
