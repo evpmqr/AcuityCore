@@ -68,16 +68,16 @@ public class TileDumper {
         });
 
         executor.execute(() -> {
-            logger.info("Starting dump");
             OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "");
+            logger.info("Starting tile dump, graph opened.");
             try {
-                Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
-                Object deleteNpcs = graph.command(new OCommandSQL("delete vertex from NPC where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
-                Object deleteSEs = graph.command(new OCommandSQL("delete vertex from SceneElement where plane = " + plane + " and x >= " + (baseX + 3) + " and x <= " + (baseX + 98) + " and y >= " + (baseY + 3) + " and y <= " + (baseY + 98))).execute();
+                Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
+                Object deleteNpcs = graph.command(new OCommandSQL("delete vertex from NPC where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
+                Object deleteSEs = graph.command(new OCommandSQL("delete vertex from SceneElement where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
 
-                logger.debug("Deleted {} tiles.", deleteTiles);
-                logger.debug("Deleted {} npcs.", deleteNpcs);
-                logger.debug("Deleted {} scene elements.", deleteSEs);
+                logger.debug("Deleted {} Tiles.", deleteTiles);
+                logger.debug("Deleted {} Npcs.", deleteNpcs);
+                logger.debug("Deleted {} SceneElements.", deleteSEs);
 
                 OrientVertex capture = graph.addVertex("class:Capture", "lowerX", baseX + 3, "lowerY", baseY + 3, "upperX", baseX + 98, "upperY", baseY + 98, "plane", plane, "timestamp", System.currentTimeMillis());
 
@@ -88,7 +88,7 @@ public class TileDumper {
                     vertexProps.put("plane", dumpTile.getPlane());
                     vertexProps.put("flag", dumpTile.getFlag());
                     OrientVertex orientVertex = graph.addVertex("class:Tile", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:captured");
+                    capture.addEdge(null, orientVertex, "class:Captured");
                 });
 
                 collectedSEs.build().forEach(dumpSE -> {
@@ -103,7 +103,7 @@ public class TileDumper {
                     vertexProps.put("flag", dumpSE.getFlag());
                     vertexProps.put("uid", dumpSE.getUid());
                     OrientVertex orientVertex = graph.addVertex("class:SceneElement", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:captured");
+                    capture.addEdge(null, orientVertex, "class:Captured");
 
                 });
 
@@ -116,16 +116,16 @@ public class TileDumper {
                     vertexProps.put("name", dumpNPC.getName());
                     vertexProps.put("npcID", dumpNPC.getNpcID());
                     OrientVertex orientVertex = graph.addVertex("class:NPC", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:captured");
+                    capture.addEdge(null, orientVertex, "class:Captured");
                 });
             }
             catch (Exception e){
-                e.printStackTrace();
+                logger.error("Error while dumping tiles, rolling back graph.", e);
                 graph.rollback();
             }
             finally {
                 graph.shutdown();
-                logger.info("Dump complete.");
+                logger.info("Tile dump completed, graph closed.");
             }
         });
     }
