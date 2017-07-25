@@ -1,7 +1,6 @@
 package com.acuity.api.meta.tile_dumper;
 
 import com.acuity.api.rs.wrappers.common.SceneElement;
-import org.bson.Document;
 
 import java.util.List;
 
@@ -11,11 +10,12 @@ import java.util.List;
 public class DumpSE {
 
     private final List<String> actions;
-    private String _id;
     private int x,y,z;
     private int seID;
     private String name;
     private int rotation;
+    private int uid;
+    private int flag;
 
     public DumpSE(SceneElement sceneElement, int x, int y, int plane) {
         this.x = x;
@@ -25,8 +25,8 @@ public class DumpSE {
         this.seID = sceneElement.getID();
         this.rotation = sceneElement.getOrientation();
         this.actions = sceneElement.getActions();
-
-        this._id = x + ":" + y + ":" + z + ":" + name + ":" + seID + ":" + rotation;
+        this.uid = sceneElement.getUID().getUID();
+        this.flag = sceneElement.getFlag();
     }
 
     public int getX() {
@@ -57,19 +57,11 @@ public class DumpSE {
         return rotation;
     }
 
-    public Document toUpdate(){
-        Document update =  new Document("$set",
-                new Document()
-                        .append("x", x)
-                        .append("y", y)
-                        .append("z", z)
-                        .append("o", rotation)
-                        .append("n", name)
-                        .append("i", seID));
-        return update;
+    public int getFlag() {
+        return flag;
     }
 
-    public String getID() {
-        return _id;
+    public int getUid() {
+        return uid;
     }
 }

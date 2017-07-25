@@ -64,6 +64,11 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         return getUID().getEntityID();
     }
 
+    @Override
+    public int getFlag() {
+        return 0;
+    }
+
     public StrictLocation getStrictLocation(){
         return new StrictLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane()); // TODO: 7/1/2017 Rename
     }

@@ -84,9 +84,6 @@ public class KeyboardMiddleMan implements KeyListener {
         if (e.getKeyChar() == 'a'){
             TileDumper.execute();
         }
-        if (e.getKeyChar() == 'c'){
-            TileDumper.clear();
-        }
         Events.getAcuityEventBus().post(e);
     }
 

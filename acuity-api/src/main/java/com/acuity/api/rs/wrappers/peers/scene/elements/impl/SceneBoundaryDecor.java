@@ -67,6 +67,11 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     }
 
     @Override
+    public int getFlag() {
+        return 0;
+    }
+
+    @Override
     public Optional<AxisAlignedBoundingBox> getBoundingBox() {
         return getRenderable().map(RSRenderable::getBoundingBox).map(RSAxisAlignedBoundingBox::getWrapper);
     }

@@ -1,7 +1,6 @@
 package com.acuity.api.meta.tile_dumper;
 
 import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
-import org.bson.Document;
 
 import java.util.List;
 
@@ -11,8 +10,6 @@ import java.util.List;
 public class DumpNPC {
 
     private final List<String> actions;
-    private String _id;
-
     private int x;
     private int y;
     private int z;
@@ -27,7 +24,6 @@ public class DumpNPC {
         this.name = npc.getName();
         this.npcID = npc.getID();
         this.actions = npc.getActions();
-        this._id = x + ":" + y + ":" + z + ":" + name + ":" + npcID;
     }
 
     public int getX() {
@@ -54,18 +50,4 @@ public class DumpNPC {
         return npcID;
     }
 
-    public Document toUpdate(){
-        Document update =  new Document("$set",
-                new Document()
-                        .append("x", x)
-                        .append("y", y)
-                        .append("z", z)
-                        .append("n", name)
-                        .append("ni", npcID));
-        return update;
-    }
-
-    public String getID() {
-        return _id;
-    }
 }
