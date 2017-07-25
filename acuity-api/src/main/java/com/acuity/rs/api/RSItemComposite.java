@@ -32,7 +32,11 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getMaleModel2();
 
+	int getModelId();
+
 	java.lang.String getName();
+
+	int getNoteId();
 
 	int getNoteTemplateId();
 
@@ -44,7 +48,23 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	int getResizeZ();
 
+	int getShiftClickActionIndex();
+
+	int getSpritePitch();
+
+	int getSpriteRoll();
+
+	int getSpriteScale();
+
+	int getSpriteTranslateX();
+
+	int getSpriteTranslateY();
+
+	int getSpriteYaw();
+
 	int getTeam();
+
+	int getValue();
 
 	com.acuity.api.rs.wrappers.peers.composite.ItemComposite getWrapper();
 
@@ -55,6 +75,8 @@ public interface RSItemComposite extends RSCacheableNode {
 	boolean isMembers();
 
 	int isStackable();
+
+	boolean isTradable();
 
 	void setAmbient(int var0);
 
@@ -86,7 +108,11 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setMembers(boolean var0);
 
+	void setModelId(int var0);
+
 	void setName(java.lang.String var0);
+
+	void setNoteId(int var0);
 
 	void setNoteTemplateId(int var0);
 
@@ -98,7 +124,25 @@ public interface RSItemComposite extends RSCacheableNode {
 
 	void setResizeZ(int var0);
 
+	void setShiftClickActionIndex(int var0);
+
+	void setSpritePitch(int var0);
+
+	void setSpriteRoll(int var0);
+
+	void setSpriteScale(int var0);
+
+	void setSpriteTranslateX(int var0);
+
+	void setSpriteTranslateY(int var0);
+
+	void setSpriteYaw(int var0);
+
 	void setTeam(int var0);
+
+	void setTradable(boolean var0);
+
+	void setValue(int var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.ItemComposite var0);
 }

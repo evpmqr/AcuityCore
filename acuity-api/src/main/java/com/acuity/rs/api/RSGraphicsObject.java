@@ -18,6 +18,10 @@ public interface RSGraphicsObject extends RSRenderable {
 
 	com.acuity.rs.api.RSAnimationSequence getSequence();
 
+	boolean isFinished();
+
+	void setFinished(boolean var0);
+
 	void setHeight(int var0);
 
 	void setID(int var0);

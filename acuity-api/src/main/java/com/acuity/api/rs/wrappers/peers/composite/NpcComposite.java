@@ -5,8 +5,6 @@ import com.acuity.api.rs.wrappers.peers.structures.CacheableNode;
 import com.acuity.rs.api.RSNPCComposite;
 import com.sun.istack.internal.NotNull;
 
-import java.util.List;
-
 /**
  * Created by Zachary Herridge on 6/27/2017.
  */
@@ -18,6 +16,10 @@ public class NpcComposite extends CacheableNode {
     public NpcComposite(RSNPCComposite rsnpcComposite) {
         super(rsnpcComposite);
         this.rsnpcComposite = rsnpcComposite;
+    }
+
+    public int getScale(){
+        return rsnpcComposite.getScaleXY();
     }
 
     public String getName() {

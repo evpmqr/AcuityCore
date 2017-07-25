@@ -6,6 +6,8 @@ package com.acuity.rs.api;
 //Extends java/lang/Object
 public interface RSSceneElement {
 
+	int getConfig();
+
 	int getEndSceneX();
 
 	int getEndSceneY();
@@ -25,6 +27,8 @@ public interface RSSceneElement {
 	int getUID();
 
 	com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneElement getWrapper();
+
+	void setConfig(int var0);
 
 	void setEndSceneX(int var0);
 

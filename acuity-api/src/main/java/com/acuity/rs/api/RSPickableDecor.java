@@ -8,6 +8,8 @@ public interface RSPickableDecor {
 
 	com.acuity.rs.api.RSRenderable getBottom();
 
+	int getConfig();
+
 	int getHash();
 
 	int getHeight();
@@ -21,6 +23,8 @@ public interface RSPickableDecor {
 	com.acuity.rs.api.RSRenderable getTop();
 
 	void setBottom(com.acuity.rs.api.RSRenderable var0);
+
+	void setConfig(int var0);
 
 	void setHash(int var0);
 

@@ -34,6 +34,8 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getHeight();
 
+	int getHorizontalMargin();
+
 	java.lang.Object[] getHoverListeners();
 
 	int getInsetY();
@@ -108,15 +110,27 @@ public interface RSInterfaceComponent extends RSNode {
 
 	int getTextColor();
 
+	int getTextSpacing();
+
 	int getType();
 
 	int getUID();
+
+	int getVerticalMargin();
 
 	int getWidth();
 
 	com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent getWrapper();
 
+	int getXLayout();
+
+	int getXMargin();
+
 	int getXPadding();
+
+	int getYLayout();
+
+	int getYMargin();
 
 	int getYPadding();
 
@@ -161,6 +175,8 @@ public interface RSInterfaceComponent extends RSNode {
 	void setHeight(int var0);
 
 	void setHidden(boolean var0);
+
+	void setHorizontalMargin(int var0);
 
 	void setHoverListeners(java.lang.Object[] var0);
 
@@ -238,15 +254,27 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setTextShadowed(boolean var0);
 
+	void setTextSpacing(int var0);
+
 	void setType(int var0);
 
 	void setUID(int var0);
+
+	void setVerticalMargin(int var0);
 
 	void setWidth(int var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent var0);
 
+	void setXLayout(int var0);
+
+	void setXMargin(int var0);
+
 	void setXPadding(int var0);
+
+	void setYLayout(int var0);
+
+	void setYMargin(int var0);
 
 	void setYPadding(int var0);
 }

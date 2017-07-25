@@ -104,6 +104,8 @@ public interface RSClient extends RSGameEngine {
 
 	int getHintArrowNpcIndex();
 
+	int getHintArrowPlayerIndex();
+
 	int getHintArrowType();
 
 	int getHintArrowX();
@@ -111,6 +113,8 @@ public interface RSClient extends RSGameEngine {
 	int getHintArrowY();
 
 	int[] getHoveredUIDs();
+
+	int getIgnoreCount();
 
 	com.acuity.rs.api.RSHashTable getInterfaceFlags();
 
@@ -272,6 +276,8 @@ public interface RSClient extends RSGameEngine {
 
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
+	com.acuity.rs.api.RSAnimationSequence invokeGetAnimationSequence(int var0);
+
 	com.acuity.rs.api.RSDefinitionProperty invokeGetDefinitionProperty(int var0);
 
 	com.acuity.rs.api.RSSpotAnimation invokeGetGraphicDefinition(int var0);
@@ -432,6 +438,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setHintArrowNpcIndex(int var0);
 
+	void setHintArrowPlayerIndex(int var0);
+
 	void setHintArrowType(int var0);
 
 	void setHintArrowX(int var0);
@@ -439,6 +447,8 @@ public interface RSClient extends RSGameEngine {
 	void setHintArrowY(int var0);
 
 	void setHoveredUIDs(int[] var0);
+
+	void setIgnoreCount(int var0);
 
 	void setInterfaceFlags(com.acuity.rs.api.RSHashTable var0);
 
