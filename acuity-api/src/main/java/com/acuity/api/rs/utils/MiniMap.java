@@ -11,15 +11,7 @@ public class MiniMap {
 
     private static final Logger logger = LoggerFactory.getLogger(MiniMap.class);
 
-    public static int getScale(){
-        return AcuityInstance.getClient().getMapScale();
-    }
-
     public static int getRotation(){
         return AcuityInstance.getClient().getMapRotation();
-    }
-
-    public static int getOffset() {
-        return AcuityInstance.getClient().getMinimapOffset();
     }
 }

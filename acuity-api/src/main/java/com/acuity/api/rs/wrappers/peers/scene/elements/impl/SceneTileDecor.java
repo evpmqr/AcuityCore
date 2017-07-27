@@ -29,7 +29,7 @@ public class SceneTileDecor implements SceneElement {
     }
 
     public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getPlane());// TODO: 7/1/2017 Rename
+        return new StrictLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getPlane());
     }
 
     public SceneLocation getSceneLocation(){
@@ -43,6 +43,11 @@ public class SceneTileDecor implements SceneElement {
 
     public int getID(){
         return getUID().getEntityID();
+    }
+
+    @Override
+    public int getFlag() {
+        return 0;
     }
 
     public UIDs.UID getUID() {

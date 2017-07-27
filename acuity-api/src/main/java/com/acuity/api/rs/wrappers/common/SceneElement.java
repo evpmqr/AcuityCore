@@ -4,6 +4,7 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
+import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
@@ -61,6 +62,10 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     int getOrientation();
 
     int getID();
+
+    int getFlag();
+
+    UIDs.UID getUID();
 
     default String getName(){
         return getComposite().map(SceneElementComposite::getName).orElse(null);

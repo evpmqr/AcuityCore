@@ -4,23 +4,18 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.db.AcuityDB;
+import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.rs.api.RSCollisionData;
-import com.mongodb.client.model.UpdateOneModel;
-import com.mongodb.client.model.UpdateOptions;
-import com.mongodb.client.result.DeleteResult;
-import org.bson.Document;
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
+import com.orientechnologies.orient.core.sql.OCommandSQL;
+import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -29,18 +24,10 @@ import java.util.stream.Stream;
 public class TileDumper {
 
     private static Logger logger = LoggerFactory.getLogger(TileDumper.class);
-    private static MongoCollection tileData;
     private static Executor executor;
 
     static {
-        try {
-            AcuityDB.init();
-            Jongo jongo = new Jongo(AcuityDB.getMongoClient().getDB("TileDB"));
-            tileData = jongo.getCollection("TileData");
-            executor = Executors.newSingleThreadExecutor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        executor = Executors.newSingleThreadExecutor();
     }
 
     public static void execute(){
@@ -71,63 +58,75 @@ public class TileDumper {
             }
         }
 
-
-        Document append = new Document()
-                .append("x", new Document("$lte", baseX + 98).append("$gte", baseX + 3))
-                .append("y", new Document("$gte", baseY + 3).append("$lte", baseY + 98))
-                .append("z", plane);
-
-        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("TileData").deleteMany(append);
-        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("SEData").deleteMany(append);
-        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("NPCData").deleteMany(append);
-
-        AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("Captures").insertOne(
-                new Document("_id", baseX + ":" + baseY + ":" + plane)
-                        .append("x", baseX)
-                        .append("y", baseY)
-                        .append("z", plane)
-                        .append("w", 98)
-                        .append("h", 98)
-        );
-
-        Npcs.streamLoaded().forEach(npc -> collectedNPCs.add(new DumpNPC(npc,
-                npc.getWorldLocation().getWorldX(), npc.getWorldLocation().getWorldY(), npc.getWorldLocation().getPlane())));
-
-        executor.execute(() -> {
-            List<UpdateOneModel<Document>> collect = collectedNPCs.build().map(document -> new UpdateOneModel<Document>(
-                            new Document("_id", document.getID()),
-                            document.toUpdate(),
-                            new UpdateOptions().upsert(true)
-                    )
-            ).collect(Collectors.toList());
-            logger.debug("Saving {} dumped NPCs.", collect.size());
-            AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("NPCData").bulkWrite(collect);
+        Npcs.streamLoaded().forEach(npc -> {
+            WorldLocation worldLocation = npc.getWorldLocation();
+            if (worldLocation.getPlane() == plane &&
+                    worldLocation.getWorldX() >= (baseX + 3) && worldLocation.getWorldX() <= (baseX + 98) &&
+                    worldLocation.getWorldY() >= (baseY + 3) && worldLocation.getWorldY() <= (baseY + 98)){
+                collectedNPCs.add(new DumpNPC(npc, worldLocation.getWorldX(), worldLocation.getWorldY(), worldLocation.getPlane()));
+            }
         });
 
         executor.execute(() -> {
-            List<UpdateOneModel<Document>> collect = collectedSEs.build().map(document -> new UpdateOneModel<Document>(
-                            new Document("_id", document.getID()),
-                            document.toUpdate(),
-                            new UpdateOptions().upsert(true)
-                    )
-            ).collect(Collectors.toList());
-            logger.debug("Saving {} dumped SEs.", collect.size());
-            AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("SEData").bulkWrite(collect);
-        });
+            OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "");
+            logger.info("Starting tile dump, graph opened.");
+            try {
+                Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
+                Object deleteNpcs = graph.command(new OCommandSQL("delete vertex from NPC where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
+                Object deleteSEs = graph.command(new OCommandSQL("delete vertex from SceneElement where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
 
-        executor.execute(() -> {
-            List<UpdateOneModel<Document>> collect = collectedTiles.build().map(document -> new UpdateOneModel<Document>(
-                    new Document("_id", document.getID()),
-                    document.toUpdate(),
-                    new UpdateOptions().upsert(true)
-            )
-            ).collect(Collectors.toList());
-            logger.debug("Saving {} dumped tiles.", collect.size());
-            AcuityDB.getMongoClient().getDatabase("TileDB").getCollection("TileData").bulkWrite(collect);
-        });
-    }
+                logger.debug("Deleted {} Tiles.", deleteTiles);
+                logger.debug("Deleted {} Npcs.", deleteNpcs);
+                logger.debug("Deleted {} SceneElements.", deleteSEs);
 
-    public static void clear() {
-        tileData.drop();
+                OrientVertex capture = graph.addVertex("class:Capture", "lowerX", baseX + 3, "lowerY", baseY + 3, "upperX", baseX + 98, "upperY", baseY + 98, "plane", plane, "timestamp", System.currentTimeMillis());
+
+                collectedTiles.build().forEach(dumpTile -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpTile.getX());
+                    vertexProps.put("y", dumpTile.getY());
+                    vertexProps.put("plane", dumpTile.getPlane());
+                    vertexProps.put("flag", dumpTile.getFlag());
+                    OrientVertex orientVertex = graph.addVertex("class:Tile", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:Captured");
+                });
+
+                collectedSEs.build().forEach(dumpSE -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpSE.getX());
+                    vertexProps.put("y", dumpSE.getY());
+                    vertexProps.put("plane", dumpSE.getZ());
+                    vertexProps.put("name", dumpSE.getName());
+                    vertexProps.put("actions", dumpSE.getActions());
+                    vertexProps.put("orientation", dumpSE.getRotation());
+                    vertexProps.put("sceneElementID", dumpSE.getSeID());
+                    vertexProps.put("flag", dumpSE.getFlag());
+                    vertexProps.put("uid", dumpSE.getUid());
+                    OrientVertex orientVertex = graph.addVertex("class:SceneElement", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:Captured");
+
+                });
+
+                collectedNPCs.build().forEach(dumpNPC -> {
+                    Map<String, Object> vertexProps = new HashMap<>();
+                    vertexProps.put("x", dumpNPC.getX());
+                    vertexProps.put("y", dumpNPC.getY());
+                    vertexProps.put("plane", dumpNPC.getZ());
+                    vertexProps.put("actions", dumpNPC.getActions());
+                    vertexProps.put("name", dumpNPC.getName());
+                    vertexProps.put("npcID", dumpNPC.getNpcID());
+                    OrientVertex orientVertex = graph.addVertex("class:NPC", vertexProps);
+                    capture.addEdge(null, orientVertex, "class:Captured");
+                });
+            }
+            catch (Exception e){
+                logger.error("Error while dumping tiles, rolling back graph.", e);
+                graph.rollback();
+            }
+            finally {
+                graph.shutdown();
+                logger.info("Tile dump completed, graph closed.");
+            }
+        });
     }
 }

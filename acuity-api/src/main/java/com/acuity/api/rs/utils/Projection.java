@@ -98,7 +98,7 @@ public class Projection {
     }
 
     public static Optional<ScreenLocation> sceneToMiniMap(int sceneX, int sceneY, Integer distanceFilter) {
-        int angle = MiniMap.getScale() + MiniMap.getRotation() & 0x7FF;
+        int angle = MiniMap.getRotation() & 0x7FF;
 
         SceneLocation sceneLocation = LocalPlayer.getSceneLocation().orElseThrow(() -> new NullPointerException("LocalPlayer.getSceneLocation() failed to return a location."));
         sceneX = sceneX / 32 - sceneLocation.getSceneX() / 32;
@@ -108,9 +108,6 @@ public class Projection {
         if (distanceFilter == null || dist < distanceFilter) {
             int sin = SINE[angle];
             int cos = COSINE[angle];
-
-            sin = sin * 256 / (MiniMap.getOffset() + 256);
-            cos = cos * 256 / (MiniMap.getOffset() + 256);
 
             int xx = sceneY * sin + cos * sceneX >> 16;
             int yy = sin * sceneX - sceneY * cos >> 16;

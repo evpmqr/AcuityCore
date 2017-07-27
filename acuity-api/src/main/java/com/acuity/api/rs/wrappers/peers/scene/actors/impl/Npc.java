@@ -2,10 +2,12 @@ package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
+import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.peers.composite.NpcComposite;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
-import com.acuity.rs.api.RSNpc;
 import com.acuity.rs.api.RSNPCComposite;
+import com.acuity.rs.api.RSNpc;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -39,9 +41,15 @@ public class Npc extends Actor implements Identifiable {
 	    return getDefinition().map(NpcComposite::getName).orElse(null);
 	}
 
+	@Override
+	public StrictLocation getStrictLocation(){
+		Integer scale = getDefinition().map(NpcComposite::getScale).orElse(0);
+		return new StrictLocation(getRsNpc().getStrictX() - scale * 64, getRsNpc().getStrictY() - scale * 64, Scene.getPlane());
+	}
+
 	@Nullable
 	@Override
-	public Integer getID() {// TODO: 6/12/2017 Rename field ID
+	public Integer getID() {
         return getDefinition().map(NpcComposite::getID).orElse(null);
 	}
 

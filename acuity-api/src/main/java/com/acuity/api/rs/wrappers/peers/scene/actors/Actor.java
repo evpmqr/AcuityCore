@@ -48,14 +48,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
                 .map(model -> model.rotateTo(getOrientation()));
     }
 
-    public int[] getPathX() {
-        return rsActor.getPathXQueue();
-    }
-
-    public int[] getPathY() {
-        return rsActor.getPathYQueue();
-    }
-
     public int getOrientation() {
         return rsActor.getOrientation();
     }

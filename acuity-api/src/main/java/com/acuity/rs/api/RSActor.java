@@ -11,6 +11,8 @@ public interface RSActor extends RSRenderable {
 
 	int getAnimation();
 
+	int getAnimationDelay();
+
 	int getGraphic();
 
 	com.acuity.rs.api.RSNodeLinkedList getHealthBars();
@@ -23,11 +25,15 @@ public interface RSActor extends RSRenderable {
 
 	int[] getHitsplats();
 
+	int[] getHitsplatTypes();
+
 	int getIdlePoseAnimation();
 
 	int getOrientation();
 
 	int getPathQueueSize();
+
+	byte[] getPathQueueTraversed();
 
 	int[] getPathXQueue();
 
@@ -49,6 +55,8 @@ public interface RSActor extends RSRenderable {
 
 	void setAnimation(int var0);
 
+	void setAnimationDelay(int var0);
+
 	void setGraphic(int var0);
 
 	void setHealthBars(com.acuity.rs.api.RSNodeLinkedList var0);
@@ -61,11 +69,15 @@ public interface RSActor extends RSRenderable {
 
 	void setHitsplats(int[] var0);
 
+	void setHitsplatTypes(int[] var0);
+
 	void setIdlePoseAnimation(int var0);
 
 	void setOrientation(int var0);
 
 	void setPathQueueSize(int var0);
+
+	void setPathQueueTraversed(byte[] var0);
 
 	void setPathXQueue(int[] var0);
 

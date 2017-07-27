@@ -12,7 +12,15 @@ public interface RSScene {
 
 	com.acuity.api.rs.wrappers.peers.scene.Scene getWrapper();
 
+	void invokeAddBoundary(int var0, int var1, int var2, int var3, com.acuity.rs.api.RSRenderable var4, com.acuity.rs.api.RSRenderable var5, int var6, int var7, int var8, int var9);
+
+	void invokeAddBoundaryDecor(int var0, int var1, int var2, int var3, com.acuity.rs.api.RSRenderable var4, com.acuity.rs.api.RSRenderable var5, int var6, int var7, int var8, int var9, int var10, int var11);
+
+	boolean invokeAddEntityMarker(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, com.acuity.rs.api.RSRenderable var8, int var9, boolean var10, int var11, int var12);
+
 	void invokeAddPickableDecor(int var0, int var1, int var2, int var3, com.acuity.rs.api.RSRenderable var4, int var5, com.acuity.rs.api.RSRenderable var6, com.acuity.rs.api.RSRenderable var7);
+
+	void invokeAddTileDecor(int var0, int var1, int var2, int var3, com.acuity.rs.api.RSRenderable var4, int var5, int var6);
 
 	void setElements(com.acuity.rs.api.RSSceneElement[] var0);
 

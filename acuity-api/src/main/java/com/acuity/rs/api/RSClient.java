@@ -24,6 +24,8 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWALL();
 
+	com.acuity.rs.api.RSBoundingBoxDrawType getBOUNDINGDRAWMOUSEOVER();
+
 	com.acuity.rs.api.RSCameraCapture[] getCameraCaptures();
 
 	int getCameraPitch();
@@ -88,6 +90,8 @@ public interface RSClient extends RSGameEngine {
 
 	int getEngineCycle();
 
+	java.util.concurrent.ScheduledExecutorService getExecutor();
+
 	com.acuity.rs.api.RSFont getFontp12full();
 
 	int getFriendCount();
@@ -102,6 +106,8 @@ public interface RSClient extends RSGameEngine {
 
 	int getHintArrowNpcIndex();
 
+	int getHintArrowPlayerIndex();
+
 	int getHintArrowType();
 
 	int getHintArrowX();
@@ -109,6 +115,8 @@ public interface RSClient extends RSGameEngine {
 	int getHintArrowY();
 
 	int[] getHoveredUIDs();
+
+	int getIgnoreCount();
 
 	com.acuity.rs.api.RSHashTable getInterfaceFlags();
 
@@ -148,8 +156,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getMapRotation();
 
-	int getMapScale();
-
 	int getMapState();
 
 	java.lang.String[] getMenuActions();
@@ -173,8 +179,6 @@ public interface RSClient extends RSGameEngine {
 	int getMenuX();
 
 	int getMenuY();
-
-	int getMinimapOffset();
 
 	int getMouseIdleTime();
 
@@ -268,11 +272,13 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeAbsoluteToViewport(int var0, int var1, int var2);
 
-	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3, int var4);
+	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3);
 
-	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4, int var5, int var6);
+	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4);
 
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
+
+	com.acuity.rs.api.RSAnimationSequence invokeGetAnimationSequence(int var0);
 
 	com.acuity.rs.api.RSDefinitionProperty invokeGetDefinitionProperty(int var0);
 
@@ -290,9 +296,11 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSCacheReferenceTable invokeGetReferenceTable(int var0, boolean var1, boolean var2, boolean var3);
 
-	int invokeGetVarpbit(int var0);
+	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
 
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
+
+	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
 
 	com.acuity.rs.api.RSVarpbit invokeLoadVarpbit(int var0);
 
@@ -311,6 +319,8 @@ public interface RSClient extends RSGameEngine {
 	boolean isDrawingAABB();
 
 	boolean isDynamicRegion();
+
+	boolean isLowMemory();
 
 	boolean isMembersWorld();
 
@@ -345,6 +355,8 @@ public interface RSClient extends RSGameEngine {
 	void setBoundingBoxes(com.acuity.rs.api.RSNodeLinkedList var0);
 
 	void setBOUNDINGDRAWALL(com.acuity.rs.api.RSBoundingBoxDrawType var0);
+
+	void setBOUNDINGDRAWMOUSEOVER(com.acuity.rs.api.RSBoundingBoxDrawType var0);
 
 	void setCameraCaptures(com.acuity.rs.api.RSCameraCapture[] var0);
 
@@ -416,6 +428,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setEngineCycle(int var0);
 
+	void setExecutor(java.util.concurrent.ScheduledExecutorService var0);
+
 	void setFontp12full(com.acuity.rs.api.RSFont var0);
 
 	void setFriendCount(int var0);
@@ -430,6 +444,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setHintArrowNpcIndex(int var0);
 
+	void setHintArrowPlayerIndex(int var0);
+
 	void setHintArrowType(int var0);
 
 	void setHintArrowX(int var0);
@@ -437,6 +453,8 @@ public interface RSClient extends RSGameEngine {
 	void setHintArrowY(int var0);
 
 	void setHoveredUIDs(int[] var0);
+
+	void setIgnoreCount(int var0);
 
 	void setInterfaceFlags(com.acuity.rs.api.RSHashTable var0);
 
@@ -472,11 +490,11 @@ public interface RSClient extends RSGameEngine {
 
 	void setLoginState(int var0);
 
+	void setLowMemory(boolean var0);
+
 	void setMapRegions(int[] var0);
 
 	void setMapRotation(int var0);
-
-	void setMapScale(int var0);
 
 	void setMapState(int var0);
 
@@ -505,8 +523,6 @@ public interface RSClient extends RSGameEngine {
 	void setMenuX(int var0);
 
 	void setMenuY(int var0);
-
-	void setMinimapOffset(int var0);
 
 	void setMouseIdleTime(int var0);
 

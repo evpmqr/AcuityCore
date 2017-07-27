@@ -6,7 +6,19 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSCacheableNode
 public interface RSHealthBarComposite extends RSCacheableNode {
 
+	int getMaxWidth();
+
+	int getOverlaySpriteId();
+
+	int getUnderlaySpriteId();
+
 	com.acuity.api.rs.wrappers.peers.composite.HealthBarComposite getWrapper();
+
+	void setMaxWidth(int var0);
+
+	void setOverlaySpriteId(int var0);
+
+	void setUnderlaySpriteId(int var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.composite.HealthBarComposite var0);
 }

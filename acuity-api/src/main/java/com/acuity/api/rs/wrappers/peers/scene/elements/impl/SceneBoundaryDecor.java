@@ -30,10 +30,6 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
         this.rsSceneBoundaryDecor = Preconditions.checkNotNull(peer);
     }
 
-    public int getRenderFlag(){
-        return rsSceneBoundaryDecor.getRenderFlag();
-    }
-
     @Override
     public int getOrientation(){
         return rsSceneBoundaryDecor.getOrientation();
@@ -44,7 +40,7 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     }
 
     public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsSceneBoundaryDecor.getSceneX(), rsSceneBoundaryDecor.getSceneY(), rsSceneBoundaryDecor.getPlane()); // TODO: 7/1/2017 Rename
+        return new StrictLocation(rsSceneBoundaryDecor.getSceneX(), rsSceneBoundaryDecor.getSceneY(), rsSceneBoundaryDecor.getPlane());
     }
 
     public SceneLocation getSceneLocation(){
@@ -64,6 +60,11 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     @Override
     public int getID() {
         return getUID().getEntityID();
+    }
+
+    @Override
+    public int getFlag() {
+        return 0;
     }
 
     @Override

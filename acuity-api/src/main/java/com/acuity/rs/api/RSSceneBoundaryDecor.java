@@ -6,6 +6,8 @@ package com.acuity.rs.api;
 //Extends java/lang/Object
 public interface RSSceneBoundaryDecor {
 
+	int getConfig();
+
 	com.acuity.rs.api.RSRenderable getEntity();
 
 	com.acuity.rs.api.RSRenderable getLinkedEntity();
@@ -18,9 +20,7 @@ public interface RSSceneBoundaryDecor {
 
 	int getPlane();
 
-	int getRenderFlag();
-
-	int getRenderInfo();
+	int getRenderConfig();
 
 	int getSceneX();
 
@@ -29,6 +29,8 @@ public interface RSSceneBoundaryDecor {
 	int getUID();
 
 	com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneBoundaryDecor getWrapper();
+
+	void setConfig(int var0);
 
 	void setEntity(com.acuity.rs.api.RSRenderable var0);
 
@@ -42,9 +44,7 @@ public interface RSSceneBoundaryDecor {
 
 	void setPlane(int var0);
 
-	void setRenderFlag(int var0);
-
-	void setRenderInfo(int var0);
+	void setRenderConfig(int var0);
 
 	void setSceneX(int var0);
 

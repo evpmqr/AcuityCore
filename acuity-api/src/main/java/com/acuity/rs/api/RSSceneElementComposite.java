@@ -12,7 +12,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getAmbientSoundId();
 
-	int getAnimationId();
+	int getAnimation();
 
 	int getClipType();
 
@@ -22,15 +22,11 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int getID();
 
+	int getItemSupport();
+
 	int getMapIconID();
 
 	int getMapSceneId();
-
-	int getModelHeight();
-
-	int getModelSizeX();
-
-	int getModelSizeY();
 
 	java.lang.String getName();
 
@@ -38,13 +34,13 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	short[] getNewTextures();
 
-	int getOffsetX();
-
-	int getOffsetY();
-
-	int getOffsetZ();
-
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
+
+	int getScaleX();
+
+	int getScaleY();
+
+	int getScaleZ();
 
 	int getSizeX();
 
@@ -54,6 +50,12 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	int[] getTransformIDs();
 
+	int getTranslateX();
+
+	int getTranslateY();
+
+	int getTranslateZ();
+
 	int getVarpbitIndex();
 
 	int getVarpIndex();
@@ -61,6 +63,8 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite getWrapper();
 
 	boolean isClipped();
+
+	boolean isImpenetrable();
 
 	boolean isProjectileClipped();
 
@@ -74,7 +78,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setAmbientSoundId(int var0);
 
-	void setAnimationId(int var0);
+	void setAnimation(int var0);
 
 	void setClipped(boolean var0);
 
@@ -86,15 +90,13 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setID(int var0);
 
+	void setImpenetrable(boolean var0);
+
+	void setItemSupport(int var0);
+
 	void setMapIconID(int var0);
 
 	void setMapSceneId(int var0);
-
-	void setModelHeight(int var0);
-
-	void setModelSizeX(int var0);
-
-	void setModelSizeY(int var0);
 
 	void setName(java.lang.String var0);
 
@@ -102,17 +104,17 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
 	void setNewTextures(short[] var0);
 
-	void setOffsetX(int var0);
-
-	void setOffsetY(int var0);
-
-	void setOffsetZ(int var0);
-
 	void setProjectileClipped(boolean var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
 	void setRotated(boolean var0);
+
+	void setScaleX(int var0);
+
+	void setScaleY(int var0);
+
+	void setScaleZ(int var0);
 
 	void setSizeX(int var0);
 
@@ -123,6 +125,12 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 	void setTextures(short[] var0);
 
 	void setTransformIDs(int[] var0);
+
+	void setTranslateX(int var0);
+
+	void setTranslateY(int var0);
+
+	void setTranslateZ(int var0);
 
 	void setVarpbitIndex(int var0);
 
