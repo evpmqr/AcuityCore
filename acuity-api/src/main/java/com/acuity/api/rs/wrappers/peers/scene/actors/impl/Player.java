@@ -1,6 +1,7 @@
 package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.Prayers;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
 import com.acuity.api.rs.wrappers.peers.types.PlayerType;
 import com.acuity.rs.api.RSPlayer;
@@ -43,17 +44,8 @@ public class Player extends Actor {
 		return rsPlayer.getCombatLevel();
 	}
 
-	/*
-	default = -1
-	magic = 2
-	ranged = 1
-	melee = 0
-	retribution = 3
-	redemption = 5
-	smite = 4
-	 */
-	public int getPrayerIcon() {
-		return rsPlayer.getPrayerIcon();
+	public Optional<Prayers.Prayer> getPrayerByOverhead() {
+		return Prayers.getPrayerByOverheadID(rsPlayer.getPrayerIcon());
 	}
 
 	//default value = -1

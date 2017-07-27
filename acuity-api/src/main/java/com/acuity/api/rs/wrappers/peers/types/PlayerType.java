@@ -18,12 +18,16 @@ public class PlayerType {
         this.rsPlayerType = Preconditions.checkNotNull(rsPlayerType);
     }
 
-    public PlayerEquipment getEquipmentIDs(){
+    public PlayerEquipment getEquipment(){
         return new PlayerEquipment(rsPlayerType.getEquipmentIDs());
     }
 
     public boolean isFemale(){
         return rsPlayerType.isFemale();
+    }
+
+    public boolean isMale(){
+        return !rsPlayerType.isFemale();
     }
 
     @NotNull

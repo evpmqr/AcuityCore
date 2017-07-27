@@ -20,17 +20,17 @@ public enum ActionResult {
 	}
 
 	public ActionResult sleep(int duration) {
-		Time.sleep(duration);
+		Delay.delay(duration);
 		return this;
 	}
 
 	public ActionResult sleep(int minDuration, int maxDuration) {
-		Time.sleep(minDuration, maxDuration);
+		Delay.delay(minDuration, maxDuration);
 		return this;
 	}
 
 	public ActionResult sleepUntil(BooleanSupplier condition, long timeout) {
-		Time.sleepUntil(condition, timeout);
+		Delay.delayUntil(condition, timeout);
 		return this;
 	}
 }

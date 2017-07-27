@@ -26,7 +26,7 @@ public class Projection {
     public static final int[] SINE = new int[2048];
     public static final int[] COSINE = new int[2048];
 
-    public static final int[][] SIDES = {
+    private static final int[][] AABB_SIDES = {
             {0, 1, 2, 3},
             {4, 5, 6, 7},
 
@@ -37,11 +37,10 @@ public class Projection {
             {3, 7, 4, 0}
     };
 
-    public static final int[][] TRIANGLES = {
+    private static final int[][] AABB_TRIANGLES = {
             {0, 1, 3},
             {2, 3, 1},
     };
-
 
     static {
         for (int i = 0; i < SINE.length; i++) {
@@ -128,10 +127,10 @@ public class Projection {
      */
     public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox){
         ScreenLocation3D[] vertices = boundingBox.getVertices();
-        int[][][] model = new int[SIDES.length * TRIANGLES.length][3][3];
-        for (int[] side : SIDES) {
-            for (int face = 0; face < TRIANGLES.length; face++) {
-                int[] triangle = TRIANGLES[face];
+        int[][][] model = new int[AABB_SIDES.length * AABB_TRIANGLES.length][3][3];
+        for (int[] side : AABB_SIDES) {
+            for (int face = 0; face < AABB_TRIANGLES.length; face++) {
+                int[] triangle = AABB_TRIANGLES[face];
                 model[face][0] = vertices[side[triangle[0]]].toArray();
                 model[face][1] = vertices[side[triangle[1]]].toArray();
                 model[face][2] = vertices[side[triangle[2]]].toArray();

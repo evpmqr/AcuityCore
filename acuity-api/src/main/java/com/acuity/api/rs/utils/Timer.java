@@ -62,7 +62,7 @@ public class Timer {
 
 	public void sleepUntilComplete() {
 		while (getTimeLeft() > 0) {
-			Time.sleep(290);
+			Delay.delay(290);
 		}
 	}
 

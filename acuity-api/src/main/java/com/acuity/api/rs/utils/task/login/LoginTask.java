@@ -2,9 +2,9 @@ package com.acuity.api.rs.utils.task.login;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.Mouse;
+import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.Login;
-import com.acuity.api.rs.utils.Time;
 import com.acuity.api.rs.utils.Timer;
 import com.acuity.api.rs.utils.task.Task;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
@@ -28,14 +28,14 @@ public class LoginTask extends Task {
 			return false;
 		}
 
-		return Game.getGameState() == Game.LOGIN_SCREEN;
+		return Game.getGameState() == Game.State.LOGIN_SCREEN.getIndex();
 	}
 
 	@Override
 	public int loop() {
 		if (AcuityInstance.getClient().isWorldSelectOpen()) {
 			Mouse.click(new ScreenLocation(741, 11));
-			Time.sleepUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
+			Delay.delayUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
 		}
 
 		final Account account = AcuityInstance.getRsAccount();

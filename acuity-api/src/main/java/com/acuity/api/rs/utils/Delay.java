@@ -6,9 +6,9 @@ import java.util.function.BooleanSupplier;
  * Created by Eclipseop.
  * Date: 6/17/2017.
  */
-public class Time {
+public class Delay {
 
-	public static boolean sleep(int durationMills) {
+	public static boolean delay(int durationMills) {
 		if (durationMills <= 0) {
 			return true;
 		}
@@ -20,17 +20,17 @@ public class Time {
 		return true;
 	}
 
-	public static boolean sleep(int minDurationMills, int maxDurationMills) {
-		return sleep(Random.nextInt(minDurationMills, maxDurationMills));
+	public static boolean delay(int minDurationMills, int maxDurationMills) {
+		return delay(Random.nextInt(minDurationMills, maxDurationMills));
 	}
 
-	public static boolean sleepUntil(BooleanSupplier condition, long timeoutMills) {
+	public static boolean delayUntil(BooleanSupplier condition, long timeoutMills) {
 		timeoutMills = System.currentTimeMillis() + timeoutMills;
 		while (System.currentTimeMillis() < timeoutMills && !Thread.interrupted()){
 			if (condition.getAsBoolean()){
 				return true;
 			}
-			sleep(290);
+			delay(290);
 		}
 		return false;
 	}

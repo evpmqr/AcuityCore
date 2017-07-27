@@ -8,13 +8,25 @@ import com.acuity.api.rs.events.impl.GameTickEvent;
  */
 public class Game {
 
-    public static final int NOT_INITALIZED = 0;
-    public static final int CLIENT_LOADING = 5;
-    public static final int LOGIN_SCREEN = 10;
-    public static final int LOADING_SCREEN = 25;
-    public static final int IN_GAME = 30;
-    public static final int CONNECTION_LOST = 40;
-    public static final int CONNECTION_RECONNECTING = 45; //maybe
+    public enum State{
+        NOT_INITALIZED(0),
+        CLIENT_LOADING(5),
+        LOGIN_SCREEN(10),
+        LOADING_SCREEN(25),
+        IN_GAME(30),
+        CONNECTION_LOST(40),
+        CONNECTION_RECONNECTING(45);
+
+        private final int index;
+
+        State(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+    }
 
     public static int getGameState(){
         return AcuityInstance.getClient().getGameState();

@@ -39,12 +39,12 @@ public class Varpbit extends CacheableNode{
     }
 
     public int getValue(int varpValue) {
-        int mask = Varps.BIT_MASKS[getUpper() - getLower()];
+        int mask = Varps.getMask(getUpper() - getLower());
         return varpValue >> getLower() & mask;
     }
 
     public int getMask() {
-        return Varps.BIT_MASKS[getBitCount()];
+        return Varps.getMask(getBitCount());
     }
 
     public boolean getBoolean() {

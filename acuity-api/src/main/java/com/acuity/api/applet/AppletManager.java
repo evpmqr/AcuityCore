@@ -57,7 +57,7 @@ public class AppletManager {
 
     @Subscribe
     public void gameStateChanged(GameStateChangeEvent changeEvent) {
-        if (changeEvent.getPreviousGameState() == Game.CLIENT_LOADING && changeEvent.getGamestate() == Game.LOGIN_SCREEN) {
+        if (changeEvent.getPreviousGameState() == Game.State.CLIENT_LOADING.getIndex() && changeEvent.getGamestate() == Game.State.LOGIN_SCREEN.getIndex()) {
             mouseMiddleMan.replace(getClient().getCanvas());
             keyboardMiddleMan.replace(getClient().getCanvas());
             Events.getRsEventBus().unregister(this);
