@@ -8,6 +8,14 @@ import com.acuity.api.rs.events.impl.GameTickEvent;
  */
 public class Game {
 
+    public static State getGameState(){
+        return State.fromValue(AcuityInstance.getClient().getGameState());
+    }
+
+    public static long getLastGameTick(){
+        return GameTickEvent.INSTANCE.getTickCounter();
+    }
+
     public enum State{
         NOT_INITALIZED(0),
         CLIENT_LOADING(5),
@@ -26,13 +34,19 @@ public class Game {
         public int getIndex() {
             return index;
         }
-    }
 
-    public static int getGameState(){
-        return AcuityInstance.getClient().getGameState();
-    }
+        public boolean isCurrent(){
+            return getGameState() == this;
+        }
 
-    public static long getLastGameTick(){
-        return GameTickEvent.INSTANCE.getTickCounter();
+        private static Game.State fromValue(final int value) {
+            for (Game.State state : values()) {
+                if (state.index == value) {
+                    return state;
+                }
+            }
+            throw new IllegalStateException("Unknown Game.State: " + value + ".");
+        }
+
     }
 }

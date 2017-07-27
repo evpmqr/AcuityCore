@@ -28,7 +28,7 @@ public class LoginTask extends Task {
 			return false;
 		}
 
-		return Game.getGameState() == Game.State.LOGIN_SCREEN.getIndex();
+		return Game.State.LOGIN_SCREEN.isCurrent();
 	}
 
 	@Override
@@ -42,7 +42,6 @@ public class LoginTask extends Task {
 		if (account != null && account.isValid()) {
 			switch (Login.getLoginState()) {
 				case ENTER_CREDENTIALS:
-
 					final String loginMessage = Login.getLoginMessage();
 					if (loginMessage.contains("many login attempts")) {
 						logger.info("Too many login attempts! Sleeping for 2 minutes.");
@@ -59,14 +58,13 @@ public class LoginTask extends Task {
 						ScreenLocation screenLocation = new ScreenLocation((int) (235 + (Math.random() * (370 - 235))), (int) (305 + (Math.random() * (335 - 305))));
 						Mouse.click(screenLocation);
 					}
-
 					break;
 				case INVALID_CREDENTIALS:
 					account.setWrongLogin(true);
-					Login.setLoginIndex(Login.LoginState.ENTER_CREDENTIALS.getValue());
+					Login.setLoginState(Login.State.ENTER_CREDENTIALS);
 					break;
 				default:
-					Login.setLoginIndex(Login.LoginState.ENTER_CREDENTIALS.getValue());
+					Login.setLoginState(Login.State.ENTER_CREDENTIALS);
 					break;
 			}
 		}

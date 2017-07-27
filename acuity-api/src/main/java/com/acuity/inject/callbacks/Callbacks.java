@@ -94,7 +94,7 @@ public class Callbacks {
     @ClientInvoked
     public static void drawCallback(Image image) {
         try {
-            if (Game.getGameState() == Game.State.IN_GAME.getIndex()) {
+            if (Game.State.IN_GAME.isCurrent()) {
                 Events.getRsEventBus().post(new InGameDrawEvent(image));
             }
             else {
