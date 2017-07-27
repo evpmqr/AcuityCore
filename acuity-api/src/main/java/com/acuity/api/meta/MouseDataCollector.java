@@ -5,9 +5,9 @@ import com.acuity.api.rs.events.impl.ActionEvent;
 import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.google.common.eventbus.Subscribe;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -21,7 +21,11 @@ public class MouseDataCollector {
     private PrintWriter printWriter;
 
     public void processCanvasEvent(MouseEvent event){
-        //printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getFineX() + "," + event.getFineY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
+        printWriter.write(System.currentTimeMillis() + ",canvasEvent," + event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
+    }
+
+    public void processCanvasEvent(KeyEvent event){
+
     }
 
     @Subscribe
@@ -31,7 +35,7 @@ public class MouseDataCollector {
 
     @Subscribe
     public void processAction(ActionEvent event){
-       // printWriter.write(System.currentTimeMillis() + ":actionEvent:" + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
+        printWriter.write(System.currentTimeMillis() + ",actionEvent," + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
     }
 
     public void start(){
@@ -41,8 +45,6 @@ public class MouseDataCollector {
             printWriter = new PrintWriter(file);
             Events.getRsEventBus().register(this);
             Events.getAcuityEventBus().register(this);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

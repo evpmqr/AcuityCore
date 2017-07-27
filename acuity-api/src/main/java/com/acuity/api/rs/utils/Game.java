@@ -17,7 +17,7 @@ public class Game {
     }
 
     public enum State{
-        NOT_INITALIZED(0),
+        NOT_INITIALIZED(0),
         CLIENT_LOADING(5),
         LOGIN_SCREEN(10),
         LOADING_SCREEN(25),

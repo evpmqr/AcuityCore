@@ -16,7 +16,7 @@ public class Tabs {
         CLAN_CHAT(KeyEvent.VK_F7, 28),
         FRIENDS_LIST(KeyEvent.VK_F8, 29),
         IGNORE_LIST(KeyEvent.VK_F9, 30),
-        LOGOUT(-1, 31),
+        LOGOUT(null, 31),
         OPTIONS(KeyEvent.VK_F10, 32),
         EMOTES(KeyEvent.VK_F11, 33),
         MUSIC_PLAYER(KeyEvent.VK_F12, 34),
@@ -29,11 +29,20 @@ public class Tabs {
         MAGIC(KeyEvent.VK_F6, 51);
 
         private final int index;
-        private final int hotkey;
+        private final Integer hotkey;
 
-        Tab(int hotkey, int index) {
+        Tab(Integer hotkey, int index) {
             this.hotkey = hotkey;
             this.index = index;
+        }
+
+        public static Tab getOpen() {
+            for (Tab tab : values()) {
+                if (tab.isOpen()) {
+                    return tab;
+                }
+            }
+            return null;
         }
 
         public Optional<InterfaceComponent> getComponent() {
@@ -48,23 +57,13 @@ public class Tabs {
             if (isOpen()) {
                 return ActionResult.SUCCESS;
             }
-
-            if (Varps.get(281, 0) >= 1000 && hotkey != -1) {
-                Keyboard.type((char) hotkey);
-            } else {
+            if (Varps.get(281, 0) >= 1000 && hotkey != null) {
+                Keyboard.type((char) (int) hotkey);
+            }
+            else {
                 // TODO: 7/11/2017  getComponent().ifPresent(component -> AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(component.getPoint(), true));
             }
-
             return isOpen() ? ActionResult.SUCCESS : ActionResult.FAILURE;
-        }
-
-        public static Tab getOpen() {
-            for (Tab tab : values()) {
-                if (tab.isOpen()) {
-                    return tab;
-                }
-            }
-            return null;
         }
     }
 }

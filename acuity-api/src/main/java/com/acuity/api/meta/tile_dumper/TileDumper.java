@@ -30,7 +30,7 @@ public class TileDumper {
         executor = Executors.newSingleThreadExecutor();
     }
 
-    public static void execute(){
+    public static void execute() {
         Stream.Builder<DumpTile> collectedTiles = Stream.builder();
         Stream.Builder<DumpSE> collectedSEs = Stream.builder();
         Stream.Builder<DumpNPC> collectedNPCs = Stream.builder();
@@ -40,14 +40,14 @@ public class TileDumper {
         int plane = Scene.getPlane();
         RSCollisionData rsCollisionData = AcuityInstance.getClient().getRsClient().getCollisionMaps()[plane];
 
-        if (rsCollisionData != null){
+        if (rsCollisionData != null) {
             int[][] flags = rsCollisionData.getFlags();
             for (int x = 3; x < flags.length; x++) {
                 int[] tiles = flags[x];
                 for (int y = 3; y < tiles.length; y++) {
-                    if (x <= 98 && y <= 98){
+                    if (x <= 98 && y <= 98) {
                         DumpTile dumpTile = new DumpTile(x + baseX, y + baseY, plane, tiles[y]);
-                        if (dumpTile.getFlag() != 0){
+                        if (dumpTile.getFlag() != 0) {
                             collectedTiles.add(dumpTile);
                         }
 
@@ -62,7 +62,7 @@ public class TileDumper {
             WorldLocation worldLocation = npc.getWorldLocation();
             if (worldLocation.getPlane() == plane &&
                     worldLocation.getWorldX() >= (baseX + 3) && worldLocation.getWorldX() <= (baseX + 98) &&
-                    worldLocation.getWorldY() >= (baseY + 3) && worldLocation.getWorldY() <= (baseY + 98)){
+                    worldLocation.getWorldY() >= (baseY + 3) && worldLocation.getWorldY() <= (baseY + 98)) {
                 collectedNPCs.add(new DumpNPC(npc, worldLocation.getWorldX(), worldLocation.getWorldY(), worldLocation.getPlane()));
             }
         });
@@ -118,12 +118,10 @@ public class TileDumper {
                     OrientVertex orientVertex = graph.addVertex("class:NPC", vertexProps);
                     capture.addEdge(null, orientVertex, "class:Captured");
                 });
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 logger.error("Error while dumping tiles, rolling back graph.", e);
                 graph.rollback();
-            }
-            finally {
+            } finally {
                 graph.shutdown();
                 logger.info("Tile dump completed, graph closed.");
             }

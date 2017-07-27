@@ -1,6 +1,7 @@
-package com.acuity.api.applet.input;
+package com.acuity.api.applet.input.impl;
 
 import com.acuity.api.Events;
+import com.acuity.api.applet.input.InputMiddleMan;
 import com.acuity.api.input.SmartActions;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.utils.Random;
@@ -15,21 +16,12 @@ import java.awt.event.KeyListener;
 /**
  * Created by Zach on 6/17/2017.
  */
-public class KeyboardMiddleMan implements KeyListener {
+public class KeyboardMiddleMan implements InputMiddleMan, KeyListener {
 
     private static Logger logger = LoggerFactory.getLogger(KeyboardMiddleMan.class);
 
     private Component component;
     private KeyListener output;
-
-    public void replace(Component component) {
-        this.component = component;
-        if (component.getKeyListeners().length > 0) {
-            output = component.getKeyListeners()[0];
-        }
-        component.addKeyListener(this);
-        logger.info("Replaced keyboard of {}.", component);
-    }
 
     public synchronized void pressEnter() {
         dispatchPressKey(KeyEvent.VK_ENTER, 20);
@@ -94,5 +86,16 @@ public class KeyboardMiddleMan implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         Events.getAcuityEventBus().post(e);
+    }
+
+    @Override
+    public boolean insertInto(Component component) {
+        this.component = component;
+        if (component.getKeyListeners().length > 0) {
+            output = component.getKeyListeners()[0];
+        }
+        component.addKeyListener(this);
+        logger.info("Replaced keyboard of {}.", component);
+        return true;
     }
 }

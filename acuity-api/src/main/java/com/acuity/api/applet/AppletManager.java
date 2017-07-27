@@ -1,8 +1,9 @@
 package com.acuity.api.applet;
 
 import com.acuity.api.Events;
-import com.acuity.api.applet.input.KeyboardMiddleMan;
-import com.acuity.api.applet.input.MouseMiddleMan;
+import com.acuity.api.applet.input.impl.FocusMiddleMan;
+import com.acuity.api.applet.input.impl.KeyboardMiddleMan;
+import com.acuity.api.applet.input.impl.MouseMiddleMan;
 import com.acuity.api.applet.loader.ClientConfig;
 import com.acuity.api.applet.loader.ClientEnvironment;
 import com.acuity.api.applet.loader.ClientStub;
@@ -32,6 +33,7 @@ public class AppletManager {
     private ClientEnvironment<Client> clientEnvironment;
     private ClientStub clientStub;
 
+    private FocusMiddleMan focusMiddleMan = new FocusMiddleMan();
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
     private KeyboardMiddleMan keyboardMiddleMan = new KeyboardMiddleMan();
 
@@ -58,8 +60,9 @@ public class AppletManager {
     @Subscribe
     public void gameStateChanged(GameStateChangeEvent changeEvent) {
         if (changeEvent.getPreviousGameState() == Game.State.CLIENT_LOADING.getIndex() && changeEvent.getGamestate() == Game.State.LOGIN_SCREEN.getIndex()) {
-            mouseMiddleMan.replace(getClient().getCanvas());
-            keyboardMiddleMan.replace(getClient().getCanvas());
+            focusMiddleMan.insertInto(getClient().getCanvas());
+            mouseMiddleMan.insertInto(getClient().getCanvas());
+            keyboardMiddleMan.insertInto(getClient().getCanvas());
             Events.getRsEventBus().unregister(this);
         }
     }
