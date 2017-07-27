@@ -35,7 +35,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
         else lastModel = rsRenderable.getCachedModel();
 
         return Optional.ofNullable(lastModel)
-                .map(model -> model.place(location.getX() , location.getY()))
+                .map(model -> model.place(location.getFineX() , location.getFineY()))
                 .map(model -> {
                     if (orientation != null) model.rotateTo(orientation);
                     return model;

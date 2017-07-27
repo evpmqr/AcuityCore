@@ -12,16 +12,16 @@ import java.util.Optional;
  */
 public class FineLocation implements Locatable{
 
-    private int x, y, plane;
+    private int fineX, fineY, plane;
     private int baseX, baseY;
 
-    public FineLocation(int x, int y, int plane) {
-        this(x, y, plane, Scene.getBaseX(), Scene.getBaseY());
+    public FineLocation(int fineX, int fineY, int plane) {
+        this(fineX, fineY, plane, Scene.getBaseX(), Scene.getBaseY());
     }
 
-    public FineLocation(int x, int y, int plane, int baseX, int baseY) {
-        this.x = x;
-        this.y = y;
+    public FineLocation(int fineX, int fineY, int plane, int baseX, int baseY) {
+        this.fineX = fineX;
+        this.fineY = fineY;
         this.plane = plane;
         this.baseX = baseX;
         this.baseY = baseY;
@@ -31,16 +31,16 @@ public class FineLocation implements Locatable{
         return plane;
     }
 
-    public int getX() {
-        return x;
+    public int getFineX() {
+        return fineX;
     }
 
-    public int getY() {
-        return y;
+    public int getFineY() {
+        return fineY;
     }
 
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(x / Projection.TILE_PIXEL_SIZE, y / Projection.TILE_PIXEL_SIZE, plane, baseX, baseY);
+        return new SceneLocation(fineX / Projection.TILE_PIXEL_SIZE, fineY / Projection.TILE_PIXEL_SIZE, plane, baseX, baseY);
     }
 
     @Override

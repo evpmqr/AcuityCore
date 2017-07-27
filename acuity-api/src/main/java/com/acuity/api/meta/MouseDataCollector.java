@@ -21,7 +21,7 @@ public class MouseDataCollector {
     private PrintWriter printWriter;
 
     public void processCanvasEvent(MouseEvent event){
-        //printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
+        //printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getFineX() + "," + event.getFineY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
     }
 
     @Subscribe

@@ -59,7 +59,7 @@ public class Projection {
     }
 
     public static Optional<ScreenLocation> fineToScreen(FineLocation fineLocation) {
-        return fineToScreen(fineLocation.getX(), fineLocation.getY(), fineLocation.getPlane());
+        return fineToScreen(fineLocation.getFineX(), fineLocation.getFineY(), fineLocation.getPlane());
     }
 
     public static Optional<ScreenLocation> fineToScreen(int fineX, int fineY, int height) {

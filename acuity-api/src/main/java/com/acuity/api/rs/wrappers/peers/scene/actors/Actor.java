@@ -44,7 +44,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     public Optional<Model> getCachedModel() {
         FineLocation fineLocation = getFineLocation();
         return super.getCachedModel()
-                .map(model -> model.place(fineLocation.getX(), fineLocation.getY()))
+                .map(model -> model.place(fineLocation.getFineX(), fineLocation.getFineY()))
                 .map(model -> model.rotateTo(getOrientation()));
     }
 
