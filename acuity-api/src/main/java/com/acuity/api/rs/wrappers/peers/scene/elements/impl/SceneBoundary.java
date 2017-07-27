@@ -3,8 +3,8 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.SceneElement;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
@@ -47,7 +47,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
     public Optional<Model> getModel() {
         return SceneElement.getModel(
                 getRenderable().orElse(null),
-                getStrictLocation(),
+                getFineLocation(),
                 null);
     }
 
@@ -69,12 +69,12 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         return 0;
     }
 
-    public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane());
+    public FineLocation getFineLocation(){
+        return new FineLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane());
     }
 
     public SceneLocation getSceneLocation(){
-        return getStrictLocation().getSceneLocation();
+        return getFineLocation().getSceneLocation();
     }
 
     @Override

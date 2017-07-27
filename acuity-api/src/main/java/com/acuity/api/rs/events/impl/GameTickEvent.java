@@ -7,17 +7,15 @@ import com.acuity.api.rs.events.RSEvent;
  */
 public class GameTickEvent implements RSEvent{
 
+    public static final GameTickEvent INSTANCE = new GameTickEvent();
+
     private static long tickCounter = 0;
-
-    public GameTickEvent() {
-
-    }
 
     public static void incrementTick(){
         tickCounter++;
     }
 
-    public static long getTickCounter() {
+    public long getTickCounter() {
         return tickCounter;
     }
 }

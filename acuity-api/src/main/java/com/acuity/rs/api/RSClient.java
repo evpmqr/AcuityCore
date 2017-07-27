@@ -100,8 +100,6 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSGrandExchangeOffer[] getGrandExchangeOffers();
 
-	com.acuity.rs.api.RSNodeDeque getGraphicsObjectDeque();
-
 	com.acuity.rs.api.RSNodeDeque[][][] getGroundItemDeque();
 
 	int getHintArrowNpcIndex();
@@ -178,6 +176,8 @@ public interface RSClient extends RSGameEngine {
 
 	int getMenuY();
 
+	int getModLevel();
+
 	int getMouseIdleTime();
 
 	com.acuity.rs.api.RSMouseRecorder getMouseRecorder();
@@ -230,8 +230,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getRedrawMode();
 
-	int getRights();
-
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -245,6 +243,8 @@ public interface RSClient extends RSGameEngine {
 	int[] getSkillExperiences();
 
 	int getSpellTargetFlags();
+
+	com.acuity.rs.api.RSNodeDeque getSpotAnimationDeque();
 
 	int[] getTempVarps();
 
@@ -278,27 +278,27 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSAnimationSequence invokeGetAnimationSequence(int var0);
 
-	com.acuity.rs.api.RSDefinitionProperty invokeGetDefinitionProperty(int var0);
-
-	com.acuity.rs.api.RSSpotAnimation invokeGetGraphicDefinition(int var0);
-
-	com.acuity.rs.api.RSHitsplatDefinition invokeGetHitsplatDefinition(int var0);
-
-	com.acuity.rs.api.RSItemComposite invokeGetItemDefinition(int var0);
-
 	com.acuity.rs.api.RSSpritePixels invokeGetItemSprite(int var0, int var1, int var2, int var3, int var4, boolean var5);
 
-	com.acuity.rs.api.RSNPCComposite invokeGetNpcDefinition(int var0);
-
-	com.acuity.rs.api.RSSceneElementComposite invokeGetObjectDefinition(int var0);
-
 	com.acuity.rs.api.RSCacheReferenceTable invokeGetReferenceTable(int var0, boolean var1, boolean var2, boolean var3);
+
+	com.acuity.rs.api.RSTypeProperty invokeGetTypeProperty(int var0);
 
 	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
 
 	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
 
 	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
+
+	com.acuity.rs.api.RSHitsplatType invokeLoadHitsplatType(int var0);
+
+	com.acuity.rs.api.RSItemType invokeLoadItemType(int var0);
+
+	com.acuity.rs.api.RSNPCType invokeLoadNpcType(int var0);
+
+	com.acuity.rs.api.RSSceneElementType invokeLoadSceneElementType(int var0);
+
+	com.acuity.rs.api.RSSpotAnimationType invokeLoadSpotAnimationType(int var0);
 
 	com.acuity.rs.api.RSVarpbit invokeLoadVarpbit(int var0);
 
@@ -436,8 +436,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setGrandExchangeOffers(com.acuity.rs.api.RSGrandExchangeOffer[] var0);
 
-	void setGraphicsObjectDeque(com.acuity.rs.api.RSNodeDeque var0);
-
 	void setGroundItemDeque(com.acuity.rs.api.RSNodeDeque[][][] var0);
 
 	void setHintArrowNpcIndex(int var0);
@@ -520,6 +518,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setMenuY(int var0);
 
+	void setModLevel(int var0);
+
 	void setMouseIdleTime(int var0);
 
 	void setMouseRecorder(com.acuity.rs.api.RSMouseRecorder var0);
@@ -576,8 +576,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setResizableMode(boolean var0);
 
-	void setRights(int var0);
-
 	void setRunEnergy(int var0);
 
 	void setSceneGraph(com.acuity.rs.api.RSScene var0);
@@ -593,6 +591,8 @@ public interface RSClient extends RSGameEngine {
 	void setSpellSelected(boolean var0);
 
 	void setSpellTargetFlags(int var0);
+
+	void setSpotAnimationDeque(com.acuity.rs.api.RSNodeDeque var0);
 
 	void setTempVarps(int[] var0);
 

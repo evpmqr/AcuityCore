@@ -20,7 +20,7 @@ public class Game {
         return AcuityInstance.getClient().getGameState();
     }
 
-    public static long getCurrentGameTick() {
-        return GameTickEvent.getTickCounter();
+    public static long getLastGameTick(){
+        return GameTickEvent.INSTANCE.getTickCounter();
     }
 }

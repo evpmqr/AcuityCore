@@ -36,8 +36,8 @@ public class KeyboardMiddleMan implements KeyListener {
 
     public synchronized void sendText(String text, boolean pressEnter, int minDelay, int maxDelay) {
         Preconditions.checkNotNull(text);
-        Preconditions.checkArgument(minDelay >= 0, "Please only pass positive delays");
-        Preconditions.checkArgument(maxDelay >= 0, "Please only pass positive delays");
+        Preconditions.checkArgument(minDelay >= 0, "Invalid delay - Negative min delay.");
+        Preconditions.checkArgument(maxDelay >= 0, "Invalid delay - Negative max delay.");
 
         for (char element : text.toCharArray()) {
             dispatchPressKey(element, Random.nextInt(minDelay, maxDelay));

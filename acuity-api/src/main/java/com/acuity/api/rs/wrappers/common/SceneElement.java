@@ -6,15 +6,15 @@ import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.utils.Varps;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
-import com.acuity.api.rs.wrappers.peers.composite.SceneElementComposite;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.api.rs.wrappers.peers.types.SceneElementType;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
-import com.acuity.rs.api.RSSceneElementComposite;
+import com.acuity.rs.api.RSSceneElementType;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
  */
 public interface SceneElement extends Locatable, Nameable, Interactive {
 
-    static Optional<Model> getModel(RSRenderable rsRenderable, StrictLocation location, Integer orientation) {
+    static Optional<Model> getModel(RSRenderable rsRenderable, FineLocation location, Integer orientation) {
         if (rsRenderable == null) return Optional.empty();
 
         Model lastModel;
@@ -44,7 +44,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
 
     @SuppressWarnings("unchecked")
     default List<String> getActions(){
-        return getComposite().map(SceneElementComposite::getActions).map(Arrays::asList).orElse(Collections.EMPTY_LIST);
+        return getComposite().map(SceneElementType::getActions).map(Arrays::asList).orElse(Collections.EMPTY_LIST);
     }
 
     @Override
@@ -68,11 +68,11 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     UIDs.UID getUID();
 
     default String getName(){
-        return getComposite().map(SceneElementComposite::getName).orElse(null);
+        return getComposite().map(SceneElementType::getName).orElse(null);
     }
 
-    default Optional<SceneElementComposite> getComposite(){
-        RSSceneElementComposite rsSceneElementComposite = AcuityInstance.getClient().getRsClient().invokeGetObjectDefinition(getID());
+    default Optional<SceneElementType> getComposite(){
+        RSSceneElementType rsSceneElementComposite = AcuityInstance.getClient().getRsClient().invokeLoadSceneElementType(getID());
 
         if (rsSceneElementComposite != null){
             int[] transformIDs = rsSceneElementComposite.getTransformIDs();
@@ -90,11 +90,11 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
                 }
 
                 if (transformedIndex != -1) {
-                    rsSceneElementComposite = AcuityInstance.getClient().getRsClient().invokeGetObjectDefinition(transformIDs[transformedIndex]);
+                    rsSceneElementComposite = AcuityInstance.getClient().getRsClient().invokeLoadSceneElementType(transformIDs[transformedIndex]);
                 }
             }
         }
 
-        return Optional.ofNullable(rsSceneElementComposite).map(RSSceneElementComposite::getWrapper);
+        return Optional.ofNullable(rsSceneElementComposite).map(RSSceneElementType::getWrapper);
     }
 }

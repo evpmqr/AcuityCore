@@ -1,8 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
@@ -55,15 +55,15 @@ public class Projection {
     }
 
     public static Optional<ScreenLocation> sceneToScreen(SceneLocation sceneLocation) {
-        return strictToScreen(sceneLocation.getStrictLocation());
+        return fineToScreen(sceneLocation.getFineLocation());
     }
 
-    public static Optional<ScreenLocation> strictToScreen(StrictLocation strictLocation) {
-        return strictToScreen(strictLocation.getX(), strictLocation.getY(), strictLocation.getPlane());
+    public static Optional<ScreenLocation> fineToScreen(FineLocation fineLocation) {
+        return fineToScreen(fineLocation.getX(), fineLocation.getY(), fineLocation.getPlane());
     }
 
-    public static Optional<ScreenLocation> strictToScreen(int strictX, int strictY, int height) {
-        if (strictX >= TILE_PIXEL_SIZE && strictX <= 13056 && strictY >= TILE_PIXEL_SIZE && strictY <= 13056) {
+    public static Optional<ScreenLocation> fineToScreen(int fineX, int fineY, int height) {
+        if (fineX >= TILE_PIXEL_SIZE && fineX <= 13056 && fineY >= TILE_PIXEL_SIZE && fineY <= 13056) {
             int alt = Camera.getPitch();
             if (alt < 0) {
                 return Optional.empty();
@@ -72,23 +72,23 @@ public class Projection {
             if (yaw < 0) {
                 return Optional.empty();
             }
-            int elevation = Scene.getGroundHeight(strictX, strictY).orElse(0) - height;
-            strictX -= Camera.getX();
-            strictY -= Camera.getY();
+            int elevation = Scene.getGroundHeight(fineX, fineY).orElse(0) - height;
+            fineX -= Camera.getX();
+            fineY -= Camera.getY();
             elevation -= Camera.getZ();
             int altSin = SINE[alt];
             int altCos = COSINE[alt];
             int yawSin = SINE[yaw];
             int yawCos = COSINE[yaw];
-            int angle = strictY * yawSin + strictX * yawCos >> 16;
-            strictY = strictY * yawCos - strictX * yawSin >> 16;
-            strictX = angle;
-            angle = elevation * altCos - strictY * altSin >> 16;
-            strictY = elevation * altSin + strictY * altCos >> 16;
-            if (strictY == 0) {
+            int angle = fineY * yawSin + fineX * yawCos >> 16;
+            fineY = fineY * yawCos - fineX * yawSin >> 16;
+            fineX = angle;
+            angle = elevation * altCos - fineY * altSin >> 16;
+            fineY = elevation * altSin + fineY * altCos >> 16;
+            if (fineY == 0) {
                 return Optional.empty();
             }
-            return Optional.of(new ScreenLocation(256 + (strictX << 9) / strictY, (angle << 9) / strictY + 167));
+            return Optional.of(new ScreenLocation(256 + (fineX << 9) / fineY, (angle << 9) / fineY + 167));
         }
         return Optional.empty();
     }

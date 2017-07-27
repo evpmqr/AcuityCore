@@ -12,6 +12,10 @@ public interface RSProjectile extends RSRenderable {
 
 	int getEndCycle();
 
+	int getFineX();
+
+	int getFineY();
+
 	int getHeight();
 
 	double getHeightOffset();
@@ -29,10 +33,6 @@ public interface RSProjectile extends RSRenderable {
 	double getSpeedY();
 
 	int getStartCycle();
-
-	int getStrictX();
-
-	int getStrictY();
 
 	int getTargetDistance();
 
@@ -54,6 +54,10 @@ public interface RSProjectile extends RSRenderable {
 
 	void setEndCycle(int var0);
 
+	void setFineX(int var0);
+
+	void setFineY(int var0);
+
 	void setHeight(int var0);
 
 	void setHeightOffset(double var0);
@@ -73,10 +77,6 @@ public interface RSProjectile extends RSRenderable {
 	void setSpeedY(double var0);
 
 	void setStartCycle(int var0);
-
-	void setStrictX(int var0);
-
-	void setStrictY(int var0);
 
 	void setTargetDistance(int var0);
 

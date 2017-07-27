@@ -6,11 +6,11 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSNode
 public interface RSHealthBar extends RSNode {
 
-	com.acuity.rs.api.RSHealthBarComposite getDefinition();
-
 	com.acuity.rs.api.RSNodeLinkedList getHitsplats();
 
-	void setDefinition(com.acuity.rs.api.RSHealthBarComposite var0);
+	com.acuity.rs.api.RSHealthBarType getType();
 
 	void setHitsplats(com.acuity.rs.api.RSNodeLinkedList var0);
+
+	void setType(com.acuity.rs.api.RSHealthBarType var0);
 }

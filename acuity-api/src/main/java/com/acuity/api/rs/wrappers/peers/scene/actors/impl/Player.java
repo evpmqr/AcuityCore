@@ -1,10 +1,10 @@
 package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.wrappers.peers.composite.PlayerComposite;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
+import com.acuity.api.rs.wrappers.peers.types.PlayerType;
 import com.acuity.rs.api.RSPlayer;
-import com.acuity.rs.api.RSPlayerComposite;
+import com.acuity.rs.api.RSPlayerType;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -35,8 +35,8 @@ public class Player extends Actor {
 		return getSkullIcon() == 0;
 	}
 
-	public Optional<PlayerComposite> getAppearance() {
-		return Optional.ofNullable(rsPlayer.getAppearance()).map(RSPlayerComposite::getWrapper);
+	public Optional<PlayerType> getAppearance() {
+		return Optional.ofNullable(rsPlayer.getAppearance()).map(RSPlayerType::getWrapper);
 	}
 
 	public int getCombatLevel() {

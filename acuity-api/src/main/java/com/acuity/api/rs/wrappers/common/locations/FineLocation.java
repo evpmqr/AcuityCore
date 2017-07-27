@@ -10,16 +10,16 @@ import java.util.Optional;
 /**
  * Created by Zach on 7/1/2017.
  */
-public class StrictLocation implements Locatable{
+public class FineLocation implements Locatable{
 
     private int x, y, plane;
     private int baseX, baseY;
 
-    public StrictLocation(int x, int y, int plane) {
+    public FineLocation(int x, int y, int plane) {
         this(x, y, plane, Scene.getBaseX(), Scene.getBaseY());
     }
 
-    public StrictLocation(int x, int y, int plane, int baseX, int baseY) {
+    public FineLocation(int x, int y, int plane, int baseX, int baseY) {
         this.x = x;
         this.y = y;
         this.plane = plane;
@@ -50,7 +50,7 @@ public class StrictLocation implements Locatable{
 
     @Override
     public Optional<ScreenLocation> getScreenLocation() {
-        return Projection.strictToScreen(this);
+        return Projection.fineToScreen(this);
     }
 
 

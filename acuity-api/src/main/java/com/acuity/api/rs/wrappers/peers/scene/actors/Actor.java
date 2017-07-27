@@ -5,8 +5,8 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
@@ -42,9 +42,9 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     @Override
     public Optional<Model> getCachedModel() {
-        StrictLocation strictLocation = getStrictLocation();
+        FineLocation fineLocation = getFineLocation();
         return super.getCachedModel()
-                .map(model -> model.place(strictLocation.getX(), strictLocation.getY()))
+                .map(model -> model.place(fineLocation.getX(), fineLocation.getY()))
                 .map(model -> model.rotateTo(getOrientation()));
     }
 
@@ -93,12 +93,12 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return getAnimation() != getIdlePoseAnimation();
     }
 
-    public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsActor.getStrictX(), rsActor.getStrictY(), Scene.getPlane());
+    public FineLocation getFineLocation(){
+        return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
     public SceneLocation getSceneLocation(){
-        return getStrictLocation().getSceneLocation();
+        return getFineLocation().getSceneLocation();
     }
 
     @Override

@@ -10,15 +10,15 @@ public interface RSPickableDecor {
 
 	int getConfig();
 
+	int getFineX();
+
+	int getFineY();
+
 	int getHash();
 
 	int getHeight();
 
 	com.acuity.rs.api.RSRenderable getMiddle();
-
-	int getStrictX();
-
-	int getStrictY();
 
 	com.acuity.rs.api.RSRenderable getTop();
 
@@ -26,15 +26,15 @@ public interface RSPickableDecor {
 
 	void setConfig(int var0);
 
+	void setFineX(int var0);
+
+	void setFineY(int var0);
+
 	void setHash(int var0);
 
 	void setHeight(int var0);
 
 	void setMiddle(com.acuity.rs.api.RSRenderable var0);
-
-	void setStrictX(int var0);
-
-	void setStrictY(int var0);
 
 	void setTop(com.acuity.rs.api.RSRenderable var0);
 }

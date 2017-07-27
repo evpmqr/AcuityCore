@@ -59,8 +59,8 @@ public class SceneLocation implements Locatable {
 		return plane;
 	}
 
-	public StrictLocation getStrictLocation(){
-        return new StrictLocation(getSceneX() * Projection.TILE_PIXEL_SIZE, getSceneY() * Projection.TILE_PIXEL_SIZE, getPlane(), getBaseX(), getBaseY());
+	public FineLocation getFineLocation(){
+        return new FineLocation(getSceneX() * Projection.TILE_PIXEL_SIZE, getSceneY() * Projection.TILE_PIXEL_SIZE, getPlane(), getBaseX(), getBaseY());
     }
 
 	@Override
@@ -84,10 +84,8 @@ public class SceneLocation implements Locatable {
 		if (getBaseY() != that.getBaseY()) return false;
 		if (getSceneX() != that.getSceneX()) return false;
 		if (getSceneY() != that.getSceneY()) return false;
-		if (getPlane() != that.getPlane()) return false;
-
-		return true;
-	}
+        return getPlane() == that.getPlane();
+    }
 
 	@Override
 	public int hashCode() {
