@@ -38,27 +38,27 @@ public class Npc extends Actor implements Identifiable {
 	@Nullable
 	@Override
 	public String getName() {
-	    return getDefinition().map(NpcType::getName).orElse(null);
+	    return getType().map(NpcType::getName).orElse(null);
 	}
 
 	@Override
 	public FineLocation getFineLocation(){
-		Integer scale = getDefinition().map(NpcType::getScale).orElse(0);
+		Integer scale = getType().map(NpcType::getScale).orElse(0);
 		return new FineLocation(getRsNpc().getFineX() - scale * 64, getRsNpc().getFineY() - scale * 64, Scene.getPlane());
 	}
 
 	@Nullable
 	@Override
 	public Integer getID() {
-        return getDefinition().map(NpcType::getID).orElse(null);
+        return getType().map(NpcType::getID).orElse(null);
 	}
 
 	@Override
 	public List<String> getActions() {
-        return getDefinition().map(NpcType::getActions).map(Arrays::asList).orElse(Collections.emptyList());
+        return getType().map(NpcType::getActions).map(Arrays::asList).orElse(Collections.emptyList());
 	}
 
-	public Optional<NpcType> getDefinition() {
+	public Optional<NpcType> getType() {
 		return Optional.ofNullable(rsNpc.getType()).map(RSNPCType::getWrapper);
 	}
 
