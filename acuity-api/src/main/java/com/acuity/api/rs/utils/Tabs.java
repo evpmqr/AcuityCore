@@ -13,6 +13,8 @@ import java.util.Optional;
 public class Tabs {
 
     public enum Tab {
+
+        // TODO: 7/27/2017 Change the hot keys to be based on the varps in indexs 1224 and 1226
         CLAN_CHAT(KeyEvent.VK_F7, 28),
         FRIENDS_LIST(KeyEvent.VK_F8, 29),
         IGNORE_LIST(KeyEvent.VK_F9, 30),

@@ -1,5 +1,6 @@
 package com.acuity.api.applet.input.impl;
 
+import com.acuity.api.Events;
 import com.acuity.api.applet.input.InputMiddleMan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,36 +117,43 @@ public class MouseMiddleMan implements InputMiddleMan {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 

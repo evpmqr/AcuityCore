@@ -34,15 +34,7 @@ public class KeyboardMiddleMan implements InputMiddleMan {
         for (char element : text.toCharArray()) {
             dispatchPressKey(element, Random.nextInt(minDelay, maxDelay));
         }
-
-        if (pressEnter) {
-            pressEnter();
-        }
-    }
-
-    private synchronized void dispatchPressKey(int eventKey, int millis) {
-        output.dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
-        output.dispatch(new KeyEvent(component, KeyEvent.KEY_RELEASED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
+        if (pressEnter) pressEnter();
     }
 
     public synchronized void dispatchTypeKey(char c, int delay) {
@@ -53,6 +45,11 @@ public class KeyboardMiddleMan implements InputMiddleMan {
         if (!(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN)) {
             output.dispatch(generateKeyEvent(c, KeyEvent.KEY_TYPED, 0));
         }
+    }
+
+    private synchronized void dispatchPressKey(int eventKey, int millis) {
+        output.dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
+        output.dispatch(new KeyEvent(component, KeyEvent.KEY_RELEASED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
     }
 
     private KeyEvent generateKeyEvent(char key, int type, int wait) {

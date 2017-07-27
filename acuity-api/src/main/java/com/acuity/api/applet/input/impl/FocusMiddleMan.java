@@ -1,5 +1,6 @@
 package com.acuity.api.applet.input.impl;
 
+import com.acuity.api.Events;
 import com.acuity.api.applet.input.InputMiddleMan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,11 +58,13 @@ public class FocusMiddleMan implements InputMiddleMan {
 
         @Override
         public void focusGained(FocusEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
         @Override
         public void focusLost(FocusEvent e) {
+            Events.getAcuityEventBus().post(e);
             dispatch(e);
         }
 
