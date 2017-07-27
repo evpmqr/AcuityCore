@@ -59,8 +59,12 @@ public class MouseMiddleMan implements InputMiddleMan {
         component.addMouseWheelListener(output);
         logger.debug("Added MMouseListener as MouseWheelListener to component {}.", component);
 
-        logger.info("Successfully middle manned mouse of component {} with MMouseListener {}.", component, output);
+        logger.info("Successfully middle manned mouse of component {} with {}.", component, output);
         return true;
+    }
+
+    public MMouseListener getOutput() {
+        return output;
     }
 
     public class MMouseListener implements MouseListener, MouseMotionListener, MouseWheelListener{
@@ -80,6 +84,9 @@ public class MouseMiddleMan implements InputMiddleMan {
         }
 
         public void dispatch(MouseEvent e){
+            if (e.isConsumed()) {
+                return;
+            }
             switch (e.getID()){
                 case MouseEvent.MOUSE_CLICKED:
                     for (MouseListener mouseListener : mouseListeners) mouseListener.mouseClicked(e);
@@ -103,7 +110,7 @@ public class MouseMiddleMan implements InputMiddleMan {
                     for (MouseMotionListener mouseListener : mouseMotionListeners) mouseListener.mouseDragged(e);
                     break;
                 default:
-                    logger.warn("Attempted to dispatch unknown MouseEvent {}.", e);
+                    logger.warn("Failed to dispatch unknown MouseEvent {}.", e);
             }
         }
 

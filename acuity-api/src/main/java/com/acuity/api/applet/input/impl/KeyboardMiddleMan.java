@@ -2,8 +2,6 @@ package com.acuity.api.applet.input.impl;
 
 import com.acuity.api.Events;
 import com.acuity.api.applet.input.InputMiddleMan;
-import com.acuity.api.input.SmartActions;
-import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.utils.Random;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
@@ -12,16 +10,17 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 /**
  * Created by Zach on 6/17/2017.
  */
-public class KeyboardMiddleMan implements InputMiddleMan, KeyListener {
+public class KeyboardMiddleMan implements InputMiddleMan {
 
     private static Logger logger = LoggerFactory.getLogger(KeyboardMiddleMan.class);
 
     private Component component;
-    private KeyListener output;
+    private MKeyboardListener output = new MKeyboardListener();
 
     public synchronized void pressEnter() {
         dispatchPressKey(KeyEvent.VK_ENTER, 20);
@@ -42,17 +41,17 @@ public class KeyboardMiddleMan implements InputMiddleMan, KeyListener {
     }
 
     private synchronized void dispatchPressKey(int eventKey, int millis) {
-        dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
-        dispatch(new KeyEvent(component, KeyEvent.KEY_RELEASED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
+        output.dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
+        output.dispatch(new KeyEvent(component, KeyEvent.KEY_RELEASED, System.currentTimeMillis() + millis, 0, eventKey, (char) eventKey, KeyEvent.KEY_LOCATION_STANDARD));
     }
 
     public synchronized void dispatchTypeKey(char c, int delay) {
         AWTKeyStroke keystroke = AWTKeyStroke.getAWTKeyStroke(c);
         int keycode = keystroke.getKeyCode();
         if (c >= 'a' && c <= 'z') keycode -= 32;
-        dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + delay, keystroke.getModifiers(), keystroke.getKeyCode(), keystroke.getKeyChar(), KeyEvent.KEY_LOCATION_STANDARD));
+        output.dispatch(new KeyEvent(component, KeyEvent.KEY_PRESSED, System.currentTimeMillis() + delay, keystroke.getModifiers(), keystroke.getKeyCode(), keystroke.getKeyChar(), KeyEvent.KEY_LOCATION_STANDARD));
         if (!(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN)) {
-            dispatch(generateKeyEvent(c, KeyEvent.KEY_TYPED, 0));
+            output.dispatch(generateKeyEvent(c, KeyEvent.KEY_TYPED, 0));
         }
     }
 
@@ -61,41 +60,79 @@ public class KeyboardMiddleMan implements InputMiddleMan, KeyListener {
         return new KeyEvent(component, type, System.currentTimeMillis() + wait, ks.getModifiers(), ks.getKeyCode(), ks.getKeyChar());
     }
 
-
-    public void dispatch(KeyEvent event) {
-        Preconditions.checkNotNull(event);
-        component.dispatchEvent(event);
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        Events.getAcuityEventBus().post(e);
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 'a'){
-            TileDumper.execute();
-        }
-        if (e.getKeyChar() == 'c' && e.isControlDown()){
-            SmartActions.INSTANCE.clear();
-        }
-        Events.getAcuityEventBus().post(e);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        Events.getAcuityEventBus().post(e);
+    public MKeyboardListener getOutput() {
+        return output;
     }
 
     @Override
     public boolean insertInto(Component component) {
         this.component = component;
-        if (component.getKeyListeners().length > 0) {
-            output = component.getKeyListeners()[0];
+
+        KeyListener[] keyListeners = component.getKeyListeners();
+        for (KeyListener keyListener : keyListeners) {
+            component.removeKeyListener(keyListener);
+            logger.debug("Removed KeyListener {} from component.", keyListener);
         }
-        component.addKeyListener(this);
-        logger.info("Replaced keyboard of {}.", component);
+        output.setKeyListeners(keyListeners);
+
+        component.addKeyListener(output);
+        logger.debug("Added MKeyboardListener as KeyListener to component {}.", component);
+
+        logger.info("Successfully middle manned keyboard of component {} with {}.", component, output);
         return true;
+    }
+
+
+    public class MKeyboardListener implements KeyListener {
+
+        private KeyListener[] keyListeners;
+
+        public void dispatch(KeyEvent e) {
+            if (e.isConsumed()) {
+                return;
+            }
+            switch (e.getID()) {
+                case KeyEvent.KEY_PRESSED:
+                    for (KeyListener keyListener : keyListeners) keyListener.keyPressed(e);
+                    break;
+                case KeyEvent.KEY_TYPED:
+                    for (KeyListener keyListener : keyListeners) keyListener.keyTyped(e);
+                    break;
+                case KeyEvent.KEY_RELEASED:
+                    for (KeyListener keyListener : keyListeners) keyListener.keyReleased(e);
+                    break;
+                default:
+                    logger.warn("Failed to dispatch unknown KeyEvent {}.", e);
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            Events.getAcuityEventBus().post(e);
+            dispatch(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            Events.getAcuityEventBus().post(e);
+            dispatch(e);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            Events.getAcuityEventBus().post(e);
+            dispatch(e);
+        }
+
+        public void setKeyListeners(KeyListener[] keyListeners) {
+            this.keyListeners = keyListeners;
+        }
+
+        @Override
+        public String toString() {
+            return "MKeyboardListener{" +
+                    "keyListeners=" + Arrays.toString(keyListeners) +
+                    '}';
+        }
     }
 }
