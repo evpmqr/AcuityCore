@@ -9,9 +9,21 @@ public interface RSMouseRecorder extends java.lang.Runnable {
 
 	int getIndex();
 
+	java.lang.Object getLock();
+
+	int[] getMouseXHistory();
+
+	int[] getMouseYHistory();
+
 	boolean isEnabled();
 
 	void setEnabled(boolean var0);
 
 	void setIndex(int var0);
+
+	void setLock(java.lang.Object var0);
+
+	void setMouseXHistory(int[] var0);
+
+	void setMouseYHistory(int[] var0);
 }

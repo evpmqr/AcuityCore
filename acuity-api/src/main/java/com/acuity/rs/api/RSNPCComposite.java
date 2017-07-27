@@ -18,8 +18,6 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	short[] getNewColors();
 
-	short[] getNewTextures();
-
 	int getPrayerIcon();
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
@@ -30,7 +28,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	int getSize();
 
-	short[] getTextures();
+	short[] getTexturesnewTextures();
 
 	int[] getTransformIDs();
 
@@ -58,8 +56,6 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setNewColors(short[] var0);
 
-	void setNewTextures(short[] var0);
-
 	void setPrayerIcon(int var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
@@ -74,7 +70,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
 	void setSize(int var0);
 
-	void setTextures(short[] var0);
+	void setTexturesnewTextures(short[] var0);
 
 	void setTransformIDs(int[] var0);
 
