@@ -22,28 +22,20 @@ public class Login {
         setLoginInfo(account.getUsername(), account.getPassword());
     }
 
-    public static void setLoginIndex(int index){
-        AcuityInstance.getClient().setLoginIndex(index);
-        logger.info("Set login index to {}.", index);
+    public static void setLoginState(final State state) {
+        AcuityInstance.getClient().setLoginIndex(state.getValue());
+        logger.info("Set login index to {}.", state);
     }
 
-    public static void setLoginIndex(final LoginState state) {
-        setLoginIndex(state.getValue());
-    }
-
-    public static int getLoginIndex(){
-        return AcuityInstance.getClient().getLoginIndex();
-    }
-
-    public static LoginState getLoginState(){
-        return LoginState.fromValue(AcuityInstance.getClient().getLoginState());
+    public static State getLoginState(){
+        return State.fromValue(AcuityInstance.getClient().getLoginState());
     }
 
     public static String getLoginMessage(){
         return AcuityInstance.getClient().getLoginResponse1() + " " + AcuityInstance.getClient().getLoginResponse2();
     }
 
-    public enum LoginState {
+    public enum State {
         INITIAL(0),
         LEGACY(1), //http://i.imgur.com/y6Kko5v.png
         ENTER_CREDENTIALS(2),
@@ -54,7 +46,7 @@ public class Login {
 
         private final int value;
 
-        LoginState(final int value) {
+        State(final int value) {
             this.value = value;
         }
 
@@ -62,13 +54,17 @@ public class Login {
             return value;
         }
 
-        private static LoginState fromValue(final int value) {
-            for (LoginState loginState : values()) {
-                if (loginState.value == value) {
-                    return loginState;
+        private static State fromValue(final int value) {
+            for (State state : values()) {
+                if (state.value == value) {
+                    return state;
                 }
             }
-            return null;
+            throw new IllegalStateException("Unknown Login.State: " + value + ".");
+        }
+
+        public boolean isCurrent(){
+            return getLoginState() == this;
         }
     }
 }

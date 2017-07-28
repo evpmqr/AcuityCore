@@ -16,8 +16,8 @@ public class Varps {
 
 	private static final Logger logger = LoggerFactory.getLogger(Varps.class);
 
-	public static final int MAX_VARP = 2000;
-	public static final int[] BIT_MASKS = new int[32];
+	private static final int MAX_VARP = 2000;
+	private static final int[] BIT_MASKS = new int[32];
 
 	static {
 		int var = 2;
@@ -27,6 +27,11 @@ public class Varps {
 		}
 	}
 
+	public static int getMask(int index){
+	    //Preconditions.checkArgument(index > 0 && index < 32, "Bad mask index, mask index must be in range [0-" + BIT_MASKS.length + ").");
+		return BIT_MASKS[index];
+	}
+
 	public static Optional<int[]> getAll() {
 		Optional<int[]> varps = Optional.ofNullable(AcuityInstance.getClient().getVarps());
 		if (varps.map(ints -> ints.length).orElse(0) == 0) return Optional.empty();
@@ -34,7 +39,7 @@ public class Varps {
 	}
 
 	public static int get(final int index, final int defaultValue) {
-		Preconditions.checkArgument(index < MAX_VARP && index > 0, "Bad index, min index: 1, max index: 1999");
+		Preconditions.checkArgument(index < MAX_VARP && index > 0, "Invalid varp index, index must be in range (0-" + MAX_VARP + ").");
 		return getAll()
                 .map(ints -> ints[index])
                 .orElse(defaultValue);

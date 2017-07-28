@@ -8,19 +8,46 @@ import com.acuity.api.rs.events.impl.GameTickEvent;
  */
 public class Game {
 
-    public static final int NOT_INITALIZED = 0;
-    public static final int CLIENT_LOADING = 5;
-    public static final int LOGIN_SCREEN = 10;
-    public static final int LOADING_SCREEN = 25;
-    public static final int IN_GAME = 30;
-    public static final int CONNECTION_LOST = 40;
-    public static final int CONNECTION_RECONNECTING = 45; //maybe
-
-    public static int getGameState(){
-        return AcuityInstance.getClient().getGameState();
+    public static State getGameState(){
+        return State.fromValue(AcuityInstance.getClient().getGameState());
     }
 
-    public static long getCurrentGameTick() {
-        return GameTickEvent.getTickCounter();
+    public static long getLastGameTick(){
+        return GameTickEvent.INSTANCE.getTickCounter();
+    }
+
+    public enum State{
+        NOT_INITIALIZED(0),
+        CLIENT_LOADING(5),
+        LOGIN_SCREEN(10),
+        IDK(20),
+        LOADING_SCREEN(25),
+        IN_GAME(30),
+        CONNECTION_LOST(40),
+        CONNECTION_RECONNECTING(45);
+
+        private final int index;
+
+        State(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public boolean isCurrent(){
+            return getGameState() == this;
+        }
+
+        private static Game.State fromValue(final int value) {
+            for (Game.State state : values()) {
+                if (state.index == value) {
+                    return state;
+                }
+            }
+            throw new IllegalStateException("Unknown Game.State: " + value + ".");
+        }
+
     }
 }

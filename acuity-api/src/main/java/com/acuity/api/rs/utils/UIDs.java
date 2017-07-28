@@ -2,12 +2,6 @@ package com.acuity.api.rs.utils;
 
 public class UIDs {
 
-    // TODO: 6/12/2017 Convert to Enum?
-    public static final int PLAYER = 0;
-    public static final int NPC = 1;
-    public static final int OBJECT = 2;
-    public static final int GROUND_ITEM = 3;
-
     public static int compile(int sceneX, int sceneY, int id, int type, boolean interactable) {
         sceneX &= 127;    // Maximum value of 127
         sceneY &= 127;    // Maximum value of 127
@@ -32,13 +26,20 @@ public class UIDs {
         return uid >> 14 & 0x7fff;
     }
 
-    public static int getEntityType(int uid) {
-        return uid >> 29 & 0x3;
+    public static Type getEntityType(int uid) {
+        return Type.values()[uid >> 29 & 0x3];
     }
 
     //Checks the sign bit, checking if it's positive or negative is a faster/clever alternative
     public static boolean isInteractable(int uid) {
         return uid > 0;
+    }
+
+    public enum Type {
+        PLAYER,
+        NPC,
+        SCENE_ELEMENT,
+        PICKABLE_DECOR
     }
 
     public static class UID {
@@ -65,7 +66,7 @@ public class UIDs {
             return UIDs.getEntityID(uid);
         }
 
-        public int getEntityType() {
+        public Type getEntityType() {
             return UIDs.getEntityType(uid);
         }
 

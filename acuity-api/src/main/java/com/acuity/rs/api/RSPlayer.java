@@ -8,7 +8,7 @@ public interface RSPlayer extends RSActor {
 
 	java.lang.String[] getActions();
 
-	com.acuity.rs.api.RSPlayerComposite getAppearance();
+	com.acuity.rs.api.RSPlayerType getAppearance();
 
 	int getCombatLevel();
 
@@ -30,7 +30,7 @@ public interface RSPlayer extends RSActor {
 
 	void setActions(java.lang.String[] var0);
 
-	void setAppearance(com.acuity.rs.api.RSPlayerComposite var0);
+	void setAppearance(com.acuity.rs.api.RSPlayerType var0);
 
 	void setCombatLevel(int var0);
 

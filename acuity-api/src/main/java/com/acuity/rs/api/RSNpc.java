@@ -6,11 +6,11 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSActor
 public interface RSNpc extends RSActor {
 
-	com.acuity.rs.api.RSNPCComposite getDefinition();
+	com.acuity.rs.api.RSNPCType getType();
 
 	com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc getWrapper();
 
-	void setDefinition(com.acuity.rs.api.RSNPCComposite var0);
+	void setType(com.acuity.rs.api.RSNPCType var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc var0);
 }

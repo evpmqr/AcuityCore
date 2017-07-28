@@ -3,10 +3,10 @@ package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
 import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
-import com.acuity.api.rs.wrappers.peers.composite.NpcComposite;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
-import com.acuity.rs.api.RSNPCComposite;
+import com.acuity.api.rs.wrappers.peers.types.NpcType;
+import com.acuity.rs.api.RSNPCType;
 import com.acuity.rs.api.RSNpc;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -38,28 +38,28 @@ public class Npc extends Actor implements Identifiable {
 	@Nullable
 	@Override
 	public String getName() {
-	    return getDefinition().map(NpcComposite::getName).orElse(null);
+	    return getType().map(NpcType::getName).orElse(null);
 	}
 
 	@Override
-	public StrictLocation getStrictLocation(){
-		Integer scale = getDefinition().map(NpcComposite::getScale).orElse(0);
-		return new StrictLocation(getRsNpc().getStrictX() - scale * 64, getRsNpc().getStrictY() - scale * 64, Scene.getPlane());
+	public FineLocation getFineLocation(){
+		Integer scale = getType().map(NpcType::getScale).orElse(0);
+		return new FineLocation(getRsNpc().getFineX() - scale * 64, getRsNpc().getFineY() - scale * 64, Scene.getPlane());
 	}
 
 	@Nullable
 	@Override
 	public Integer getID() {
-        return getDefinition().map(NpcComposite::getID).orElse(null);
+        return getType().map(NpcType::getID).orElse(null);
 	}
 
 	@Override
 	public List<String> getActions() {
-        return getDefinition().map(NpcComposite::getActions).map(Arrays::asList).orElse(Collections.emptyList());
+        return getType().map(NpcType::getActions).map(Arrays::asList).orElse(Collections.emptyList());
 	}
 
-	public Optional<NpcComposite> getDefinition() {
-		return Optional.ofNullable(rsNpc.getDefinition()).map(RSNPCComposite::getWrapper);
+	public Optional<NpcType> getType() {
+		return Optional.ofNullable(rsNpc.getType()).map(RSNPCType::getWrapper);
 	}
 
 	@NotNull

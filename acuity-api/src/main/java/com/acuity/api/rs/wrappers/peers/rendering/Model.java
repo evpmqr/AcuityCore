@@ -27,7 +27,7 @@ public class Model extends Renderable{
 
     private RSModel rsModel;
 
-    private int strictXCached, strictYCached;
+    private int fineXCached, fineYCached;
 
     private boolean modelCached = false;
     private int[] xVertices, yVertices, zVertices;
@@ -60,12 +60,12 @@ public class Model extends Renderable{
         return Clickable.EMPTY_SUPPLIER; // TODO: 7/10/2017 Impl
     }
 
-    public int getCachedStrictX() {
-        return strictXCached;
+    public int getFineXCached() {
+        return fineXCached;
     }
 
-    public int getCachedStrictY() {
-        return strictYCached;
+    public int getFineYCached() {
+        return fineYCached;
     }
 
     public int[] getXVertices(){
@@ -96,9 +96,9 @@ public class Model extends Renderable{
         return modelCached;
     }
 
-    public Model place(int strictX, int strictY) {
-        this.strictXCached = strictX;
-        this.strictYCached = strictY;
+    public Model place(int fineX, int fineY) {
+        this.fineXCached = fineX;
+        this.fineYCached = fineY;
         return this;
     }
 
@@ -136,19 +136,19 @@ public class Model extends Renderable{
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
-            ScreenLocation x = Projection.strictToScreen(
-                    strictXCached + xVertices[xTriangles[i]],
-                    strictYCached + zVertices[xTriangles[i]],
+            ScreenLocation x = Projection.fineToScreen(
+                    fineXCached + xVertices[xTriangles[i]],
+                    fineYCached + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
-            ScreenLocation y = Projection.strictToScreen(
-                    strictXCached + xVertices[yTriangles[i]],
-                    strictYCached + zVertices[yTriangles[i]],
+            ScreenLocation y = Projection.fineToScreen(
+                    fineXCached + xVertices[yTriangles[i]],
+                    fineYCached + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
-            ScreenLocation z = Projection.strictToScreen(
-                    strictXCached + xVertices[zTriangles[i]],
-                    strictYCached + zVertices[zTriangles[i]],
+            ScreenLocation z = Projection.fineToScreen(
+                    fineXCached + xVertices[zTriangles[i]],
+                    fineYCached + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null
@@ -174,19 +174,19 @@ public class Model extends Renderable{
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
             }
-            ScreenLocation x = Projection.strictToScreen(
-                    strictXCached + xVertices[xTriangles[i]],
-                    strictYCached + zVertices[xTriangles[i]],
+            ScreenLocation x = Projection.fineToScreen(
+                    fineXCached + xVertices[xTriangles[i]],
+                    fineYCached + zVertices[xTriangles[i]],
                     -yVertices[xTriangles[i]]
             ).orElse(null);
-            ScreenLocation y = Projection.strictToScreen(
-                    strictXCached + xVertices[yTriangles[i]],
-                    strictYCached + zVertices[yTriangles[i]],
+            ScreenLocation y = Projection.fineToScreen(
+                    fineXCached + xVertices[yTriangles[i]],
+                    fineYCached + zVertices[yTriangles[i]],
                     -yVertices[yTriangles[i]]
             ).orElse(null);
-            ScreenLocation z = Projection.strictToScreen(
-                    strictXCached + xVertices[zTriangles[i]],
-                    strictYCached + zVertices[zTriangles[i]],
+            ScreenLocation z = Projection.fineToScreen(
+                    fineXCached + xVertices[zTriangles[i]],
+                    fineYCached + zVertices[zTriangles[i]],
                     -yVertices[zTriangles[i]]
             ).orElse(null);
             if (x != null && y != null && z != null

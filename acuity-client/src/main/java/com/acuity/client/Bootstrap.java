@@ -2,18 +2,19 @@ package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
+import com.acuity.api.input.SmartActions;
+import com.acuity.api.meta.MouseDataCollector;
+import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
-import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
+import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.devgui.ScriptRunnerView;
-import com.acuity.rs.api.RSNode;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Comparator;
+import java.awt.event.KeyEvent;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -31,6 +32,22 @@ public class Bootstrap {
         });
     }
 
+    @Subscribe
+    public void testKeyEvent(KeyEvent e){
+        if (e.getKeyChar() == 'c' && e.isControlDown()){
+            SmartActions.INSTANCE.clear();
+        }
+        else if (e.getKeyChar() == 'a'){
+            TileDumper.execute();
+        }
+        else if (e.getKeyChar() == 'n'){
+            LocalPlayer.get().ifPresent(player -> {
+                System.out.println(player.getHealthPercent());
+
+            });
+        }
+    }
+
     public Bootstrap() {
         EventQueue.invokeLater(() -> {
             try {
@@ -43,6 +60,9 @@ public class Bootstrap {
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
+                MouseDataCollector.INSTANCE.start();
+                SmartActions.INSTANCE.start();
+
                 new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -50,6 +70,7 @@ public class Bootstrap {
         });
 
         Events.getRsEventBus().register(this);
+        Events.getAcuityEventBus().register(this);
     }
 
     public static void main(String[] args) {

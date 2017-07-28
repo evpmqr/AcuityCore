@@ -5,16 +5,15 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
-import com.acuity.api.rs.wrappers.common.locations.StrictLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
-import com.acuity.rs.api.RSActor;
-import com.acuity.rs.api.RSNodeLinkedList;
+import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -42,9 +41,9 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     @Override
     public Optional<Model> getCachedModel() {
-        StrictLocation strictLocation = getStrictLocation();
+        FineLocation fineLocation = getFineLocation();
         return super.getCachedModel()
-                .map(model -> model.place(strictLocation.getX(), strictLocation.getY()))
+                .map(model -> model.place(fineLocation.getFineX(), fineLocation.getFineY()))
                 .map(model -> model.rotateTo(getOrientation()));
     }
 
@@ -93,12 +92,27 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return getAnimation() != getIdlePoseAnimation();
     }
 
-    public StrictLocation getStrictLocation(){
-        return new StrictLocation(rsActor.getStrictX(), rsActor.getStrictY(), Scene.getPlane());
+    public FineLocation getFineLocation(){
+        return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
+    }
+
+    //Test
+    public int getHealthPercent(){
+        for (Object o : rsActor.getHealthBars()) {
+            if (o != null && o instanceof RSHealthBar){
+                for (Object o1 : ((RSHealthBar) o).getHitsplats()) {
+                    if (o1 != null && o1 instanceof RSHitUpdate){
+                        int currentWidth = ((RSHitUpdate) o1).getCurrentWidth();
+                        return currentWidth * 100 / 255;
+                    }
+                }
+            }
+        }
+        return 0;
     }
 
     public SceneLocation getSceneLocation(){
-        return getStrictLocation().getSceneLocation();
+        return getFineLocation().getSceneLocation();
     }
 
     @Override

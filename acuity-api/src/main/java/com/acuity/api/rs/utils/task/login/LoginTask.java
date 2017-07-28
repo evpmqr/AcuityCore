@@ -2,9 +2,9 @@ package com.acuity.api.rs.utils.task.login;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.Mouse;
+import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.api.rs.utils.Login;
-import com.acuity.api.rs.utils.Time;
 import com.acuity.api.rs.utils.Timer;
 import com.acuity.api.rs.utils.task.Task;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
@@ -28,21 +28,20 @@ public class LoginTask extends Task {
 			return false;
 		}
 
-		return Game.getGameState() == Game.LOGIN_SCREEN;
+		return Game.State.LOGIN_SCREEN.isCurrent();
 	}
 
 	@Override
 	public int loop() {
 		if (AcuityInstance.getClient().isWorldSelectOpen()) {
 			Mouse.click(new ScreenLocation(741, 11));
-			Time.sleepUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
+			Delay.delayUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
 		}
 
 		final Account account = AcuityInstance.getRsAccount();
 		if (account != null && account.isValid()) {
 			switch (Login.getLoginState()) {
 				case ENTER_CREDENTIALS:
-
 					final String loginMessage = Login.getLoginMessage();
 					if (loginMessage.contains("many login attempts")) {
 						logger.info("Too many login attempts! Sleeping for 2 minutes.");
@@ -59,14 +58,13 @@ public class LoginTask extends Task {
 						ScreenLocation screenLocation = new ScreenLocation((int) (235 + (Math.random() * (370 - 235))), (int) (305 + (Math.random() * (335 - 305))));
 						Mouse.click(screenLocation);
 					}
-
 					break;
 				case INVALID_CREDENTIALS:
 					account.setWrongLogin(true);
-					Login.setLoginIndex(Login.LoginState.ENTER_CREDENTIALS.getValue());
+					Login.setLoginState(Login.State.ENTER_CREDENTIALS);
 					break;
 				default:
-					Login.setLoginIndex(Login.LoginState.ENTER_CREDENTIALS.getValue());
+					Login.setLoginState(Login.State.ENTER_CREDENTIALS);
 					break;
 			}
 		}

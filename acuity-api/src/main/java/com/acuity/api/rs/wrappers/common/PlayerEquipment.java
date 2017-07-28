@@ -11,27 +11,39 @@ public class PlayerEquipment {
 
 	private static final Logger logger = LoggerFactory.getLogger(PlayerEquipment.class);
 
-	// TODO: 7/5/2017 Enum?
-	public final static int SLOTS_HELMET = 0;
-	public final static int SLOTS_CAPE = 1;
-	public final static int SLOTS_NECKLACE = 2;
-	public final static int SLOTS_WEAPON = 3;
-	public final static int SLOTS_CHEST = 4;
-	public final static int SLOTS_SHIELD = 5;
-	public final static int SLOTS_LEGS = 7;
-	public final static int SLOTS_HANDS = 9;
-	public final static int SLOTS_FEET = 10;
+	public enum Slot {
+		HELMET(0),
+		CAPE(1),
+		NECKLACE(2),
+		WEAPON(3),
+		CHEST(4),
+		SHIELD(5),
+		LEGS(7),
+		HANDES(9),
+		FEET(10);
+
+		private int index;
+
+		Slot(int index) {
+			this.index = index;
+		}
+
+		public int getIndex() {
+			return index;
+		}
+	}
+
 	//public final static int SLOTS_RING = 12;
 	//public final static int SLOTS_AMMO = 13;
 
-	private int[] equipment;
+	private int[] equipmentIDs;
 
-	public PlayerEquipment(int[] equipment) {
-		this.equipment = equipment;
+	public PlayerEquipment(int[] equipmentIDs) {
+		this.equipmentIDs = equipmentIDs;
 	}
 
-	public int getItemId(final int slot) {
-		int id = this.equipment[slot];
+	public int getItemId(Slot slot) {
+		int id = this.equipmentIDs[slot.getIndex()];
 		if (id > 512) {
 			id -= 512;
 		}

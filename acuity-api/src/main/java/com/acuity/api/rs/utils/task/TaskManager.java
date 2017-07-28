@@ -1,6 +1,6 @@
 package com.acuity.api.rs.utils.task;
 
-import com.acuity.api.rs.utils.Time;
+import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.utils.task.login.LoginTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,13 +34,13 @@ public class TaskManager {
 							if (loop < 0) {
 								continue;
 							}
-							Time.sleep(loop);
+							Delay.delay(loop);
 						}
 					} catch (Exception e) {
-						logger.error("Exception thrown during " + task.getClass().getName());
+						logger.error("Exception thrown during " + task.getClass().getName(), e);
 					}
 				}
-				Time.sleep(100);
+				Delay.delay(100);
 			}
 		});
 

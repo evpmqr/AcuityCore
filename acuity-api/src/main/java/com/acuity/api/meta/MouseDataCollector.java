@@ -5,9 +5,9 @@ import com.acuity.api.rs.events.impl.ActionEvent;
 import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.google.common.eventbus.Subscribe;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,18 +20,28 @@ public class MouseDataCollector {
 
     private PrintWriter printWriter;
 
-    public void processCanvasEvent(MouseEvent event){
-        //printWriter.write(System.currentTimeMillis() + ":canvasEvent:" + event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiersEx() + "\n");
+    private synchronized void write(String log){
+        printWriter.write(log);
+    }
+    
+    @Subscribe
+    public void processRecorderUpdate(MouseRecorderUpdateEvent event){
+        write(event.getTimeMillis() + ",mouseRecorded," + event.getLastX() + "," + event.getLastY());
     }
 
     @Subscribe
-    public void processRecorderUpdate(MouseRecorderUpdateEvent event){
+    public void processKeyboardEvent(KeyEvent event){
+        write(System.currentTimeMillis() + ",keyEvent," + event.getID() + ","+ event.getWhen() + "," + event.getKeyCode() + "," + event.getKeyChar() + "," + event.getExtendedKeyCode() + "," + event.getKeyLocation() + "," + event.getModifiers() + "," + event.getModifiersEx() + "\n");
+    }
 
+    @Subscribe
+    public void processMouseEvent(MouseEvent event){
+        write(System.currentTimeMillis() + ",mouseEvent," + event.getID() + ","+ event.getWhen() + "," + event.getX() + "," + event.getY() + "," + event.getButton() + "," + event.getClickCount() + "," + event.getModifiers() + "," + event.getModifiersEx() + "\n");
     }
 
     @Subscribe
     public void processAction(ActionEvent event){
-       // printWriter.write(System.currentTimeMillis() + ":actionEvent:" + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
+        write(System.currentTimeMillis() + ",actionEvent," + event.getOpcode() + "," + event.getArg0() + "," + event.getArg1() + "," + event.getArg3() + "," + event.getAction() + "," + event.getTarget() + "," + event.getClickX() + "," + event.getClickY() + "\n");
     }
 
     public void start(){
@@ -41,8 +51,6 @@ public class MouseDataCollector {
             printWriter = new PrintWriter(file);
             Events.getRsEventBus().register(this);
             Events.getAcuityEventBus().register(this);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

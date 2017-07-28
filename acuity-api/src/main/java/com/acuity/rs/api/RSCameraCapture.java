@@ -10,13 +10,13 @@ public interface RSCameraCapture {
 
 	int getFlag();
 
-	int getMaxStrictX();
+	int getMaxFineX();
 
-	int getMaxStrictY();
+	int getMaxFineY();
 
-	int getMinStrictX();
+	int getMinFineX();
 
-	int getMinStrictY();
+	int getMinFineY();
 
 	int getTileHeight();
 
@@ -24,13 +24,13 @@ public interface RSCameraCapture {
 
 	void setFlag(int var0);
 
-	void setMaxStrictX(int var0);
+	void setMaxFineX(int var0);
 
-	void setMaxStrictY(int var0);
+	void setMaxFineY(int var0);
 
-	void setMinStrictX(int var0);
+	void setMinFineX(int var0);
 
-	void setMinStrictY(int var0);
+	void setMinFineY(int var0);
 
 	void setTileHeight(int var0);
 }
