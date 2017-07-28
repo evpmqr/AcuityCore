@@ -3,10 +3,7 @@ package com.acuity.inject.callbacks;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.events.impl.ActionEvent;
-import com.acuity.api.rs.events.impl.GameStateChangeEvent;
-import com.acuity.api.rs.events.impl.GameTickEvent;
-import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
+import com.acuity.api.rs.events.impl.*;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
@@ -15,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.lang.reflect.Field;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -28,7 +24,8 @@ public class Callbacks {
     public static void fieldUpdating(String name, int index, Object instance) {
         logger.trace("Field Updating: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
-
+            case "tempVarps":
+                break;
         }
     }
 
@@ -36,6 +33,9 @@ public class Callbacks {
     public static void fieldUpdated(String name, int index, Object instance) {
         logger.trace("Field Updated: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
+            case "tempVarps":
+                Events.getRsEventBus().post(new VarpChangeEvent(index));
+                break;
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;

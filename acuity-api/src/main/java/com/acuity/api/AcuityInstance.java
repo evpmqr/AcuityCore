@@ -23,7 +23,7 @@ public class AcuityInstance {
     private AppletManager appletManager;
     private ScriptManager scriptManager;
 
-    private static Account rsAccount = new Account("chromatosph@yahoo.org", "123123"); // TODO: 7/8/2017 change
+    private static Account rsAccount = new Account("", ""); // TODO: 7/8/2017 change
 
     public static Account getRsAccount() {
         return rsAccount;
