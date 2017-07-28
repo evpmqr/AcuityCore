@@ -3,6 +3,7 @@ package com.acuity.client;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.input.SmartActions;
+import com.acuity.api.meta.MouseDataCollector;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
@@ -52,6 +53,7 @@ public class Bootstrap {
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
+                MouseDataCollector.INSTANCE.start();
                 SmartActions.INSTANCE.start();
 
                 new ScriptRunnerView().setVisible(true);

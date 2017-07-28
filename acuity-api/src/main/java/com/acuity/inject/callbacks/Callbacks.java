@@ -29,7 +29,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdating(String name, int index, Object instance) {
-        logger.trace("Field Updating: '{}' with index={} and instance={}", name, index, instance);
+        logger.debug("Field Updating: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
 
         }
@@ -37,14 +37,22 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdated(String name, int index, Object instance) {
-        logger.trace("Field Updated: '{}' with index={} and instance={}", name, index, instance);
+        logger.debug("Field Updated: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                 break;
-            case "mouseRecorderAccessed":
-                Events.getRsEventBus().post(new MouseRecorderUpdateEvent());
+            case "mouseYHistory":
+                try {
+                    int lastX = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseXHistory()[index];
+                    int lastY = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseYHistory()[index];
+                    Events.getRsEventBus().post(new MouseRecorderUpdateEvent(System.currentTimeMillis(), lastX, lastY));
+                }
+                catch (Exception e){
+
+                }
                 break;
+
         }
     }
 
