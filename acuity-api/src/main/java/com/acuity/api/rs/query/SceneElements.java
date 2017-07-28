@@ -1,11 +1,14 @@
 package com.acuity.api.rs.query;
 
+import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.api.rs.wrappers.common.SceneElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Comparator;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -31,5 +34,9 @@ public class SceneElements {
             throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
         return Scene.getLoaded(sceneX, sceneY, plane).map(SceneTile::streamElements).orElse(Stream.empty());
+    }
+
+    public static SceneElement getNearest(Predicate<? super SceneElement> predicate) {
+        return streamLoaded().filter(predicate).sorted(Comparator.comparingInt(Locatable::distance)).findFirst().orElse(null);
     }
 }
