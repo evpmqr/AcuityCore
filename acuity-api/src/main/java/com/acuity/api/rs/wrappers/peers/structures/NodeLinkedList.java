@@ -32,16 +32,7 @@ public class NodeLinkedList<T extends Node> {
     }
 
     @SuppressWarnings("unchecked")
-    public Stream<T> stream(){
-       return Streams.stream(iterator()).filter(Objects::nonNull).map(object -> (T) object.getWrapper());
-    }
-
-    public List<T> toList(){
-        return stream().collect(Collectors.toList());
-    }
-
-    @SuppressWarnings("unchecked")
-    private Iterator<? extends RSNode> iterator() {
+    public Iterator<? extends RSNode> iterator() {
         return rsNodeLinkedList.iterator();
     }
 

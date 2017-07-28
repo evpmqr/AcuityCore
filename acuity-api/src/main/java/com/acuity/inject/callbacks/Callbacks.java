@@ -9,6 +9,7 @@ import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +95,9 @@ public class Callbacks {
 
     @ClientInvoked
     public static void addHitUpdateCallback(RSActor actor, int i, int i2, int i3, int i4, int i5, int i6){
-
+        if (actor != null && actor instanceof RSPlayer){
+            System.out.println(((RSPlayer) actor).getWrapper().getNullSafeName() + ": " + ((RSPlayer) actor).getWrapper().getHealthPercent());
+        }
     }
 
     @ClientInvoked

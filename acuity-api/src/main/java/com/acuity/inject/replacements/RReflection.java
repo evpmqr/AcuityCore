@@ -87,10 +87,15 @@ public class RReflection {
     public static Class<?> classForName(String className) throws ClassNotFoundException {
         logger.debug("RS-Reflection getting class named '{}'.", className);
         try {
-            return AcuityInstance.getAppletManager().getRsClassLoader().loadClass(className);
+            try {
+                return AcuityInstance.getAppletManager().getRsClassLoader().loadClass(className);
+            }
+            catch (ClassNotFoundException e){
+                return Class.forName(className);
+            }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (Throwable throwable){
+            throwable.printStackTrace();
         }
         return null;
     }

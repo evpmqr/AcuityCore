@@ -16,6 +16,8 @@ import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar;
 import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
 import com.acuity.rs.api.RSActor;
+import com.acuity.rs.api.RSHealthBar;
+import com.acuity.rs.api.RSHitUpdate;
 import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
@@ -23,6 +25,8 @@ import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -99,16 +103,19 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
-    public int getHitPoints(){
-        return getHealthBars().map(NodeLinkedList::stream)
-                .map(healthBarStream -> healthBarStream.findFirst()
-                        .map(
-                                healthBar -> healthBar.getHitSplats()
-                                        .map(NodeLinkedList::stream)
-                                        .map(hitUpdateStream -> hitUpdateStream.findFirst().map(HitUpdate::getCurrentWidth).orElse(-1))
-                                        .orElse(-1)
-                        ).orElse(-1))
-                .orElse(-1);
+    public double getHealthPercent(){
+        int highestCycle = 0;
+        int result = 0;
+        for (Object o : rsActor.getHealthBars()) {
+            if (o != null && o instanceof RSHealthBar){
+                for (Object o1 : ((RSHealthBar) o).getHitsplats()) {
+                    if (((RSHitUpdate) o1).getStartCycle() >= highestCycle){
+                        result = ((RSHitUpdate) o1).getCurrentWidth();
+                    }
+                }
+            }
+        }
+        return Math.min(result * 1000D / 255D, 100);
     }
 
     public SceneLocation getSceneLocation(){
