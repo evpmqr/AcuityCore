@@ -67,6 +67,10 @@ public class AppletManager {
         }
     }
 
+    public RSClassLoader getRsClassLoader() {
+        return rsClassLoader;
+    }
+
     public Client getClient() {
         return Preconditions.checkNotNull(clientEnvironment, "Load the RS client before referencing it.").getGameEngine();
     }
