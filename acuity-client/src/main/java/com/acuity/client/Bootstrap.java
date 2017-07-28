@@ -9,6 +9,7 @@ import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneElement;
 import com.acuity.client.devgui.ScriptRunnerView;
 import com.google.common.eventbus.Subscribe;
 
@@ -43,6 +44,14 @@ public class Bootstrap {
                 System.out.println(player.getHealthPercent());
             });
         }
+    }
+
+    @Subscribe
+    public void drawNearest(InGameDrawEvent event){
+    SceneElement element = (SceneElement) SceneElements.getNearest(sceneElement -> sceneElement.getNullSafeName().equals("Tree"));
+        element.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
+            event.getGraphics().drawString(element.getNullSafeName(), screenLocation.getX(), screenLocation.getY());
+        });
     }
 
     public Bootstrap() {
