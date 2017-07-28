@@ -12,8 +12,11 @@ import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
+import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar;
+import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
-import com.acuity.rs.api.*;
+import com.acuity.rs.api.RSActor;
+import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -60,7 +63,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getAnimation();
     }
 
-    public Optional<NodeLinkedList> getHealthBars() {
+    public Optional<NodeLinkedList<HealthBar>> getHealthBars() {
         return Optional.ofNullable(rsActor.getHealthBars()).map(RSNodeLinkedList::getWrapper);
     }
 
@@ -96,19 +99,16 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
-    //Test
     public int getHealthPercent(){
-        for (Object o : rsActor.getHealthBars()) {
-            if (o != null && o instanceof RSHealthBar){
-                for (Object o1 : ((RSHealthBar) o).getHitsplats()) {
-                    if (o1 != null && o1 instanceof RSHitUpdate){
-                        int currentWidth = ((RSHitUpdate) o1).getCurrentWidth();
-                        return currentWidth * 100 / 255;
-                    }
-                }
-            }
-        }
-        return 0;
+        return getHealthBars().map(NodeLinkedList::stream)
+                .map(healthBarStream -> healthBarStream.findFirst()
+                        .map(
+                                healthBar -> healthBar.getHitSplats()
+                                        .map(NodeLinkedList::stream)
+                                        .map(hitUpdateStream -> hitUpdateStream.findFirst().map(HitUpdate::getCurrentWidth).orElse(-1))
+                                        .orElse(-1)
+                        ).orElse(-1))
+                .orElse(-1);
     }
 
     public SceneLocation getSceneLocation(){

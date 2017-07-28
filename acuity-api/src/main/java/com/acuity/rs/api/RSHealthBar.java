@@ -10,7 +10,11 @@ public interface RSHealthBar extends RSNode {
 
 	com.acuity.rs.api.RSHealthBarType getType();
 
+	com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar getWrapper();
+
 	void setHitsplats(com.acuity.rs.api.RSNodeLinkedList var0);
 
 	void setType(com.acuity.rs.api.RSHealthBarType var0);
+
+	void setWrapper(com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar var0);
 }

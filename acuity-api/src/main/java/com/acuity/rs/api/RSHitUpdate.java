@@ -14,6 +14,8 @@ public interface RSHitUpdate extends RSNode {
 
 	int getStartWidth();
 
+	com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate getWrapper();
+
 	void setCurrentCycle(int var0);
 
 	void setCurrentWidth(int var0);
@@ -21,4 +23,6 @@ public interface RSHitUpdate extends RSNode {
 	void setStartCycle(int var0);
 
 	void setStartWidth(int var0);
+
+	void setWrapper(com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate var0);
 }
