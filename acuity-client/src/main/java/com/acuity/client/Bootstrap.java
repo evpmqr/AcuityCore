@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class Bootstrap {
 
     @Subscribe
-    public void testDraw(InGameDrawEvent event){
+    public void testDraw(InGameDrawEvent event) {
         SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getNullSafeName().equals("Door")).forEach(sceneElement -> {
             sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
                 event.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions() + " " + sceneElement.getOrientation(), screenLocation.getX(), screenLocation.getY());
@@ -33,17 +33,14 @@ public class Bootstrap {
     }
 
     @Subscribe
-    public void testKeyEvent(KeyEvent e){
-        if (e.getKeyChar() == 'c' && e.isControlDown()){
+    public void testKeyEvent(KeyEvent e) {
+        if (e.getKeyChar() == 'c' && e.isControlDown()) {
             SmartActions.INSTANCE.clear();
-        }
-        else if (e.getKeyChar() == 'a'){
+        } else if (e.getKeyChar() == 'a') {
             TileDumper.execute();
-        }
-        else if (e.getKeyChar() == 'n'){
+        } else if (e.getKeyChar() == 'n') {
             LocalPlayer.get().ifPresent(player -> {
                 System.out.println(player.getHealthPercent());
-
             });
         }
     }
