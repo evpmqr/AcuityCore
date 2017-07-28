@@ -8,17 +8,17 @@ public class ActionEvent {
     private final int opcode;
     private final int arg0;
     private final int arg1;
-    private final int arg3;
+    private final int arg2;
     private final String action;
     private final String target;
     private final int clickX;
     private final int clickY;
 
-    public ActionEvent(int opcode, int arg0, int arg1, int arg3, String action, String target, int clickX, int clickY) {
+    public ActionEvent(int opcode, int arg0, int arg1, int arg2, String action, String target, int clickX, int clickY) {
         this.opcode = opcode;
         this.arg0 = arg0;
         this.arg1 = arg1;
-        this.arg3 = arg3;
+        this.arg2 = arg2;
         this.action = action;
         this.target = target;
         this.clickX = clickX;
@@ -37,8 +37,8 @@ public class ActionEvent {
         return arg1;
     }
 
-    public int getArg3() {
-        return arg3;
+    public int getArg2() {
+        return arg2;
     }
 
     public String getAction() {
@@ -63,7 +63,7 @@ public class ActionEvent {
                 "opcode=" + opcode +
                 ", arg0=" + arg0 +
                 ", arg1=" + arg1 +
-                ", arg3=" + arg3 +
+                ", arg2=" + arg2 +
                 ", action='" + action + '\'' +
                 ", target='" + target + '\'' +
                 ", clickX=" + clickX +
