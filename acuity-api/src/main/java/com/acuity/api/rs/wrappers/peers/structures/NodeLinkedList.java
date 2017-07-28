@@ -4,15 +4,20 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSNode;
 import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Streams;
 import com.sun.istack.internal.NotNull;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 6/12/2017.
  */
-public class NodeLinkedList implements java.lang.Iterable{
+public class NodeLinkedList<T extends Node> {
 
     private RSNodeLinkedList rsNodeLinkedList;
 
@@ -21,12 +26,22 @@ public class NodeLinkedList implements java.lang.Iterable{
         this.rsNodeLinkedList = Preconditions.checkNotNull(peer);
     }
 
-    public Optional<Node> getNode(){
-        return Optional.ofNullable(rsNodeLinkedList.getNode()).map(RSNode::getWrapper);
+    @SuppressWarnings("unchecked")
+    public Optional<T> getNode(){
+        return Optional.ofNullable(rsNodeLinkedList.getNode()).map(rsNode -> (T) rsNode.getWrapper());
     }
 
-    @Override
-    public Iterator iterator() {
+    @SuppressWarnings("unchecked")
+    public Stream<T> stream(){
+       return Streams.stream(iterator()).filter(Objects::nonNull).map(object -> (T) object.getWrapper());
+    }
+
+    public List<T> toList(){
+        return stream().collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    private Iterator<? extends RSNode> iterator() {
         return rsNodeLinkedList.iterator();
     }
 
