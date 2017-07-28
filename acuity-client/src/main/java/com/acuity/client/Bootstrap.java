@@ -42,7 +42,7 @@ public class Bootstrap {
         }
         else if (e.getKeyChar() == 'n'){
             LocalPlayer.get().ifPresent(player -> {
-                System.out.println(player.getHealthPercent());
+                System.out.println(player.getHitPoints());
 
             });
         }

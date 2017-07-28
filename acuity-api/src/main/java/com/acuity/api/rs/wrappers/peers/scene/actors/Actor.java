@@ -99,7 +99,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
-    public int getHealthPercent(){
+    public int getHitPoints(){
         return getHealthBars().map(NodeLinkedList::stream)
                 .map(healthBarStream -> healthBarStream.findFirst()
                         .map(
