@@ -1,6 +1,5 @@
 package com.acuity.api;
 
-import com.acuity.api.rs.events.impl.ActionEvent;
 import com.google.common.eventbus.EventBus;
 
 import java.util.concurrent.Executor;
@@ -12,7 +11,6 @@ import java.util.concurrent.Executors;
 public class Events {
 
     private static Executor executor = Executors.newSingleThreadExecutor();
-
     private static EventBus rsEventBus = new EventBus();
     private static EventBus acuityEventBus = new EventBus();
 
