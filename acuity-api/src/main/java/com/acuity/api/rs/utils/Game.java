@@ -20,6 +20,7 @@ public class Game {
         NOT_INITIALIZED(0),
         CLIENT_LOADING(5),
         LOGIN_SCREEN(10),
+        IDK(20),
         LOADING_SCREEN(25),
         IN_GAME(30),
         CONNECTION_LOST(40),

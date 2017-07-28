@@ -8,15 +8,13 @@ public interface RSNPCType extends RSCacheableNode {
 
 	java.lang.String[] getActions();
 
-	short[] getColors();
-
 	int getID();
 
 	int getIdleAnimation();
 
 	java.lang.String getName();
 
-	short[] getNewColors();
+	short[] getNewColorscolors();
 
 	int getPrayerIcon();
 
@@ -46,15 +44,13 @@ public interface RSNPCType extends RSCacheableNode {
 
 	void setActions(java.lang.String[] var0);
 
-	void setColors(short[] var0);
-
 	void setID(int var0);
 
 	void setIdleAnimation(int var0);
 
 	void setName(java.lang.String var0);
 
-	void setNewColors(short[] var0);
+	void setNewColorscolors(short[] var0);
 
 	void setPrayerIcon(int var0);
 

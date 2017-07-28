@@ -13,8 +13,7 @@ import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
-import com.acuity.rs.api.RSActor;
-import com.acuity.rs.api.RSNodeLinkedList;
+import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -95,6 +94,21 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     public FineLocation getFineLocation(){
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
+    }
+
+    //Test
+    public int getHealthPercent(){
+        for (Object o : rsActor.getHealthBars()) {
+            if (o != null && o instanceof RSHealthBar){
+                for (Object o1 : ((RSHealthBar) o).getHitsplats()) {
+                    if (o1 != null && o1 instanceof RSHitUpdate){
+                        int currentWidth = ((RSHitUpdate) o1).getCurrentWidth();
+                        return currentWidth * 100 / 255;
+                    }
+                }
+            }
+        }
+        return 0;
     }
 
     public SceneLocation getSceneLocation(){

@@ -10,10 +10,7 @@ import com.acuity.api.rs.events.impl.MouseRecorderUpdateEvent;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.rs.api.RSAxisAlignedBoundingBox;
-import com.acuity.rs.api.RSConnection;
-import com.acuity.rs.api.RSModel;
-import com.acuity.rs.api.RSRenderable;
+import com.acuity.rs.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +26,7 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdating(String name, int index, Object instance) {
-        logger.debug("Field Updating: '{}' with index={} and instance={}", name, index, instance);
+        logger.trace("Field Updating: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
 
         }
@@ -37,10 +34,21 @@ public class Callbacks {
 
     @ClientInvoked
     public static void fieldUpdated(String name, int index, Object instance) {
-        logger.debug("Field Updated: '{}' with index={} and instance={}", name, index, instance);
+        logger.trace("Field Updated: '{}' with index={} and instance={}", name, index, instance);
         switch (name) {
             case "gameState":
                 Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
+                break;
+            case "hitSplatsCyclesChanged":
+                try {
+                    logger.debug("Field Updated: '{}' with index={} and instance={}", name, index, instance);
+                    if (instance != null && instance instanceof RSPlayer && ((RSPlayer) instance).getWrapper() != null){
+                        System.out.println(((RSPlayer) instance).getName() + ": " + ((RSPlayer) instance).getWrapper().getHealthPercent());
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 break;
             case "mouseYHistory":
                 try {
@@ -52,7 +60,6 @@ public class Callbacks {
 
                 }
                 break;
-
         }
     }
 
@@ -74,25 +81,17 @@ public class Callbacks {
 
     @ClientInvoked
     public static void addAxisAlignedBoundingBoxCallback(RSModel rsModel, int i, int i2, int i3, int i4){
-        System.out.println();
+
     }
 
     @ClientInvoked
     public static void generateLegacy2DBoundingBoxCallback(int i, int i2, int i3, int i4, int i5, int i6, int i7){
-        System.out.println();
+
     }
 
     @ClientInvoked
     public static void aabbMouseTargetCalcCallBack(RSModel rsModel, int i, int i2, int i3){
-        try {
-            Field ah = rsModel.getClass().getField("ah");
-            ah.setBoolean(rsModel, true);
-            System.out.println("set");
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @ClientInvoked

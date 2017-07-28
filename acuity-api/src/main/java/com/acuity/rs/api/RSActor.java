@@ -51,6 +51,8 @@ public interface RSActor extends RSRenderable {
 
 	int getTargetIndex();
 
+	void invokeAddHitUpdate(int var0, int var1, int var2, int var3, int var4, int var5);
+
 	void setActionFrame(int var0);
 
 	void setAnimation(int var0);

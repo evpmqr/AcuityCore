@@ -37,7 +37,7 @@ public class TaskManager {
 							Delay.delay(loop);
 						}
 					} catch (Exception e) {
-						logger.error("Exception thrown during " + task.getClass().getName());
+						logger.error("Exception thrown during " + task.getClass().getName(), e);
 					}
 				}
 				Delay.delay(100);

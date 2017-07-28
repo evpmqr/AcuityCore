@@ -28,7 +28,7 @@ public class Varps {
 	}
 
 	public static int getMask(int index){
-	    Preconditions.checkArgument(index > 0 && index < 32, "Bad mask index, mask index must be in range [0-" + BIT_MASKS.length + ").");
+	    //Preconditions.checkArgument(index > 0 && index < 32, "Bad mask index, mask index must be in range [0-" + BIT_MASKS.length + ").");
 		return BIT_MASKS[index];
 	}
 

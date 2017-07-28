@@ -7,6 +7,7 @@ import com.acuity.api.meta.MouseDataCollector;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
+import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.devgui.ScriptRunnerView;
 import com.google.common.eventbus.Subscribe;
@@ -39,6 +40,12 @@ public class Bootstrap {
         else if (e.getKeyChar() == 'a'){
             TileDumper.execute();
         }
+        else if (e.getKeyChar() == 'n'){
+            LocalPlayer.get().ifPresent(player -> {
+                System.out.println(player.getHealthPercent());
+
+            });
+        }
     }
 
     public Bootstrap() {
@@ -63,6 +70,7 @@ public class Bootstrap {
         });
 
         Events.getRsEventBus().register(this);
+        Events.getAcuityEventBus().register(this);
     }
 
     public static void main(String[] args) {

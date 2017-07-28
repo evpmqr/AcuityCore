@@ -136,6 +136,8 @@ public interface RSClient extends RSGameEngine {
 
 	long getLastClickTime();
 
+	int getLatestSelectedItemIndex();
+
 	java.lang.String getLatestSelectedItemName();
 
 	com.acuity.rs.api.RSPlayer getLocalPlayer();
@@ -471,6 +473,8 @@ public interface RSClient extends RSGameEngine {
 	void setItemTables(com.acuity.rs.api.RSHashTable var0);
 
 	void setLastClickTime(long var0);
+
+	void setLatestSelectedItemIndex(int var0);
 
 	void setLatestSelectedItemName(java.lang.String var0);
 
