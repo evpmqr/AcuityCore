@@ -58,19 +58,19 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void insertMenuItemCallback(String s1, String s2, int i1, int i2, int i3, int i4){
+    public static void insertMenuItemCallback(String action, String target, int opcode, int arg0, int arg1, int arg2){
         try {
-
+            Events.getRsEventBus().post(new MenuInsertEvent(opcode, arg0, arg1, arg2, action, target));
         }
         catch (Throwable e){
-            logger.error("Error during process action callback.", e);
+            logger.error("Error during process menu insert callback.", e);
         }
     }
 
     @ClientInvoked
-    public static void processActionCallback(int arg2, int arg3, int opcode, int arg1, String action, String target, int clickX, int clickY){
+    public static void processActionCallback(int arg1, int arg2, int opcode, int arg0, String action, String target, int clickX, int clickY){
         try {
-            Events.getRsEventBus().post(new ActionEvent(opcode, arg1, arg2, arg3, action, target, clickX, clickY));
+            Events.getRsEventBus().post(new ActionEvent(opcode, arg0, arg1, arg2, action, target, clickX, clickY));
         }
         catch (Throwable e){
             logger.error("Error during process action callback.", e);
