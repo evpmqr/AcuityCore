@@ -60,8 +60,8 @@ public class Bootstrap {
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
-                MouseDataCollector.INSTANCE.start();
-                SmartActions.INSTANCE.start();
+           //     MouseDataCollector.INSTANCE.start();
+           //     SmartActions.INSTANCE.start();
 
                 new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {

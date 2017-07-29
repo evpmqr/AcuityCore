@@ -24,6 +24,7 @@ public class ScriptManager {
     public void stopScript() {
         if (script == null)
             return;
+        script.onExit();
         script.stop();
         script = null;
     }
