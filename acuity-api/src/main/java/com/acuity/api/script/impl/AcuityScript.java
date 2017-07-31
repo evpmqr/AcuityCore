@@ -1,16 +1,18 @@
 package com.acuity.api.script.impl;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Created by MadDev on 6/11/17.
  */
 public abstract class AcuityScript implements Loopable {
 
     private ScriptState state = ScriptState.NO_SCRIPT;
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public void execute() {
-        final Thread t = new Thread(script);
-        t.setName("AcuityScriptRunner");
-        t.start();
+        executor.submit(script);
         state = ScriptState.RUNNING;
     }
 
@@ -40,6 +42,7 @@ public abstract class AcuityScript implements Loopable {
     }
 
     public void stop() {
+        executor.shutdown();
         state = ScriptState.NO_SCRIPT;
     }
 
@@ -57,5 +60,9 @@ public abstract class AcuityScript implements Loopable {
 
     public ScriptState getState() {
         return state;
+    }
+
+    public void onExit() {
+        System.out.println("Script has stopped.");
     }
 }

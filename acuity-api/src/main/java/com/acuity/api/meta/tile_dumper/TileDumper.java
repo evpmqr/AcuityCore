@@ -88,7 +88,7 @@ public class TileDumper {
                     vertexProps.put("plane", dumpTile.getPlane());
                     vertexProps.put("flag", dumpTile.getFlag());
                     OrientVertex orientVertex = graph.addVertex("class:Tile", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:Captured");
+                    capture.addEdge(null, orientVertex, "Captured");
                 });
 
                 collectedSEs.build().forEach(dumpSE -> {
@@ -103,7 +103,7 @@ public class TileDumper {
                     vertexProps.put("flag", dumpSE.getFlag());
                     vertexProps.put("uid", dumpSE.getUid());
                     OrientVertex orientVertex = graph.addVertex("class:SceneElement", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:Captured");
+                    capture.addEdge(null, orientVertex, "Captured");
 
                 });
 
@@ -116,7 +116,7 @@ public class TileDumper {
                     vertexProps.put("name", dumpNPC.getName());
                     vertexProps.put("npcID", dumpNPC.getNpcID());
                     OrientVertex orientVertex = graph.addVertex("class:NPC", vertexProps);
-                    capture.addEdge(null, orientVertex, "class:Captured");
+                    capture.addEdge(null, orientVertex, "Captured");
                 });
             } catch (Exception e) {
                 logger.error("Error while dumping tiles, rolling back graph.", e);

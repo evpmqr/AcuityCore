@@ -20,11 +20,13 @@ public class Game {
         NOT_INITIALIZED(0),
         CLIENT_LOADING(5),
         LOGIN_SCREEN(10),
-        IDK(20),
+        AUTHENTICATOR(11),
+        LOGGING_IN(20),
         LOADING_SCREEN(25),
         IN_GAME(30),
         CONNECTION_LOST(40),
-        CONNECTION_RECONNECTING(45);
+        CONNECTION_RECONNECTING(45),
+        ERROR(1000);
 
         private final int index;
 

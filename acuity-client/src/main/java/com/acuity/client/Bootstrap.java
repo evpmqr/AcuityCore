@@ -9,8 +9,9 @@ import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneElement;
 import com.acuity.client.devgui.ScriptRunnerView;
+import com.acuity.rs.api.RSHealthBar;
+import com.acuity.rs.api.RSHitUpdate;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
@@ -26,6 +27,12 @@ public class Bootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
+        LocalPlayer.get().ifPresent(player -> {
+            player.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
+                event.getGraphics().drawString("HP: " + player.getHealthPercent(), screenLocation.getX(), screenLocation.getY());
+            });
+        });
+
         SceneElements.streamLoaded().filter(sceneElement -> sceneElement.getNullSafeName().equals("Door")).forEach(sceneElement -> {
             sceneElement.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
                 event.getGraphics().drawString(sceneElement.getNullSafeName() + sceneElement.getActions() + " " + sceneElement.getOrientation(), screenLocation.getX(), screenLocation.getY());
@@ -38,22 +45,15 @@ public class Bootstrap {
         if (e.getKeyChar() == 'c' && e.isControlDown()){
             SmartActions.INSTANCE.clear();
         }
-        else if (e.getKeyChar() == 'a' && e.getID() ==  KeyEvent.KEY_TYPED){
+        else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
             TileDumper.execute();
         }
         else if (e.getKeyChar() == 'n'){
             LocalPlayer.get().ifPresent(player -> {
-                System.out.println(player.getHitPoints());
+                System.out.println(player.getHealthPercent());
+
             });
         }
-    }
-
-    @Subscribe
-    public void drawNearest(InGameDrawEvent event){
-    SceneElement element = (SceneElement) SceneElements.getNearest(sceneElement -> sceneElement.getNullSafeName().equals("Tree"));
-        element.getModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-            event.getGraphics().drawString(element.getNullSafeName(), screenLocation.getX(), screenLocation.getY());
-        });
     }
 
     public Bootstrap() {
@@ -65,11 +65,12 @@ public class Bootstrap {
                 frame.setVisible(true);
 
                 AcuityInstance.init();
+                AcuityInstance.getAppletManager().setInitalWorld(1);
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
-                MouseDataCollector.INSTANCE.start();
-                SmartActions.INSTANCE.start();
+           //     MouseDataCollector.INSTANCE.start();
+           //     SmartActions.INSTANCE.start();
 
                 new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {
