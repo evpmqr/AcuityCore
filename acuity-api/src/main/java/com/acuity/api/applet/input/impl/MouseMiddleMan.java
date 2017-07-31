@@ -168,7 +168,8 @@ public class MouseMiddleMan implements InputMiddleMan {
 
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
-            dispatch(e);
+            Events.getAcuityEventBus().post(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         public void setMouseListeners(MouseListener[] mouseListeners) {

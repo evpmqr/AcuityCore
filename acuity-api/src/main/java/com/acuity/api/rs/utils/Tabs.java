@@ -60,7 +60,7 @@ public class Tabs {
                 return ActionResult.SUCCESS;
             }
             if (Varps.get(281, 0) >= 1000 && hotkey != null) {
-                Keyboard.type((char) (int) hotkey);
+                Keyboard.getDriver().type((char) (int) hotkey);
             }
             else {
                 // TODO: 7/11/2017  getComponent().ifPresent(component -> AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(component.getPoint(), true));
