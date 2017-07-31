@@ -7,7 +7,9 @@ import com.acuity.api.rs.events.impl.*;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.rs.api.*;
+import com.acuity.rs.api.RSActor;
+import com.acuity.rs.api.RSAxisAlignedBoundingBox;
+import com.acuity.rs.api.RSRenderable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,9 +48,11 @@ public class Callbacks {
                     Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
                     break;
                 case "mouseYHistory":
-                    int lastX = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseXHistory()[index];
-                    int lastY = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseYHistory()[index];
-                    Events.getRsEventBus().post(new MouseRecorderUpdateEvent(System.currentTimeMillis(), lastX, lastY));
+                    if (AcuityInstance.getClient().getRsClient().getMouseRecorder() != null){
+                        int lastX = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseXHistory()[index];
+                        int lastY = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseYHistory()[index];
+                        Events.getRsEventBus().post(new MouseRecorderUpdateEvent(System.currentTimeMillis(), lastX, lastY));
+                    }
                     break;
             }
         }
@@ -89,37 +93,13 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void queueForWriteCallback(RSConnection connectionInstance, byte[] writeBuffer, int offset, int length){
-        try {
-            logger.trace("Queued for write buffer={} offset={} length={}", writeBuffer == null ? "null" : "[" + writeBuffer.length + "]", offset, length);
-        }
-        catch (Throwable e){
-            logger.error("Error during queue for write callback.", e);
-        }
-    }
-
-    @ClientInvoked
-    public static void addAxisAlignedBoundingBoxCallback(RSModel rsModel, int i, int i2, int i3, int i4){
-
-    }
-
-    @ClientInvoked
-    public static void generateLegacy2DBoundingBoxCallback(int i, int i2, int i3, int i4, int i5, int i6, int i7){
-
-    }
-
-    @ClientInvoked
-    public static void aabbMouseTargetCalcCallBack(RSModel rsModel, int i, int i2, int i3){
-
-    }
-
-    @ClientInvoked
     public static void addHitUpdateCallback(RSActor actor, int i, int i2, int i3, int i4, int i5, int i6){
 
     }
 
     @ClientInvoked
     public static void boundingBoxUpdated(RSRenderable rsRenderable, RSAxisAlignedBoundingBox rsAxisAlignedBoundingBox){
+
     }
 
     @ClientInvoked

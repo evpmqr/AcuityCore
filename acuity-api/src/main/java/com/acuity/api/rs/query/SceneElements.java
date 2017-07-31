@@ -39,4 +39,8 @@ public class SceneElements {
     public static SceneElement getNearest(Predicate<? super SceneElement> predicate) {
         return streamLoaded().filter(predicate).sorted(Comparator.comparingInt(Locatable::distance)).findFirst().orElse(null);
     }
+
+    public static SceneElement getNearest(final String name){
+        return getNearest(sceneElement -> sceneElement.getNullSafeName().equals(name));
+    }
 }

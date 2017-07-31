@@ -1,7 +1,6 @@
 package com.acuity.db.entities;
 
 
-
 /**
  * Created by Zachary Herridge on 6/1/2017.
  */

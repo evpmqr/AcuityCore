@@ -95,11 +95,11 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return getAnimation() != getIdlePoseAnimation();
     }
 
-    public FineLocation getFineLocation(){
+    public FineLocation getFineLocation() {
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
-    public int getHealthPercent(){
+    public int getHitPoints() {
         return getHealthBars().map(NodeLinkedList::stream)
                 .map(healthBarStream -> healthBarStream.findFirst()
                         .map(
@@ -111,7 +111,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
                 .orElse(-1);
     }
 
-    public SceneLocation getSceneLocation(){
+    public SceneLocation getSceneLocation() {
         return getFineLocation().getSceneLocation();
     }
 
@@ -127,7 +127,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
     @Override
     public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
-        if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
+        if (!AcuityInstance.getSettings().isModelInteractionsEnabled()) {
             return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
         }
         return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);

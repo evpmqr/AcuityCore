@@ -23,15 +23,15 @@ public class AcuityHttpClient {
     private static String jwtToken = null;
 
 
-    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> tClass){
+    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> tClass) {
         return makeCall(url, tClass, true);
     }
 
-    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> mapJsonTo, boolean addAcuityAuth){
+    public static <T> Optional<T> makeCall(HttpUrl url, Class<T> mapJsonTo, boolean addAcuityAuth) {
         try {
             Response response = AcuityHttpClient.makeCall(url, addAcuityAuth);
             if (response.code() == 401) return Optional.empty();
-            try (ResponseBody body = response.body()){
+            try (ResponseBody body = response.body()) {
                 return Optional.of(JsonUtil.getGSON().fromJson(new InputStreamReader(body.byteStream()), mapJsonTo));
             }
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class AcuityHttpClient {
     }
 
     @SuppressWarnings("unchecked")
-    public static boolean login(String username, String password){
+    public static boolean login(String username, String password) {
         HttpUrl login = AcuityHttpClient.API_BASE.newBuilder()
                 .addPathSegment("login")
                 .addQueryParameter("username", username)
@@ -61,7 +61,7 @@ public class AcuityHttpClient {
         return makeCall(login, HashMap.class)
                 .map(hashMap -> {
                     String result = String.valueOf(hashMap.getOrDefault("result", "LOGIN_FAILED"));
-                    if (result.startsWith("LOGIN_SUCCESS:")){
+                    if (result.startsWith("LOGIN_SUCCESS:")) {
                         jwtToken = result.substring("LOGIN_SUCCESS:".length());
                         return true;
                     }

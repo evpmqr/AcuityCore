@@ -27,7 +27,7 @@ public class AcuityDB {
 
     public static void init() throws IOException {
         Properties properties = new Properties();
-        try (InputStream input = AcuityDB.class.getClassLoader().getResourceAsStream("acuitydb.properties")){
+        try (InputStream input = AcuityDB.class.getClassLoader().getResourceAsStream("acuitydb.properties")) {
             properties.load(input);
         }
 
@@ -46,7 +46,7 @@ public class AcuityDB {
         return mongoClient;
     }
 
-    public static boolean isActive(){
+    public static boolean isActive() {
         return mongoClient != null;
     }
 }
