@@ -20,6 +20,7 @@ public class KeyboardMiddleMan implements InputMiddleMan {
     private static Logger logger = LoggerFactory.getLogger(KeyboardMiddleMan.class);
 
     private Component component;
+    private boolean acceptingUserInput = true;
     private MKeyboardListener output = new MKeyboardListener();
 
     public synchronized void pressEnter() {
@@ -75,19 +76,26 @@ public class KeyboardMiddleMan implements InputMiddleMan {
         component.addKeyListener(output);
         logger.debug("Added MKeyboardListener as KeyListener to component {}.", component);
 
-        logger.info("Successfully middle manned keyboard of component {} with {}.", component, output);
+        logger.info("Successfully middle-manned keyboard of component {} with {}.", component, output);
         return true;
     }
 
+    @Override
+    public boolean isAcceptingUserInput() {
+        return acceptingUserInput;
+    }
+
+    @Override
+    public void setAcceptingUserInput(boolean acceptingUserInput) {
+        this.acceptingUserInput = acceptingUserInput;
+    }
 
     public class MKeyboardListener implements KeyListener {
 
         private KeyListener[] keyListeners;
 
         public void dispatch(KeyEvent e) {
-            if (e.isConsumed()) {
-                return;
-            }
+            if (e.isConsumed()) return;
             switch (e.getID()) {
                 case KeyEvent.KEY_PRESSED:
                     for (KeyListener keyListener : keyListeners) keyListener.keyPressed(e);
@@ -99,26 +107,26 @@ public class KeyboardMiddleMan implements InputMiddleMan {
                     for (KeyListener keyListener : keyListeners) keyListener.keyReleased(e);
                     break;
                 default:
-                    logger.warn("Failed to dispatch unknown KeyEvent {}.", e);
+                    logger.error("Failed to dispatch unknown KeyEvent {}.", e);
             }
         }
 
         @Override
         public void keyTyped(KeyEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         public void setKeyListeners(KeyListener[] keyListeners) {

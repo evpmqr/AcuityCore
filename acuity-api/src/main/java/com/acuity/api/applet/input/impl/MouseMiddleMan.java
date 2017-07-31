@@ -17,6 +17,7 @@ public class MouseMiddleMan implements InputMiddleMan {
     private static Logger logger = LoggerFactory.getLogger(MouseMiddleMan.class);
 
     private Component component;
+    private boolean acceptingUserInput = true;
     private MMouseListener output = new MMouseListener();
 
     public void dispatchClick(int x, int y, boolean left) {
@@ -60,8 +61,18 @@ public class MouseMiddleMan implements InputMiddleMan {
         component.addMouseWheelListener(output);
         logger.debug("Added MMouseListener as MouseWheelListener to component {}.", component);
 
-        logger.info("Successfully middle manned mouse of component {} with {}.", component, output);
+        logger.info("Successfully middle-manned mouse of component {} with {}.", component, output);
         return true;
+    }
+
+    @Override
+    public boolean isAcceptingUserInput() {
+        return acceptingUserInput;
+    }
+
+    @Override
+    public void setAcceptingUserInput(boolean acceptingUserInput) {
+        this.acceptingUserInput = acceptingUserInput;
     }
 
     public MMouseListener getOutput() {
@@ -85,9 +96,7 @@ public class MouseMiddleMan implements InputMiddleMan {
         }
 
         public void dispatch(MouseEvent e){
-            if (e.isConsumed()) {
-                return;
-            }
+            if (e.isConsumed()) return;
             switch (e.getID()){
                 case MouseEvent.MOUSE_CLICKED:
                     for (MouseListener mouseListener : mouseListeners) mouseListener.mouseClicked(e);
@@ -111,50 +120,50 @@ public class MouseMiddleMan implements InputMiddleMan {
                     for (MouseMotionListener mouseListener : mouseMotionListeners) mouseListener.mouseDragged(e);
                     break;
                 default:
-                    logger.warn("Failed to dispatch unknown MouseEvent {}.", e);
+                    logger.error("Failed to dispatch unknown MouseEvent {}.", e);
             }
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override

@@ -17,6 +17,7 @@ public class FocusMiddleMan implements InputMiddleMan {
 
     private static Logger logger = LoggerFactory.getLogger(FocusMiddleMan.class);
 
+    private boolean acceptingUserInput = true;
     private MFocusListener output = new MFocusListener();
 
     @Override
@@ -31,8 +32,18 @@ public class FocusMiddleMan implements InputMiddleMan {
         component.addFocusListener(output);
         logger.debug("Added MFocusListener as FocusListener to component {}.", component);
 
-        logger.info("Successfully middle manned focus listener of component {} with {}.", component, output);
+        logger.info("Successfully middle-manned focus listener of component {} with {}.", component, output);
         return true;
+    }
+
+    @Override
+    public boolean isAcceptingUserInput() {
+        return acceptingUserInput;
+    }
+
+    @Override
+    public void setAcceptingUserInput(boolean acceptingUserInput) {
+        this.acceptingUserInput = acceptingUserInput;
     }
 
     public MFocusListener getOutput() {
@@ -52,20 +63,20 @@ public class FocusMiddleMan implements InputMiddleMan {
                     for (FocusListener focusListener : focusListeners) focusListener.focusLost(e);
                     break;
                 default:
-                    logger.warn("Failed to dispatch unknown FocusEvent {}.", e);
+                    logger.error("Failed to dispatch unknown FocusEvent {}.", e);
             }
         }
 
         @Override
         public void focusGained(FocusEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void focusLost(FocusEvent e) {
             Events.getAcuityEventBus().post(e);
-            dispatch(e);
+            if (isAcceptingUserInput()) dispatch(e);
         }
 
         public void setFocusListeners(FocusListener[] focusListeners) {
