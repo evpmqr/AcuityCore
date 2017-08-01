@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 
 
 @WebServlet(urlPatterns = "/*", name = "RESTDemoUIServlet", asyncSupported = true)
-@VaadinServletConfiguration(ui = AcuityUI.class, productionMode = false)
-public class AcuityServlet extends VaadinServlet {
+@VaadinServletConfiguration(ui = DashboardUI.class, productionMode = false)
+public class DashboardServlet extends VaadinServlet {
 
 }

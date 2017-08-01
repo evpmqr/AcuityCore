@@ -1,10 +1,10 @@
 package com.acuity.web.site.view;
 
+import com.acuity.web.site.events.DashboardEvent;
+import com.acuity.web.site.events.Events;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
-import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -21,16 +21,6 @@ public class LoginView extends VerticalLayout {
         Component loginForm = buildLoginForm();
         addComponent(loginForm);
         setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
-
-        Notification notification = new Notification(
-                "Welcome to Dashboard Demo");
-        notification
-                .setDescription("<span>This application is not real, it only demonstrates an application built with the <a href=\"https://vaadin.com\">Vaadin framework</a>.</span> <span>No username or password is required, just click the <b>Sign In</b> button to continue.</span>");
-        notification.setHtmlContentAllowed(true);
-        notification.setStyleName("tray dark small closable login-help");
-        notification.setPosition(Position.BOTTOM_CENTER);
-        notification.setDelayMsec(20000);
-        notification.show(Page.getCurrent());
     }
 
     private Component buildLoginForm() {
@@ -66,10 +56,7 @@ public class LoginView extends VerticalLayout {
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
 
-        signin.addClickListener(clickEvent -> {
-            System.out.println("Clicked");
-
-        });
+        signin.addClickListener(clickEvent -> Events.post(new DashboardEvent.UserLoginRequestedEvent(username.getValue(), password.getValue())));
         return fields;
     }
 
