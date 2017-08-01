@@ -31,6 +31,8 @@ public class DashboardUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         Events.register(this);
 
+
+
         setLocale(Locale.US);
         Responsive.makeResponsive(this);
         addStyleName(ValoTheme.UI_WITH_MENU);

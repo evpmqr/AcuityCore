@@ -21,12 +21,16 @@ public class MenuItem extends Button {
         setPrimaryStyleName("valo-menu-item");
         setCaption(view.getName());
         Events.register(this);
-        addClickListener(clickEvent ->  UI.getCurrent().getNavigator().navigateTo(view.getName()));
+        addClickListener(clickEvent ->  {
+            UI.getCurrent().getNavigator().navigateTo(view.getName());
+        });
     }
 
     @Subscribe
     public void onViewChange(DashboardEvent.ViewChange viewChange){
         removeStyleName(STYLE_SELECTED);
-        if (viewChange.getView().equals(view.getName())) addStyleName(STYLE_SELECTED);
+        if (viewChange.getView().equals(view.getName())) {
+            addStyleName(STYLE_SELECTED);
+        }
     }
 }

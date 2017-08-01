@@ -62,8 +62,7 @@ public class Menu extends CustomComponent {
 
     private Component buildToggleButton() {
         Button valoMenuToggleButton = new Button("Menu", clickEvent -> {
-            if (getCompositionRoot().getStyleName()
-                    .contains(STYLE_VISIBLE)) {
+            if (getCompositionRoot().getStyleName().contains(STYLE_VISIBLE)) {
                 getCompositionRoot().removeStyleName(STYLE_VISIBLE);
             } else {
                 getCompositionRoot().addStyleName(STYLE_VISIBLE);

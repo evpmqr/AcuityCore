@@ -5,6 +5,7 @@ import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.db.MapDataDB;
 import com.acuity.rs.api.RSCollisionData;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
@@ -25,12 +26,19 @@ public class TileDumper {
 
     private static Logger logger = LoggerFactory.getLogger(TileDumper.class);
     private static Executor executor;
+    private static boolean dbInited = false;
 
     static {
         executor = Executors.newSingleThreadExecutor();
+        dbInited = MapDataDB.initMapDataDB(1, 5);
     }
 
     public static void execute() {
+        if (!dbInited) {
+            logger.error("MapDataDB not yet inited.");
+            return;
+        }
+
         Stream.Builder<DumpTile> collectedTiles = Stream.builder();
         Stream.Builder<DumpSE> collectedSEs = Stream.builder();
         Stream.Builder<DumpNPC> collectedNPCs = Stream.builder();
@@ -68,7 +76,7 @@ public class TileDumper {
         });
 
         executor.execute(() -> {
-            OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "");
+            OrientGraph graph = MapDataDB.getMapDataFactory().getTx();
             logger.info("Starting tile dump, graph opened.");
             try {
                 Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
