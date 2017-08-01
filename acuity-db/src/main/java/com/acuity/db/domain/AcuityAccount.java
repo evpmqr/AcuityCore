@@ -6,4 +6,5 @@ package com.acuity.db.domain;
 public class AcuityAccount {
 
 
+
 }

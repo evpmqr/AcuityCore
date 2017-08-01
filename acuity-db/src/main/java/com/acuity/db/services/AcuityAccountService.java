@@ -4,6 +4,7 @@ import com.acuity.db.AcuityDB;
 import com.orientechnologies.orient.core.metadata.sequence.OSequence;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 
 /**
  * Created by Zachary Herridge on 8/1/2017.
@@ -16,9 +17,9 @@ public class AcuityAccountService {
         return INSTANCE;
     }
 
-    public Vertex findByUsername(String username){
+    public OrientVertex findByUsername(String username){
         for (Vertex vertex : AcuityDB.getControlCoreFactory().getNoTx().query().has("username", username).vertices()) {
-            return vertex;
+            return (OrientVertex) vertex;
         }
         return null;
     }

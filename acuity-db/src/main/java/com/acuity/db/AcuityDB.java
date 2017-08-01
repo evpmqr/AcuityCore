@@ -2,9 +2,9 @@ package com.acuity.db;
 
 import com.acuity.db.services.AcuityAccountService;
 import com.acuity.db.util.DBAccess;
-import com.google.gson.Gson;
-import com.tinkerpop.blueprints.Vertex;
+import com.acuity.db.util.live_queries.LiveQuery;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
+import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 
 /**
  * Created by Zachary Herridge on 8/1/2017.
@@ -24,10 +24,30 @@ public class AcuityDB {
 
     public static void main(String[] args) {
         initMapDataDB(1, 10);
-        Vertex zach = AcuityAccountService.getInstance().findByUsername("Zach");
-        if (zach != null){
-            String s1 = new Gson().toJson(zach);
-            System.out.println(s1);
+
+        OrientVertex zach = AcuityAccountService.getInstance().findByUsername("Zach");
+
+
+        LiveQuery liveQuery = new LiveQuery(AcuityDB.getControlCoreFactory().getDatabase(), "live select from " + zach.getId().toString());
+        liveQuery.start();
+
+        for (int i = 0; i < 120; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
+
+        liveQuery.stop();
+
+       /* OrientVertex eric = AcuityAccountService.getInstance().findByUsername("Eric");
+
+        OrientGraph tx = AcuityDB.getControlCoreFactory().getTx();
+        OrientVertex vertex = tx.getVertex(zach.getId());
+        OrientVertex vertex2 = tx.getVertex(eric.getId());
+        vertex.setProperty("testLink", vertex2);
+        tx.commit();*/
     }
 }
