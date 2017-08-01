@@ -3,15 +3,12 @@ package com.acuity.client;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.input.SmartActions;
-import com.acuity.api.meta.MouseDataCollector;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.devgui.ScriptRunnerView;
-import com.acuity.rs.api.RSHealthBar;
-import com.acuity.rs.api.RSHitUpdate;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
@@ -65,7 +62,6 @@ public class Bootstrap {
                 frame.setVisible(true);
 
                 AcuityInstance.init();
-                AcuityInstance.getAppletManager().setInitalWorld(1);
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 

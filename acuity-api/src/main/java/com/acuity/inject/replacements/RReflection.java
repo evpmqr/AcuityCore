@@ -86,17 +86,29 @@ public class RReflection {
     @ClientInvoked
     public static Class<?> classForName(String className) throws ClassNotFoundException {
         logger.trace("RS-Reflection getting class named '{}'.", className);
+
         try {
-            try {
-                return AcuityInstance.getAppletManager().getRsClassLoader().loadClass(className);
-            }
-            catch (ClassNotFoundException e){
-                return Class.forName(className);
-            }
+            return Class.forName(className, true, AcuityInstance.getAppletManager().getRsClassLoader());
         }
-        catch (Throwable throwable){
-            throwable.printStackTrace();
+        catch (ClassNotFoundException e){
+            logger.debug("Class.forName() via RS-Loader failed to find class named '{}'.", className);
         }
+
+        try {
+            return Class.forName(className);
+        }
+        catch (ClassNotFoundException e){
+            logger.debug("Class.forName() failed to find class named '{}'.", className);
+        }
+
+        try {
+            return AcuityInstance.getAppletManager().getRsClassLoader().loadClass(className);
+        }
+        catch (ClassNotFoundException e){
+            logger.debug("RSClassLoader.loadClass() failed to find class named '{}'.", className);
+        }
+
+        logger.warn("RS-Reflection failed to find class named '{}' returning null.");
         return null;
     }
 }

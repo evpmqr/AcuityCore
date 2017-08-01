@@ -9,4 +9,7 @@ public interface InputMiddleMan {
 
     boolean insertInto(Component component);
 
+    boolean isAcceptingUserInput();
+
+    void setAcceptingUserInput(boolean acceptingUserInput);
 }

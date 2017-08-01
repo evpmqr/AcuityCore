@@ -7,7 +7,7 @@ import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
  */
 public interface MouseDriver {
 
-    void click(ScreenLocation screenLocation, boolean leftClick, int delayMills);
+    void click(ScreenLocation screenLocation, boolean leftClick);
 
-    void move(ScreenLocation screenLocation, int delay);
+    void move(ScreenLocation screenLocation);
 }

@@ -9,7 +9,7 @@ public class Keyboard {
 
     private static KeyboardDriver keyboardDriver = new BasicKeyboardDriver();
 
-    public static void type(char key){
-        keyboardDriver.type(key);
+    public static KeyboardDriver getDriver(){
+        return keyboardDriver;
     }
 }
