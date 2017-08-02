@@ -10,6 +10,20 @@ import java.io.InputStream;
  */
 public class AcuityDB {
 
+    private static ArangoDB db = null;
+
+    public static void init(){
+        InputStream in = AcuityDB.class.getClassLoader().getResourceAsStream("db.properties");
+        db = new ArangoDB.Builder()
+                .maxConnections(8)
+                .loadProperties(in)
+                .build();
+    }
+
+    public static ArangoDB getDB(){
+        return db;
+    }
+
 
     public static void main(String[] args) {
         InputStream in = AcuityDB.class.getClassLoader().getResourceAsStream("db.properties");
@@ -18,7 +32,11 @@ public class AcuityDB {
                 .loadProperties(in)
                 .build();
 
-        BaseDocument document = arangoDB.db("_system").collection("AcuityUsers").getDocument("433", BaseDocument.class);
+
+
+        BaseDocument document = arangoDB.db("TileData").collection("AcuityUsers").getDocument("433", BaseDocument.class);
+
+
 
         System.out.println(document);
 
