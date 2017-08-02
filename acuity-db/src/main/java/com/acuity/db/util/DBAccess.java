@@ -10,11 +10,11 @@ import java.util.Properties;
 public class DBAccess {
 
     public static String getUsername(){
-        return getProperty("dbUsername");
+        return getProperty("arangodb.user");
     }
 
     public static String getPassword(){
-        return getProperty("dbPassword");
+        return getProperty("arangodb.password");
     }
 
     private static String getProperty(String key){
