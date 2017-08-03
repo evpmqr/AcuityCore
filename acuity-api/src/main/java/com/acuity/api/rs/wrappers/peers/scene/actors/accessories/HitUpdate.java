@@ -19,4 +19,8 @@ public class HitUpdate extends Node {
         return rsHitUpdate.getCurrentWidth();
     }
 
+    public int getStartCycle(){
+        return rsHitUpdate.getStartCycle();
+    }
+
 }

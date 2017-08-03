@@ -205,7 +205,8 @@ public class Client extends GameEngine {
     }
 
     public boolean isWorldSelectOpen() {
-    	return rsClient.isWorldSelectShown();
+        // TODO: 8/3/2017  return rsClient.isWorldSelectShown();
+        return false;
 	}
 
 	public int[] getHoveredUIDs(){

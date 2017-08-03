@@ -36,7 +36,7 @@ public class AppletManager {
     private FocusMiddleMan focusMiddleMan = new FocusMiddleMan();
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
     private KeyboardMiddleMan keyboardMiddleMan = new KeyboardMiddleMan();
-
+    private int initalWorld = 1;
 
     public AppletManager() throws Exception {
         Events.getRsEventBus().register(this);
@@ -45,7 +45,7 @@ public class AppletManager {
     @SuppressWarnings("unchecked")
     public void load() throws MalformedURLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         logger.info("RSClient loading started.");
-        clientConfig = new ClientConfig(1);
+        clientConfig = new ClientConfig(initalWorld);
         rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
         Class<?> client = rsClassLoader.loadClass("client");
         clientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
@@ -65,6 +65,11 @@ public class AppletManager {
             keyboardMiddleMan.insertInto(getClient().getCanvas());
             Events.getRsEventBus().unregister(this);
         }
+    }
+
+    public void setInitalWorld(int initalWorld) {
+        if (initalWorld > 300) initalWorld -= 300;
+        this.initalWorld = initalWorld;
     }
 
     public RSClassLoader getRsClassLoader() {

@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 /**
  * Created by Zach on 5/31/2017.
  */
-public class Bootstrap {
+public class ClientBootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
@@ -53,7 +53,7 @@ public class Bootstrap {
         }
     }
 
-    public Bootstrap() {
+    public ClientBootstrap() {
         EventQueue.invokeLater(() -> {
             try {
                 JFrame frame = new JFrame();
@@ -79,6 +79,6 @@ public class Bootstrap {
     }
 
     public static void main(String[] args) {
-        new Bootstrap();
+        new ClientBootstrap();
     }
 }

@@ -154,8 +154,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getMapRotation();
 
-	int getMapState();
-
 	java.lang.String[] getMenuActions();
 
 	int getMenuHeight();
@@ -288,7 +286,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
 
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
 
 	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
 
@@ -335,8 +333,6 @@ public interface RSClient extends RSGameEngine {
 	boolean isUseAABBBoundingBoxes();
 
 	boolean isViewportWalking();
-
-	boolean isWorldSelectShown();
 
 	void setAudioEffectCount(int var0);
 
@@ -494,8 +490,6 @@ public interface RSClient extends RSGameEngine {
 
 	void setMapRotation(int var0);
 
-	void setMapState(int var0);
-
 	void setMembersWorld(boolean var0);
 
 	void setMenuActions(java.lang.String[] var0);
@@ -619,8 +613,6 @@ public interface RSClient extends RSGameEngine {
 	void setWeight(int var0);
 
 	void setWorlds(com.acuity.rs.api.RSWorld[] var0);
-
-	void setWorldSelectShown(boolean var0);
 
 	void setWrapper(com.acuity.api.rs.wrappers.peers.engine.Client var0);
 

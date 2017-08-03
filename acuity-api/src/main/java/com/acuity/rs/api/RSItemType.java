@@ -14,8 +14,6 @@ public interface RSItemType extends RSCacheableNode {
 
 	int getFemaleHeadModel2();
 
-	int getFemaleModel1();
-
 	int getFemaleModel2();
 
 	java.lang.String[] getGroundActions();
@@ -85,8 +83,6 @@ public interface RSItemType extends RSCacheableNode {
 	void setFemaleHeadModel(int var0);
 
 	void setFemaleHeadModel2(int var0);
-
-	void setFemaleModel1(int var0);
 
 	void setFemaleModel2(int var0);
 

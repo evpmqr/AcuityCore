@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Created by Zachary Herridge on 6/12/2017.
  */
-public class NodeLinkedList<T extends Node> {
+public class NodeLinkedList<T extends Node> implements Iterable<T> {
 
     private RSNodeLinkedList rsNodeLinkedList;
 
@@ -26,14 +26,25 @@ public class NodeLinkedList<T extends Node> {
         this.rsNodeLinkedList = Preconditions.checkNotNull(peer);
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<T> getNode(){
-        return Optional.ofNullable(rsNodeLinkedList.getNode()).map(rsNode -> (T) rsNode.getWrapper());
-    }
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
 
-    @SuppressWarnings("unchecked")
-    public Iterator<? extends RSNode> iterator() {
-        return rsNodeLinkedList.iterator();
+            private Iterator iterator = rsNodeLinkedList.iterator();
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public T next() {
+                RSNode next = (RSNode) iterator.next();
+                if (next != null) return (T) next.getWrapper();
+                return null;
+            }
+        };
     }
 
     @NotNull

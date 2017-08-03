@@ -5,15 +5,11 @@ import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
-import com.orientechnologies.orient.core.sql.OCommandSQL;
-import com.tinkerpop.blueprints.impls.orient.OrientGraph;
-import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Stream;
@@ -25,12 +21,24 @@ public class TileDumper {
 
     private static Logger logger = LoggerFactory.getLogger(TileDumper.class);
     private static Executor executor;
+    private static boolean dbInited = false;
 
     static {
         executor = Executors.newSingleThreadExecutor();
+        AcuityDB.init();
+    }
+
+    public static void main(String[] args) {
+        AcuityDB.getDB().db("TileData").collection("Tiles").insertDocument(new DumpTile(123,333, 3, 1233322));
+
     }
 
     public static void execute() {
+        if (!dbInited) {
+            logger.error("MapDataDB not yet inited.");
+            return;
+        }
+
         Stream.Builder<DumpTile> collectedTiles = Stream.builder();
         Stream.Builder<DumpSE> collectedSEs = Stream.builder();
         Stream.Builder<DumpNPC> collectedNPCs = Stream.builder();
@@ -68,7 +76,10 @@ public class TileDumper {
         });
 
         executor.execute(() -> {
-            OrientGraph graph = new OrientGraph("remote:acuitybotting.com/MapData", "root", "");
+
+
+
+            /*OrientGraph graph = MapDataDB.getMapDataFactory().getTx();
             logger.info("Starting tile dump, graph opened.");
             try {
                 Object deleteTiles = graph.command(new OCommandSQL("delete vertex from Tile where plane = ? and x >= ? and x <= ? and y >= ? and y <= ?")).execute(plane, baseX + 3, baseX + 98, baseY + 3, baseY + 98);
@@ -124,7 +135,7 @@ public class TileDumper {
             } finally {
                 graph.shutdown();
                 logger.info("Tile dump completed, graph closed.");
-            }
+            }*/
         });
     }
 }
