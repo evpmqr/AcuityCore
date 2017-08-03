@@ -5,6 +5,7 @@ import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
+import com.acuity.db.AcuityDB;
 import com.acuity.rs.api.RSCollisionData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,11 @@ public class TileDumper {
 
     static {
         executor = Executors.newSingleThreadExecutor();
+        AcuityDB.init();
+    }
+
+    public static void main(String[] args) {
+        AcuityDB.getDB().db("TileData").collection("Tiles").insertDocument(new DumpTile(123,333, 3, 1233322));
 
     }
 
@@ -70,6 +76,9 @@ public class TileDumper {
         });
 
         executor.execute(() -> {
+
+
+
             /*OrientGraph graph = MapDataDB.getMapDataFactory().getTx();
             logger.info("Starting tile dump, graph opened.");
             try {

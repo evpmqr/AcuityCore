@@ -11,11 +11,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Zachary Herridge on 8/2/2017.
  */
-public class ArangoMonitor implements Runnable{
+public class ArangoMonitor{
 
     private static final Gson gson = new Gson();
 
@@ -28,6 +31,7 @@ public class ArangoMonitor implements Runnable{
     private long lastTick = -1;
     private String jwt = null;
 
+    private ScheduledExecutorService scheduledExecutorService;
     private long pollTimeMS = 300;
 
     public ArangoMonitor(String server, String db, String username, String password) {
@@ -37,30 +41,36 @@ public class ArangoMonitor implements Runnable{
         this.password = password;
     }
 
-    @Override
-    public void run() {
-        while (running){
-            try {
-                if (jwt == null && username != null && password != null){
-                    System.out.println("a");
-                    authenticate();
-                }
-                else if (lastTick == -1){
-                    System.out.println("ri");
-                    requestInitialState();
-                }
-                else {
-                    follow();
-                }
+    public void start(){
+        stop();
+        scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(this::poll, 0, pollTimeMS, TimeUnit.MILLISECONDS);
+    }
 
-                try {
-                    Thread.sleep(pollTimeMS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } catch (IOException e) {
+    public void stop(){
+        if (scheduledExecutorService != null) scheduledExecutorService.shutdownNow();
+    }
+
+    private void poll() {
+        try {
+            if (jwt == null && username != null && password != null){
+                System.out.println("a");
+                authenticate();
+            }
+            else if (lastTick == -1){
+                System.out.println("ri");
+                requestInitialState();
+            }
+            else {
+                follow();
+            }
+            try {
+                Thread.sleep(pollTimeMS);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
     }
 
@@ -82,8 +92,15 @@ public class ArangoMonitor implements Runnable{
         if (lastTick == 0) return;
         this.lastTick = lastTick;
 
-        for (String s : response.substring(1, response.length() - 1).split("}\\{")) {
-            System.out.println(s);
+        for (String changeEntry : response.substring(1, response.length() - 1).split("}\\{")) {
+            ArangoMonitorEvent arangoMonitorEvent = gson.fromJson("{" + changeEntry  + "}", ArangoMonitorEvent.class);
+            for (String s : changeEntry.split(",(?![^{}]*+})")){
+                if (s.startsWith("\"data\":")){
+                    arangoMonitorEvent.setDocument(s.substring("\"data\":".length()));
+                    break;
+                }
+            }
+            System.out.println(arangoMonitorEvent);
         }
     }
 
@@ -132,6 +149,6 @@ public class ArangoMonitor implements Runnable{
 
     public static void main(String[] args) {
         ArangoMonitor arangoMonitor = new ArangoMonitor("http://127.0.0.1:8529", "_system", DBAccess.getUsername(), DBAccess.getPassword());
-        new Thread(arangoMonitor).start();
+        arangoMonitor.start();
     }
 }
