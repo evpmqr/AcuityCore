@@ -4,10 +4,9 @@ import com.acuity.control.server.sessions.handlers.LoginHandler;
 import com.acuity.control.server.sessions.handlers.MessageHandler;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.SubscriberExceptionContext;
 import com.google.gson.Gson;
-import net.engio.mbassy.bus.MBassador;
-import net.engio.mbassy.bus.error.IPublicationErrorHandler;
-import net.engio.mbassy.bus.error.PublicationError;
 import org.java_websocket.WebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,14 +24,8 @@ public class SocketSession {
     private static final Gson gson = new Gson();
 
     private WebSocket webSocket;
-    private MBassador<Object> eventBus = new MBassador<>(new IPublicationErrorHandler() {
-        @Override
-        public void handleError(PublicationError publicationError) {
-            publicationError.getCause().printStackTrace();
-        }
-    });
+    private EventBus eventBus = new EventBus(this::error);
     private Map<String, Object> attributes = new ConcurrentHashMap<>();
-
     private AcuityAccount acuityAccount;
     private MessageHandler currentHandler = new LoginHandler(this);
 
@@ -60,7 +53,7 @@ public class SocketSession {
     public void message(String message) {
         if (message == null) return;
         MessagePackage messagePackage = gson.fromJson(message, MessagePackage.class);
-        eventBus.post(messagePackage).asynchronously();
+        eventBus.post(messagePackage);
     }
 
     public Map<String, Object> getAttributes() {
@@ -72,15 +65,24 @@ public class SocketSession {
         return (T) attributes.getOrDefault(key, defaultValue);
     }
 
-    public MBassador<Object> getEventBus() {
+    public AcuityAccount getAcuityAccount() {
+        return acuityAccount;
+    }
+
+    public void setAcuityAccount(AcuityAccount acuityAccount) {
+        this.acuityAccount = acuityAccount;
+    }
+
+    public EventBus getEventBus() {
         return eventBus;
     }
 
     public void setCurrentHandler(MessageHandler currentHandler) {
+        if (this.currentHandler != null) currentHandler.close();
         this.currentHandler = currentHandler;
     }
 
-    public void error(Exception e) {
-        e.printStackTrace();
+    public void error(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {
+        throwable.printStackTrace();
     }
 }
