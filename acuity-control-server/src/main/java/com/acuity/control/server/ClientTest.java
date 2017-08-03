@@ -29,7 +29,7 @@ public class ClientTest extends WebSocketClient {
         System.out.println("opened connection");
 
         MessagePackage messagePackage = new MessagePackage();
-        messagePackage.getHeaders().put("AUTH", "asdsadsa");
+        messagePackage.getBody().put("UpdateAccount", "asdsadsa");
         send(new Gson().toJson(messagePackage));
     }
 
