@@ -4,6 +4,7 @@ import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.api.rs.wrappers.common.SceneElement;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ public class SceneElements {
 
     private static final Logger logger = LoggerFactory.getLogger(SceneElements.class);
 
-    public static Stream<SceneElement> streamLoaded(){
+    public static Stream<SceneElement> streamLoaded() {
         Stream.Builder<SceneElement> streamBuilder = Stream.builder();
         int plane = Scene.getPlane();
         for (int x = 0; x < Scene.SIZE; x++) {
@@ -29,7 +30,7 @@ public class SceneElements {
         return streamBuilder.build();
     }
 
-    public static Stream<SceneElement> streamLoaded(int sceneX, int sceneY, int plane){
+    public static Stream<SceneElement> streamLoaded(int sceneX, int sceneY, int plane) {
         if (sceneX > Scene.SIZE || sceneX < 0 || sceneY > Scene.SIZE || sceneY < 0 || plane < 0 || plane > 3) {
             throw new IllegalArgumentException("Coordinates outside loaded scene.");
         }
@@ -40,7 +41,7 @@ public class SceneElements {
         return streamLoaded().filter(predicate).sorted(Comparator.comparingInt(Locatable::distance)).findFirst().orElse(null);
     }
 
-    public static SceneElement getNearest(final String name){
+    public static SceneElement getNearest(final String name) {
         return getNearest(sceneElement -> sceneElement.getNullSafeName().equals(name));
     }
 }

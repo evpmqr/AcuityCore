@@ -58,7 +58,7 @@ public class Callbacks {
                         int lastY = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseYHistory()[index];
                         Events.getRsEventBus().post(new MouseRecorderUpdateEvent(System.currentTimeMillis(), lastX, lastY));
                     } catch (Exception e) {
-
+                       e.printStackTrace();
                     }
                     break;
 
