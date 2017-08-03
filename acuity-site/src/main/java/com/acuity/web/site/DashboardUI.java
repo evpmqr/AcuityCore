@@ -1,5 +1,8 @@
 package com.acuity.web.site;
 
+import com.acuity.db.arango_monitor.ArangoMonitor;
+import com.acuity.db.arango_monitor.ArangoMonitorStream;
+import com.acuity.db.util.DBAccess;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.view.LoginView;
@@ -24,8 +27,14 @@ import java.util.Locale;
 @Title("Acuity Botting")
 public class DashboardUI extends UI {
 
+    private static ArangoMonitor arangoMonitor = new ArangoMonitor(new ArangoMonitorStream("http://127.0.0.1:8529", "_system", DBAccess.getUsername(), DBAccess.getPassword()));
+
     private boolean loggedIn = false;
     private Events events = new Events();
+
+    public static ArangoMonitor getArangoMonitor() {
+        return arangoMonitor;
+    }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {

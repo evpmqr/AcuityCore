@@ -1,8 +1,10 @@
 package com.acuity.web.site.view.dashboard;
 
+import com.acuity.db.arango_monitor.ArangoMonitorEvent;
+import com.acuity.web.site.DashboardUI;
+import com.google.common.eventbus.Subscribe;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -11,28 +13,22 @@ import com.vaadin.ui.VerticalLayout;
 
 public class AccountsView extends VerticalLayout implements View{
 
+    private Label countingLbl = new Label("Count = 0");
+
     public AccountsView() {
-        Label countingLbl = new Label("Count = 0");
         addComponent(countingLbl);
+        DashboardUI.getArangoMonitor().getEventBus().register(this);
+    }
 
-        UI current = UI.getCurrent();
+    @Override
+    public void detach() {
+        DashboardUI.getArangoMonitor().getEventBus().unregister(this);
+    }
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int i = 0; i < 10; i++) {
-                int finalI = i;
-                current.access(() -> countingLbl.setValue("Count = " + finalI));
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }).start();
+    @Subscribe
+    public void onArangoEvent(ArangoMonitorEvent event){
+        if (event.getType() == 2300){
+            getUI().access(() -> countingLbl.setValue(event.toString()));
+        }
     }
 }
