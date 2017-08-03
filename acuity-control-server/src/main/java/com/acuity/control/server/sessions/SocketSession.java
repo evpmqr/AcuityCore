@@ -1,7 +1,7 @@
 package com.acuity.control.server.sessions;
 
 import com.acuity.db.AcuityDB;
-import com.acuity.db.domain.MessagePackage;
+import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
 

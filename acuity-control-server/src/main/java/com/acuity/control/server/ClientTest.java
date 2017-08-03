@@ -1,6 +1,6 @@
 package com.acuity.control.server;
 
-import com.acuity.db.domain.MessagePackage;
+import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.google.gson.Gson;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;

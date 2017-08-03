@@ -21,7 +21,7 @@ public class ArangoMonitorEvent {
                 ", database=" + database +
                 ", cid=" + cid +
                 ", tid=" + tid +
-                ", document='" + document + '\'' +
+                ", vertex='" + document + '\'' +
                 '}';
     }
 

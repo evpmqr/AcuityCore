@@ -1,4 +1,6 @@
-package com.acuity.db.domain;
+package com.acuity.db.domain.vertex.impl;
+
+import com.acuity.db.domain.vertex.Vertex;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +8,7 @@ import java.util.Map;
 /**
  * Created by Zachary Herridge on 8/3/2017.
  */
-public class MessagePackage {
+public class MessagePackage extends Vertex {
 
     private Map<String, Object> headers = new HashMap<>();
     private Map<String, Object> body = new HashMap<>();
