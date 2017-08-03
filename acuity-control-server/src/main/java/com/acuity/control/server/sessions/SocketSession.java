@@ -37,11 +37,12 @@ public class SocketSession {
         return webSocket;
     }
 
-    public void close() {
+    public void destroy() {
         System.out.println("ScoketSession closed.");
+
     }
 
-    public void open() {
+    public void init() {
         System.out.println("ScoketSession opened.");
     }
 
@@ -78,8 +79,9 @@ public class SocketSession {
     }
 
     public void setCurrentHandler(MessageHandler currentHandler) {
-        if (this.currentHandler != null) currentHandler.close();
+        if (this.currentHandler != null) currentHandler.destroy();
         this.currentHandler = currentHandler;
+        currentHandler.init();
     }
 
     public void error(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {

@@ -16,14 +16,14 @@ public class Sessions {
     public static SocketSession createSession(WebSocket socket){
         SocketSession socketSession = new SocketSession(socket);
         sessionMap.put(socketSession.getWebSocket(), socketSession);
-        socketSession.open();
+        socketSession.init();
         return socketSession;
     }
 
     public static Optional<SocketSession> closeSession(WebSocket socket){
         SocketSession remove = sessionMap.remove(socket);
         if (remove != null){
-            remove.close();
+            remove.destroy();
         }
         return Optional.ofNullable(remove);
     }

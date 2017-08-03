@@ -13,7 +13,6 @@ public abstract class MessageHandler {
 
     public MessageHandler(SocketSession socketSession) {
         this.socketSession = socketSession;
-        socketSession.getEventBus().register(this);
     }
 
     @Subscribe
@@ -23,7 +22,11 @@ public abstract class MessageHandler {
         return socketSession;
     }
 
-    public void close() {
+    public void init(){
+        socketSession.getEventBus().register(this);
+    }
+
+    public void destroy() {
         socketSession.getEventBus().unregister(this);
     }
 }
