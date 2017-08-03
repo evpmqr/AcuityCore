@@ -27,8 +27,7 @@ public class Menu extends CustomComponent {
         setId(ID);
         setSizeUndefined();
 
-        // There's only one DashboardMenu per UI so this doesn't need to be
-        // unregistered from the UI-scoped DashboardEventBus.
+
         Events.register(this);
 
         setCompositionRoot(buildContent());
