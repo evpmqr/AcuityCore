@@ -70,8 +70,7 @@ public class ArangoMonitorStream {
             }
             try {
                 Thread.sleep(pollTimeMS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             }
         } catch (Throwable e) {
             e.printStackTrace();

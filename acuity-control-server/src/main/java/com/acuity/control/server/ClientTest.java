@@ -27,9 +27,15 @@ public class ClientTest extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshakedata) {
         System.out.println("opened connection");
+        MessagePackage messagePackage = new MessagePackage(MessagePackage.Type.LOGIN)
+                .putBody("username", "zgherridge@gmail.com")
+                .putBody("password", "asdasd")
+                .putBody("sessionType", 1);
+        send(messagePackage);
+    }
 
-        MessagePackage messagePackage = new MessagePackage();
-        messagePackage.getBody().put("UpdateAccount", "asdsadsa");
+    private void send(MessagePackage messagePackage){
+        System.out.println("Sending: " + messagePackage);
         send(new Gson().toJson(messagePackage));
     }
 

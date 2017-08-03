@@ -17,6 +17,10 @@ public class MessagePackage extends Vertex {
 
     }
 
+    public MessagePackage(int type) {
+        putHeader("messageType", type);
+    }
+
     public Map<String, Object> getHeaders() {
         return headers;
     }
@@ -31,5 +35,33 @@ public class MessagePackage extends Vertex {
                 "headers=" + headers +
                 ", body=" + body +
                 '}';
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getBody(String key, T defaultValue) {
+        return (T) body.getOrDefault(key, defaultValue);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getHeader(String key, T defaultValue) {
+        return (T) headers.getOrDefault(key, defaultValue);
+    }
+
+    public MessagePackage putHeader(String key, Object value) {
+        getHeaders().put(key, value);
+        return this;
+    }
+
+    public MessagePackage putBody(String key, Object value) {
+        getBody().put(key, value);
+        return this;
+    }
+
+    public interface Type {
+        int UNKNOWN = 0;
+        int LOGIN = 1;
+        int GOOD_LOGIN = 2;
+        int BAD_LOGIN = 3;
+
     }
 }
