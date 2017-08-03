@@ -1,7 +1,7 @@
 package com.acuity.db;
 
+import com.acuity.db.services.AcuityAccountService;
 import com.arangodb.ArangoDB;
-import com.arangodb.entity.BaseDocument;
 
 import java.io.InputStream;
 
@@ -26,19 +26,7 @@ public class AcuityDB {
 
 
     public static void main(String[] args) {
-        InputStream in = AcuityDB.class.getClassLoader().getResourceAsStream("db.properties");
-        ArangoDB arangoDB = new ArangoDB.Builder()
-                .maxConnections(8)
-                .loadProperties(in)
-                .build();
-
-
-
-        BaseDocument document = arangoDB.db("TileData").collection("AcuityUsers").getDocument("433", BaseDocument.class);
-
-
-
-        System.out.println(document);
-
+        init();
+        System.out.println(AcuityAccountService.getInstance().checkLogin("zgherridge@gmail.com", "asdsad"));
     }
 }
