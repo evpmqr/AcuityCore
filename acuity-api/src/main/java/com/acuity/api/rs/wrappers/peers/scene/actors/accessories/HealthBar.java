@@ -20,7 +20,7 @@ public class HealthBar extends Node{
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<NodeLinkedList<HitUpdate>> getHitSplats() {
+    public Optional<NodeLinkedList<HitUpdate>> getHitUpdates() {
         return Optional.ofNullable(rsHealthBar.getHitsplats()).map(RSNodeLinkedList::getWrapper);
     }
 }

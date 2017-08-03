@@ -15,10 +15,7 @@ import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoun
 import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar;
 import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
-import com.acuity.rs.api.RSActor;
-import com.acuity.rs.api.RSHealthBar;
-import com.acuity.rs.api.RSHitUpdate;
-import com.acuity.rs.api.RSNodeLinkedList;
+import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
@@ -103,19 +100,38 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return new FineLocation(rsActor.getFineX(), rsActor.getFineY(), Scene.getPlane());
     }
 
+    public boolean isHealthBarVisible(){
+        int engineCycle = AcuityInstance.getClient().getRsClient().getEngineCycle();
+
+        for (int i : rsActor.getHitsplatCycles()) {
+            if (i > engineCycle){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public double getHealthPercent(){
-        int highestCycle = 0;
-        int result = 0;
-        for (Object o : rsActor.getHealthBars()) {
-            if (o != null && o instanceof RSHealthBar){
-                for (Object o1 : ((RSHealthBar) o).getHitsplats()) {
-                    if (((RSHitUpdate) o1).getStartCycle() >= highestCycle){
-                        result = ((RSHitUpdate) o1).getCurrentWidth();
+        NodeLinkedList<HealthBar> healthBars = rsActor.getHealthBars().getWrapper();
+
+        int highestCycle = -1;
+        int width = -1;
+        for (HealthBar healthBar : healthBars) {
+            NodeLinkedList<HitUpdate> hitUpdates = healthBar.getHitUpdates().orElse(null);
+            if (hitUpdates != null){
+                for (HitUpdate hitUpdate : hitUpdates) {
+                    if (highestCycle <= hitUpdate.getStartCycle()){
+                        highestCycle = hitUpdate.getStartCycle();
+                        width = hitUpdate.getCurrentWidth();
                     }
                 }
             }
         }
-        return Math.min(result * 1000D / 255D, 100);
+
+        if (width == -1) return -1;
+        return Math.max(Math.min(width * 1000D / 255D, 100), 0);
     }
 
     public SceneLocation getSceneLocation(){
