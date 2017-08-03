@@ -1,8 +1,11 @@
 package com.acuity.web.site;
 
+import com.acuity.web.site.events.Events;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinServlet;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -14,4 +17,15 @@ import javax.servlet.annotation.WebServlet;
 @VaadinServletConfiguration(ui = DashboardUI.class, productionMode = false)
 public class DashboardServlet extends VaadinServlet {
 
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+        super.init(servletConfig);
+        Events.start();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        Events.stop();
+    }
 }

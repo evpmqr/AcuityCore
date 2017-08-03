@@ -1,7 +1,7 @@
 package com.acuity.web.site.view.dashboard;
 
 import com.acuity.db.arango_monitor.ArangoMonitorEvent;
-import com.acuity.web.site.DashboardUI;
+import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Label;
@@ -17,12 +17,13 @@ public class AccountsView extends VerticalLayout implements View{
 
     public AccountsView() {
         addComponent(countingLbl);
-        DashboardUI.getArangoMonitor().getEventBus().register(this);
+        Events.getDBEventBus().register(this);
     }
 
     @Override
     public void detach() {
-        DashboardUI.getArangoMonitor().getEventBus().unregister(this);
+        Events.getDBEventBus().unregister(this);
+        super.detach();
     }
 
     @Subscribe
