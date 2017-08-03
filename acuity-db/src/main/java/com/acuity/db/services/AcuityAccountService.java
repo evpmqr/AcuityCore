@@ -33,8 +33,8 @@ public class AcuityAccountService {
         return Optional.ofNullable(acuityAccountDocumentCreateEntity.getNew());
     }
 
-    public boolean checkLogin(String email, String password){
-        return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash())).orElse(false);
+    public Optional<AcuityAccount> checkLogin(String email, String password){
+        return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);
     }
 
     public Optional<AcuityAccount> getAccountByEmail(String email){

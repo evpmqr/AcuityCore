@@ -25,6 +25,10 @@ public class AcuityDB {
     }
 
 
+    public static void stop() {
+        if (db != null) db.shutdown();
+    }
+
     public static void main(String[] args) {
         init();
         System.out.println(AcuityAccountService.getInstance().checkLogin("zgherridge@gmail.com", "asdsad"));
