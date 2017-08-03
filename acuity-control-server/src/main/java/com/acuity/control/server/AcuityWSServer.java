@@ -42,7 +42,7 @@ public class AcuityWSServer extends WebSocketServer {
 
     @Override
     public void onError(WebSocket webSocket, Exception e) {
-        Sessions.getSession(webSocket).ifPresent(socketSession -> socketSession.error(e));
+        Sessions.getSession(webSocket).ifPresent(socketSession -> socketSession.error(e, null));
     }
 
     @Override
