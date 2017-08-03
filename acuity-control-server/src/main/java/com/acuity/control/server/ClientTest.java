@@ -1,5 +1,7 @@
-package com.acuity.control_server;
+package com.acuity.control.server;
 
+import com.acuity.db.domain.MessagePackage;
+import com.google.gson.Gson;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.drafts.Draft_6455;
@@ -25,8 +27,10 @@ public class ClientTest extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshakedata) {
         System.out.println("opened connection");
-        send("Hello server - Client.");
-        // if you plan to refuse connection based on ip or httpfields overload: onWebsocketHandshakeReceivedAsClient
+
+        MessagePackage messagePackage = new MessagePackage();
+        messagePackage.getHeaders().put("AUTH", "asdsadsa");
+        send(new Gson().toJson(messagePackage));
     }
 
     @Override

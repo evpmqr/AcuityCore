@@ -1,5 +1,7 @@
-package com.acuity.control_server;
+package com.acuity.control.server.sessions;
 
+import com.acuity.db.domain.MessagePackage;
+import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
 
 /**
@@ -26,8 +28,10 @@ public class SocketSession {
     }
 
     public void message(String message) {
-        System.out.println("Message: " + message);
-        webSocket.send("Sup dude.");
+        if (message == null) return;
+
+        MessagePackage messagePackage = new Gson().fromJson(message, MessagePackage.class);
+        System.out.println(messagePackage);
     }
 
     public void error(Exception e) {

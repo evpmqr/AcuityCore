@@ -1,4 +1,4 @@
-package com.acuity.control_server;
+package com.acuity.control.server.sessions;
 
 import org.java_websocket.WebSocket;
 
