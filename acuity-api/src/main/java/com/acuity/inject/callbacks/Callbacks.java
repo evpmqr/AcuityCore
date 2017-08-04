@@ -69,7 +69,7 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void insertMenuItemCallback(String action, String target, int opcode, int arg0, int arg1, int arg2) {
+    public static void insertMenuItemCallback(String action, String target, int opcode, int arg0, int arg1, int arg2, boolean b) {
         try {
             Events.getRsEventBus().post(new MenuInsertEvent(opcode, arg0, arg1, arg2, action, target));
         } catch (Throwable e) {
