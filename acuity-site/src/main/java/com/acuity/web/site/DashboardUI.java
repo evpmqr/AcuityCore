@@ -8,6 +8,7 @@ import com.acuity.web.site.view.LoginView;
 import com.acuity.web.site.view.MainView;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Push;
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
@@ -24,6 +25,7 @@ import java.util.Locale;
  * Created by Zach on 7/31/2017.
  */
 @Push
+@Theme("dashboard")
 @Title("Acuity Botting")
 public class DashboardUI extends UI {
 

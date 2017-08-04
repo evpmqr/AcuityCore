@@ -1,0 +1,8 @@
+@import "../valo/valo";
+
+
+$valo-menu-background-color: #54564d;
+
+@mixin dashboard {
+  @include valo;
+}
