@@ -10,6 +10,7 @@ public class ArangoEventImpl implements ArangoEvent{
     private int database;
     private String cid;
     private String tid;
+    private String cname;
     private String document;
 
     @Override
@@ -18,9 +19,11 @@ public class ArangoEventImpl implements ArangoEvent{
                 "tick=" + tick +
                 ", type=" + type +
                 ", database=" + database +
-                ", cid=" + cid +
-                ", tid=" + tid +
-                ", vertex='" + document + '\'' +
+                ", cid='" + cid + '\'' +
+                ", tid='" + tid + '\'' +
+                ", cname='" + cname + '\'' +
+                ", document='" + document + '\'' +
+                ", data=" + document +
                 '}';
     }
 

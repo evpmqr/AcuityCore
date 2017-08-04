@@ -4,7 +4,9 @@ import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.BotClient;
+import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.services.impl.BotClientService;
+import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.data.provider.DataProvider;
@@ -37,6 +39,10 @@ public class BotClientsListView extends VerticalLayout implements View {
         grid.setSizeFull();
         addComponent(grid);
         Events.getDBEventBus().register(this);
+
+        for (BotClient botClient : botClients) {
+            MessagePackageService.getInstance().insert(new MessagePackage(MessagePackage.Type.DIRECT).putHeader("destinationKey", botClient.getKey()));
+        }
     }
 
     @Override
@@ -51,6 +57,7 @@ public class BotClientsListView extends VerticalLayout implements View {
             botClients.remove(event.getBotClient());
         }
         else if (event.getBotClient().getOwnerID().equals(acuityAccount.getKey())) {
+            botClients.remove(event.getBotClient());
             botClients.add(event.getBotClient());
         }
         grid.getDataProvider().refreshAll();

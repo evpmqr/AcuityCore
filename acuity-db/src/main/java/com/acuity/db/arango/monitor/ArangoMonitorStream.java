@@ -95,11 +95,13 @@ public class ArangoMonitorStream {
 
         for (String changeEntry : response.substring(1, response.length() - 1).split("}\\{")) {
             ArangoEventImpl arangoEventImpl = Json.GSON.fromJson("{" + changeEntry  + "}", ArangoEventImpl.class);
-            for (String s : changeEntry.split(",(?![^{}]*+})")){
-                if (s.startsWith("\"data\":")){
-                    arangoEventImpl.setDocument(s.substring("\"data\":".length()));
-                    break;
-                }
+
+            // TODO: 8/4/2017 This relies on data being the last key which it seems to be always. Maybe change it? In a few months arango will support real triggers and all this will be removed anyways.
+            String dataKey = "data\":";
+            int i = changeEntry.indexOf(dataKey);
+            if (i != -1){
+                String document = changeEntry.substring(i + dataKey.length());
+                arangoEventImpl.setDocument(document);
             }
 
             for (ArangoStreamListener listener : listeners) {
