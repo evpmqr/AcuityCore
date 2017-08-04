@@ -23,6 +23,17 @@ public class Vertex {
     }
 
     @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Vertex)) return false;
+
+        Vertex vertex = (Vertex) object;
+
+        return _key != null ? _key.equals(vertex._key) : vertex._key == null;
+    }
+
+
+    @Override
     public String toString() {
         return "Vertex{" +
                 "_key='" + _key + '\'' +

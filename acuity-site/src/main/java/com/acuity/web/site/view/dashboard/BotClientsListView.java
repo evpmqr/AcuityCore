@@ -7,6 +7,7 @@ import com.acuity.db.domain.vertex.impl.BotClient;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
+import com.vaadin.data.provider.DataProvider;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
@@ -14,8 +15,8 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.LocalDateTimeRenderer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
@@ -23,14 +24,14 @@ import java.util.Map;
 public class BotClientsListView extends VerticalLayout implements View {
 
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
-    private Map<String, BotClient> clients = new HashMap<>();
+    private List<BotClient> botClients = new ArrayList<>();
 
     private Grid<BotClient> grid = new Grid<>();
 
     public BotClientsListView() {
-        BotClientService.getInstance().getByOwnerKey(acuityAccount.getKey()).forEach(botClient -> clients.put(botClient.getKey(), botClient));
+        botClients = BotClientService.getInstance().getByOwnerKey(acuityAccount.getKey());
         MultiSelectionModel<BotClient> selectionModel = (MultiSelectionModel<BotClient>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
-        grid.setItems(clients.values());
+        grid.setDataProvider(DataProvider.ofCollection(botClients));
         grid.addColumn(BotClient::getKey).setCaption("Key");
         grid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
         grid.setSizeFull();
@@ -44,22 +45,14 @@ public class BotClientsListView extends VerticalLayout implements View {
         super.detach();
     }
 
-    private void updateGrid() {
-        getUI().access(() -> {
-            grid.setItems(clients.values());
-        });
-    }
-
     @Subscribe
     public void onBotClientEvent(BotClientEvent event) {
-        System.out.println(event);
         if (event.getType() == ArangoEvent.DELETE) {
-            if (clients.remove(event.getBotClient().getKey()) != null) updateGrid();
+            botClients.remove(event.getBotClient());
         }
         else if (event.getBotClient().getOwnerID().equals(acuityAccount.getKey())) {
-            clients.put(event.getBotClient().getKey(), event.getBotClient());
-            updateGrid();
+            botClients.add(event.getBotClient());
         }
-
+        grid.getDataProvider().refreshAll();
     }
 }

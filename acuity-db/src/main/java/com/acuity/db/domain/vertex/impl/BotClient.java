@@ -27,6 +27,7 @@ public class BotClient extends Vertex {
         return connectionTime;
     }
 
+
     @Override
     public String toString() {
         return "BotClient{" +
