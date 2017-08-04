@@ -12,7 +12,6 @@ public class ArangoMonitorEvent {
     private int tid;
     private String document;
 
-
     @Override
     public String toString() {
         return "ArangoMonitorEvent{" +
@@ -46,7 +45,7 @@ public class ArangoMonitorEvent {
     }
 
     public String getDocument() {
-        return document;
+        return document ;
     }
 
     public void setDocument(String document) {

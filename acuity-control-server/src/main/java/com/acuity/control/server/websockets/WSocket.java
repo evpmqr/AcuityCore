@@ -4,18 +4,16 @@ import com.acuity.control.server.messages.handlers.impl.LoginHandler;
 import com.acuity.control.server.sessions.Session;
 import com.acuity.control.server.sessions.Sessions;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.db.util.Json;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionContext;
 import com.google.common.eventbus.SubscriberExceptionHandler;
-import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
 public class WSocket implements SubscriberExceptionHandler{
-
-    private static Gson gson = new Gson();
 
     private WebSocket socket;
     private Session session;
@@ -27,11 +25,11 @@ public class WSocket implements SubscriberExceptionHandler{
     }
 
     public void send(MessagePackage messagePackage){
-        socket.send(gson.toJson(messagePackage));
+        socket.send(Json.GSON.toJson(messagePackage));
     }
 
     public void onMessage(String message){
-        MessagePackage messagePackage = gson.fromJson(message, MessagePackage.class);
+        MessagePackage messagePackage = Json.GSON.fromJson(message, MessagePackage.class);
         if (messagePackage != null) eventBus.post(messagePackage);
     }
 

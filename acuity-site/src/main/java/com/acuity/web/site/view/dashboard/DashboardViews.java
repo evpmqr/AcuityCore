@@ -12,7 +12,7 @@ import java.util.List;
 public class DashboardViews {
 
     public static List<DashboardView> getViews(){
-        return Arrays.asList(new DashboardView(AccountsView.class, "RS Accounts"), new DashboardView(AccountsView.class, "Proxies"));
+        return Arrays.asList(new DashboardView(AccountsView.class, "RS Accounts"), new DashboardView(BotClientsListView.class, "Clients"));
     }
 
     public static class DashboardView {

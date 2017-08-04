@@ -1,7 +1,7 @@
 package com.acuity.control.client;
 
 import com.acuity.db.domain.vertex.impl.MessagePackage;
-import com.google.gson.Gson;
+import com.acuity.db.util.Json;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.drafts.Draft_6455;
@@ -36,7 +36,7 @@ public class ClientTest extends WebSocketClient {
 
     private void send(MessagePackage messagePackage){
         System.out.println("Sending: " + messagePackage);
-        send(new Gson().toJson(messagePackage));
+        send(Json.GSON.toJson(messagePackage));
     }
 
     @Override

@@ -18,4 +18,16 @@ public class BotClient extends Vertex {
 
     public BotClient() {
     }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    @Override
+    public String toString() {
+        return "BotClient{" +
+                "ownerID='" + ownerID + '\'' +
+                ", connectionTime=" + connectionTime +
+                '}';
+    }
 }

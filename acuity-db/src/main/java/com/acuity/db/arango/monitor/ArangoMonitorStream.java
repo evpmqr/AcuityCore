@@ -1,6 +1,6 @@
 package com.acuity.db.arango.monitor;
 
-import com.google.gson.Gson;
+import com.acuity.db.util.Json;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
  * Created by Zachary Herridge on 8/2/2017.
  */
 public class ArangoMonitorStream {
-
-    private static final Gson gson = new Gson();
 
     private String server;
     private String db;
@@ -95,7 +93,7 @@ public class ArangoMonitorStream {
         this.lastTick = lastTick;
 
         for (String changeEntry : response.substring(1, response.length() - 1).split("}\\{")) {
-            ArangoMonitorEvent arangoMonitorEvent = gson.fromJson("{" + changeEntry  + "}", ArangoMonitorEvent.class);
+            ArangoMonitorEvent arangoMonitorEvent = Json.GSON.fromJson("{" + changeEntry  + "}", ArangoMonitorEvent.class);
             for (String s : changeEntry.split(",(?![^{}]*+})")){
                 if (s.startsWith("\"data\":")){
                     arangoMonitorEvent.setDocument(s.substring("\"data\":".length()));
@@ -121,7 +119,7 @@ public class ArangoMonitorStream {
 
         String response = readInput(connection);
 
-        HashMap hashMap = gson.fromJson(response, HashMap.class);
+        HashMap hashMap = Json.GSON.fromJson(response, HashMap.class);
         lastTick = Long.parseLong((String) ((Map<String, Object>) hashMap.get("state")).get("lastLogTick"));
     }
 
@@ -137,7 +135,7 @@ public class ArangoMonitorStream {
         }
 
         String response = readInput(connection);
-        HashMap hashMap = gson.fromJson(response, HashMap.class);
+        HashMap hashMap = Json.GSON.fromJson(response, HashMap.class);
         jwt = (String) hashMap.get("jwt");
     }
 
