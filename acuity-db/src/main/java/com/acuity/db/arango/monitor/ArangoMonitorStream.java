@@ -1,6 +1,5 @@
-package com.acuity.db.arango_monitor;
+package com.acuity.db.arango.monitor;
 
-import com.acuity.db.util.DBAccess;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -159,10 +158,5 @@ public class ArangoMonitorStream {
 
     public interface ArangoStreamListener {
         void onEvent(ArangoMonitorEvent event);
-    }
-
-    public static void main(String[] args) {
-        ArangoMonitorStream arangoMonitorStream = new ArangoMonitorStream("http://127.0.0.1:8529", "_system", DBAccess.getUsername(), DBAccess.getPassword());
-        arangoMonitorStream.start();
     }
 }

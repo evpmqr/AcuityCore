@@ -12,7 +12,7 @@ public abstract class MessageHandler {
     private WSocket socket;
 
     public MessageHandler(WSocket wSocket) {
-        this.socket = socket;
+        this.socket = wSocket;
     }
 
     @Subscribe
@@ -20,10 +20,6 @@ public abstract class MessageHandler {
 
     public WSocket getSocket() {
         return socket;
-    }
-
-    public void init(){
-        socket.getEventBus().register(this);
     }
 
     public void destroy() {

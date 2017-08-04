@@ -19,4 +19,13 @@ public class Sessions {
         return session;
     }
 
+
+    public static void closeSession(Session session){
+        closeSession(session.getSessionKey());
+    }
+
+    public static void closeSession(String key){
+        sessionMap.remove(key);
+    }
+
 }

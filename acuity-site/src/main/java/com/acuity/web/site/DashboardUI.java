@@ -1,7 +1,7 @@
 package com.acuity.web.site;
 
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
-import com.acuity.db.services.AcuityAccountService;
+import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.view.LoginView;

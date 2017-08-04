@@ -1,4 +1,4 @@
-package com.acuity.db.arango_monitor;
+package com.acuity.db.arango.monitor;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.

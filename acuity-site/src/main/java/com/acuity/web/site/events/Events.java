@@ -1,6 +1,6 @@
 package com.acuity.web.site.events;
 
-import com.acuity.db.arango_monitor.ArangoMonitorStream;
+import com.acuity.db.arango.monitor.ArangoMonitorStream;
 import com.acuity.db.util.DBAccess;
 import com.acuity.web.site.DashboardUI;
 import com.google.common.eventbus.EventBus;
@@ -12,7 +12,7 @@ import com.google.common.eventbus.SubscriberExceptionHandler;
  */
 public class Events implements SubscriberExceptionHandler {
 
-    private static ArangoMonitorStream arangoMonitor = new ArangoMonitorStream("http://127.0.0.1:8529", "_system", DBAccess.getUsername(), DBAccess.getPassword());
+    private static ArangoMonitorStream arangoMonitor = new ArangoMonitorStream("http://AcuityBotting.com:8529", "AcuityCore-Prod", DBAccess.getUsername(), DBAccess.getPassword());
     private static EventBus dbEventBus = new EventBus(new SubscriberExceptionHandler() {
         @Override
         public void handleException(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {

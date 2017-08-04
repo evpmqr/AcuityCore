@@ -1,21 +1,30 @@
 package com.acuity.control.server.websockets;
 
+import com.google.common.eventbus.SubscriberExceptionContext;
+
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
-public class WSocketEvents {
+public class WSocketEvent {
 
-    public static class SocketOpened {
+    private WSocketEvent() {
+    }
+
+    public static class Opened {
 
     }
 
-    public static class SocketClosed {
+    public static class LoginComplete {
+
+    }
+
+    public static class Closed {
 
         private final int code;
         private final String reason;
         private final boolean remote;
 
-        public SocketClosed(int code, String reason, boolean remote) {
+        public Closed(int code, String reason, boolean remote) {
             this.code = code;
             this.reason = reason;
             this.remote = remote;
@@ -34,15 +43,21 @@ public class WSocketEvents {
         }
     }
 
-    public static class SocketError {
+    public static class Error {
         private Throwable throwable;
+        private SubscriberExceptionContext subscriberExceptionContext;
 
-        public SocketError(Throwable throwable) {
+        public Error(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {
             this.throwable = throwable;
+            this.subscriberExceptionContext = subscriberExceptionContext;
         }
 
         public Throwable getThrowable() {
             return throwable;
+        }
+
+        public SubscriberExceptionContext getSubscriberExceptionContext() {
+            return subscriberExceptionContext;
         }
     }
 

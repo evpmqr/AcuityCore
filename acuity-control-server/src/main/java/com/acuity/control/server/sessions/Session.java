@@ -20,10 +20,6 @@ public class Session {
         this.sessionKey = sessionKey;
     }
 
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
     public <T> void setAttribute(Class<T> type, T value) {
         setAttribute(type.getName(), value);
     }

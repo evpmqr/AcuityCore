@@ -2,23 +2,24 @@ package com.acuity.control.server.websockets;
 
 import com.acuity.control.server.messages.handlers.impl.LoginHandler;
 import com.acuity.control.server.sessions.Session;
+import com.acuity.control.server.sessions.Sessions;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.SubscriberExceptionContext;
+import com.google.common.eventbus.SubscriberExceptionHandler;
 import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
-
-import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
-public class WSocket {
+public class WSocket implements SubscriberExceptionHandler{
 
     private static Gson gson = new Gson();
 
     private WebSocket socket;
     private Session session;
-    private EventBus eventBus = new EventBus();
+    private EventBus eventBus = new EventBus(this);
 
     public WSocket(WebSocket socket) {
         this.socket = socket;
@@ -35,15 +36,17 @@ public class WSocket {
     }
 
     public void onError(Exception e) {
-        eventBus.post(new WSocketEvents.SocketError(e));
+        e.printStackTrace();
+        eventBus.post(new WSocketEvent.Error(e, null));
     }
 
     public void onClose(int code, String reason, boolean remote) {
-        eventBus.post(new WSocketEvents.SocketClosed(code, reason, remote));
+        eventBus.post(new WSocketEvent.Closed(code, reason, remote));
+        if (session != null) Sessions.closeSession(session);
     }
 
     public void onOpen() {
-        eventBus.post(new WSocketEvents.SocketOpened());
+        eventBus.post(new WSocketEvent.Opened());
     }
 
     public WebSocket getSocket() {
@@ -54,11 +57,17 @@ public class WSocket {
         this.session = session;
     }
 
-    public Optional<Session> getSession(){
-        return Optional.ofNullable(session);
+    public Session getSession(){
+        return session;
     }
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    @Override
+    public void handleException(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {
+        throwable.printStackTrace();
+        eventBus.post(new WSocketEvent.Error(throwable, subscriberExceptionContext));
     }
 }

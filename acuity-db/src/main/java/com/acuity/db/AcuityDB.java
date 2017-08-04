@@ -1,7 +1,7 @@
 package com.acuity.db;
 
-import com.acuity.db.services.AcuityAccountService;
 import com.arangodb.ArangoDB;
+import com.arangodb.velocypack.module.jdk8.VPackJdk8Module;
 
 import java.io.InputStream;
 
@@ -10,11 +10,14 @@ import java.io.InputStream;
  */
 public class AcuityDB {
 
+    public static final String DB_NAME = "AcuityCore-Prod";
+
     private static ArangoDB db = null;
 
     public static void init(){
         InputStream in = AcuityDB.class.getClassLoader().getResourceAsStream("db.properties");
         db = new ArangoDB.Builder()
+                .registerModule(new VPackJdk8Module())
                 .maxConnections(8)
                 .loadProperties(in)
                 .build();
@@ -31,6 +34,5 @@ public class AcuityDB {
 
     public static void main(String[] args) {
         init();
-        System.out.println(AcuityAccountService.getInstance().checkLogin("zgherridge@gmail.com", "asdsad"));
     }
 }

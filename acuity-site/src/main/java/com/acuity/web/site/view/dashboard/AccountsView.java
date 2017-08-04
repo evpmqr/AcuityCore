@@ -1,6 +1,6 @@
 package com.acuity.web.site.view.dashboard;
 
-import com.acuity.db.arango_monitor.ArangoMonitorEvent;
+import com.acuity.db.arango.monitor.ArangoMonitorEvent;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.navigator.View;

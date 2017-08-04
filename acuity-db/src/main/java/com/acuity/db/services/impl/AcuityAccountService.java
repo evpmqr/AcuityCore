@@ -1,9 +1,9 @@
-package com.acuity.db.services;
+package com.acuity.db.services.impl;
 
 import com.acuity.bcrypt.BCrypt;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
-import com.arangodb.ArangoCollection;
+import com.acuity.db.services.DBCollectionService;
 import com.arangodb.ArangoCursor;
 import com.arangodb.ArangoDBException;
 import com.arangodb.entity.DocumentCreateEntity;
@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 8/1/2017.
  */
-public class AcuityAccountService {
+public class AcuityAccountService extends DBCollectionService {
 
     private static final AcuityAccountService INSTANCE = new AcuityAccountService();
 
@@ -23,8 +23,8 @@ public class AcuityAccountService {
         return INSTANCE;
     }
 
-    public ArangoCollection getCollection(){
-        return AcuityDB.getDB().db("_system").collection("AcuityUsers");
+    public AcuityAccountService() {
+        super(AcuityDB.DB_NAME, "AcuityAccount");
     }
 
     public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws ArangoDBException{
@@ -38,11 +38,11 @@ public class AcuityAccountService {
     }
 
     public Optional<AcuityAccount> getAccountByEmail(String email){
-        String query = "FOR user IN AcuityUsers " +
+        String query = "FOR user IN AcuityAccount " +
                 "FILTER user.email == @email " +
                 "LIMIT 1 " +
                 "RETURN user";
-        ArangoCursor<AcuityAccount> system = AcuityDB.getDB().db("_system").query(query, Collections.singletonMap("email", email), null, AcuityAccount.class);
+        ArangoCursor<AcuityAccount> system = getDB().query(query, Collections.singletonMap("email", email), null, AcuityAccount.class);
         return system.asListRemaining().stream().findFirst();
     }
 

@@ -29,7 +29,7 @@ public class ClientTest extends WebSocketClient {
         System.out.println("opened connection");
         MessagePackage messagePackage = new MessagePackage(MessagePackage.Type.LOGIN)
                 .putBody("username", "zgherridge@gmail.com")
-                .putBody("password", "asdasd")
+                .putBody("password", "Akaliopdontnerf!)1")
                 .putBody("sessionType", 1);
         send(messagePackage);
     }
