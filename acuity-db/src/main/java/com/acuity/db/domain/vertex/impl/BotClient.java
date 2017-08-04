@@ -23,6 +23,10 @@ public class BotClient extends Vertex {
         return ownerID;
     }
 
+    public LocalDateTime getConnectionTime() {
+        return connectionTime;
+    }
+
     @Override
     public String toString() {
         return "BotClient{" +
