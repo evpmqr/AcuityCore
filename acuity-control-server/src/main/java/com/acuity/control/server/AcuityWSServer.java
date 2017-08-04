@@ -1,6 +1,7 @@
 package com.acuity.control.server;
 
-import com.acuity.control.server.sessions.Sessions;
+import com.acuity.control.server.websockets.WSocket;
+import com.acuity.control.server.websockets.WSockets;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -27,26 +28,28 @@ public class AcuityWSServer extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
-        Sessions.createSession(webSocket);
+        WSocket wSocket = WSockets.bindSocket(webSocket);
+        wSocket.onOpen();
     }
 
     @Override
     public void onClose(WebSocket webSocket, int code, String reason, boolean remote) {
-        Sessions.closeSession(webSocket);
+        WSockets.get(webSocket).ifPresent(wSocket -> wSocket.onClose(code, reason, remote));
+        WSockets.remove(webSocket);
     }
 
     @Override
     public void onMessage(WebSocket webSocket, String message) {
-        Sessions.getSession(webSocket).ifPresent(socketSession -> socketSession.message(message));
+        WSockets.get(webSocket).ifPresent(wSocket -> wSocket.onMessage(message));
     }
 
     @Override
     public void onError(WebSocket webSocket, Exception e) {
-        Sessions.getSession(webSocket).ifPresent(socketSession -> socketSession.error(e, null));
+        WSockets.get(webSocket).ifPresent(wSocket -> wSocket.onError(e));
     }
 
     @Override
     public void onStart() {
-        logger.info("Websocket server started.");
+        logger.info("Acuity WSServer started.");
     }
 }

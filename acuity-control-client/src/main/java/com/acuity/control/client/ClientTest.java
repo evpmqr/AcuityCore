@@ -1,4 +1,4 @@
-package com.acuity.control.server;
+package com.acuity.control.client;
 
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.google.gson.Gson;

@@ -1,6 +1,9 @@
-package com.acuity.control.server.sessions.handlers;
+package com.acuity.control.server.messages.handlers.impl;
 
-import com.acuity.control.server.sessions.SocketSession;
+import com.acuity.control.server.messages.handlers.MessageHandler;
+import com.acuity.control.server.sessions.Session;
+import com.acuity.control.server.sessions.Sessions;
+import com.acuity.control.server.websockets.WSocket;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.services.AcuityAccountService;
@@ -10,14 +13,14 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Zachary Herridge on 8/3/2017.
  */
-public class LoginHandler extends MessageHandler{
+public class LoginHandler extends MessageHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginHandler.class);
 
     private static final MessagePackage BAD_LOGIN = new MessagePackage(MessagePackage.Type.BAD_LOGIN);
 
-    public LoginHandler(SocketSession socketSession) {
-        super(socketSession);
+    public LoginHandler(WSocket wSocket) {
+        super(wSocket);
     }
 
 
@@ -38,15 +41,22 @@ public class LoginHandler extends MessageHandler{
 
                 if (acuityAccount != null){
                     if (sessionType == 1){
-                        getSocket().setCurrentHandler(new BotSessionHandler(getSocket()));
+                        getSocket().getEventBus().register(new BotClientHandler(getSocket()));
                     }
                     else {
                         getSocket().send(BAD_LOGIN);
                         return;
                     }
-                    getSocket().setAcuityAccount(acuityAccount);
-                    getSocket().send(new MessagePackage(MessagePackage.Type.GOOD_LOGIN)
-                            .putBody("acuityAccount", acuityAccount));
+
+                    Session session = getSocket().getSession().orElse(null);
+                    if (session == null){
+                        session = Sessions.createSession();
+                        getSocket().setSession(session);
+                    }
+                    session.setAttribute(AcuityAccount.class, acuityAccount);
+                    getSocket().send(new MessagePackage(MessagePackage.Type.GOOD_LOGIN).putBody("acuityAccount", acuityAccount));
+
+                    destroy();
                 }
                 else {
                     getSocket().send(BAD_LOGIN);

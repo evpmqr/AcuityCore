@@ -19,5 +19,6 @@
         <module>acuity-site</module>
         <module>acuity-control-server</module>
         <module>acuity-db</module>
+        <module>acuity-control-client</module>
     </modules>
 </project>
