@@ -1,6 +1,6 @@
 package com.acuity.web.site.view.dashboard;
 
-import com.acuity.db.arango.monitor.ArangoMonitorEvent;
+import com.acuity.db.arango.monitor.events.ArangoEventImpl;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.navigator.View;
@@ -27,7 +27,7 @@ public class AccountsView extends VerticalLayout implements View{
     }
 
     @Subscribe
-    public void onArangoEvent(ArangoMonitorEvent event){
+    public void onArangoEvent(ArangoEventImpl event){
         if (event.getType() == 2300){
             getUI().access(() -> countingLbl.setValue(event.toString()));
         }

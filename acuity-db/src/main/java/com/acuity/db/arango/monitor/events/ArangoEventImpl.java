@@ -1,20 +1,20 @@
-package com.acuity.db.arango.monitor;
+package com.acuity.db.arango.monitor.events;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.
  */
-public class ArangoMonitorEvent {
+public class ArangoEventImpl implements ArangoEvent{
 
     private long tick;
     private int type;
     private int database;
-    private int cid;
-    private int tid;
+    private String cid;
+    private String tid;
     private String document;
 
     @Override
     public String toString() {
-        return "ArangoMonitorEvent{" +
+        return "ArangoEventImpl{" +
                 "tick=" + tick +
                 ", type=" + type +
                 ", database=" + database +
@@ -24,26 +24,32 @@ public class ArangoMonitorEvent {
                 '}';
     }
 
+    @Override
     public long getTick() {
         return tick;
     }
 
+    @Override
     public int getType() {
         return type;
     }
 
+    @Override
     public int getDatabase() {
         return database;
     }
 
-    public int getCid() {
+    @Override
+    public String getCid() {
         return cid;
     }
 
-    public int getTid() {
+    @Override
+    public String getTid() {
         return tid;
     }
 
+    @Override
     public String getDocument() {
         return document ;
     }

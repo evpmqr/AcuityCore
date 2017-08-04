@@ -1,6 +1,10 @@
 package com.acuity.web.site.events;
 
 import com.acuity.db.arango.monitor.ArangoMonitorStream;
+import com.acuity.db.arango.monitor.events.ArangoEvent;
+import com.acuity.db.arango.monitor.events.ArangoEventImpl;
+import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
+import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.util.DBAccess;
 import com.acuity.web.site.DashboardUI;
 import com.google.common.eventbus.EventBus;
@@ -39,7 +43,7 @@ public class Events implements SubscriberExceptionHandler {
     }
 
     public static void start(){
-        arangoMonitor.addListener(event -> dbEventBus.post(event));
+        arangoMonitor.addListener(new ArangoListener());
         arangoMonitor.start();
     }
 
@@ -50,5 +54,21 @@ public class Events implements SubscriberExceptionHandler {
     @Override
     public final void handleException(final Throwable exception, final SubscriberExceptionContext context) {
         exception.printStackTrace();
+    }
+
+    public static class ArangoListener implements ArangoMonitorStream.ArangoStreamListener{
+
+        @Override
+        public void onEvent(ArangoEventImpl event) {
+            System.out.println("EVENT@123: " + event);
+            if (event.getType() == ArangoEvent.CREATE_OR_UPDATE || event.getType() == ArangoEvent.DELETE){
+                if (BotClientService.getInstance().getCollectionID().equals(event.getCid())){
+                    dbEventBus.post(new BotClientEvent(event));
+                }
+                else {
+                    dbEventBus.post(event);
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.acuity.db.arango.monitor;
 
+import com.acuity.db.arango.monitor.events.ArangoEventImpl;
 import com.acuity.db.util.Json;
 
 import java.io.BufferedReader;
@@ -93,16 +94,16 @@ public class ArangoMonitorStream {
         this.lastTick = lastTick;
 
         for (String changeEntry : response.substring(1, response.length() - 1).split("}\\{")) {
-            ArangoMonitorEvent arangoMonitorEvent = Json.GSON.fromJson("{" + changeEntry  + "}", ArangoMonitorEvent.class);
+            ArangoEventImpl arangoEventImpl = Json.GSON.fromJson("{" + changeEntry  + "}", ArangoEventImpl.class);
             for (String s : changeEntry.split(",(?![^{}]*+})")){
                 if (s.startsWith("\"data\":")){
-                    arangoMonitorEvent.setDocument(s.substring("\"data\":".length()));
+                    arangoEventImpl.setDocument(s.substring("\"data\":".length()));
                     break;
                 }
             }
 
             for (ArangoStreamListener listener : listeners) {
-                listener.onEvent(arangoMonitorEvent);
+                listener.onEvent(arangoEventImpl);
             }
         }
     }
@@ -155,6 +156,6 @@ public class ArangoMonitorStream {
     }
 
     public interface ArangoStreamListener {
-        void onEvent(ArangoMonitorEvent event);
+        void onEvent(ArangoEventImpl event);
     }
 }
