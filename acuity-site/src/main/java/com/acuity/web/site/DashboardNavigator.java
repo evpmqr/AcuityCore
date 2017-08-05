@@ -35,6 +35,8 @@ public class DashboardNavigator extends Navigator {
             addProvider(viewProvider);
         }
 
+
+
         setErrorProvider(new ViewProvider() {
             @Override
             public String getViewName(String s) {

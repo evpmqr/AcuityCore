@@ -42,4 +42,8 @@ public class BotClientService extends DBCollectionService{
         ArangoCursor<BotClient> system = getDB().query(query, Collections.singletonMap("key", key), null, BotClient.class);
         return system.asListRemaining();
     }
+
+    public Optional<BotClient> getByKey(String key) {
+        return Optional.ofNullable(getCollection().getDocument(key, BotClient.class));
+    }
 }

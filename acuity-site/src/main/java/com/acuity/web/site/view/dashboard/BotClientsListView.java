@@ -13,6 +13,7 @@ import com.vaadin.data.provider.DataProvider;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.LocalDateTimeRenderer;
@@ -31,18 +32,29 @@ public class BotClientsListView extends VerticalLayout implements View {
     private Grid<BotClient> grid = new Grid<>();
 
     public BotClientsListView() {
+        setSizeFull();
         botClients = BotClientService.getInstance().getByOwnerKey(acuityAccount.getKey());
+        Events.getDBEventBus().register(this);
+
+        buildActions();
+        buildGrid();
+    }
+
+    private void buildActions(){
+
+    }
+
+    private void buildGrid(){
         MultiSelectionModel<BotClient> selectionModel = (MultiSelectionModel<BotClient>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
         grid.setDataProvider(DataProvider.ofCollection(botClients));
         grid.addColumn(BotClient::getKey).setCaption("Key");
         grid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
         grid.setSizeFull();
+        grid.setColumnReorderingAllowed(true);
+        grid.addItemClickListener(itemClick -> {
+            UI.getCurrent().getNavigator().navigateTo("Client/" + itemClick.getItem().getKey());
+        });
         addComponent(grid);
-        Events.getDBEventBus().register(this);
-
-        for (BotClient botClient : botClients) {
-            MessagePackageService.getInstance().insert(new MessagePackage(MessagePackage.Type.DIRECT).putHeader("destinationKey", botClient.getKey()));
-        }
     }
 
     @Override
