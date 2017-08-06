@@ -57,6 +57,11 @@ public class ArangoEventImpl implements ArangoEvent{
         return document ;
     }
 
+    @Override
+    public String getCName() {
+        return cname;
+    }
+
     public void setDocument(String document) {
         this.document = document;
     }

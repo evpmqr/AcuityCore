@@ -2,6 +2,7 @@ package com.acuity.db.services.impl;
 
 import com.acuity.bcrypt.BCrypt;
 import com.acuity.db.AcuityDB;
+import com.acuity.db.domain.edge.Edge;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.DBCollectionService;
 import com.arangodb.ArangoCursor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 8/1/2017.
  */
-public class AcuityAccountService extends DBCollectionService {
+public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
 
     private static final AcuityAccountService INSTANCE = new AcuityAccountService();
 
@@ -24,7 +25,7 @@ public class AcuityAccountService extends DBCollectionService {
     }
 
     public AcuityAccountService() {
-        super(AcuityDB.DB_NAME, "AcuityAccount");
+        super(AcuityDB.DB_NAME, "AcuityAccount", AcuityAccount.class);
     }
 
     public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws ArangoDBException{

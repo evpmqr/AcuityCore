@@ -6,6 +6,8 @@ import com.acuity.control.server.websockets.WSocket;
 import com.acuity.control.server.websockets.WSocketEvent;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
+import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.botclient.BotClientConfig;
@@ -23,8 +25,8 @@ public class BotClientHandler extends MessageHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(BotClientHandler.class);
 
-    private String botClientKey;
-    private String configKey;
+    private Vertex botClient;
+    private Vertex config;
 
     public BotClientHandler(WSocket wSocket) {
         super(wSocket);
@@ -40,7 +42,7 @@ public class BotClientHandler extends MessageHandler {
     public void onMessageEvent(MessagePackageEvent event){
         if (event.getType() == ArangoEvent.CREATE_OR_UPDATE){
             String destination = event.getMessagePackage().getHeader("destinationKey", null);
-            if (botClientKey.equals(destination)){
+            if (botClient.getKey().equals(destination)){
                 getSocket().send(event.getMessagePackage());
                 MessagePackageService.getInstance().delete(event.getMessagePackage());
             }
@@ -50,8 +52,23 @@ public class BotClientHandler extends MessageHandler {
     @Subscribe
     public void onClose(WSocketEvent.Closed closed){
         Events.getDBEventBus().unregister(this);
-        BotClientService.getInstance().removeClient(botClientKey);
-        BotClientConfigService.getInstance().removeConfig(configKey);
+        BotClientService.getInstance().removeClient(botClient.getKey());
+        BotClientConfigService.getInstance().removeConfig(config.getKey());
+    }
+
+    @Subscribe
+    public void assignmentChange(RSAccountAssignedToEvent event){
+        if (event.getEdge().getTo().equals(botClient.getID())){
+            if (event.getType() == ArangoEvent.DELETE){
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
+            }
+            else {
+
+
+
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
+            }
+        }
     }
 
     @Subscribe
@@ -60,9 +77,9 @@ public class BotClientHandler extends MessageHandler {
         AcuityAccount acuityAccount = getSocket().getSession().getAttribute(AcuityAccount.class);
         if (acuityAccount != null){
             BotClientService.getInstance().registerClient(acuityAccount.getKey()).ifPresent(botClient -> {
-                botClientKey = botClient.getKey();
-                BotClientConfigService.getInstance().registerConfig(acuityAccount.getKey(), botClientKey).ifPresent(botClientConfig -> {
-                    configKey = botClientConfig.getKey();
+                botClient = botClient;
+                BotClientConfigService.getInstance().registerConfig(acuityAccount.getKey(), botClient.getKey()).ifPresent(botClientConfig -> {
+                    config = botClientConfig;
 
                 });
             });

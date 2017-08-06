@@ -1,7 +1,9 @@
 package com.acuity.web.site.view.dashboard;
 
+import com.acuity.db.AcuityDB;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
+import com.acuity.db.domain.edge.Edge;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.botclient.BotClient;
 import com.acuity.db.services.impl.BotClientService;
@@ -26,7 +28,8 @@ public class BotClientView extends VerticalLayout implements View {
     private void build(){
         addComponent(new Label("ClientKey: " + botClient.getKey()));
         addComponent(new Button("Kill Bot", clickEvent -> {
-
+            new Edge();
+            AcuityDB.getDB().db(AcuityDB.DB_NAME).graph("Test").edgeCollection("Owns").insertEdge(new Edge(acuityAccount.getID(), botClient.getID()));
         }));
     }
 

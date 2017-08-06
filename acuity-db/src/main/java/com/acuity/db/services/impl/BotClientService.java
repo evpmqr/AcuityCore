@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
-public class BotClientService extends DBCollectionService{
+public class BotClientService extends DBCollectionService<BotClient> {
 
     private static final BotClientService INSTANCE = new BotClientService();
 
@@ -23,7 +23,7 @@ public class BotClientService extends DBCollectionService{
     }
 
     public BotClientService() {
-        super(AcuityDB.DB_NAME, "BotClient");
+        super(AcuityDB.DB_NAME, "BotClient", BotClient.class);
     }
 
     public Optional<BotClient> registerClient(String ownerID){
@@ -41,9 +41,5 @@ public class BotClientService extends DBCollectionService{
                 "RETURN bot";
         ArangoCursor<BotClient> system = getDB().query(query, Collections.singletonMap("key", key), null, BotClient.class);
         return system.asListRemaining();
-    }
-
-    public Optional<BotClient> getByKey(String key) {
-        return Optional.ofNullable(getCollection().getDocument(key, BotClient.class));
     }
 }

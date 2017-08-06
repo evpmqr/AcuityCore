@@ -20,4 +20,6 @@ public interface ArangoEvent {
 
     String getDocument();
 
+    String getCName();
+
 }

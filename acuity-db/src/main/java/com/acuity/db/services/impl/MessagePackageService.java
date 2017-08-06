@@ -7,7 +7,7 @@ import com.acuity.db.services.DBCollectionService;
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
-public class MessagePackageService extends DBCollectionService {
+public class MessagePackageService extends DBCollectionService<MessagePackage> {
 
     private static final MessagePackageService INSTANCE = new MessagePackageService();
 
@@ -16,7 +16,7 @@ public class MessagePackageService extends DBCollectionService {
     }
 
     public MessagePackageService() {
-        super(AcuityDB.DB_NAME, "MessagePackage");
+        super(AcuityDB.DB_NAME, "MessagePackage", MessagePackage.class);
     }
 
     public void insert(MessagePackage messagePackage){

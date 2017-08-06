@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Created by Zach on 8/5/2017.
  */
-public class BotClientConfigService extends DBCollectionService {
+public class BotClientConfigService extends DBCollectionService<BotClientConfig> {
 
     private static final BotClientConfigService INSTANCE = new BotClientConfigService();
 
@@ -20,7 +20,7 @@ public class BotClientConfigService extends DBCollectionService {
     }
 
     public BotClientConfigService() {
-        super(AcuityDB.DB_NAME, "BotClientConfig");
+        super(AcuityDB.DB_NAME, "BotClientConfig", BotClientConfig.class);
     }
 
     public Optional<BotClientConfig> registerConfig(String acuityKey, String botClientKey){

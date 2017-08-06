@@ -63,5 +63,6 @@ public class MessagePackage extends Vertex {
         int GOOD_LOGIN = 2;
         int BAD_LOGIN = 3;
         int DIRECT = 4;
+        int ACCOUNT_ASSIGNMENT_CHANGE = 5;
     }
 }

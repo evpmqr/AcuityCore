@@ -40,7 +40,7 @@ public interface RSItemType extends RSCacheableNode {
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
 
-	int getResizeX();
+	int getResizeXfemaleModel1();
 
 	int getResizeY();
 
@@ -114,7 +114,7 @@ public interface RSItemType extends RSCacheableNode {
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
 
-	void setResizeX(int var0);
+	void setResizeXfemaleModel1(int var0);
 
 	void setResizeY(int var0);
 

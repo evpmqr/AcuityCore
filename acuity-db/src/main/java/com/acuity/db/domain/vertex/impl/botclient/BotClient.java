@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public class BotClient extends Vertex {
 
-    private String ownerID;
+    private String ownerID; // TODO: 8/6/2017 Rename to key
     private LocalDateTime connectionTime = LocalDateTime.now();
 
     public BotClient(String ownerID) {

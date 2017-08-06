@@ -44,6 +44,11 @@ public class WrappedEvent implements ArangoEvent {
     }
 
     @Override
+    public String getCName() {
+        return arangoEvent.getCName();
+    }
+
+    @Override
     public String toString() {
         return "WrappedEvent{" +
                 "arangoEvent=" + arangoEvent +

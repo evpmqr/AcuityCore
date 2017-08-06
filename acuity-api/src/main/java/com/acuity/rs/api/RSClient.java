@@ -136,7 +136,7 @@ public interface RSClient extends RSGameEngine {
 
 	long getLastClickTime();
 
-	int getLatestSelectedItemIndex();
+	int getLatestSelectedItemIndexpacketIDlatestSelectedItemIndex();
 
 	java.lang.String getLatestSelectedItemName();
 
@@ -195,8 +195,6 @@ public interface RSClient extends RSGameEngine {
 	int getOnCursorCount();
 
 	com.acuity.rs.api.RSPacketBuffer getPacket();
-
-	int getPacketIDlatestSelectedItemIndex();
 
 	java.lang.String getPassword();
 
@@ -470,7 +468,7 @@ public interface RSClient extends RSGameEngine {
 
 	void setLastClickTime(long var0);
 
-	void setLatestSelectedItemIndex(int var0);
+	void setLatestSelectedItemIndexpacketIDlatestSelectedItemIndex(int var0);
 
 	void setLatestSelectedItemName(java.lang.String var0);
 
@@ -535,8 +533,6 @@ public interface RSClient extends RSGameEngine {
 	void setOnCursorCount(int var0);
 
 	void setPacket(com.acuity.rs.api.RSPacketBuffer var0);
-
-	void setPacketIDlatestSelectedItemIndex(int var0);
 
 	void setPassword(java.lang.String var0);
 

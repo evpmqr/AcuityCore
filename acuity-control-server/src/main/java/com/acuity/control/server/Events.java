@@ -5,6 +5,7 @@ import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.ArangoEventImpl;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.db.util.DBAccess;
@@ -49,6 +50,9 @@ public class Events {
                 }
                 else if (BotClientService.getInstance().getCollectionID().equals(event.getCid())){
                     dbEventBus.post(new BotClientEvent(event));
+                }
+                if (event.getCName().equals("AssignedTo")){
+                    dbEventBus.post(new RSAccountAssignedToEvent(event));
                 }
                 else {
                     dbEventBus.post(event);
