@@ -88,9 +88,9 @@ public class Projection {
                 return Optional.empty();
             }
 
-            fineX = fineX * AcuityInstance.getClient().getViewportScale() / fineY + AcuityInstance.getClient().getViewportWidth() / 2;
+   /*         fineX = fineX * AcuityInstance.getClient().getViewportScale() / fineY + AcuityInstance.getClient().getViewportWidth() / 2;
             fineY = elevation * AcuityInstance.getClient().getViewportScale() / fineY + AcuityInstance.getClient().getViewportHeight() / 2;
-
+*/
             return Optional.of(new ScreenLocation(256 + (fineX << 9) / fineY, (angle << 9) / fineY + 167));
         }
         return Optional.empty();

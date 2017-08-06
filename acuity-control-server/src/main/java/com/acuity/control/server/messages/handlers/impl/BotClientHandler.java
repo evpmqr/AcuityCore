@@ -8,6 +8,8 @@ import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.db.domain.vertex.impl.botclient.BotClientConfig;
+import com.acuity.db.services.impl.BotClientConfigService;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.google.common.eventbus.Subscribe;
@@ -22,6 +24,7 @@ public class BotClientHandler extends MessageHandler {
     private static final Logger logger = LoggerFactory.getLogger(BotClientHandler.class);
 
     private String botClientKey;
+    private String configKey;
 
     public BotClientHandler(WSocket wSocket) {
         super(wSocket);
@@ -48,6 +51,7 @@ public class BotClientHandler extends MessageHandler {
     public void onClose(WSocketEvent.Closed closed){
         Events.getDBEventBus().unregister(this);
         BotClientService.getInstance().removeClient(botClientKey);
+        BotClientConfigService.getInstance().removeConfig(configKey);
     }
 
     @Subscribe
@@ -55,7 +59,13 @@ public class BotClientHandler extends MessageHandler {
         logger.debug("Login complete");
         AcuityAccount acuityAccount = getSocket().getSession().getAttribute(AcuityAccount.class);
         if (acuityAccount != null){
-            BotClientService.getInstance().registerClient(acuityAccount.getKey()).ifPresent(botClient -> botClientKey = botClient.getKey());
+            BotClientService.getInstance().registerClient(acuityAccount.getKey()).ifPresent(botClient -> {
+                botClientKey = botClient.getKey();
+                BotClientConfigService.getInstance().registerConfig(acuityAccount.getKey(), botClientKey).ifPresent(botClientConfig -> {
+                    configKey = botClientConfig.getKey();
+
+                });
+            });
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.acuity.db.domain.vertex.impl;
+package com.acuity.db.domain.vertex.impl.botclient;
 
 import com.acuity.db.domain.vertex.Vertex;
 

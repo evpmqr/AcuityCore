@@ -1,7 +1,7 @@
 package com.acuity.web.site.view.dashboard.menu;
 
 import com.acuity.web.site.events.Events;
-import com.acuity.web.site.view.dashboard.DashboardViews;
+import com.acuity.web.site.views.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
@@ -77,9 +77,13 @@ public class Menu extends CustomComponent {
     private Component buildMenuItems() {
         CssLayout menuItemsLayout = new CssLayout();
         menuItemsLayout.addStyleName("valo-menuitems");
-        for (DashboardViews.DashboardView dashboardView : DashboardViews.getViews()) {
-            menuItemsLayout.addComponent(dashboardView.createMenuItem());
+
+        for (View view : View.values()) {
+            if (view.isNavBar()){
+                menuItemsLayout.addComponent(view.createMenuItem());
+            }
         }
+
         return menuItemsLayout;
 
     }

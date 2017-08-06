@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Created by Zachary Herridge on 6/12/2017.
  */
-public class NodeLinkedList<T extends Node> implements Iterable<T> {
+public class NodeLinkedList {
 
     private RSNodeLinkedList rsNodeLinkedList;
 
@@ -26,8 +26,7 @@ public class NodeLinkedList<T extends Node> implements Iterable<T> {
         this.rsNodeLinkedList = Preconditions.checkNotNull(peer);
     }
 
-    @Override
-    public Iterator<T> iterator() {
+    public <T extends Node> Iterator<T> iterator(Class<T> tClass) {
         return new Iterator<T>() {
 
             private Iterator iterator = rsNodeLinkedList.iterator();
@@ -41,7 +40,7 @@ public class NodeLinkedList<T extends Node> implements Iterable<T> {
             @Override
             public T next() {
                 RSNode next = (RSNode) iterator.next();
-                if (next != null) return (T) next.getWrapper();
+                if (next != null && tClass.isAssignableFrom(next.getWrapper().getClass())) return (T) next.getWrapper();
                 return null;
             }
         };

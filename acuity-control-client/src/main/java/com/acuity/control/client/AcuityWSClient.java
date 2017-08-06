@@ -76,6 +76,7 @@ public class AcuityWSClient {
     @Subscribe
     public void onOpen(WClientEvent.Opened opened){
         logger.info("Web socket opened.");
+        send(new MessagePackage(MessagePackage.Type.LOGIN).putBody("username", "zgherridge@gmail.com").putBody("password", "Akaliopdontnerf!)1").putBody("sessionType", 1));
     }
 
     @Subscribe
