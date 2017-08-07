@@ -6,6 +6,8 @@ import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.RSAccountService;
 import com.acuity.web.site.events.Events;
+import com.arangodb.entity.DocumentDeleteEntity;
+import com.arangodb.entity.MultiDocumentEntity;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.icons.VaadinIcons;
@@ -23,9 +25,7 @@ import java.util.List;
 
 public class RSAccountsListView extends VerticalLayout implements View{
 
-
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
-
 
     private List<RSAccount> rsAccounts = new ArrayList<>();
     private Grid<RSAccount> grid = new Grid<>();
@@ -47,7 +47,8 @@ public class RSAccountsListView extends VerticalLayout implements View{
         addRSAccount.setIcon(VaadinIcons.PLUS_CIRCLE);
 
         Button delete = new Button("Delete Selected", clickEvent -> {
-            RSAccountService.getInstance().getCollection().deleteDocuments(rsAccountMultiSelectionModel.getSelectedItems());
+            MultiDocumentEntity<DocumentDeleteEntity<Void>> results = RSAccountService.getInstance().getCollection().deleteDocuments(rsAccountMultiSelectionModel.getSelectedItems());
+            Notification.show("Deleted " + (long) results.getDocuments().size() + " Account(s).");
         });
         delete.setIcon(VaadinIcons.TRASH);
 
@@ -65,7 +66,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
         grid.setSizeFull();
         grid.setColumnReorderingAllowed(true);
         grid.addItemClickListener(itemClick -> {
-            UI.getCurrent().getNavigator().navigateTo("RSAccount/" + itemClick.getItem().getKey());
+            UI.getCurrent().getNavigator().navigateTo("RS-Account/" + itemClick.getItem().getKey());
         });
         addComponent(grid);
     }

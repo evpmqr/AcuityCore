@@ -24,8 +24,9 @@ public class BotClientView extends VerticalLayout implements View {
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
     private BotClient botClient;
 
-
     private void build(){
+        Events.getDBEventBus().register(this);
+
         addComponent(new Label("ClientKey: " + botClient.getKey()));
         addComponent(new Button("Kill Bot", clickEvent -> {
             new Edge();
