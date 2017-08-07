@@ -22,7 +22,10 @@ public class RSAccountView extends VerticalLayout implements View{
 
     public void build(){
         Events.getDBEventBus().register(this);
+
         addComponent(new Label("Email: " + rsAccount.getEmail()));
+
+
     }
 
     @Override

@@ -17,7 +17,7 @@ public class DBCollectionService<T> {
 
     protected final String dbName;
     protected final String dbCollectionName;
-    private Class<T> type;
+    protected Class<T> type;
 
     public DBCollectionService(String dbName, String dbCollectionName, Class<T> type) {
         this.dbName = dbName;
@@ -29,8 +29,8 @@ public class DBCollectionService<T> {
         return Optional.ofNullable(getCollection().getDocument(key, type));
     }
 
-    public T getByID(String id){
-        return getDB().getDocument(id, type);
+    public Optional<T> getByID(String id){
+        return Optional.ofNullable(getDB().getDocument(id, type));
     }
 
     public ArangoDatabase getDB(){
