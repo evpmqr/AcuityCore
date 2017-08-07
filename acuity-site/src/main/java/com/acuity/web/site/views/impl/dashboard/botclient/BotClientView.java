@@ -58,10 +58,15 @@ public class BotClientView extends VerticalLayout implements View {
         assignedAccount.setDataProvider(new ListDataProvider<RSAccount>(byOwner));
         assignedAccount.setItemCaptionGenerator(RSAccount::getEmail);
         if (this.assignedAcocunt != null) assignedAccount.setSelectedItem(this.assignedAcocunt);
-        assignedAccount.addSelectionListener(singleSelectionEvent -> singleSelectionEvent.getFirstSelectedItem().ifPresent(rsAccount -> {
-            AssignedTo assignedTo = new AssignedTo(rsAccount.getID(), botClient.getID());
-            RSAccountAssignmentService.getInstance().insert(assignedTo);
-        }));
+        assignedAccount.addSelectionListener(singleSelectionEvent -> {
+            RSAccount selectedAccount = singleSelectionEvent.getFirstSelectedItem().orElse(null);
+            if (selectedAccount != null){
+                RSAccountAssignmentService.getInstance().insert(new AssignedTo(selectedAccount.getID(), botClient.getID()));
+            }
+            else {
+                RSAccountAssignmentService.getInstance().removeByToID(botClient.getID());
+            }
+        });
         addComponent(assignedAccount);
 
 

@@ -55,9 +55,7 @@ public class BotClientHandler extends MessageHandler {
     @Subscribe
     public void onClose(WSocketEvent.Closed closed){
         Events.getDBEventBus().unregister(this);
-
-        if (botClient != null) BotClientService.getInstance().removeClient(botClient.getKey());
-        if (config != null) BotClientConfigService.getInstance().removeConfig(config.getKey());
+        BotClientService.getInstance().removeClient(botClient.getKey());
     }
 
     @Subscribe

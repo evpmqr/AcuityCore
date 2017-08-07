@@ -32,7 +32,7 @@ public class BotClientsListView extends VerticalLayout implements View {
 
     public BotClientsListView() {
         setSizeFull();
-        clients = BotClientService.getInstance().getByOwner(acuityAccount.getID());
+        clients = BotClientService.getInstance().getJoinedByOwnerID(acuityAccount.getID());
         Events.getDBEventBus().register(this);
 
         buildActions();
@@ -47,6 +47,7 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.setDataProvider(DataProvider.ofCollection(clients));
         clientGrid.addColumn(BotClient::getKey).setCaption("Key");
         clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
+        clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.addItemClickListener(itemClick -> {
@@ -68,7 +69,7 @@ public class BotClientsListView extends VerticalLayout implements View {
         }
         else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
             clients.remove(event.getBotClient());
-            clients.add(event.getBotClient());
+            BotClientService.getInstance().getJoinedByID(event.getBotClient().getID()).ifPresent(clients::add);
         }
         clientGrid.getDataProvider().refreshAll();
     }
