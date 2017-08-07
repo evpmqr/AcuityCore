@@ -55,7 +55,7 @@ public class DashboardUI extends UI {
     @Subscribe
     public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
         AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).ifPresent(acuityAccount -> {
-            VaadinSession.getCurrent().setAttribute(AcuityAccount.class, acuityAccount);
+            getSession().setAttribute(AcuityAccount.class, acuityAccount);
             Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!");
         });
         updateContent();

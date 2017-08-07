@@ -9,6 +9,7 @@ import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
@@ -28,11 +29,15 @@ public class BotClientView extends VerticalLayout implements View {
         Events.getDBEventBus().register(this);
 
         addComponent(new Label("ClientKey: " + botClient.getKey()));
-        addComponent(new Button("Kill Bot", clickEvent -> {
+
+        Button killBot = new Button("Kill Bot", clickEvent -> {
             MessagePackageService.getInstance().insert(new MessagePackage(MessagePackage.Type.DIRECT)
                     .putHeader("destinationKey", botClient.getKey())
                     .putBody("command", "kill-bot"));
-        }));
+        });
+        killBot.setIcon(VaadinIcons.CLOSE_CIRCLE_O);
+        addComponent(killBot);
+
     }
 
     @Override
@@ -57,7 +62,7 @@ public class BotClientView extends VerticalLayout implements View {
     public void onBotClientEvent(BotClientEvent event) {
         if (event.getBotClient().getKey().equals(botClient.getKey())){
             if (event.getType() == ArangoEvent.DELETE) {
-
+                getUI().access(() -> getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.CLIENTS.getName()));
             }
             else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
 
