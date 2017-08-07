@@ -90,8 +90,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getEngineCycle();
 
-	java.util.concurrent.ScheduledExecutorService getExecutor();
-
 	com.acuity.rs.api.RSFont getFontp12full();
 
 	int getFriendCount();
@@ -270,7 +268,7 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3);
 
-	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4);
+	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4, int var5, int var6);
 
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
@@ -282,9 +280,9 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSTypeProperty invokeGetTypeProperty(int var0);
 
-	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
+	int invokeGetVarpbit(int var0);
 
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
 
 	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
 
@@ -421,8 +419,6 @@ public interface RSClient extends RSGameEngine {
 	void setDynamicRegion(boolean var0);
 
 	void setEngineCycle(int var0);
-
-	void setExecutor(java.util.concurrent.ScheduledExecutorService var0);
 
 	void setFontp12full(com.acuity.rs.api.RSFont var0);
 
