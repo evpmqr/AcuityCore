@@ -9,7 +9,6 @@ public class Vertex {
     protected String _id;
     protected String _rev;
 
-
     public String getKey() {
         return _key;
     }
@@ -21,6 +20,17 @@ public class Vertex {
     public String getRev() {
         return _rev;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Vertex)) return false;
+
+        Vertex vertex = (Vertex) object;
+
+        return _key != null ? _key.equals(vertex._key) : vertex._key == null;
+    }
+
 
     @Override
     public String toString() {

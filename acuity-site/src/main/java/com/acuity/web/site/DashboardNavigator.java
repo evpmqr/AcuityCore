@@ -2,10 +2,9 @@ package com.acuity.web.site;
 
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
-import com.acuity.web.site.view.ErrorView;
-import com.acuity.web.site.view.dashboard.DashboardViews;
+import com.acuity.web.site.views.View;
+import com.acuity.web.site.views.impl.ErrorView;
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.UI;
@@ -29,9 +28,8 @@ public class DashboardNavigator extends Navigator {
     }
 
     private void initViewProviders() {
-
-        for (DashboardViews.DashboardView dashboardView : DashboardViews.getViews()) {
-            ViewProvider viewProvider = new ClassBasedViewProvider(dashboardView.getName(), dashboardView.getViewClass());
+        for (View view : View.values()) {
+            ViewProvider viewProvider = new ClassBasedViewProvider(view.getName(), view.getViewClass());
             addProvider(viewProvider);
         }
 
@@ -42,7 +40,7 @@ public class DashboardNavigator extends Navigator {
             }
 
             @Override
-            public View getView(String s) {
+            public com.vaadin.navigator.View getView(String s) {
                 return new ErrorView();
             }
         });

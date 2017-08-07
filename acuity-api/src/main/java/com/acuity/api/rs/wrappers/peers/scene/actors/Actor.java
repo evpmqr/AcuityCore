@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -64,7 +65,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getAnimation();
     }
 
-    public Optional<NodeLinkedList<HealthBar>> getHealthBars() {
+    public Optional<NodeLinkedList> getHealthBars() {
         return Optional.ofNullable(rsActor.getHealthBars()).map(RSNodeLinkedList::getWrapper);
     }
 
@@ -114,21 +115,27 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
 
     public double getHealthPercent(){
-        NodeLinkedList<HealthBar> healthBars = rsActor.getHealthBars().getWrapper();
+
+        RSNodeLinkedList healthBars1 = rsActor.getHealthBars();
 
         int highestCycle = -1;
         int width = -1;
-        for (HealthBar healthBar : healthBars) {
-            NodeLinkedList<HitUpdate> hitUpdates = healthBar.getHitUpdates().orElse(null);
-            if (hitUpdates != null){
-                for (HitUpdate hitUpdate : hitUpdates) {
-                    if (highestCycle <= hitUpdate.getStartCycle()){
-                        highestCycle = hitUpdate.getStartCycle();
-                        width = hitUpdate.getCurrentWidth();
+
+        for (Object healthBar : healthBars1) {
+            if (healthBar != null && healthBar instanceof RSHealthBar){
+                RSNodeLinkedList hitsplats = ((RSHealthBar) healthBar).getHitsplats();
+                for (Object hitsplat : hitsplats) {
+                    if (hitsplat != null && hitsplat instanceof RSHitUpdate){
+                        HitUpdate hitUpdate = ((RSHitUpdate) hitsplat).getWrapper();
+                        if (highestCycle <= hitUpdate.getStartCycle()){
+                            highestCycle = hitUpdate.getStartCycle();
+                            width = hitUpdate.getCurrentWidth();
+                        }
                     }
                 }
             }
         }
+
 
         if (width == -1) return -1;
         return Math.max(Math.min(width * 1000D / 255D, 100), 0);

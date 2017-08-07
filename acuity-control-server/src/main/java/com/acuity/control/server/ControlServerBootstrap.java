@@ -12,6 +12,7 @@ public class ControlServerBootstrap {
     public static void main(String[] args) {
         try {
             AcuityDB.init();
+            Events.start();
             AcuityWSServer acuityWSServer = new AcuityWSServer(8015);
             acuityWSServer.start();
         } catch (UnknownHostException e) {

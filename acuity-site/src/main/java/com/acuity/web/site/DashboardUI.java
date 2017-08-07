@@ -1,13 +1,14 @@
 package com.acuity.web.site;
 
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
-import com.acuity.db.services.AcuityAccountService;
+import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
-import com.acuity.web.site.view.LoginView;
-import com.acuity.web.site.view.MainView;
+import com.acuity.web.site.views.impl.LoginView;
+import com.acuity.web.site.views.impl.MainView;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Push;
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
@@ -24,6 +25,7 @@ import java.util.Locale;
  * Created by Zach on 7/31/2017.
  */
 @Push
+@Theme("dashboard")
 @Title("Acuity Botting")
 public class DashboardUI extends UI {
 
@@ -53,7 +55,7 @@ public class DashboardUI extends UI {
     @Subscribe
     public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
         AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).ifPresent(acuityAccount -> {
-            VaadinSession.getCurrent().setAttribute(AcuityAccount.class, acuityAccount);
+            getSession().setAttribute(AcuityAccount.class, acuityAccount);
             Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!");
         });
         updateContent();
