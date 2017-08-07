@@ -4,7 +4,7 @@ import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
-import com.acuity.db.domain.vertex.impl.botclient.BotClient;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;

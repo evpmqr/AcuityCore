@@ -3,7 +3,7 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.edge.impl.AssignedTo;
 import com.acuity.db.domain.vertex.impl.RSAccount;
-import com.acuity.db.domain.vertex.impl.botclient.BotClient;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.DBEdgeCollectionService;
 
 /**

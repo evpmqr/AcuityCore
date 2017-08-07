@@ -1,0 +1,114 @@
+package com.acuity.db.domain.vertex.impl.scripts;
+
+import com.acuity.db.domain.vertex.Vertex;
+import com.acuity.db.domain.vertex.impl.AcuityAccount;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+
+/**
+ * Created by Zachary Herridge on 8/7/2017.
+ */
+public class Script extends Vertex {
+
+    private String ownerID;
+    private String title;
+    private String category;
+    private String desc;
+    private LocalDateTime creationTimeStamp = LocalDateTime.now();
+
+    private int accessLevel = Access.PUBLIC.getCode();
+
+    private AcuityAccount author;
+
+    private HashSet<String> localPaths = new HashSet<>();
+
+    public Script(String ownerID, String title, String category, String desc, int accessLevel) {
+        this.ownerID = ownerID;
+        this.title = title;
+        this.category = category;
+        this.desc = desc;
+        this.accessLevel = accessLevel;
+    }
+
+    public Script() {
+    }
+
+    public LocalDateTime getCreationTimeStamp() {
+        return creationTimeStamp;
+    }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    public AcuityAccount getAuthor() {
+        return author;
+    }
+
+    public HashSet<String> getLocalPaths() {
+        return localPaths;
+    }
+
+    public enum  Access {
+        PUBLIC(1, "Public"),
+        PRIVATE(2, "Private"),
+        REMOVED_BY_OWNER(3, "Removed"),
+        REMOVED_BY_ADMIN(4, "Removed");
+
+        private int code;
+        private String displayName;
+
+        Access(int code, String displayName) {
+            this.code = code;
+            this.displayName = displayName;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public static Access getByCode(int code){
+            for (Access access : values()) {
+                if (access.getCode() == code) return access;
+            }
+            return null;
+        }
+    }
+}

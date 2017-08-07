@@ -1,7 +1,7 @@
 package com.acuity.db.services.impl;
 
 import com.acuity.db.AcuityDB;
-import com.acuity.db.domain.vertex.impl.botclient.BotClient;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.DBCollectionService;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;

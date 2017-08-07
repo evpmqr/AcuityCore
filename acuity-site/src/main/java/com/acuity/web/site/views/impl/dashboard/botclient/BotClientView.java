@@ -6,7 +6,7 @@ import com.acuity.db.domain.edge.impl.AssignedTo;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
-import com.acuity.db.domain.vertex.impl.botclient.BotClient;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.db.services.impl.RSAccountAssignmentService;

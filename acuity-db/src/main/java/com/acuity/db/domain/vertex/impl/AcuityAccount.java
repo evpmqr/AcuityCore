@@ -10,6 +10,7 @@ public class AcuityAccount extends Vertex {
     private String email;
     private String displayName;
     private String passwordHash;
+    private int rank;
 
     public AcuityAccount() {
     }
@@ -32,6 +33,10 @@ public class AcuityAccount extends Vertex {
         return passwordHash;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
     @Override
     public String toString() {
         return "AcuityAccount{" +
@@ -40,5 +45,10 @@ public class AcuityAccount extends Vertex {
                 ", displayName='" + displayName + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 '}';
+    }
+
+    public interface Rank {
+        int USER = 0;
+        int ADMIN = 1001;
     }
 }

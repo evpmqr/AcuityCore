@@ -1,4 +1,4 @@
-package com.acuity.db.domain.vertex.impl.botclient;
+package com.acuity.db.domain.vertex.impl.bot_clients;
 
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.RSAccount;

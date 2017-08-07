@@ -1,0 +1,41 @@
+package com.acuity.db.services.impl;
+
+import com.acuity.db.AcuityDB;
+import com.acuity.db.domain.vertex.impl.AcuityAccount;
+import com.acuity.db.domain.vertex.impl.scripts.Script;
+import com.acuity.db.services.DBCollectionService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Zachary Herridge on 8/7/2017.
+ */
+public class ScriptService extends DBCollectionService<Script> {
+
+    private static final ScriptService INSTANCE = new ScriptService();
+
+    public static ScriptService getInstance() {
+        return INSTANCE;
+    }
+
+    public ScriptService() {
+        super(AcuityDB.DB_NAME, "Script", Script.class);
+    }
+
+    public List<Script> getByAccess(String acuityID, int accessLevel, int rank) {
+        String query = "for script in Script\n" +
+                "filter script.ownerID == @ownerID || script.accessLevel == @accessLevel || @rankAccess\n" +
+                "return merge(script, {\n" +
+                "    \"author\" : document(script.ownerID)\n" +
+                "})\n";
+
+
+        Map<String, Object> args = new HashMap<>();
+        args.put("ownerID", acuityID);
+        args.put("accessLevel", accessLevel);
+        args.put("rankAccess", rank == AcuityAccount.Rank.ADMIN);
+        return getDB().query(query, args, null, Script.class).asListRemaining();
+    }
+}

@@ -2,7 +2,7 @@ package com.acuity.db.arango.monitor.events.wrapped.impl;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.WrappedEvent;
-import com.acuity.db.domain.vertex.impl.botclient.BotClient;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.util.Json;
 
 /**
