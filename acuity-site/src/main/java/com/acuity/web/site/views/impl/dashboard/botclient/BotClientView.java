@@ -61,7 +61,7 @@ public class BotClientView extends VerticalLayout implements View {
         assignedAccount.addSelectionListener(singleSelectionEvent -> {
             RSAccount selectedAccount = singleSelectionEvent.getFirstSelectedItem().orElse(null);
             if (selectedAccount != null){
-                RSAccountAssignmentService.getInstance().insert(new AssignedTo(selectedAccount.getID(), botClient.getID()));
+                RSAccountAssignmentService.getInstance().insert(new AssignedTo(acuityAccount.getID(), selectedAccount.getID(), botClient.getID()));
             }
             else {
                 RSAccountAssignmentService.getInstance().removeByToID(botClient.getID());

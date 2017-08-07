@@ -51,7 +51,7 @@ public class Events {
                 else if (BotClientService.getInstance().getCollectionID().equals(event.getCid())){
                     dbEventBus.post(new BotClientEvent(event));
                 }
-                if (event.getCName().equals("AssignedTo")){
+                else if (event.getCName().equals("AssignedTo")){
                     dbEventBus.post(new RSAccountAssignedToEvent(event));
                 }
                 else {

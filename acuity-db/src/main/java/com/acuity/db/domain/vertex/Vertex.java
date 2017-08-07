@@ -9,7 +9,6 @@ public class Vertex {
     protected String _id;
     protected String _rev;
 
-
     public String getKey() {
         return _key;
     }

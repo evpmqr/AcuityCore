@@ -9,14 +9,20 @@ import java.time.LocalDateTime;
  */
 public class AssignedTo extends Edge {
 
+    private String ownerID;
     private LocalDateTime assignedTimeStamp;
 
-    public AssignedTo(String rsAccountID, String botClientID) {
+    public AssignedTo(String ownerID, String rsAccountID, String botClientID) {
         super(rsAccountID, botClientID);
+        this.ownerID = ownerID;
         this.assignedTimeStamp = LocalDateTime.now();
     }
 
     public AssignedTo() {
+    }
+
+    public String getOwnerID() {
+        return ownerID;
     }
 
     public LocalDateTime getAssignedTimeStamp() {

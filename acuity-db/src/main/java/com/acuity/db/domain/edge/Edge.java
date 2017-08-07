@@ -1,11 +1,12 @@
 package com.acuity.db.domain.edge;
 
+import com.acuity.db.domain.vertex.Vertex;
+
 /**
  * Created by Zach on 8/6/2017.
  */
-public class Edge {
+public class Edge extends Vertex{
 
-    protected String _key;
     protected String _from;
     protected String _to;
 
@@ -23,9 +24,5 @@ public class Edge {
 
     public String getTo(){
         return _to;
-    }
-
-    public String getKey(){
-        return _key;
     }
 }
