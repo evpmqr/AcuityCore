@@ -4,6 +4,7 @@ import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;
 import com.google.common.eventbus.Subscribe;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 
@@ -16,10 +17,11 @@ public class MenuItem extends Button {
 
     private View view;
 
-    public MenuItem(View view) {
+    public MenuItem(View view, VaadinIcons icon) {
         this.view = view;
         setPrimaryStyleName("valo-menu-item");
         setCaption(view.getName());
+        setIcon(icon);
         Events.register(this);
         addClickListener(clickEvent ->  {
             UI.getCurrent().getNavigator().navigateTo(view.getName());

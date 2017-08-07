@@ -8,7 +8,6 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.components.grid.MultiSelectionModel;
 
 import java.util.List;
 
@@ -20,7 +19,6 @@ public class ScriptsListView extends VerticalLayout implements View {
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
 
     private Grid<Script> grid = new Grid<>();
-    private MultiSelectionModel<Script> scriptSelectionModel = (MultiSelectionModel<Script>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
 
     public ScriptsListView() {
         List<Script> scripts = ScriptService.getInstance().getByAccess(acuityAccount.getID(), Script.Access.PUBLIC.getCode(), acuityAccount.getRank());
@@ -35,6 +33,7 @@ public class ScriptsListView extends VerticalLayout implements View {
     }
 
     private void buildGrid(){
+        grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.addColumn(Script::getTitle).setCaption("Title");
         grid.addColumn(script -> script.getAuthor().getDisplayName()).setCaption("Author");
         grid.addColumn(Script::getCategory).setCaption("Category");

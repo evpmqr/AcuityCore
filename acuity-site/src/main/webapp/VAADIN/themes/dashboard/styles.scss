@@ -1,6 +1,8 @@
+@import "variables";
 @import "dashboard";
+@import "../valo/valo";
 
 .dashboard {
-  // Output the actual theme selectors
   @include dashboard;
+  @include valo;
 }
