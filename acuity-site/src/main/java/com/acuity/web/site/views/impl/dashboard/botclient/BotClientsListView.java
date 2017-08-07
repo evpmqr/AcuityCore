@@ -65,10 +65,18 @@ public class BotClientsListView extends VerticalLayout implements View {
 
     @Subscribe
     public void onAssignmentUpdate(RSAccountAssignedToEvent event){
-        String clientKey = event.getEdge().getKey();
-        if (clientKey != null){
-            String clientID = BotClientService.getInstance().getCollectionName() + "/" + clientKey;
+        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
+
+        boolean update = false;
+        if (event.getType() == ArangoEvent.DELETE){
+            update = clients.removeIf(botClient -> botClient.getID().equals(clientID));
+        }
+        else if (event.getEdge().getOwnerID().equals(acuityAccount.getID())){
             clients.removeIf(botClient -> botClient.getID().equals(clientID));
+            update= true;
+        }
+
+        if (update) {
             BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
             clientGrid.getDataProvider().refreshAll();
         }
