@@ -26,12 +26,13 @@ public class BotClientsListView extends VerticalLayout implements View {
 
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
 
-    private List<BotClient> botClients = new ArrayList<>();
-    private Grid<BotClient> grid = new Grid<>();
+    private List<BotClient> clients = new ArrayList<>();
+    private Grid<BotClient> clientGrid = new Grid<>();
+    private MultiSelectionModel<BotClient> clientSelectionModel = (MultiSelectionModel<BotClient>) clientGrid.setSelectionMode(Grid.SelectionMode.MULTI);
 
     public BotClientsListView() {
         setSizeFull();
-        botClients = BotClientService.getInstance().getByOwner(acuityAccount.getID());
+        clients = BotClientService.getInstance().getByOwner(acuityAccount.getID());
         Events.getDBEventBus().register(this);
 
         buildActions();
@@ -43,16 +44,15 @@ public class BotClientsListView extends VerticalLayout implements View {
     }
 
     private void buildGrid(){
-        MultiSelectionModel<BotClient> selectionModel = (MultiSelectionModel<BotClient>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
-        grid.setDataProvider(DataProvider.ofCollection(botClients));
-        grid.addColumn(BotClient::getKey).setCaption("Key");
-        grid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
-        grid.setSizeFull();
-        grid.setColumnReorderingAllowed(true);
-        grid.addItemClickListener(itemClick -> {
+        clientGrid.setDataProvider(DataProvider.ofCollection(clients));
+        clientGrid.addColumn(BotClient::getKey).setCaption("Key");
+        clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
+        clientGrid.setSizeFull();
+        clientGrid.setColumnReorderingAllowed(true);
+        clientGrid.addItemClickListener(itemClick -> {
             UI.getCurrent().getNavigator().navigateTo("Client/" + itemClick.getItem().getKey());
         });
-        addComponent(grid);
+        addComponent(clientGrid);
     }
 
     @Override
@@ -64,12 +64,12 @@ public class BotClientsListView extends VerticalLayout implements View {
     @Subscribe
     public void onBotClientEvent(BotClientEvent event) {
         if (event.getType() == ArangoEvent.DELETE) {
-            botClients.remove(event.getBotClient());
+            clients.remove(event.getBotClient());
         }
         else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
-            botClients.remove(event.getBotClient());
-            botClients.add(event.getBotClient());
+            clients.remove(event.getBotClient());
+            clients.add(event.getBotClient());
         }
-        grid.getDataProvider().refreshAll();
+        clientGrid.getDataProvider().refreshAll();
     }
 }

@@ -1,12 +1,12 @@
 package com.acuity.web.site.views.impl.dashboard.botclient;
 
-import com.acuity.db.AcuityDB;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
-import com.acuity.db.domain.edge.Edge;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
+import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.botclient.BotClient;
 import com.acuity.db.services.impl.BotClientService;
+import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.navigator.View;
@@ -29,8 +29,9 @@ public class BotClientView extends VerticalLayout implements View {
 
         addComponent(new Label("ClientKey: " + botClient.getKey()));
         addComponent(new Button("Kill Bot", clickEvent -> {
-            new Edge();
-            AcuityDB.getDB().db(AcuityDB.DB_NAME).graph("Test").edgeCollection("Owns").insertEdge(new Edge(acuityAccount.getID(), botClient.getID()));
+            MessagePackageService.getInstance().insert(new MessagePackage(MessagePackage.Type.DIRECT)
+                    .putHeader("destinationKey", botClient.getKey())
+                    .putBody("command", "kill-bot"));
         }));
     }
 

@@ -20,7 +20,6 @@ import java.util.concurrent.Executors;
 public class AcuityWSClient {
 
     private static final Logger logger = LoggerFactory.getLogger(AcuityWSClient.class);
-
     private static final AcuityWSClient INSTANCE = new AcuityWSClient();
 
     public static AcuityWSClient getInstance() {
@@ -29,6 +28,7 @@ public class AcuityWSClient {
 
     private WClient wClient;
 
+    private EventBus eventBus = new EventBus();
     private Executor executor = Executors.newSingleThreadExecutor();
     private boolean reconnect = true;
     private long reconnectDelay = 3000;
@@ -37,7 +37,7 @@ public class AcuityWSClient {
     public void start(String host) throws URISyntaxException {
         this.lastHost = host;
         wClient = new WClient(this.lastHost, new Draft_6455());
-        getEventBus().register(this);
+        wClient.getEventBus().register(this);
         wClient.connect();
     }
 
@@ -66,7 +66,7 @@ public class AcuityWSClient {
     }
 
     public EventBus getEventBus(){
-        return wClient.getEventBus();
+        return eventBus;
     }
 
     public boolean isConnected(){
@@ -74,9 +74,15 @@ public class AcuityWSClient {
     }
 
     @Subscribe
+    public void onMessage(MessagePackage messagePackage){
+        logger.debug("onMessage: {}.", messagePackage);
+        if (messagePackage != null) eventBus.post(messagePackage);
+    }
+
+    @Subscribe
     public void onOpen(WClientEvent.Opened opened){
         logger.info("Web socket opened.");
-        send(new MessagePackage(MessagePackage.Type.LOGIN).putBody("username", "zgherridge@gmail.com").putBody("password", "Akaliopdontnerf!)1").putBody("sessionType", 1));
+        eventBus.post(opened);
     }
 
     @Subscribe
@@ -85,6 +91,7 @@ public class AcuityWSClient {
         if (reconnect){
             executor.execute(new Recconect());
         }
+        eventBus.post(closed);
     }
 
     private class Recconect implements Runnable{
