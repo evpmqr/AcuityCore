@@ -1,7 +1,7 @@
-package com.acuity.web.site.view;
+package com.acuity.web.site.views.impl;
 
 import com.acuity.web.site.DashboardNavigator;
-import com.acuity.web.site.view.dashboard.menu.Menu;
+import com.acuity.web.site.views.impl.dashboard.menu.Menu;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;

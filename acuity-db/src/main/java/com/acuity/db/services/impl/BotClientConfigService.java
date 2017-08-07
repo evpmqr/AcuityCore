@@ -23,8 +23,8 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
         super(AcuityDB.DB_NAME, "BotClientConfig", BotClientConfig.class);
     }
 
-    public Optional<BotClientConfig> registerConfig(String acuityKey, String botClientKey){
-        BotClientConfig botClientConfig = new BotClientConfig(acuityKey, botClientKey);
+    public Optional<BotClientConfig> registerConfig(String acuityID, String botClientKey){
+        BotClientConfig botClientConfig = new BotClientConfig(acuityID, botClientKey);
         DocumentCreateEntity<BotClientConfig> entity = getCollection().insertDocument(botClientConfig, new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(entity.getNew());
     }

@@ -1,4 +1,4 @@
-package com.acuity.web.site.view.dashboard;
+package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.AcuityDB;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
@@ -36,7 +36,7 @@ public class BotClientView extends VerticalLayout implements View {
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
         BotClientService.getInstance().getByKey(event.getParameters()).ifPresent(result -> {
-            if (result.getOwnerID().equals(acuityAccount.getKey())){
+            if (result.getOwnerID().equals(acuityAccount.getID())){
                 botClient = result;
                 Events.getDBEventBus().register(this);
             }
@@ -57,7 +57,7 @@ public class BotClientView extends VerticalLayout implements View {
             if (event.getType() == ArangoEvent.DELETE) {
 
             }
-            else if (event.getBotClient().getOwnerID().equals(acuityAccount.getKey())) {
+            else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
 
             }
         }

@@ -10,13 +10,14 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
-import com.acuity.db.domain.vertex.impl.botclient.BotClientConfig;
 import com.acuity.db.services.impl.BotClientConfigService;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.UUID;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.
@@ -40,6 +41,8 @@ public class BotClientHandler extends MessageHandler {
 
     @Subscribe
     public void onMessageEvent(MessagePackageEvent event){
+        if (botClient == null) return;
+
         if (event.getType() == ArangoEvent.CREATE_OR_UPDATE){
             String destination = event.getMessagePackage().getHeader("destinationKey", null);
             if (botClient.getKey().equals(destination)){
@@ -52,20 +55,20 @@ public class BotClientHandler extends MessageHandler {
     @Subscribe
     public void onClose(WSocketEvent.Closed closed){
         Events.getDBEventBus().unregister(this);
-        BotClientService.getInstance().removeClient(botClient.getKey());
-        BotClientConfigService.getInstance().removeConfig(config.getKey());
+
+        if (botClient != null) BotClientService.getInstance().removeClient(botClient.getKey());
+        if (config != null) BotClientConfigService.getInstance().removeConfig(config.getKey());
     }
 
     @Subscribe
     public void assignmentChange(RSAccountAssignedToEvent event){
+        if (botClient == null) return;
+
         if (event.getEdge().getTo().equals(botClient.getID())){
             if (event.getType() == ArangoEvent.DELETE){
                 getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
             }
             else {
-
-
-
                 getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
             }
         }
@@ -76,11 +79,11 @@ public class BotClientHandler extends MessageHandler {
         logger.debug("Login complete");
         AcuityAccount acuityAccount = getSocket().getSession().getAttribute(AcuityAccount.class);
         if (acuityAccount != null){
-            BotClientService.getInstance().registerClient(acuityAccount.getKey()).ifPresent(botClient -> {
-                botClient = botClient;
-                BotClientConfigService.getInstance().registerConfig(acuityAccount.getKey(), botClient.getKey()).ifPresent(botClientConfig -> {
-                    config = botClientConfig;
 
+            BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey()).ifPresent(botClient -> {
+                this.botClient = botClient;
+                BotClientConfigService.getInstance().registerConfig(acuityAccount.getID(), botClient.getKey()).ifPresent(botClientConfig -> {
+                    this.config = botClientConfig;
                 });
             });
         }

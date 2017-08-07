@@ -1,15 +1,15 @@
 package com.acuity.web.site.views;
 
-import com.acuity.web.site.view.dashboard.AccountsView;
-import com.acuity.web.site.view.dashboard.BotClientView;
-import com.acuity.web.site.view.dashboard.BotClientsListView;
-import com.acuity.web.site.view.dashboard.menu.MenuItem;
+import com.acuity.web.site.views.impl.dashboard.botclient.BotClientView;
+import com.acuity.web.site.views.impl.dashboard.botclient.BotClientsListView;
+import com.acuity.web.site.views.impl.dashboard.menu.MenuItem;
+import com.acuity.web.site.views.impl.dashboard.rs.account.RSAccountsListView;
 
 /**
  * Created by Zach on 8/5/2017.
  */
 public enum View {
-    ACCOUNTS(AccountsView.class, "Accounts", true),
+    ACCOUNTS(RSAccountsListView.class, "Accounts", true),
     CLIENTS(BotClientsListView.class, "Clients", true),
     CLIENT(BotClientView.class, "Client", false)
     ;

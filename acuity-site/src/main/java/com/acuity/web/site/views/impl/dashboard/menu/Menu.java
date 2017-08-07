@@ -1,4 +1,4 @@
-package com.acuity.web.site.view.dashboard.menu;
+package com.acuity.web.site.views.impl.dashboard.menu;
 
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;

@@ -2,8 +2,8 @@ package com.acuity.web.site;
 
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
-import com.acuity.web.site.view.ErrorView;
 import com.acuity.web.site.views.View;
+import com.acuity.web.site.views.impl.ErrorView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.ComponentContainer;

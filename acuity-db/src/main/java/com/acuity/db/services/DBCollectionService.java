@@ -2,8 +2,12 @@ package com.acuity.db.services;
 
 import com.acuity.db.AcuityDB;
 import com.arangodb.ArangoCollection;
+import com.arangodb.ArangoCursor;
 import com.arangodb.ArangoDatabase;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -39,5 +43,25 @@ public class DBCollectionService<T> {
 
     public String getCollectionID(){
         return getCollection().getInfo().getId();
+    }
+
+    public String getCollectionName() {
+        return getCollection().getInfo().getName();
+    }
+
+    public List<T> getByOwner(String ownerID) {
+        String query = "FOR entity IN @@collection " +
+                "FILTER entity.ownerID == @ownerID " +
+                "RETURN entity";
+        Map<String, Object> args = new HashMap<>();
+        args.put("ownerID", ownerID);
+        args.put("@collection", dbCollectionName);
+        ArangoCursor<T> system = getDB().query(query, args, null, type);
+        return system.asListRemaining();
+    }
+
+    public void insert(T entity) {
+        if (entity == null) return;
+        getCollection().insertDocument(entity);
     }
 }

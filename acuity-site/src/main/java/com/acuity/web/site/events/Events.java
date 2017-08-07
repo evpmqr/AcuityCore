@@ -4,6 +4,7 @@ import com.acuity.db.arango.monitor.ArangoMonitorStream;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.ArangoEventImpl;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.util.DBAccess;
 import com.acuity.web.site.DashboardUI;
@@ -63,6 +64,9 @@ public class Events implements SubscriberExceptionHandler {
             if (event.getType() == ArangoEvent.CREATE_OR_UPDATE || event.getType() == ArangoEvent.DELETE){
                 if (BotClientService.getInstance().getCollectionID().equals(event.getCid())){
                     dbEventBus.post(new BotClientEvent(event));
+                }
+                else if (event.getCName().equals("RSAccount")){
+                    dbEventBus.post(new RSAccountEvent(event));
                 }
                 else {
                     dbEventBus.post(event);

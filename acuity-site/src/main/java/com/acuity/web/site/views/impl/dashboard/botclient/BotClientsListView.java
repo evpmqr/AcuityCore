@@ -1,4 +1,4 @@
-package com.acuity.web.site.view.dashboard;
+package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
@@ -25,13 +25,13 @@ import java.util.List;
 public class BotClientsListView extends VerticalLayout implements View {
 
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
-    private List<BotClient> botClients = new ArrayList<>();
 
+    private List<BotClient> botClients = new ArrayList<>();
     private Grid<BotClient> grid = new Grid<>();
 
     public BotClientsListView() {
         setSizeFull();
-        botClients = BotClientService.getInstance().getByOwnerKey(acuityAccount.getKey());
+        botClients = BotClientService.getInstance().getByOwner(acuityAccount.getID());
         Events.getDBEventBus().register(this);
 
         buildActions();
@@ -66,7 +66,7 @@ public class BotClientsListView extends VerticalLayout implements View {
         if (event.getType() == ArangoEvent.DELETE) {
             botClients.remove(event.getBotClient());
         }
-        else if (event.getBotClient().getOwnerID().equals(acuityAccount.getKey())) {
+        else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
             botClients.remove(event.getBotClient());
             botClients.add(event.getBotClient());
         }

@@ -7,17 +7,23 @@ import com.acuity.db.domain.vertex.Vertex;
  */
 public class RSAccount extends Vertex {
 
+    private String ownerID;
     private String email;
     private String ign;
     private String password;
 
-    public RSAccount(String email, String ign, String password) {
+    public RSAccount(String ownerID, String email, String ign, String password) {
+        this.ownerID = ownerID;
         this.email = email;
         this.ign = ign;
         this.password = password;
     }
 
     public RSAccount() {
+    }
+
+    public String getOwnerID() {
+        return ownerID;
     }
 
     public String getEmail() {

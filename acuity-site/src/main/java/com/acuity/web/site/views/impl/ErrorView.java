@@ -1,4 +1,4 @@
-package com.acuity.web.site.view;
+package com.acuity.web.site.views.impl;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;

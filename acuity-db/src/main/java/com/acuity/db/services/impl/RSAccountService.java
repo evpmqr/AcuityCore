@@ -20,6 +20,4 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
     }
 
 
-
-
 }

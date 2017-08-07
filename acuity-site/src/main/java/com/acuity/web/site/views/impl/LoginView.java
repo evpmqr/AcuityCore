@@ -1,4 +1,4 @@
-package com.acuity.web.site.view;
+package com.acuity.web.site.views.impl;
 
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
