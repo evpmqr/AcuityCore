@@ -14,6 +14,7 @@ public class AssignedTo extends Edge {
 
     public AssignedTo(String ownerID, String rsAccountID, String botClientID) {
         super(rsAccountID, botClientID);
+        this._key = botClientID.split("/")[1];
         this.ownerID = ownerID;
         this.assignedTimeStamp = LocalDateTime.now();
     }
