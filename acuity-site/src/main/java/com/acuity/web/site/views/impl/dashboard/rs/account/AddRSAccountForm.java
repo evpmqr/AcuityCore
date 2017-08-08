@@ -5,6 +5,8 @@ import com.acuity.db.services.impl.RSAccountService;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.*;
 
+import java.util.UUID;
+
 /**
  * Created by Zachary Herridge on 8/7/2017.
  */
@@ -15,9 +17,12 @@ public class AddRSAccountForm extends FormLayout {
     private PasswordField password = new PasswordField("RS-Password");
 
     public AddRSAccountForm(String acuityID, Window window) {
+        setId(UUID.randomUUID().toString());
+
         email.setIcon(VaadinIcons.MAILBOX);
         email.setRequiredIndicatorVisible(true);
         addComponent(email);
+
 
         ign.setIcon(VaadinIcons.USER);
         addComponent(ign);

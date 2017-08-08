@@ -64,6 +64,7 @@ public class AddScriptView extends FormLayout implements View {
         add.setIcon(VaadinIcons.CLOUD_UPLOAD);
         addComponent(add);
 
+        setSizeFull();
         setResponsive(true);
     }
 }

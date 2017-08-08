@@ -1,5 +1,15 @@
 @import "../valo/valo";
 
+.v-slot-backColorGrey{
+  background-color:#07a9ca;
+}
+
+.v-gridlayout-marginTop{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 .v-grid-cell-focused:before {
   display: none !important;
 }

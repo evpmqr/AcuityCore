@@ -38,7 +38,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
         Button addRSAccount = new Button("Add", clickEvent -> {
             final Window window = new Window("Add RS-Account");
-            window.setWidth(320.0f, Unit.PIXELS);
+            window.setWidth(340.0f, Unit.PIXELS);
             AddRSAccountForm addRSAccountForm = new AddRSAccountForm(acuityAccount.getID(), window);
             addRSAccountForm.setMargin(true);
             window.setContent(addRSAccountForm);
@@ -47,8 +47,8 @@ public class RSAccountsListView extends VerticalLayout implements View{
         addRSAccount.setIcon(VaadinIcons.PLUS_CIRCLE);
 
         Button delete = new Button("Delete Selected", clickEvent -> {
-            MultiDocumentEntity<DocumentDeleteEntity<Void>> results = RSAccountService.getInstance().getCollection().deleteDocuments(rsAccountMultiSelectionModel.getSelectedItems());
-            Notification.show("Deleted " + (long) results.getDocuments().size() + " Account(s).");
+            MultiDocumentEntity<DocumentDeleteEntity<Void>> results = RSAccountService.getInstance().deleteAccounts(rsAccountMultiSelectionModel.getSelectedItems());
+            Notification.show("Deleted " + (long) results.getDocuments().size() + " Account(s).", Notification.Type.TRAY_NOTIFICATION);
         });
         delete.setIcon(VaadinIcons.TRASH);
 

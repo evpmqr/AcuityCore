@@ -1,8 +1,12 @@
 package com.acuity.web.site.views.impl.dashboard.menu;
 
+import com.acuity.db.domain.vertex.impl.AcuityAccount;
+import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;
-import com.vaadin.server.FontAwesome;
+import com.google.common.eventbus.Subscribe;
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -17,10 +21,13 @@ public class Menu extends CustomComponent {
     public static final String NOTIFICATIONS_BADGE_ID = "dashboard-menu-notifications-badge";
     private static final String STYLE_VISIBLE = "valo-menu-visible";
 
+    private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
+
     private Label notificationsBadge;
     private Label reportsBadge;
     private MenuBar.MenuItem settingsItem;
 
+    private CssLayout menuItemsLayout = new CssLayout();
 
     public Menu() {
         setPrimaryStyleName("valo-menu");
@@ -44,7 +51,9 @@ public class Menu extends CustomComponent {
 
         menuContent.addComponent(buildTitle());
         menuContent.addComponent(buildToggleButton());
-        menuContent.addComponent(buildMenuItems());
+        menuContent.addComponent(menuItemsLayout);
+        menuItemsLayout.addStyleName("valo-menuitems");
+        buildMenuItems();
 
         return menuContent;
     }
@@ -67,25 +76,27 @@ public class Menu extends CustomComponent {
                 getCompositionRoot().addStyleName(STYLE_VISIBLE);
             }
         });
-        valoMenuToggleButton.setIcon(FontAwesome.LIST);
+        valoMenuToggleButton.setIcon(VaadinIcons.LIST);
         valoMenuToggleButton.addStyleName("valo-menu-toggle");
         valoMenuToggleButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         valoMenuToggleButton.addStyleName(ValoTheme.BUTTON_SMALL);
         return valoMenuToggleButton;
     }
 
-    private Component buildMenuItems() {
-        CssLayout menuItemsLayout = new CssLayout();
-        menuItemsLayout.addStyleName("valo-menuitems");
+    @Subscribe
+    public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
+        acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
+        buildMenuItems();
+    }
 
+
+    private void buildMenuItems() {
+        menuItemsLayout.removeAllComponents();
         for (View view : View.values()) {
-            if (view.isNavBar()){
+            if (view.isNavBar() && view.isAccessible(acuityAccount)){
                 menuItemsLayout.addComponent(view.createMenuItem());
             }
         }
-
-        return menuItemsLayout;
-
     }
 }
 

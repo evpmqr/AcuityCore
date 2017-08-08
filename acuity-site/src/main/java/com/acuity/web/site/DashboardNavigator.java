@@ -1,5 +1,6 @@
 package com.acuity.web.site;
 
+import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;
@@ -17,21 +18,12 @@ public class DashboardNavigator extends Navigator {
     public DashboardNavigator(ComponentContainer container) {
         super(UI.getCurrent(), container);
 
-        initViewProviders();
-
         addViewChangeListener(viewChangeEvent -> {
             Events.post(new DashboardEvent.ViewChange(viewChangeEvent.getViewName()));
             Events.post(new DashboardEvent.BrowserResizeEvent());
             Events.post(new DashboardEvent.CloseOpenWindowsEvent());
             return true;
         });
-    }
-
-    private void initViewProviders() {
-        for (View view : View.values()) {
-            ViewProvider viewProvider = new ClassBasedViewProvider(view.getName(), view.getViewClass());
-            addProvider(viewProvider);
-        }
 
         setErrorProvider(new ViewProvider() {
             @Override
@@ -44,6 +36,14 @@ public class DashboardNavigator extends Navigator {
                 return new ErrorView();
             }
         });
+    }
 
+    public void initViewProviders(AcuityAccount acuityAccount) {
+        for (View view : View.values()) {
+            if (view.isAccessible(acuityAccount)){
+                ViewProvider viewProvider = new ClassBasedViewProvider(view.getName(), view.getViewClass());
+                addProvider(viewProvider);
+            }
+        }
     }
 }

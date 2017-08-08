@@ -10,6 +10,7 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 8/7/2017.
@@ -21,11 +22,18 @@ public class ScriptsListView extends VerticalLayout implements View {
     private Grid<Script> grid = new Grid<>();
 
     public ScriptsListView() {
-        List<Script> scripts = ScriptService.getInstance().getByAccess(acuityAccount.getID(), Script.Access.PUBLIC.getCode(), acuityAccount.getRank());
-        grid.setItems(scripts);
-
+        updateScripts();
         buildGrid();
+        buildAddScriptButton();
+    }
 
+    private void updateScripts(){
+        Optional<AcuityAccount> acuityAccount = Optional.ofNullable(this.acuityAccount);
+        List<Script> scripts = ScriptService.getInstance().getByAccess(acuityAccount.map(AcuityAccount::getID).orElse(""), Script.Access.PUBLIC.getCode(), acuityAccount.map(AcuityAccount::getRank).orElse(AcuityAccount.Rank.USER));
+        grid.setItems(scripts);
+    }
+
+    private void buildAddScriptButton(){
         Button addScript = new Button("New Script", clickEvent -> {
             getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.ADD_SCRIPT.getName());
         });
