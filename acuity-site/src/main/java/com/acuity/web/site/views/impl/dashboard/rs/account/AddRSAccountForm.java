@@ -36,6 +36,8 @@ public class AddRSAccountForm extends FormLayout {
             RSAccountService.getInstance().insert(rsAccount);
             if (window != null) window.close();
         }));
+
+        setResponsive(true);
     }
 
     public String getEmail(){

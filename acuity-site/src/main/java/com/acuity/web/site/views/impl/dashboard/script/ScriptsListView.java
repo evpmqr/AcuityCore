@@ -1,13 +1,18 @@
 package com.acuity.web.site.views.impl.dashboard.script;
 
+import com.acuity.db.domain.edge.impl.AddedScript;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
+import com.acuity.db.services.impl.ScriptAddedService;
 import com.acuity.db.services.impl.ScriptService;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +52,33 @@ public class ScriptsListView extends VerticalLayout implements View {
         grid.addColumn(script -> script.getAuthor().getDisplayName()).setCaption("Author");
         grid.addColumn(Script::getCategory).setCaption("Category");
         grid.addColumn(Script::getDesc).setCaption("Description");
+
+        if (acuityAccount != null){
+            grid.addComponentColumn(script -> {
+                HorizontalLayout content = new HorizontalLayout();
+                Button add = new Button(VaadinIcons.PLUS_CIRCLE);
+                add.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+                add.addStyleName(ValoTheme.BUTTON_TINY);
+                add.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+
+                add.addClickListener(clickEvent -> {
+                    ScriptAddedService.getInstance().insert(new AddedScript(acuityAccount.getID(), script.getID()));
+                });
+
+                Button remove = new Button(VaadinIcons.MINUS_CIRCLE);
+                remove.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+                remove.addStyleName(ValoTheme.BUTTON_TINY);
+                remove.addStyleName(ValoTheme.BUTTON_DANGER);
+
+                remove.addClickListener(clickEvent -> {
+                    ScriptAddedService.getInstance().getCollection().deleteDocument(acuityAccount.getKey() + ":" + script.getKey());
+                });
+
+                content.addComponents(add, remove);
+                return content;
+            }).setCaption("Actions").setSortable(false);
+        }
+
         grid.setSizeFull();
         grid.setColumnReorderingAllowed(true);
         grid.getColumns().forEach(column -> column.setHidable(true));

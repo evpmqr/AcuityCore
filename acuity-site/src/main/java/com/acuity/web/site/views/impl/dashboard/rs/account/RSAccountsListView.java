@@ -39,7 +39,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
         Button addRSAccount = new Button("Add", clickEvent -> {
             final Window window = new Window("Add RS-Account");
-            window.setWidth(340.0f, Unit.PIXELS);
+            window.setWidth(360.0f, Unit.PIXELS);
             AddRSAccountForm addRSAccountForm = new AddRSAccountForm(acuityAccount.getID(), window);
             addRSAccountForm.setMargin(true);
             window.setContent(addRSAccountForm);

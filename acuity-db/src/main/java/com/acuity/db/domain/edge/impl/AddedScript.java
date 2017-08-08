@@ -9,6 +9,7 @@ public class AddedScript extends Edge{
 
     public AddedScript(String acuityID, String scriptID) {
         super(acuityID, scriptID);
+        this._key = acuityID.split("/")[1] + ":" + scriptID.split("/")[1];
     }
 
     public AddedScript() {
