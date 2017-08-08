@@ -96,9 +96,8 @@ public class BotClientView extends VerticalLayout implements View {
         });
         assignedScript.addSelectionListener(singleSelectionEvent -> {
             if (singleSelectionEvent.isUserOriginated()){
-                singleSelectionEvent.getFirstSelectedItem().ifPresent(script -> {
-                    BotClientConfigService.getInstance().assignScript(BotClientConfigService.getInstance().getCollectionName() + "/" + botClient.getKey(), script.getID());
-                });
+                Script selectedScript = singleSelectionEvent.getFirstSelectedItem().orElse(null);
+                BotClientConfigService.getInstance().assignScript(botClient.getKey(), selectedScript != null ? selectedScript.getID() : null);
             }
         });
         return assignedScript;

@@ -3,11 +3,11 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
 import com.acuity.db.services.DBCollectionService;
+import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
+import com.arangodb.model.DocumentUpdateOptions;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -31,13 +31,10 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
         return Optional.ofNullable(entity.getNew());
     }
 
-    public void assignScript(String configID, String scriptID){
-        String query = "LET doc = document(@configID)\n" +
-                "update doc with {assignedScriptID : @scriptID } in BotClientConfig";
-        Map<String, Object> args = new HashMap<>();
-        args.put("configID", configID);
-        args.put("scriptID", scriptID);
-        getDB().query(query, args, null, null);
+    public void assignScript(String configKey, String scriptID){
+        BaseDocument value = new BaseDocument();
+        value.addAttribute("assignedScriptID", scriptID);
+        getCollection().updateDocument(configKey, value, new DocumentUpdateOptions().keepNull(true));
     }
 
 
