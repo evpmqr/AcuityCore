@@ -1,5 +1,6 @@
 package com.acuity.db.domain.vertex.impl.scripts;
 
+import com.acuity.db.domain.edge.impl.AddedScript;
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 
@@ -17,9 +18,11 @@ public class Script extends Vertex {
     private String desc;
     private LocalDateTime creationTimeStamp = LocalDateTime.now();
 
+
     private int accessLevel = Access.PUBLIC.getCode();
 
     private AcuityAccount author;
+    private AddedScript added;
 
     private HashSet<String> localPaths = new HashSet<>();
 
@@ -32,6 +35,10 @@ public class Script extends Vertex {
     }
 
     public Script() {
+    }
+
+    public AddedScript getAdded() {
+        return added;
     }
 
     public LocalDateTime getCreationTimeStamp() {

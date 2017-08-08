@@ -37,6 +37,7 @@ public class ScriptsListView extends VerticalLayout implements View {
         Optional<AcuityAccount> acuityAccount = Optional.ofNullable(this.acuityAccount);
         List<Script> scripts = ScriptService.getInstance().getByAccess(acuityAccount.map(AcuityAccount::getID).orElse(""), Script.Access.PUBLIC.getCode(), acuityAccount.map(AcuityAccount::getRank).orElse(AcuityAccount.Rank.USER));
         grid.setItems(scripts);
+        grid.getDataProvider().refreshAll();
     }
 
     private void buildAddScriptButton(){
@@ -56,25 +57,33 @@ public class ScriptsListView extends VerticalLayout implements View {
         if (acuityAccount != null){
             grid.addComponentColumn(script -> {
                 HorizontalLayout content = new HorizontalLayout();
-                Button add = new Button(VaadinIcons.PLUS_CIRCLE);
-                add.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-                add.addStyleName(ValoTheme.BUTTON_TINY);
-                add.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-                add.addClickListener(clickEvent -> {
-                    ScriptAddedService.getInstance().insert(new AddedScript(acuityAccount.getID(), script.getID()));
-                });
+                if (script.getAdded() == null){
+                    Button add = new Button(VaadinIcons.PLUS_CIRCLE);
+                    add.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+                    add.addStyleName(ValoTheme.BUTTON_TINY);
+                    add.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-                Button remove = new Button(VaadinIcons.MINUS_CIRCLE);
-                remove.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-                remove.addStyleName(ValoTheme.BUTTON_TINY);
-                remove.addStyleName(ValoTheme.BUTTON_DANGER);
+                    add.addClickListener(clickEvent -> {
+                        ScriptAddedService.getInstance().insert(new AddedScript(acuityAccount.getID(), script.getID()));
+                        updateScripts();
+                    });
 
-                remove.addClickListener(clickEvent -> {
-                    ScriptAddedService.getInstance().getCollection().deleteDocument(acuityAccount.getKey() + ":" + script.getKey());
-                });
+                    content.addComponent(add);
+                }
+                else {
+                    Button remove = new Button(VaadinIcons.MINUS_CIRCLE);
+                    remove.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+                    remove.addStyleName(ValoTheme.BUTTON_TINY);
+                    remove.addStyleName(ValoTheme.BUTTON_DANGER);
 
-                content.addComponents(add, remove);
+                    remove.addClickListener(clickEvent -> {
+                        ScriptAddedService.getInstance().getCollection().deleteDocument(acuityAccount.getKey() + ":" + script.getKey());
+                        updateScripts();
+                    });
+                    content.addComponent(remove);
+                }
+
                 return content;
             }).setCaption("Actions").setSortable(false);
         }

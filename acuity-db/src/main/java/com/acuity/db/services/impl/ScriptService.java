@@ -26,14 +26,16 @@ public class ScriptService extends DBCollectionService<Script> {
 
     public List<Script> getByAccess(String acuityID, int accessLevel, int rank) {
         String query = "for script in Script\n" +
-                "filter script.ownerID == @ownerID || script.accessLevel == @accessLevel || @rankAccess\n" +
+                "filter script.ownerID == @acuityID || script.accessLevel == @accessLevel || @rankAccess\n" +
                 "return merge(script, {\n" +
-                "    \"author\" : document(script.ownerID)\n" +
+                "    \"author\" : document(script.ownerID),\n" +
+                "    \"added\" : document(AddedScript, concat(@acuityKey, \":\", script._key))\n" +
                 "})\n";
 
 
         Map<String, Object> args = new HashMap<>();
-        args.put("ownerID", acuityID);
+        args.put("acuityID", acuityID);
+        args.put("acuityKey", acuityID.isEmpty() ? "" : acuityID.split("/")[1]);
         args.put("accessLevel", accessLevel);
         args.put("rankAccess", rank == AcuityAccount.Rank.ADMIN);
         return getDB().query(query, args, null, Script.class).asListRemaining();
