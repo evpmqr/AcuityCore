@@ -6,6 +6,8 @@ import com.acuity.db.services.DBCollectionService;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -27,6 +29,15 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
         BotClientConfig botClientConfig = new BotClientConfig(acuityID, botClientKey);
         DocumentCreateEntity<BotClientConfig> entity = getCollection().insertDocument(botClientConfig, new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(entity.getNew());
+    }
+
+    public void assignScript(String configID, String scriptID){
+        String query = "LET doc = document(@configID)\n" +
+                "update doc with {assignedScriptID : @scriptID } in BotClientConfig";
+        Map<String, Object> args = new HashMap<>();
+        args.put("configID", configID);
+        args.put("scriptID", scriptID);
+        getDB().query(query, args, null, null);
     }
 
 

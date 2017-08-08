@@ -33,32 +33,32 @@ public class ScriptsListView extends VerticalLayout implements View {
         buildAddScriptButton();
     }
 
-    private void updateScripts(){
+    private void updateScripts() {
         Optional<AcuityAccount> acuityAccount = Optional.ofNullable(this.acuityAccount);
         List<Script> scripts = ScriptService.getInstance().getByAccess(acuityAccount.map(AcuityAccount::getID).orElse(""), Script.Access.PUBLIC.getCode(), acuityAccount.map(AcuityAccount::getRank).orElse(AcuityAccount.Rank.USER));
         grid.setItems(scripts);
         grid.getDataProvider().refreshAll();
     }
 
-    private void buildAddScriptButton(){
+    private void buildAddScriptButton() {
         Button addScript = new Button("New Script", clickEvent -> {
             getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.ADD_SCRIPT.getName());
         });
         addComponent(addScript);
     }
 
-    private void buildGrid(){
+    private void buildGrid() {
         grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.addColumn(Script::getTitle).setCaption("Title");
         grid.addColumn(script -> script.getAuthor().getDisplayName()).setCaption("Author");
         grid.addColumn(Script::getCategory).setCaption("Category");
         grid.addColumn(Script::getDesc).setCaption("Description");
 
-        if (acuityAccount != null){
-            grid.addComponentColumn(script -> {
-                HorizontalLayout content = new HorizontalLayout();
+        grid.addComponentColumn(script -> {
+            HorizontalLayout content = new HorizontalLayout();
 
-                if (script.getAdded() == null){
+            if (acuityAccount != null){
+                if (script.getAdded() == null) {
                     Button add = new Button(VaadinIcons.PLUS_CIRCLE);
                     add.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
                     add.addStyleName(ValoTheme.BUTTON_TINY);
@@ -70,8 +70,7 @@ public class ScriptsListView extends VerticalLayout implements View {
                     });
 
                     content.addComponent(add);
-                }
-                else {
+                } else {
                     Button remove = new Button(VaadinIcons.MINUS_CIRCLE);
                     remove.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
                     remove.addStyleName(ValoTheme.BUTTON_TINY);
@@ -83,10 +82,20 @@ public class ScriptsListView extends VerticalLayout implements View {
                     });
                     content.addComponent(remove);
                 }
+            }
 
-                return content;
-            }).setCaption("Actions").setSortable(false);
-        }
+            Button open = new Button(VaadinIcons.ARROW_CIRCLE_UP);
+            open.addStyleName("acuity-primary");
+            open.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+            open.addStyleName(ValoTheme.BUTTON_TINY);
+            open.addClickListener(clickEvent -> {
+                getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.SCRIPT.getName() + "/" + script.getKey());
+            });
+            content.addComponent(open);
+
+            return content;
+        }).setCaption("Actions").setSortable(false);
+
 
         grid.setSizeFull();
         grid.setColumnReorderingAllowed(true);

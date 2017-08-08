@@ -29,7 +29,7 @@ public class MainView extends HorizontalLayout {
 
 
         HorizontalLayout panel = new HorizontalLayout();
-        panel.setStyleName("backColorGrey");
+        panel.addStyleName("acuity-primary-bar");
         panel.setMargin(false);
         panel.setHeight(43, Unit.PIXELS);
 

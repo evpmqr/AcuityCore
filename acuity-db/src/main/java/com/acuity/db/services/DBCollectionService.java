@@ -30,6 +30,7 @@ public class DBCollectionService<T> {
     }
 
     public Optional<T> getByID(String id){
+        if (id == null) return Optional.empty();
         return Optional.ofNullable(getDB().getDocument(id, type));
     }
 

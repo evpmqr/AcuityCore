@@ -1,7 +1,13 @@
 @import "../valo/valo";
 
-.v-slot-backColorGrey{
-  background-color:#07a9ca;
+
+.v-slot-acuity-primary-bar{
+  background-color:#07a9ca !important;
+  color:#07a9ca !important;
+}
+
+.acuity-primary{
+  color:#07a9ca !important;
 }
 
 .v-csslayout-smallMargin{

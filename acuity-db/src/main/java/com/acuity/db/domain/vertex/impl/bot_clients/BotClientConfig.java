@@ -10,7 +10,9 @@ public class BotClientConfig extends Vertex {
 
     private String acuityID;
     private String botClientID;
+
     private boolean running = true;
+    private String assignedScriptID;
 
     public BotClientConfig(String acuityID, String botClientKey) {
         this._key = botClientKey;
@@ -19,6 +21,10 @@ public class BotClientConfig extends Vertex {
     }
 
     public BotClientConfig() {
+    }
+
+    public String getAssignedScriptID() {
+        return assignedScriptID;
     }
 
     public String getBotClientID() {

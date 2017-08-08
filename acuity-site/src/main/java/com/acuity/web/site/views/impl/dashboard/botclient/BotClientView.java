@@ -8,10 +8,8 @@ import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
-import com.acuity.db.services.impl.BotClientService;
-import com.acuity.db.services.impl.MessagePackageService;
-import com.acuity.db.services.impl.RSAccountAssignmentService;
-import com.acuity.db.services.impl.RSAccountService;
+import com.acuity.db.domain.vertex.impl.scripts.Script;
+import com.acuity.db.services.impl.*;
 import com.acuity.web.site.components.InlineLabel;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
@@ -33,6 +31,7 @@ public class BotClientView extends VerticalLayout implements View {
     private BotClient botClient;
 
     private ComboBox<RSAccount> assignedAccount = new ComboBox<>();
+    private ComboBox<Script> assignedScript = new ComboBox<>();
 
     private void build(){
         addStyleName("view");
@@ -54,7 +53,7 @@ public class BotClientView extends VerticalLayout implements View {
         panel.setResponsive(true);
         panel.setCaptionAsHtml(true);
 
-        GridLayout content = new GridLayout(2, 3);
+        GridLayout content = new GridLayout(2, 4);
         content.setResponsive(true);
         content.setSpacing(true);
         content.addStyleName("view-top");
@@ -73,12 +72,36 @@ public class BotClientView extends VerticalLayout implements View {
                 });
             }
         });
-
         content.addComponent(accountLabel);
         content.addComponent(createAccountComboBox());
 
+        Label scriptLabel = new InlineLabel("Script:", VaadinIcons.CODE);
+
+
+        content.addComponent(scriptLabel);
+        content.addComponent(createScriptComboBox());
+
         panel.setContent(content);
         addComponent(panel);
+    }
+
+    private ComboBox createScriptComboBox(){
+        assignedScript.setHeight(25, Unit.PIXELS);
+        assignedScript.setWidth(100, Unit.PERCENTAGE);
+        assignedScript.setItemCaptionGenerator(script -> script.getTitle());
+        List<Script> addedScripts = ScriptAddedService.getInstance().getAdded(acuityAccount.getID());
+        assignedScript.setItems(addedScripts);
+        ScriptService.getInstance().getByID(botClient.getClientConfig().getAssignedScriptID()).ifPresent(script -> {
+            assignedScript.setSelectedItem(script);
+        });
+        assignedScript.addSelectionListener(singleSelectionEvent -> {
+            if (singleSelectionEvent.isUserOriginated()){
+                singleSelectionEvent.getFirstSelectedItem().ifPresent(script -> {
+                    BotClientConfigService.getInstance().assignScript(BotClientConfigService.getInstance().getCollectionName() + "/" + botClient.getKey(), script.getID());
+                });
+            }
+        });
+        return assignedScript;
     }
 
     private ComboBox createAccountComboBox(){
@@ -87,11 +110,9 @@ public class BotClientView extends VerticalLayout implements View {
         List<RSAccount> byOwner = RSAccountService.getInstance().getByOwner(acuityAccount.getID());
         assignedAccount.setDataProvider(new ListDataProvider<RSAccount>(byOwner));
         assignedAccount.setItemCaptionGenerator(RSAccount::getEmail);
-        RSAccountAssignmentService.getInstance().getByToID(botClient.getID()).stream().findFirst().ifPresent(assignedTo -> {
-            RSAccountService.getInstance().getByID(assignedTo.getFrom()).ifPresent(account -> {
-                assignedAccount.setSelectedItem(account);
-            });
-        });
+        RSAccountAssignmentService.getInstance().getByToID(botClient.getID()).stream().findFirst().ifPresent(assignedTo -> RSAccountService.getInstance().getByID(assignedTo.getFrom()).ifPresent(account -> {
+            assignedAccount.setSelectedItem(account);
+        }));
         assignedAccount.addSelectionListener(singleSelectionEvent -> {
             if (singleSelectionEvent.isUserOriginated()){
                 RSAccount selectedAccount = singleSelectionEvent.getFirstSelectedItem().orElse(null);
@@ -110,7 +131,7 @@ public class BotClientView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-        BotClientService.getInstance().getByKey(event.getParameters()).ifPresent(result -> {
+        BotClientService.getInstance().getJoinedByID(BotClientService.getInstance().getCollectionName() + "/" + event.getParameters()).ifPresent(result -> {
             if (result.getOwnerID().equals(acuityAccount.getID())){
                 botClient = result;
                 Events.getDBEventBus().register(this);
