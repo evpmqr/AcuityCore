@@ -32,6 +32,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private MultiSelectionModel<RSAccount> rsAccountMultiSelectionModel = (MultiSelectionModel<RSAccount>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
 
     public RSAccountsListView() {
+        addStyleName("view");
         rsAccounts = RSAccountService.getInstance().getByOwner(acuityAccount.getID());
         Events.getDBEventBus().register(this);
         setSizeFull();
@@ -68,6 +69,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
         grid.addItemClickListener(itemClick -> {
             UI.getCurrent().getNavigator().navigateTo("RS-Account/" + itemClick.getItem().getKey());
         });
+        grid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(grid);
     }
 

@@ -22,6 +22,7 @@ public class ScriptsListView extends VerticalLayout implements View {
     private Grid<Script> grid = new Grid<>();
 
     public ScriptsListView() {
+        addStyleName("view");
         updateScripts();
         buildGrid();
         buildAddScriptButton();
@@ -48,6 +49,7 @@ public class ScriptsListView extends VerticalLayout implements View {
         grid.addColumn(Script::getDesc).setCaption("Description");
         grid.setSizeFull();
         grid.setColumnReorderingAllowed(true);
+        grid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(grid);
     }
 

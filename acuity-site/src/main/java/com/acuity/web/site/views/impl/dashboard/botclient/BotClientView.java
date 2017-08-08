@@ -12,6 +12,7 @@ import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
 import com.acuity.db.services.impl.RSAccountAssignmentService;
 import com.acuity.db.services.impl.RSAccountService;
+import com.acuity.web.site.components.InlineLabel;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.data.provider.ListDataProvider;
@@ -34,6 +35,7 @@ public class BotClientView extends VerticalLayout implements View {
     private ComboBox<RSAccount> assignedAccount = new ComboBox<>();
 
     private void build(){
+        addStyleName("view");
         Events.getDBEventBus().register(this);
 
         addInformationPanel();
@@ -52,21 +54,27 @@ public class BotClientView extends VerticalLayout implements View {
         panel.setResponsive(true);
         panel.setCaptionAsHtml(true);
 
-
         GridLayout content = new GridLayout(2, 3);
         content.setResponsive(true);
         content.setSpacing(true);
+        content.addStyleName("view-top");
 
-        content.setStyleName("marginTop");
-
-        content.addComponent(new Label("Client Key:"));
+        content.addComponent(new InlineLabel("Client Key:", VaadinIcons.KEY_O));
         content.addComponent(new Label(botClient.getKey()));
 
-        content.addComponent(new Label("Connected:"));
+        content.addComponent(new InlineLabel("Connected:", VaadinIcons.TIMER));
         content.addComponent(new Label(botClient.getConnectionTime().toString()));
 
-        content.addComponent(new Label("Account:"));
+        Label accountLabel = new InlineLabel("Account:", VaadinIcons.USER);
+        content.addLayoutClickListener(layoutClickEvent -> {
+            if (layoutClickEvent.getClickedComponent() != null && layoutClickEvent.getClickedComponent().equals(accountLabel)){
+                assignedAccount.getSelectedItem().ifPresent(account -> {
+                    getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.ACCOUNT.getName() + "/" + account.getKey());
+                });
+            }
+        });
 
+        content.addComponent(accountLabel);
         content.addComponent(createAccountComboBox());
 
         panel.setContent(content);
@@ -125,7 +133,7 @@ public class BotClientView extends VerticalLayout implements View {
 
         if (clientID.equals(botClient.getID())){
             if (event.getType() == ArangoEvent.DELETE){
-                getUI().access(() -> assignedAccount.setSelectedItem(null));
+                getUI().access(() -> assignedAccount.clear());
             }
             else if (event.getEdge().getOwnerID().equals(acuityAccount.getID())){
                 RSAccountService.getInstance().getByID(event.getEdge().getFrom()).ifPresent(account -> {

@@ -27,7 +27,6 @@ public class AddRSAccountForm extends FormLayout {
         ign.setIcon(VaadinIcons.USER);
         addComponent(ign);
 
-        PasswordField password = new PasswordField("Password");
         password.setIcon(VaadinIcons.PASSWORD);
         password.setRequiredIndicatorVisible(true);
         addComponent(password);

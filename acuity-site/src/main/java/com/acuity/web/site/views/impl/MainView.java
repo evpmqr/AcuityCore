@@ -35,7 +35,7 @@ public class MainView extends HorizontalLayout {
 
         body.addComponent(panel);
 
-
+        content.addStyleName("smallMargin");
         content.addStyleName("view-content");
         content.setSizeFull();
         body.addComponent(content);

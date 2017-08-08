@@ -32,6 +32,7 @@ public class BotClientsListView extends VerticalLayout implements View {
     private MultiSelectionModel<BotClient> clientSelectionModel = (MultiSelectionModel<BotClient>) clientGrid.setSelectionMode(Grid.SelectionMode.MULTI);
 
     public BotClientsListView() {
+        addStyleName("view");
         setSizeFull();
         Events.getDBEventBus().register(this);
         clients.addAll(BotClientService.getInstance().getJoinedByOwnerID(acuityAccount.getID()));
@@ -52,8 +53,11 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.sort(account);
         clientGrid.addItemClickListener(itemClick -> {
-            UI.getCurrent().getNavigator().navigateTo("Client/" + itemClick.getItem().getKey());
+            if (itemClick.getColumn() != null && itemClick.getColumn().getCaption().equals("Key")){
+                UI.getCurrent().getNavigator().navigateTo("Client/" + itemClick.getItem().getKey());
+            }
         });
+        clientGrid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(clientGrid);
     }
 

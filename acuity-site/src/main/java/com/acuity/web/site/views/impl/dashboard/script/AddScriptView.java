@@ -22,7 +22,7 @@ public class AddScriptView extends FormLayout implements View {
     private Binder<Script> scriptBinder = new Binder<>();
 
     public AddScriptView() {
-        setMargin(true);
+        addStyleName("view");
 
         TextField title = new TextField("Title");
         title.setRequiredIndicatorVisible(true);
