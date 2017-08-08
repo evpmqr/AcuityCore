@@ -6,13 +6,14 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.impl.BotClientService;
+import com.acuity.web.site.components.OpenButton;
 import com.acuity.web.site.events.Events;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.LocalDateTimeRenderer;
@@ -53,11 +54,16 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.sort(account);
-        clientGrid.addItemClickListener(itemClick -> {
-            if (itemClick.getColumn() != null && itemClick.getColumn().getCaption().equals("Key")){
-                UI.getCurrent().getNavigator().navigateTo("Client/" + itemClick.getItem().getKey());
-            }
-        });
+
+        clientGrid.addComponentColumn(client -> {
+            HorizontalLayout content = new HorizontalLayout();
+
+            OpenButton openButton = new OpenButton(com.acuity.web.site.views.View.CLIENT.getName() + "/" + client.getKey());
+            content.addComponent(openButton);
+
+            return content;
+        }).setCaption("Actions").setSortable(false);
+
         clientGrid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(clientGrid);
     }

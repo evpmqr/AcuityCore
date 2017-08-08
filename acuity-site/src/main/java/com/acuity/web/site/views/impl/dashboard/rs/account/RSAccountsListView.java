@@ -5,6 +5,7 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.RSAccountService;
+import com.acuity.web.site.components.OpenButton;
 import com.acuity.web.site.events.Events;
 import com.arangodb.entity.DocumentDeleteEntity;
 import com.arangodb.entity.MultiDocumentEntity;
@@ -66,9 +67,17 @@ public class RSAccountsListView extends VerticalLayout implements View{
         grid.addColumn(RSAccount::getIgn).setCaption("IGN");
         grid.setSizeFull();
         grid.setColumnReorderingAllowed(true);
-        grid.addItemClickListener(itemClick -> {
-            UI.getCurrent().getNavigator().navigateTo("RS-Account/" + itemClick.getItem().getKey());
-        });
+
+        grid.addComponentColumn(account -> {
+            HorizontalLayout content = new HorizontalLayout();
+
+            OpenButton openButton = new OpenButton(com.acuity.web.site.views.View.ACCOUNT.getName() + "/" + account.getKey());
+            content.addComponent(openButton);
+
+            return content;
+        }).setCaption("Actions").setSortable(false);
+
+
         grid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(grid);
     }

@@ -5,6 +5,7 @@ import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.impl.ScriptAddedService;
 import com.acuity.db.services.impl.ScriptService;
+import com.acuity.web.site.components.OpenButton;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
@@ -84,14 +85,8 @@ public class ScriptsListView extends VerticalLayout implements View {
                 }
             }
 
-            Button open = new Button(VaadinIcons.ARROW_CIRCLE_UP);
-            open.addStyleName("acuity-primary");
-            open.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-            open.addStyleName(ValoTheme.BUTTON_TINY);
-            open.addClickListener(clickEvent -> {
-                getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.SCRIPT.getName() + "/" + script.getKey());
-            });
-            content.addComponent(open);
+            OpenButton openButton = new OpenButton(com.acuity.web.site.views.View.SCRIPT.getName() + "/" + script.getKey());
+            content.addComponent(openButton);
 
             return content;
         }).setCaption("Actions").setSortable(false);
