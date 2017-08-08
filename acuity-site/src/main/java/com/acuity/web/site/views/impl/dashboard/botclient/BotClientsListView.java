@@ -48,7 +48,7 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.setDataProvider(DataProvider.ofCollection(clients));
         clientGrid.addColumn(BotClient::getKey).setCaption("Key");
         clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
-        clientGrid.addColumn(botClient -> botClient.getClientConfig().getAssignedScriptID() == null ? "None" : botClient.getClientConfig().getAssignedScriptID()).setCaption("Script");
+        clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
         Grid.Column<BotClient, String> account = clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);

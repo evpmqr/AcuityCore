@@ -2,6 +2,7 @@ package com.acuity.db.domain.vertex.impl.bot_clients;
 
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.RSAccount;
+import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.impl.AcuityAccountService;
 
 import java.time.LocalDateTime;
@@ -11,10 +12,11 @@ import java.time.LocalDateTime;
  */
 public class BotClient extends Vertex {
 
-    private String ownerID; // TODO: 8/6/2017 Rename to key
+    private String ownerID;
     private LocalDateTime connectionTime = LocalDateTime.now();
 
     private RSAccount assignedAccount;
+    private Script assignedScript;
     private BotClientConfig clientConfig;
 
     public BotClient(String key, String ownerKey) {
@@ -31,6 +33,10 @@ public class BotClient extends Vertex {
 
     public LocalDateTime getConnectionTime() {
         return connectionTime;
+    }
+
+    public Script getAssignedScript() {
+        return assignedScript;
     }
 
     public RSAccount getAssignedAccount() {
