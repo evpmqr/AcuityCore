@@ -1,9 +1,10 @@
 package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientConfigEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientConfigEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.edge.impl.AssignedTo;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
@@ -148,46 +149,29 @@ public class BotClientView extends VerticalLayout implements View {
     }
 
     @Subscribe
-    public void onConfigEvent(BotClientConfigEvent event) {
-        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getBotClientConfig().getKey();
+    public void onClientEvent(BotClientIDEvent event){
+        String clientID = event.getBotClientID();
 
         if (clientID.equals(botClient.getID())){
-            if (event.getType() == ArangoEvent.DELETE){
-                getUI().access(() -> assignedScript.clear());
-            }
-            else if (event.getBotClientConfig().getOwnerID().equals(acuityAccount.getID())){
-                ScriptService.getInstance().getByID(event.getBotClientConfig().getAssignedScriptID()).ifPresent(script -> {
+            if (event instanceof BotClientConfigEvent && event.getType() == ArangoEvent.CREATE_OR_UPDATE){
+                ScriptService.getInstance().getByID(((BotClientConfigEvent) event).getBotClientConfig().getAssignedScriptID()).ifPresent(script -> {
                     getUI().access(() -> assignedScript.setSelectedItem(script));
                 });
             }
-        }
 
-    }
-
-    @Subscribe
-    public void onAssignmentUpdate(RSAccountAssignedToEvent event){
-        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
-
-        if (clientID.equals(botClient.getID())){
-            if (event.getType() == ArangoEvent.DELETE){
-                getUI().access(() -> assignedAccount.clear());
+            if (event instanceof RSAccountAssignedToEvent){
+                if (event.getType() == ArangoEvent.DELETE){
+                    getUI().access(() -> assignedAccount.clear());
+                }
+                else if (((RSAccountAssignedToEvent) event).getEdge().getOwnerID().equals(acuityAccount.getID())){
+                    RSAccountService.getInstance().getByID(((RSAccountAssignedToEvent) event).getEdge().getFrom()).ifPresent(account -> {
+                        getUI().access(() -> assignedAccount.setSelectedItem(account));
+                    });
+                }
             }
-            else if (event.getEdge().getOwnerID().equals(acuityAccount.getID())){
-                RSAccountService.getInstance().getByID(event.getEdge().getFrom()).ifPresent(account -> {
-                    getUI().access(() -> assignedAccount.setSelectedItem(account));
-                });
-            }
-        }
-    }
 
-    @Subscribe
-    public void onBotClientEvent(BotClientEvent event) {
-        if (event.getBotClient().getKey().equals(botClient.getKey())){
-            if (event.getType() == ArangoEvent.DELETE) {
+            if (event instanceof BotClientEvent && event.getType() == ArangoEvent.DELETE) {
                 getUI().access(() -> getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.CLIENTS.getName()));
-            }
-            else if (event.getBotClient().getID().equals(botClient.getID())) {
-
             }
         }
     }

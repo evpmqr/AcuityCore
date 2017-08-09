@@ -1,14 +1,16 @@
-package com.acuity.db.arango.monitor.events.wrapped.impl;
+package com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.WrappedEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
 import com.acuity.db.domain.edge.impl.AssignedTo;
+import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.util.Json;
 
 /**
  * Created by Zach on 8/6/2017.
  */
-public class RSAccountAssignedToEvent extends WrappedEvent {
+public class RSAccountAssignedToEvent extends WrappedEvent implements BotClientIDEvent{
 
     private AssignedTo assignedTo;
 
@@ -26,5 +28,15 @@ public class RSAccountAssignedToEvent extends WrappedEvent {
         return "RSAccountAssignedToEvent{" +
                 "assignedTo=" + assignedTo +
                 '}';
+    }
+
+    @Override
+    public String getBotClientID() {
+        return BotClientService.getInstance().getCollectionName() + "/" + assignedTo.getKey();
+    }
+
+    @Override
+    public String getOwnerID() {
+        return assignedTo.getOwnerID();
     }
 }

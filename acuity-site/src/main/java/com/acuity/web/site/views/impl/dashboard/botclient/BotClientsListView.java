@@ -1,9 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientConfigEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.impl.BotClientService;
@@ -76,14 +74,14 @@ public class BotClientsListView extends VerticalLayout implements View {
     }
 
     @Subscribe
-    public void onConfigEvent(BotClientConfigEvent event){
-        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getBotClientConfig().getKey();
+    public void onClientEvent(BotClientIDEvent event){
+        String clientID = event.getBotClientID();
 
         boolean update = false;
         if (event.getType() == ArangoEvent.DELETE){
             update = clients.removeIf(botClient -> botClient.getID().equals(clientID));
         }
-        else if (event.getBotClientConfig().getOwnerID().equals(acuityAccount.getID())){
+        else if (event.getOwnerID().equals(acuityAccount.getID())){
             clients.removeIf(botClient -> botClient.getID().equals(clientID));
             update= true;
         }
@@ -92,36 +90,5 @@ public class BotClientsListView extends VerticalLayout implements View {
             BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
             clientGrid.getDataProvider().refreshAll();
         }
-    }
-
-    @Subscribe
-    public void onAssignmentUpdate(RSAccountAssignedToEvent event){
-        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
-
-        boolean update = false;
-        if (event.getType() == ArangoEvent.DELETE){
-            update = clients.removeIf(botClient -> botClient.getID().equals(clientID));
-        }
-        else if (event.getEdge().getOwnerID().equals(acuityAccount.getID())){
-            clients.removeIf(botClient -> botClient.getID().equals(clientID));
-            update= true;
-        }
-
-        if (update) {
-            BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
-            clientGrid.getDataProvider().refreshAll();
-        }
-    }
-
-    @Subscribe
-    public void onBotClientEvent(BotClientEvent event) {
-        if (event.getType() == ArangoEvent.DELETE) {
-            clients.remove(event.getBotClient());
-        }
-        else if (event.getBotClient().getOwnerID().equals(acuityAccount.getID())) {
-            clients.remove(event.getBotClient());
-            BotClientService.getInstance().getJoinedByID(event.getBotClient().getID()).ifPresent(clients::add);
-        }
-        clientGrid.getDataProvider().refreshAll();
     }
 }

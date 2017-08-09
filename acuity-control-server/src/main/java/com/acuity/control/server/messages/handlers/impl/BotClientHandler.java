@@ -6,13 +6,15 @@ import com.acuity.control.server.websockets.WSocket;
 import com.acuity.control.server.websockets.WSocketEvent;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.BotClientConfigService;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.MessagePackageService;
+import com.acuity.db.services.impl.RSAccountService;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,12 +64,14 @@ public class BotClientHandler extends MessageHandler {
     public void assignmentChange(RSAccountAssignedToEvent event){
         if (botClient == null) return;
 
-        if (event.getEdge().getTo().equals(botClient.getID())){
+        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
+        if (clientID.equals(botClient.getID())){
             if (event.getType() == ArangoEvent.DELETE){
                 getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
             }
             else {
-                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
+                RSAccount rsAccount = RSAccountService.getInstance().getByID(event.getEdge().getFrom()).orElse(null);
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", rsAccount));
             }
         }
     }
