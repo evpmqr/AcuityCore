@@ -8,6 +8,7 @@ import com.acuity.security.bcrypt.BCrypt;
 import com.arangodb.ArangoCursor;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
+import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -28,11 +29,11 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
     }
 
     public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws Exception {
-        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), Encryption.encrypt(Encryption.generateEncryptionKey(), password, new byte[]{1, 2, 3, 4, 5, 6, 7, 8}));
+        Pair<byte[], byte[]> encrypt = Encryption.encrypt(Encryption.getSecrete(password, Encryption.SALT), Encryption.generateEncryptionKey());
+        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), encrypt.getKey(), encrypt.getValue());
         DocumentCreateEntity<AcuityAccount> acuityAccountDocumentCreateEntity = getCollection().insertDocument(acuityAccount, new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(acuityAccountDocumentCreateEntity.getNew());
     }
-
 
     public Optional<AcuityAccount> checkLogin(String email, String password){
         return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);

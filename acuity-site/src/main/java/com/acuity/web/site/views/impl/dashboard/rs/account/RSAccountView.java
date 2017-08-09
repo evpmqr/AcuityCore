@@ -22,6 +22,8 @@ public class RSAccountView extends VerticalLayout implements View{
 
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
     private RSAccount rsAccount;
+    private boolean passwordShown = false;
+
 
     public void build(){
         addStyleName("view");
@@ -55,7 +57,10 @@ public class RSAccountView extends VerticalLayout implements View{
         passwordBttn.addStyleName("grid-button");
         passwordBttn.setHeight(25, Unit.PIXELS);
         passwordBttn.addClickListener(clickEvent -> {
-            passwordBttn.setCaption(passwordBttn.getCaption().equals(rsAccount.getPassword()) ? Strings.repeat("*", rsAccount.getPassword().length()) : rsAccount.getPassword());
+            passwordShown = !passwordShown;
+            if (passwordShown) passwordBttn.setCaption(rsAccount.getPassword());
+            else passwordBttn.setCaption(Strings.repeat("*", rsAccount.getPassword().length()));
+
         });
         content.addComponent(passwordBttn);
 

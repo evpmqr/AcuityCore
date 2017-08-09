@@ -1,23 +1,28 @@
 package com.acuity.security;
 
+import javafx.util.Pair;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.PBEParameterSpec;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.GeneralSecurityException;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 
 /**
  * Created by Zachary Herridge on 8/9/2017.
  */
 public class Encryption {
+
+    public static final byte[] SALT = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
+    public static final BASE64Decoder DECODER = new BASE64Decoder();
+    public static final BASE64Encoder ENCODER = new BASE64Encoder();
 
     private static final String VALID = "ABCDEFQHIJKLMNOPQRSTUVWXYZabcdefqhijklmnop!@#$%^&*()_+;:'[]\\|1234567890";
     private static SecureRandom instanceStrong;
@@ -31,29 +36,32 @@ public class Encryption {
         return result;
     }
 
-    public static String encrypt(String property, String password, byte[] salt) throws GeneralSecurityException, UnsupportedEncodingException {
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
-        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(password.toCharArray()));
-        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-        pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(salt, 20));
-        return base64Encode(pbeCipher.doFinal(property.getBytes("UTF-8")));
+    public static byte[] genereateSalt() throws Exception {
+        byte[] salt = new byte[8];
+        SecureRandom.getInstanceStrong().nextBytes(salt);
+        return salt;
     }
 
-    private static String base64Encode(byte[] bytes) {
-        // NB: This class is internal, and you probably should use another impl
-        return new BASE64Encoder().encode(bytes);
+    public static SecretKeySpec getSecrete(String password, byte[] salt) throws Exception{
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        SecretKey tmp = factory.generateSecret(spec);
+        return new SecretKeySpec(tmp.getEncoded(), "AES");
     }
 
-    public static String decrypt(String property, String password, byte[] salt) throws GeneralSecurityException, IOException {
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
-        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(password.toCharArray()));
-        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-        pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(salt, 20));
-        return new String(pbeCipher.doFinal(base64Decode(property)), "UTF-8");
+    public static String decrypt(SecretKey secret, byte[] iv, byte[] encryptedText) throws Exception {
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
+        return new String(cipher.doFinal(encryptedText), "UTF-8");
+
     }
 
-    private static byte[] base64Decode(String property) throws IOException {
-        // NB: This class is internal, and you probably should use another impl
-        return new BASE64Decoder().decodeBuffer(property);
+    public static Pair<byte[], byte[]> encrypt(SecretKey key, String plainText) throws Exception{
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        AlgorithmParameters params = cipher.getParameters();
+        byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+        byte[] encrypted = cipher.doFinal(plainText.getBytes("UTF-8"));
+        return new Pair<>(iv, encrypted);
     }
 }

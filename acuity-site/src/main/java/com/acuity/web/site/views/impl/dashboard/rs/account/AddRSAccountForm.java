@@ -41,7 +41,7 @@ public class AddRSAccountForm extends FormLayout {
 
         addComponent(new Button("Add", clickEvent -> {
             try {
-                RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getAccountEncryptionKey());
+                RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
                 if (window != null) window.close();
             } catch (Exception e) {
                 e.printStackTrace();

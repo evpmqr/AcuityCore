@@ -1,6 +1,7 @@
 package com.acuity.db.domain.vertex.impl;
 
 import com.acuity.db.domain.vertex.Vertex;
+import com.acuity.security.Encryption;
 
 /**
  * Created by Zachary Herridge on 8/1/2017.
@@ -10,17 +11,19 @@ public class AcuityAccount extends Vertex {
     private String email;
     private String displayName;
     private String passwordHash;
+    private String accountEncryptionIV;
     private String accountEncryptionKey;
     private int rank;
 
     public AcuityAccount() {
     }
 
-    public AcuityAccount(String email, String displayName, String passwordHash, String accountEncryptionKey) {
+    public AcuityAccount(String email, String displayName, String passwordHash, byte[] accountEncryptionIV, byte[] accountEncryptionKey) {
         this.email = email;
         this.displayName = displayName;
         this.passwordHash = passwordHash;
-        this.accountEncryptionKey = accountEncryptionKey;
+        this.accountEncryptionIV = Encryption.ENCODER.encode(accountEncryptionIV);
+        this.accountEncryptionKey = Encryption.ENCODER.encode(accountEncryptionKey);
     }
 
     public String getEmail() {
@@ -29,6 +32,10 @@ public class AcuityAccount extends Vertex {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public String getAccountEncryptionIV() {
+        return accountEncryptionIV;
     }
 
     public String getAccountEncryptionKey() {

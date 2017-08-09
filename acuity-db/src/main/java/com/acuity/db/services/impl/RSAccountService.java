@@ -6,6 +6,7 @@ import com.acuity.db.services.DBCollectionService;
 import com.acuity.security.Encryption;
 import com.arangodb.entity.DocumentDeleteEntity;
 import com.arangodb.entity.MultiDocumentEntity;
+import javafx.util.Pair;
 
 import java.util.Set;
 
@@ -31,9 +32,10 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
         return result;
     }
 
-    public void addRSAccount(String ownerID, String email, String ign, String password, String acuityPassword, String accountEncryptionKey) throws Exception {
-        String passwordEncryptionKey = Encryption.decrypt(accountEncryptionKey, acuityPassword, new byte[]{1, 2, 3, 4, 5, 6, 7, 8});
-        RSAccount rsAccount = new RSAccount(ownerID, email, ign, Encryption.encrypt(password, passwordEncryptionKey, new byte[]{1, 2, 3, 4, 5, 6, 7, 8}));
+    public void addRSAccount(String ownerID, String email, String ign, String password, String acuityPassword, String accountEncryptionIV, String accountEncryptionKey) throws Exception {
+        String passwordEncryptionKey = Encryption.decrypt(Encryption.getSecrete(acuityPassword, Encryption.SALT), Encryption.DECODER.decodeBuffer(accountEncryptionIV) , Encryption.DECODER.decodeBuffer(accountEncryptionKey));
+        Pair<byte[], byte[]> encrypt = Encryption.encrypt(Encryption.getSecrete(passwordEncryptionKey, Encryption.SALT), password);
+        RSAccount rsAccount = new RSAccount(ownerID, email, ign, encrypt.getKey(), encrypt.getValue());
         insert(rsAccount);
     }
 }
