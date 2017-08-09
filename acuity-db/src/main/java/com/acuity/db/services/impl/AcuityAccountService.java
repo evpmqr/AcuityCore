@@ -1,12 +1,11 @@
 package com.acuity.db.services.impl;
 
-import com.acuity.bcrypt.BCrypt;
 import com.acuity.db.AcuityDB;
-import com.acuity.db.domain.edge.Edge;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.DBCollectionService;
+import com.acuity.security.Encryption;
+import com.acuity.security.bcrypt.BCrypt;
 import com.arangodb.ArangoCursor;
-import com.arangodb.ArangoDBException;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
 
@@ -28,11 +27,12 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
         super(AcuityDB.DB_NAME, "AcuityAccount", AcuityAccount.class);
     }
 
-    public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws ArangoDBException{
-        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()));
+    public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws Exception {
+        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), Encryption.encrypt(Encryption.generateEncryptionKey(), password, new byte[]{1, 2, 3, 4, 5, 6, 7, 8}));
         DocumentCreateEntity<AcuityAccount> acuityAccountDocumentCreateEntity = getCollection().insertDocument(acuityAccount, new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(acuityAccountDocumentCreateEntity.getNew());
     }
+
 
     public Optional<AcuityAccount> checkLogin(String email, String password){
         return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);

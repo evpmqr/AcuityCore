@@ -6,7 +6,7 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.imp
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
 import com.acuity.db.services.impl.BotClientService;
-import com.acuity.db.util.DBAccess;
+import com.acuity.security.DBAccess;
 import com.google.common.eventbus.EventBus;
 
 /**

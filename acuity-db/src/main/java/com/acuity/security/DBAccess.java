@@ -1,4 +1,4 @@
-package com.acuity.db.util;
+package com.acuity.security;
 
 import java.io.IOException;
 import java.io.InputStream;

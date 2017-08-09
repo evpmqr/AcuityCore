@@ -151,12 +151,13 @@ public class BotClientView extends VerticalLayout implements View {
     @Subscribe
     public void onClientEvent(BotClientIDEvent event){
         String clientID = event.getBotClientID();
-
         if (clientID.equals(botClient.getID())){
             if (event instanceof BotClientConfigEvent && event.getType() == ArangoEvent.CREATE_OR_UPDATE){
-                ScriptService.getInstance().getByID(((BotClientConfigEvent) event).getBotClientConfig().getAssignedScriptID()).ifPresent(script -> {
-                    getUI().access(() -> assignedScript.setSelectedItem(script));
-                });
+                String assignedScriptID = ((BotClientConfigEvent) event).getBotClientConfig().getAssignedScriptID();
+                if (assignedScriptID == null) getUI().access(() -> assignedScript.clear());
+                else {
+                    ScriptService.getInstance().getByID(assignedScriptID).ifPresent(script -> getUI().access(() -> assignedScript.setSelectedItem(script)));
+                }
             }
 
             if (event instanceof RSAccountAssignedToEvent){

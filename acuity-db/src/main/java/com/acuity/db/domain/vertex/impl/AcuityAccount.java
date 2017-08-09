@@ -10,15 +10,17 @@ public class AcuityAccount extends Vertex {
     private String email;
     private String displayName;
     private String passwordHash;
+    private String accountEncryptionKey;
     private int rank;
 
     public AcuityAccount() {
     }
 
-    public AcuityAccount(String email, String displayName, String passwordHash) {
+    public AcuityAccount(String email, String displayName, String passwordHash, String accountEncryptionKey) {
         this.email = email;
         this.displayName = displayName;
         this.passwordHash = passwordHash;
+        this.accountEncryptionKey = accountEncryptionKey;
     }
 
     public String getEmail() {
@@ -27,6 +29,10 @@ public class AcuityAccount extends Vertex {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public String getAccountEncryptionKey() {
+        return accountEncryptionKey;
     }
 
     public String getPasswordHash() {
