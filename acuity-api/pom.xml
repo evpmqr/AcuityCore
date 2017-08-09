@@ -48,6 +48,11 @@
             <artifactId>acuity-db</artifactId>
             <version>1.0.00-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.acuity</groupId>
+            <artifactId>acuity-control-client</artifactId>
+            <version>1.0.00-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

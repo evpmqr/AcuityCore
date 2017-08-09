@@ -1,4 +1,4 @@
-package com.acuity.client;
+package com.acuity.botcontrol;
 
 import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
@@ -8,15 +8,15 @@ import com.google.common.eventbus.Subscribe;
 /**
  * Created by Zachary Herridge on 8/9/2017.
  */
-public class WSClient {
+public class BotControl {
 
-    private static WSClient INSTANCE = new WSClient();
+    private static BotControl INSTANCE = new BotControl();
 
-    public static WSClient getInstance() {
+    public static BotControl getInstance() {
         return INSTANCE;
     }
 
-    public WSClient() {
+    public BotControl() {
         AcuityWSClient.getInstance().getEventBus().register(this);
     }
 

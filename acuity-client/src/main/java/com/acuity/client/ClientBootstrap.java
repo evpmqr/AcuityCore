@@ -8,6 +8,7 @@ import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.botcontrol.BotControl;
 import com.acuity.client.devgui.ScriptRunnerView;
 import com.google.common.eventbus.Subscribe;
 
@@ -56,7 +57,7 @@ public class ClientBootstrap {
     public ClientBootstrap() {
         EventQueue.invokeLater(() -> {
             try {
-                WSClient.getInstance().start();
+                BotControl.getInstance().start();
 
                 JFrame frame = new JFrame();
                 frame.setSize(new Dimension(800, 600));
