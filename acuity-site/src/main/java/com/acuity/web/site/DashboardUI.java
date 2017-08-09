@@ -57,11 +57,15 @@ public class DashboardUI extends UI {
 
     @Subscribe
     public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
-        AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).ifPresent(acuityAccount -> {
+        AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).orElse(null);
+        if (acuityAccount != null){
             getSession().setAttribute(AcuityAccount.class, acuityAccount);
             mainView.getDashboardNavigator().initViewProviders(acuityAccount);
-            Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!");
-        });
+            Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!", Notification.Type.TRAY_NOTIFICATION);
+        }
+        else {
+            Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);
+        }
         updateContent();
     }
 

@@ -52,13 +52,12 @@ public class RSAccountView extends VerticalLayout implements View{
 
         content.addComponent(new InlineLabel("Password:", VaadinIcons.PASSWORD));
 
-        Button passwordBttn = new Button(Strings.repeat("*", rsAccount.getPassword().length()));
+        Button passwordBttn = new Button(Strings.repeat("*", 10));
         passwordBttn.setStyleName(ValoTheme.BUTTON_BORDERLESS);
         passwordBttn.addStyleName("grid-button");
         passwordBttn.setHeight(25, Unit.PIXELS);
         passwordBttn.addClickListener(clickEvent -> {
-            passwordShown = !passwordShown;
-            if (passwordShown) {
+            if (!passwordShown) {
                 final Window window = new Window("Confirm Acuity Password");
                 window.setWidth(360.0f, Unit.PIXELS);
 
@@ -69,9 +68,13 @@ public class RSAccountView extends VerticalLayout implements View{
                             try {
                                 String password1 = RSAccountService.getInstance().decryptPassword(rsAccount.getPassword(), rsAccount.getPasswordIV(), password, acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
                                 passwordBttn.setCaption(password1);
+                                passwordShown = !passwordShown;
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        }
+                        else {
+                            Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);
                         }
                         window.close();
                     }
@@ -82,7 +85,10 @@ public class RSAccountView extends VerticalLayout implements View{
                 window.setContent(addRSAccountForm);
                 getUI().addWindow(window);
             }
-            else passwordBttn.setCaption(Strings.repeat("*", 10));
+            else {
+                passwordBttn.setCaption(Strings.repeat("*", 10));
+                passwordShown = !passwordShown;
+            }
 
         });
         content.addComponent(passwordBttn);

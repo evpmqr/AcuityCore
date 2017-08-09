@@ -56,6 +56,8 @@ public class ClientBootstrap {
     public ClientBootstrap() {
         EventQueue.invokeLater(() -> {
             try {
+                WSClient.getInstance().start();
+
                 JFrame frame = new JFrame();
                 frame.setSize(new Dimension(800, 600));
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
