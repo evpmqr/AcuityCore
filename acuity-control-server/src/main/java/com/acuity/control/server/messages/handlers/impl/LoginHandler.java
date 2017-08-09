@@ -26,7 +26,7 @@ public class LoginHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-        Double messageType = messagePackage.getHeader("messageType", (double) MessagePackage.Type.UNKNOWN);
+        Double messageType = messagePackage.getType();
         logger.info(messagePackage.toString());
         if (messageType == MessagePackage.Type.LOGIN){
 

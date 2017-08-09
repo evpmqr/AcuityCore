@@ -36,11 +36,26 @@ public class BotControl {
                 .putBody("sessionType", 1));
     }
 
+    public void send(MessagePackage messagePackage){
+        AcuityWSClient.getInstance().send(messagePackage);
+    }
+
     @Subscribe
     public void onMessage(MessagePackage messagePackage){
+        if (messagePackage.getType() == MessagePackage.Type.GOOD_LOGIN){
+            sendMachineInfo();
+        }
         if ("kill-bot".equals(messagePackage.getBody("command", null))){
             System.exit(0);
         }
+    }
+
+    private void sendMachineInfo(){
+        MessagePackage machineInfo = new MessagePackage(MessagePackage.Type.MACHINE_INFO);
+        for (String prop : System.getProperties().stringPropertyNames()) {
+            machineInfo.putBody(prop, System.getProperty(prop));
+        }
+        send(machineInfo);
     }
 
     public static void main(String[] args) {

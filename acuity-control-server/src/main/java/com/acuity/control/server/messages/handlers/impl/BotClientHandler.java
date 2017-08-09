@@ -38,7 +38,7 @@ public class BotClientHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-
+        System.out.println();
     }
 
     @Subscribe

@@ -1,6 +1,7 @@
 package com.acuity.db.arango.monitor.events;
 
 import com.acuity.db.arango.monitor.ArangoMonitorStream;
+import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientConfigEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientEvent;
@@ -46,6 +47,9 @@ public class ArangoEventDispatcher {
                 }
                 else if (event.getCName().equals("AssignedTo")){
                     eventBus.post(new RSAccountAssignedToEvent(event));
+                }
+                else if (event.getCName().equals("MessagePackage")){
+                    eventBus.post(new MessagePackageEvent(event));
                 }
                 else {
                     eventBus.post(event);
