@@ -4,6 +4,7 @@ import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.WrappedEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
+import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.util.Json;
 
 /**
@@ -32,7 +33,7 @@ public class BotClientEvent extends WrappedEvent implements BotClientIDEvent{
 
     @Override
     public String getBotClientID() {
-        return botClient.getID();
+        return BotClientService.getInstance().getCollectionName() + "/" + botClient.getKey();
     }
 
     @Override

@@ -14,6 +14,7 @@ public class ControlServerBootstrap {
             AcuityDB.init();
             Events.start();
             AcuityWSServer acuityWSServer = new AcuityWSServer(8015);
+            acuityWSServer.setConnectionLostTimeout(5);
             acuityWSServer.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();

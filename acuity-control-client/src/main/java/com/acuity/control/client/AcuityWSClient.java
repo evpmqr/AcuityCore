@@ -37,6 +37,7 @@ public class AcuityWSClient {
     public void start(String host) throws URISyntaxException {
         this.lastHost = host;
         wClient = new WClient(this.lastHost, new Draft_6455());
+        wClient.setConnectionLostTimeout(5);
         wClient.getEventBus().register(this);
         wClient.connect();
     }

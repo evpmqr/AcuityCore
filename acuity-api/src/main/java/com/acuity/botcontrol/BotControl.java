@@ -45,6 +45,9 @@ public class BotControl {
         if (messagePackage.getType() == MessagePackage.Type.GOOD_LOGIN){
             sendMachineInfo();
         }
+
+
+
         if ("kill-bot".equals(messagePackage.getBody("command", null))){
             System.exit(0);
         }
