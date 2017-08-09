@@ -11,19 +11,19 @@ public class AcuityAccount extends Vertex {
     private String email;
     private String displayName;
     private String passwordHash;
-    private String accountEncryptionIV;
-    private String accountEncryptionKey;
+    private String rsAccountEIV;
+    private String rsAccountEKey;
     private int rank;
 
     public AcuityAccount() {
     }
 
-    public AcuityAccount(String email, String displayName, String passwordHash, byte[] accountEncryptionIV, byte[] accountEncryptionKey) {
+    public AcuityAccount(String email, String displayName, String passwordHash, byte[] rsAccountEIV, byte[] rsAccountEKey) {
         this.email = email;
         this.displayName = displayName;
         this.passwordHash = passwordHash;
-        this.accountEncryptionIV = Encryption.ENCODER.encode(accountEncryptionIV);
-        this.accountEncryptionKey = Encryption.ENCODER.encode(accountEncryptionKey);
+        this.rsAccountEIV = Encryption.ENCODER.encode(rsAccountEIV);
+        this.rsAccountEKey = Encryption.ENCODER.encode(rsAccountEKey);
     }
 
     public String getEmail() {
@@ -34,12 +34,12 @@ public class AcuityAccount extends Vertex {
         return displayName;
     }
 
-    public String getAccountEncryptionIV() {
-        return accountEncryptionIV;
+    public String getRsAccountEIV() {
+        return rsAccountEIV;
     }
 
-    public String getAccountEncryptionKey() {
-        return accountEncryptionKey;
+    public String getRsAccountEKey() {
+        return rsAccountEKey;
     }
 
     public String getPasswordHash() {

@@ -4,6 +4,7 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.RSAccountService;
+import com.acuity.security.AcuityEncryption;
 import com.acuity.web.site.components.InlineLabel;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.impl.dashboard.modals.ConfirmPasswordModal;
@@ -63,10 +64,10 @@ public class RSAccountView extends VerticalLayout implements View{
 
                 ConfirmPasswordModal addRSAccountForm = new ConfirmPasswordModal(window){
                     @Override
-                    public void onConfirm(String password, AcuityAccount acuityAccount) {
+                    public void onConfirm(String acuityPassword, AcuityAccount acuityAccount) {
                         if (acuityAccount != null){
                             try {
-                                String password1 = RSAccountService.getInstance().decryptPassword(rsAccount.getPassword(), rsAccount.getPasswordIV(), password, acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
+                                String password1 = AcuityEncryption.decryptRSPassword(rsAccount.getPassword(), rsAccount.getPasswordIV(), acuityPassword, acuityAccount.getRsAccountEIV(), acuityAccount.getRsAccountEKey());
                                 passwordBttn.setCaption(password1);
                                 passwordShown = !passwordShown;
                             } catch (Exception e) {

@@ -43,7 +43,7 @@ public class AddRSAccountForm extends FormLayout {
         addComponent(new Button("Add", clickEvent -> {
             try {
                 if (AcuityAccountService.getInstance().checkLogin(acuityAccount.getEmail(), acuityPassword.getValue()).isPresent()){
-                    RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
+                    RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getRsAccountEIV(), acuityAccount.getRsAccountEKey());
                 }
                 else {
                     Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);

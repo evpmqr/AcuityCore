@@ -6,7 +6,6 @@ import com.acuity.db.services.DBCollectionService;
 import com.acuity.security.Encryption;
 import com.acuity.security.bcrypt.BCrypt;
 import com.arangodb.ArangoCursor;
-import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
 import javafx.util.Pair;
 
@@ -30,9 +29,9 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
 
     public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws Exception {
         Pair<byte[], byte[]> encrypt = Encryption.encrypt(Encryption.getSecrete(password, Encryption.SALT), Encryption.generateEncryptionKey());
-        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), encrypt.getKey(), encrypt.getValue());
-        DocumentCreateEntity<AcuityAccount> acuityAccountDocumentCreateEntity = getCollection().insertDocument(acuityAccount, new DocumentCreateOptions().returnNew(true));
-        return Optional.ofNullable(acuityAccountDocumentCreateEntity.getNew());
+        AcuityAccount insert = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), encrypt.getKey(), encrypt.getValue());
+        AcuityAccount result = getCollection().insertDocument(insert, new DocumentCreateOptions().returnNew(true)).getNew();
+        return Optional.ofNullable(result);
     }
 
     public Optional<AcuityAccount> checkLogin(String email, String password){

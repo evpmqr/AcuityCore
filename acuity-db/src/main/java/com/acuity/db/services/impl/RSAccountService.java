@@ -3,7 +3,7 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.DBCollectionService;
-import com.acuity.security.Encryption;
+import com.acuity.security.AcuityEncryption;
 import com.arangodb.entity.DocumentDeleteEntity;
 import com.arangodb.entity.MultiDocumentEntity;
 import javafx.util.Pair;
@@ -33,14 +33,8 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
     }
 
     public void addRSAccount(String ownerID, String email, String ign, String password, String acuityPassword, String accountEncryptionIV, String accountEncryptionKey) throws Exception {
-        String passwordEncryptionKey = Encryption.decrypt(Encryption.getSecrete(acuityPassword, Encryption.SALT), Encryption.DECODER.decodeBuffer(accountEncryptionIV) , Encryption.DECODER.decodeBuffer(accountEncryptionKey));
-        Pair<byte[], byte[]> encrypt = Encryption.encrypt(Encryption.getSecrete(passwordEncryptionKey, Encryption.SALT), password);
-        RSAccount rsAccount = new RSAccount(ownerID, email, ign, encrypt.getKey(), encrypt.getValue());
+        Pair<byte[], byte[]> result = AcuityEncryption.encryptRSPassword(password, acuityPassword, accountEncryptionIV, accountEncryptionKey);
+        RSAccount rsAccount = new RSAccount(ownerID, email, ign, result.getKey(), result.getValue());
         insert(rsAccount);
-    }
-
-    public String decryptPassword(String rsPassword, String rsPasswordIV, String acuityPassword, String accountEncryptionIV, String accountEncryptionKey) throws Exception{
-        String passwordEncryptionKey = Encryption.decrypt(Encryption.getSecrete(acuityPassword, Encryption.SALT), Encryption.DECODER.decodeBuffer(accountEncryptionIV) , Encryption.DECODER.decodeBuffer(accountEncryptionKey));
-        return Encryption.decrypt(Encryption.getSecrete(passwordEncryptionKey, Encryption.SALT), Encryption.DECODER.decodeBuffer(rsPasswordIV), Encryption.DECODER.decodeBuffer(rsPassword));
     }
 }
