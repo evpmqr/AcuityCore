@@ -37,7 +37,7 @@ public class LoginHandler extends MessageHandler {
             if (username != null && password != null && sessionType != null){
                 logger.debug("Attempting login for '{}'.", username);
                 AcuityAccount acuityAccount = AcuityAccountService.getInstance()
-                        .checkLogin(username, password)
+                        .checkLoginByEmail(username, password)
                         .orElse(null);
 
                 if (acuityAccount != null){

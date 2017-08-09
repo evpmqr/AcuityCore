@@ -22,7 +22,7 @@ public class ConfirmPasswordModal extends FormLayout {
         addComponent(confirm);
 
         confirm.addClickListener(clickEvent -> {
-            AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLogin(this.acuityAccount.getEmail(), passwordField.getValue()).orElse(null);
+            AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLoginByID(this.acuityAccount.getID(), passwordField.getValue()).orElse(null);
             onConfirm(passwordField.getValue(), acuityAccount);
         });
     }

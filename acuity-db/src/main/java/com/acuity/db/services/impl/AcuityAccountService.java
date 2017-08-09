@@ -34,7 +34,11 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
         return Optional.ofNullable(result);
     }
 
-    public Optional<AcuityAccount> checkLogin(String email, String password){
+    public Optional<AcuityAccount> checkLoginByID(String acuityID, String password){
+        return getByID(acuityID).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);
+    }
+
+    public Optional<AcuityAccount> checkLoginByEmail(String email, String password){
         return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);
     }
 

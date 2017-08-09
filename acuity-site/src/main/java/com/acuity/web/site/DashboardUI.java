@@ -57,7 +57,7 @@ public class DashboardUI extends UI {
 
     @Subscribe
     public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
-        AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).orElse(null);
+        AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLoginByEmail(event.getUserName(), event.getPassword()).orElse(null);
         if (acuityAccount != null){
             getSession().setAttribute(AcuityAccount.class, acuityAccount);
             mainView.getDashboardNavigator().initViewProviders(acuityAccount);

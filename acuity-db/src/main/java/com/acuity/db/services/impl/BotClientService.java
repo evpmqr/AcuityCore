@@ -8,7 +8,9 @@ import com.arangodb.model.DocumentCreateOptions;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
@@ -58,7 +60,9 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "    \"clientConfig\" : config,\n" +
                 "    \"assignedScript\" : document(config.assignedScriptID)\n" +
                 "    })";
-        return getDB().query(query, Collections.singletonMap("clientID", clientID), null, BotClient.class).asListRemaining().stream().findFirst();
+
+        Stream<BotClient> clientID1 = getDB().query(query, Collections.singletonMap("clientID", clientID), null, BotClient.class).asListRemaining().stream();
+        return clientID1.filter(Objects::nonNull).findAny();
     }
 
     public Optional<BotClient> registerClient(String key, String ownerID){

@@ -2,6 +2,7 @@ package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.impl.BotClientService;
@@ -77,16 +78,14 @@ public class BotClientsListView extends VerticalLayout implements View {
     public void onClientEvent(BotClientIDEvent event){
         String clientID = event.getBotClientID();
 
-        boolean update = false;
         if (event.getType() == ArangoEvent.DELETE){
-            update = clients.removeIf(botClient -> botClient.getID().equals(clientID));
+            if (clients.removeIf(botClient -> botClient.getID().equals(clientID)) && !(event instanceof BotClientEvent)){
+                BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
+                clientGrid.getDataProvider().refreshAll();
+            }
         }
         else if (event.getOwnerID().equals(acuityAccount.getID())){
             clients.removeIf(botClient -> botClient.getID().equals(clientID));
-            update= true;
-        }
-
-        if (update) {
             BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
             clientGrid.getDataProvider().refreshAll();
         }
