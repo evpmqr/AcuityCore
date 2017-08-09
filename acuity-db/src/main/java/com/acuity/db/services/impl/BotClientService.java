@@ -54,7 +54,7 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "    )\n" +
                 "let config = document(BotClientConfig, client._key)\n" +
                 "return merge(client, {\n" +
-                "    \"assignedAccount\" : first(assignment),\n" +
+                "    \"assignedAccount\" : document(first(assignment)._from),\n" +
                 "    \"clientConfig\" : config,\n" +
                 "    \"assignedScript\" : document(config.assignedScriptID)\n" +
                 "    })";

@@ -1,6 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientConfigEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
@@ -47,10 +48,10 @@ public class BotClientsListView extends VerticalLayout implements View {
 
     private void buildGrid(){
         clientGrid.setDataProvider(DataProvider.ofCollection(clients));
-        clientGrid.addColumn(BotClient::getKey).setCaption("Key");
-        clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected");
-        clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
+        clientGrid.addColumn(BotClient::getKey).setCaption("Key").setHidden(true);
+        clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected").setHidden(true);
         Grid.Column<BotClient, String> account = clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
+        clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.sort(account);
@@ -72,6 +73,25 @@ public class BotClientsListView extends VerticalLayout implements View {
     public void detach() {
         Events.getDBEventBus().unregister(this);
         super.detach();
+    }
+
+    @Subscribe
+    public void onConfigEvent(BotClientConfigEvent event){
+        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getBotClientConfig().getKey();
+
+        boolean update = false;
+        if (event.getType() == ArangoEvent.DELETE){
+            update = clients.removeIf(botClient -> botClient.getID().equals(clientID));
+        }
+        else if (event.getBotClientConfig().getOwnerID().equals(acuityAccount.getID())){
+            clients.removeIf(botClient -> botClient.getID().equals(clientID));
+            update= true;
+        }
+
+        if (update) {
+            BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
+            clientGrid.getDataProvider().refreshAll();
+        }
     }
 
     @Subscribe

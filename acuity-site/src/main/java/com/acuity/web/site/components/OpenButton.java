@@ -1,6 +1,7 @@
 package com.acuity.web.site.components;
 
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.BrowserWindowOpener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -17,8 +18,15 @@ public class OpenButton extends Button {
         addStyleName("acuity-primary");
         addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         addStyleName(ValoTheme.BUTTON_TINY);
+
         addClickListener(clickEvent -> {
-            getUI().getNavigator().navigateTo(navigationLocation);
+            if (clickEvent.isCtrlKey()){
+                BrowserWindowOpener extension = new BrowserWindowOpener("http://localhost:8080/#!Scripts");
+                extension.setUriFragment("");
+            }
+            else {
+                getUI().getNavigator().navigateTo(navigationLocation);
+            }
         });
     }
 }

@@ -1,6 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.botclient;
 
 import com.acuity.db.arango.monitor.events.ArangoEvent;
+import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientConfigEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.edge.impl.AssignedTo;
@@ -146,6 +147,22 @@ public class BotClientView extends VerticalLayout implements View {
         super.detach();
     }
 
+    @Subscribe
+    public void onConfigEvent(BotClientConfigEvent event) {
+        String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getBotClientConfig().getKey();
+
+        if (clientID.equals(botClient.getID())){
+            if (event.getType() == ArangoEvent.DELETE){
+                getUI().access(() -> assignedScript.clear());
+            }
+            else if (event.getBotClientConfig().getOwnerID().equals(acuityAccount.getID())){
+                ScriptService.getInstance().getByID(event.getBotClientConfig().getAssignedScriptID()).ifPresent(script -> {
+                    getUI().access(() -> assignedScript.setSelectedItem(script));
+                });
+            }
+        }
+
+    }
 
     @Subscribe
     public void onAssignmentUpdate(RSAccountAssignedToEvent event){

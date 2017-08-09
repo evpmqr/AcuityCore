@@ -8,15 +8,15 @@ import com.acuity.db.services.impl.BotClientService;
  */
 public class BotClientConfig extends Vertex {
 
-    private String acuityID;
+    private String ownerID;
     private String botClientID;
 
     private boolean running = true;
     private String assignedScriptID;
 
-    public BotClientConfig(String acuityID, String botClientKey) {
+    public BotClientConfig(String ownerID, String botClientKey) {
         this._key = botClientKey;
-        this.acuityID =  acuityID;
+        this.ownerID =  ownerID;
         this.botClientID = BotClientService.getInstance().getCollectionName() + "/" + botClientKey;
     }
 
@@ -29,6 +29,10 @@ public class BotClientConfig extends Vertex {
 
     public String getBotClientID() {
         return botClientID;
+    }
+
+    public String getOwnerID() {
+        return ownerID;
     }
 
     public boolean isRunning() {

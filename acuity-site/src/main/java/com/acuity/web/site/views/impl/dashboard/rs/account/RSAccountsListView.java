@@ -84,7 +84,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
     @Subscribe
     public void onRSAccountUpdate(RSAccountEvent event){
-        rsAccounts.remove(event.getRsAccount());
+        boolean remove = rsAccounts.remove(event.getRsAccount());
         if (event.getType() == ArangoEvent.CREATE_OR_UPDATE && event.getRsAccount().getOwnerID().equals(acuityAccount.getID())) {
             rsAccounts.add(event.getRsAccount());
         }

@@ -3,6 +3,7 @@ package com.acuity.web.site.events;
 import com.acuity.db.arango.monitor.ArangoMonitorStream;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.ArangoEventImpl;
+import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientConfigEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
@@ -68,6 +69,9 @@ public class Events implements SubscriberExceptionHandler {
                 }
                 else if (event.getCName().equals("RSAccount")){
                     dbEventBus.post(new RSAccountEvent(event));
+                }
+                else if (event.getCName().equals("BotClientConfig")){
+                    dbEventBus.post(new BotClientConfigEvent(event));
                 }
                 else if (event.getCName().equals("AssignedTo")){
                     dbEventBus.post(new RSAccountAssignedToEvent(event));
