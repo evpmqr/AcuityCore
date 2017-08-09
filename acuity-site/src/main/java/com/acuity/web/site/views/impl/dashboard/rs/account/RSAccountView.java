@@ -26,11 +26,26 @@ public class RSAccountView extends VerticalLayout implements View{
     private RSAccount rsAccount;
     private boolean passwordShown = false;
 
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
+        RSAccountService.getInstance().getByKey(event.getParameters()).ifPresent(result -> {
+            if (result.getOwnerID().equals(acuityAccount.getID())){
+                rsAccount = result;
+                Events.getDBEventBus().register(this);
+            }
+        });
+        if (rsAccount == null) getUI().getNavigator().navigateTo("ERROR VIEW");
+        else buildComponent();
+    }
 
-    public void build(){
+    @Subscribe
+    public void onRSAcccountEvent(RSAccountEvent event){
+
+    }
+
+    public void buildComponent(){
         addStyleName("view");
         Events.getDBEventBus().register(this);
-
         addInformationPanel();
     }
 
@@ -38,12 +53,15 @@ public class RSAccountView extends VerticalLayout implements View{
         Panel panel = new Panel("<strong>Information</strong>");
         panel.setResponsive(true);
         panel.setCaptionAsHtml(true);
+        panel.setContent(createInformationGrid());
+        addComponent(panel);
+    }
 
+    private GridLayout createInformationGrid(){
         GridLayout content = new GridLayout(2, 3);
         content.setResponsive(true);
         content.setSpacing(true);
         content.addStyleName("view-top");
-
 
         content.addComponent(new InlineLabel("Email:", VaadinIcons.MAILBOX));
         content.addComponent(new Label(rsAccount.getEmail()));
@@ -61,8 +79,7 @@ public class RSAccountView extends VerticalLayout implements View{
             if (!passwordShown) {
                 final Window window = new Window("Confirm Acuity Password");
                 window.setWidth(360.0f, Unit.PIXELS);
-
-                ConfirmPasswordModal addRSAccountForm = new ConfirmPasswordModal(window){
+                ConfirmPasswordModal confirmPasswordModal = new ConfirmPasswordModal(){
                     @Override
                     public void onConfirm(String acuityPassword, AcuityAccount acuityAccount) {
                         if (acuityAccount != null){
@@ -71,7 +88,7 @@ public class RSAccountView extends VerticalLayout implements View{
                                 passwordBttn.setCaption(password1);
                                 passwordShown = !passwordShown;
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                Notification.show("Error: " + e.getLocalizedMessage(), Notification.Type.TRAY_NOTIFICATION);
                             }
                         }
                         else {
@@ -80,10 +97,9 @@ public class RSAccountView extends VerticalLayout implements View{
                         window.close();
                     }
                 };
-
-                addRSAccountForm.setMargin(true);
+                confirmPasswordModal.setMargin(true);
                 window.setModal(true);
-                window.setContent(addRSAccountForm);
+                window.setContent(confirmPasswordModal);
                 getUI().addWindow(window);
             }
             else {
@@ -93,32 +109,12 @@ public class RSAccountView extends VerticalLayout implements View{
 
         });
         content.addComponent(passwordBttn);
-
-
-        panel.setContent(content);
-        addComponent(panel);
+        return content;
     }
 
     @Override
     public void detach() {
         Events.getDBEventBus().unregister(this);
         super.detach();
-    }
-
-    @Subscribe
-    public void onRSAcccountEvent(RSAccountEvent event){
-
-    }
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-        RSAccountService.getInstance().getByKey(event.getParameters()).ifPresent(result -> {
-            if (result.getOwnerID().equals(acuityAccount.getID())){
-                rsAccount = result;
-                Events.getDBEventBus().register(this);
-            }
-        });
-        if (rsAccount == null) getUI().getNavigator().navigateTo("ERROR VIEW");
-        else build();
     }
 }

@@ -21,36 +21,26 @@ public class AddScriptView extends FormLayout implements View {
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
     private Binder<Script> scriptBinder = new Binder<>();
 
+    private TextField title = new TextField("Title");
+    private ComboBox<String> category = new ComboBox<>("Category", Arrays.asList("Other"));
+    private TextArea description = new TextArea("Description");
+    private Button addScript = new Button("Add Script");
+
     public AddScriptView() {
+        buildComponent();
+    }
+
+    private void buildComponent(){
         addStyleName("view");
+        setSizeFull();
+        setResponsive(true);
+        addFields();
+        addAddScriptButton();
+        addValidators();
+    }
 
-        TextField title = new TextField("Title");
-        title.setRequiredIndicatorVisible(true);
-        title.setIcon(VaadinIcons.TEXT_LABEL);
-        scriptBinder.forField(title)
-                .asRequired("Must have a title")
-                .withValidator(new StringLengthValidator("Title must be between 5 and 30 letters.", 5, 30))
-                .bind(Script::getTitle, Script::setTitle);
-        addComponent(title);
-
-        ComboBox<String> category = new ComboBox<>("Category", Arrays.asList("Other"));
-        category.setRequiredIndicatorVisible(true);
-        category.setIcon(VaadinIcons.FILE_TREE_SMALL);
-        scriptBinder.forField(category)
-                .asRequired("Must select a category")
-                .bind(Script::getCategory, Script::setCategory);
-        addComponent(category);
-
-        TextArea description = new TextArea("Description");
-        description.setIcon(VaadinIcons.FILE_TEXT);
-        description.setRequiredIndicatorVisible(true);
-        scriptBinder.forField(description)
-                .asRequired("Must have a description.")
-                .withValidator(new StringLengthValidator("Description must be between 25 and 250 letters.", 25, 250))
-                .bind(Script::getDesc, Script::setDesc);
-        addComponent(description);
-
-        Button add = new Button("Add Script", clickEvent -> {
+    private void addAddScriptButton(){
+        addScript.addClickListener(clickEvent -> {
             try {
                 Script script = new Script();
                 scriptBinder.writeBean(script);
@@ -61,10 +51,37 @@ public class AddScriptView extends FormLayout implements View {
                 Notification.show("Script could not be saved, please check error messages for each field.");
             }
         });
-        add.setIcon(VaadinIcons.CLOUD_UPLOAD);
-        addComponent(add);
 
-        setSizeFull();
-        setResponsive(true);
+        addScript.setIcon(VaadinIcons.CLOUD_UPLOAD);
+        addComponent(addScript);
     }
+
+    private void addFields(){
+        title.setRequiredIndicatorVisible(true);
+        title.setIcon(VaadinIcons.TEXT_LABEL);
+        addComponent(title);
+
+        category.setRequiredIndicatorVisible(true);
+        category.setIcon(VaadinIcons.FILE_TREE_SMALL);
+        addComponent(category);
+
+        description.setIcon(VaadinIcons.FILE_TEXT);
+        description.setRequiredIndicatorVisible(true);
+        addComponent(description);
+    }
+
+    private void addValidators(){
+        scriptBinder.forField(description)
+                .asRequired("Must have a description.")
+                .withValidator(new StringLengthValidator("Description must be between 25 and 250 letters.", 25, 250))
+                .bind(Script::getDesc, Script::setDesc);
+        scriptBinder.forField(category)
+                .asRequired("Must select a category")
+                .bind(Script::getCategory, Script::setCategory);
+        scriptBinder.forField(title)
+                .asRequired("Must have a title")
+                .withValidator(new StringLengthValidator("Title must be between 5 and 30 letters.", 5, 30))
+                .bind(Script::getTitle, Script::setTitle);
+    }
+
 }

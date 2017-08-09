@@ -38,7 +38,7 @@ public class BotClientHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-        System.out.println();
+
     }
 
     @Subscribe
@@ -81,7 +81,6 @@ public class BotClientHandler extends MessageHandler {
         logger.debug("Login complete");
         AcuityAccount acuityAccount = getSocket().getSession().getAttribute(AcuityAccount.class);
         if (acuityAccount != null){
-
             BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey()).ifPresent(botClient -> {
                 this.botClient = botClient;
                 BotClientConfigService.getInstance().registerConfig(acuityAccount.getID(), botClient.getKey()).ifPresent(botClientConfig -> {

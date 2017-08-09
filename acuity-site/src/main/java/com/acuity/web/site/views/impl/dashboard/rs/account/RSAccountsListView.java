@@ -33,11 +33,43 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private MultiSelectionModel<RSAccount> rsAccountMultiSelectionModel = (MultiSelectionModel<RSAccount>) grid.setSelectionMode(Grid.SelectionMode.MULTI);
 
     public RSAccountsListView() {
-        addStyleName("view");
-        rsAccounts = RSAccountService.getInstance().getByOwner(acuityAccount.getID());
         Events.getDBEventBus().register(this);
-        setSizeFull();
+        rsAccounts = RSAccountService.getInstance().getByOwner(acuityAccount.getID());
+        buildComponent();
+    }
 
+    @Subscribe
+    public void onRSAccountUpdate(RSAccountEvent event){
+        boolean remove = rsAccounts.remove(event.getRsAccount());
+        if (event.getType() == ArangoEvent.CREATE_OR_UPDATE && event.getRsAccount().getOwnerID().equals(acuityAccount.getID())) {
+            rsAccounts.add(event.getRsAccount());
+        }
+        grid.getDataProvider().refreshAll();
+    }
+
+    private void buildComponent(){
+        addStyleName("view");
+        setSizeFull();
+        addRSAccountsGrid();
+        addControls();
+    }
+
+    private void addControls(){
+        HorizontalLayout controls = new HorizontalLayout();
+        controls.addComponents(createNewRSAccountButton(), createDeleteSelectedButton());
+        addComponents(controls);
+    }
+
+    private Button createDeleteSelectedButton(){
+        Button delete = new Button("Delete Selected", clickEvent -> {
+            MultiDocumentEntity<DocumentDeleteEntity<Void>> results = RSAccountService.getInstance().deleteAccounts(rsAccountMultiSelectionModel.getSelectedItems());
+            Notification.show("Deleted " + (long) results.getDocuments().size() + " Account(s).", Notification.Type.TRAY_NOTIFICATION);
+        });
+        delete.setIcon(VaadinIcons.TRASH);
+        return delete;
+    }
+
+    private Button createNewRSAccountButton(){
         Button addRSAccount = new Button("Add", clickEvent -> {
             final Window window = new Window("Add RS-Account");
             window.setWidth(360.0f, Unit.PIXELS);
@@ -47,21 +79,10 @@ public class RSAccountsListView extends VerticalLayout implements View{
             getUI().addWindow(window);
         });
         addRSAccount.setIcon(VaadinIcons.PLUS_CIRCLE);
-
-        Button delete = new Button("Delete Selected", clickEvent -> {
-            MultiDocumentEntity<DocumentDeleteEntity<Void>> results = RSAccountService.getInstance().deleteAccounts(rsAccountMultiSelectionModel.getSelectedItems());
-            Notification.show("Deleted " + (long) results.getDocuments().size() + " Account(s).", Notification.Type.TRAY_NOTIFICATION);
-        });
-        delete.setIcon(VaadinIcons.TRASH);
-
-        HorizontalLayout controls = new HorizontalLayout();
-        controls.addComponents(addRSAccount, delete);
-
-        buildGrid();
-        addComponents(controls);
+        return addRSAccount;
     }
 
-    private void buildGrid(){
+    private void addRSAccountsGrid(){
         grid.setDataProvider(DataProvider.ofCollection(rsAccounts));
         grid.addColumn(RSAccount::getEmail).setCaption("Email");
         grid.addColumn(RSAccount::getIgn).setCaption("IGN");
@@ -80,15 +101,6 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
         grid.getColumns().forEach(column -> column.setHidable(true));
         addComponent(grid);
-    }
-
-    @Subscribe
-    public void onRSAccountUpdate(RSAccountEvent event){
-        boolean remove = rsAccounts.remove(event.getRsAccount());
-        if (event.getType() == ArangoEvent.CREATE_OR_UPDATE && event.getRsAccount().getOwnerID().equals(acuityAccount.getID())) {
-            rsAccounts.add(event.getRsAccount());
-        }
-        grid.getDataProvider().refreshAll();
     }
 
     @Override

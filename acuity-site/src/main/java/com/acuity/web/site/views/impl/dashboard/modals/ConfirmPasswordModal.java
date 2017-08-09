@@ -6,7 +6,6 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.Window;
 
 /**
  * Created by Zachary Herridge on 8/9/2017.
@@ -15,7 +14,7 @@ public class ConfirmPasswordModal extends FormLayout {
 
     private AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
 
-    public ConfirmPasswordModal(Window window) {
+    public ConfirmPasswordModal() {
         PasswordField passwordField = new PasswordField("Password");
         addComponent(passwordField);
         Button confirm = new Button("Confirm");
