@@ -1,6 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.rs.account;
 
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
+import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.db.services.impl.RSAccountService;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinSession;
@@ -41,7 +42,13 @@ public class AddRSAccountForm extends FormLayout {
 
         addComponent(new Button("Add", clickEvent -> {
             try {
-                RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
+                if (AcuityAccountService.getInstance().checkLogin(acuityAccount.getEmail(), acuityPassword.getValue()).isPresent()){
+                    RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
+                }
+                else {
+                    Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);
+                }
+
                 if (window != null) window.close();
             } catch (Exception e) {
                 e.printStackTrace();

@@ -53,7 +53,6 @@ public class Encryption {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
         return new String(cipher.doFinal(encryptedText), "UTF-8");
-
     }
 
     public static Pair<byte[], byte[]> encrypt(SecretKey key, String plainText) throws Exception{

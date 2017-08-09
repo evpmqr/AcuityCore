@@ -38,4 +38,9 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
         RSAccount rsAccount = new RSAccount(ownerID, email, ign, encrypt.getKey(), encrypt.getValue());
         insert(rsAccount);
     }
+
+    public String decryptPassword(String rsPassword, String rsPasswordIV, String acuityPassword, String accountEncryptionIV, String accountEncryptionKey) throws Exception{
+        String passwordEncryptionKey = Encryption.decrypt(Encryption.getSecrete(acuityPassword, Encryption.SALT), Encryption.DECODER.decodeBuffer(accountEncryptionIV) , Encryption.DECODER.decodeBuffer(accountEncryptionKey));
+        return Encryption.decrypt(Encryption.getSecrete(passwordEncryptionKey, Encryption.SALT), Encryption.DECODER.decodeBuffer(rsPasswordIV), Encryption.DECODER.decodeBuffer(rsPassword));
+    }
 }

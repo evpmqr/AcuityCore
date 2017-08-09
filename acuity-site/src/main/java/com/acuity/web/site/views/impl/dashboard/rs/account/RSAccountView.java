@@ -6,6 +6,7 @@ import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.RSAccountService;
 import com.acuity.web.site.components.InlineLabel;
 import com.acuity.web.site.events.Events;
+import com.acuity.web.site.views.impl.dashboard.modals.ConfirmPasswordModal;
 import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.icons.VaadinIcons;
@@ -51,15 +52,37 @@ public class RSAccountView extends VerticalLayout implements View{
 
         content.addComponent(new InlineLabel("Password:", VaadinIcons.PASSWORD));
 
-
         Button passwordBttn = new Button(Strings.repeat("*", rsAccount.getPassword().length()));
         passwordBttn.setStyleName(ValoTheme.BUTTON_BORDERLESS);
         passwordBttn.addStyleName("grid-button");
         passwordBttn.setHeight(25, Unit.PIXELS);
         passwordBttn.addClickListener(clickEvent -> {
             passwordShown = !passwordShown;
-            if (passwordShown) passwordBttn.setCaption(rsAccount.getPassword());
-            else passwordBttn.setCaption(Strings.repeat("*", rsAccount.getPassword().length()));
+            if (passwordShown) {
+                final Window window = new Window("Confirm Acuity Password");
+                window.setWidth(360.0f, Unit.PIXELS);
+
+                ConfirmPasswordModal addRSAccountForm = new ConfirmPasswordModal(window){
+                    @Override
+                    public void onConfirm(String password, AcuityAccount acuityAccount) {
+                        if (acuityAccount != null){
+                            try {
+                                String password1 = RSAccountService.getInstance().decryptPassword(rsAccount.getPassword(), rsAccount.getPasswordIV(), password, acuityAccount.getAccountEncryptionIV(), acuityAccount.getAccountEncryptionKey());
+                                passwordBttn.setCaption(password1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        window.close();
+                    }
+                };
+
+                addRSAccountForm.setMargin(true);
+                window.setModal(true);
+                window.setContent(addRSAccountForm);
+                getUI().addWindow(window);
+            }
+            else passwordBttn.setCaption(Strings.repeat("*", 10));
 
         });
         content.addComponent(passwordBttn);
