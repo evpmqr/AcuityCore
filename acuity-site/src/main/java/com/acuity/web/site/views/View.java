@@ -2,6 +2,7 @@ package com.acuity.web.site.views;
 
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.web.site.views.impl.LoginView;
+import com.acuity.web.site.views.impl.RegistrationView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientsListView;
 import com.acuity.web.site.views.impl.dashboard.menu.MenuItem;
@@ -23,7 +24,8 @@ public enum View {
     ADD_SCRIPT(AddScriptView.class, "AddScript", false, null, 1),
     SCRIPT(ScriptView.class, "Script", false, null, 1),
     SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
-    LOGIN(LoginView.class, "LOGIN", false, null, 0)
+    LOGIN(LoginView.class, "Login", false, null, 0),
+    REGISTER(RegistrationView.class, "Register", false, null, 0)
     ;
 
     private Class<? extends com.vaadin.navigator.View> viewClass;

@@ -50,6 +50,8 @@ public class AcuityAccount extends Vertex {
         return rank;
     }
 
+
+
     @Override
     public String toString() {
         return "AcuityAccount{" +
