@@ -91,6 +91,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private Button createDeletedUnusableButton() {
         final Button deleteUnusableButton = new Button("Delete Unusable", clickEvent -> {
             RSAccountService.getInstance().deleteUnusableAccounts(acuityAccount.getID());
+            Notification.show("Deleted All Unusable Account(s).", Notification.Type.TRAY_NOTIFICATION);
         });
         deleteUnusableButton.setIcon(VaadinIcons.CLOSE_SMALL);
         return deleteUnusableButton;

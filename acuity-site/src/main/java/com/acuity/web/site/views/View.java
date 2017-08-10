@@ -20,6 +20,7 @@ import com.vaadin.icons.VaadinIcons;
  */
 public enum View {
 
+    LANDING(LandingView.class, "Introduction", true, VaadinIcons.USER, 0),
     ACCOUNTS(RSAccountsListView.class, "RS-Accounts", true, VaadinIcons.USER, 1),
     ACCOUNT(RSAccountView.class, "RS-Account", false, null, 1),
     CLIENTS(BotClientsListView.class, "Clients", true, VaadinIcons.CLUSTER, 1),
