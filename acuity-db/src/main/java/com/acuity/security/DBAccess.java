@@ -17,6 +17,10 @@ public class DBAccess {
         return getProperty("arangodb.password");
     }
 
+    public static String getPassword2(){
+        return getProperty("password2");
+    }
+
     private static String getProperty(String key){
         Properties prop = new Properties();
         try (InputStream in = DBAccess.class.getClassLoader().getResourceAsStream("db.properties")){

@@ -3,6 +3,7 @@ package com.acuity.botcontrol;
 import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.security.DBAccess;
 import com.google.common.eventbus.Subscribe;
 
 /**
@@ -31,8 +32,8 @@ public class BotControl {
     @Subscribe
     public void onConnect(WClientEvent.Opened opened){
         AcuityWSClient.getInstance().send(new MessagePackage(MessagePackage.Type.LOGIN)
-                .putBody("username", "test@gmail.com")
-                .putBody("password", "123123")
+                .putBody("username", "zgherridge@gmail.com")
+                .putBody("password", DBAccess.getPassword2())
                 .putBody("sessionType", 1));
     }
 

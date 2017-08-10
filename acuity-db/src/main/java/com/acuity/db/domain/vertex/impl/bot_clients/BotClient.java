@@ -1,6 +1,7 @@
 package com.acuity.db.domain.vertex.impl.bot_clients;
 
 import com.acuity.db.domain.vertex.Vertex;
+import com.acuity.db.domain.vertex.impl.Proxy;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.impl.AcuityAccountService;
@@ -18,6 +19,7 @@ public class BotClient extends Vertex {
     private RSAccount assignedAccount;
     private Script assignedScript;
     private BotClientConfig clientConfig;
+    private Proxy assignedProxy;
 
     public BotClient(String key, String ownerKey) {
         this._key = key;
@@ -41,6 +43,10 @@ public class BotClient extends Vertex {
 
     public RSAccount getAssignedAccount() {
         return assignedAccount;
+    }
+
+    public Proxy getAssignedProxy() {
+        return assignedProxy;
     }
 
     public BotClientConfig getClientConfig() {

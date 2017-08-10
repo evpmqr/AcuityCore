@@ -8,6 +8,7 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.imp
 import com.acuity.db.domain.edge.impl.AssignedTo;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.db.domain.vertex.impl.Proxy;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
@@ -34,6 +35,7 @@ public class BotClientView extends VerticalLayout implements View {
 
     private ComboBox<RSAccount> assignedAccount = new ComboBox<>();
     private ComboBox<Script> assignedScript = new ComboBox<>();
+    private ComboBox<Proxy> assignedProxy = new ComboBox<>();
 
     private void build(){
         addStyleName("view");
@@ -55,7 +57,7 @@ public class BotClientView extends VerticalLayout implements View {
         panel.setResponsive(true);
         panel.setCaptionAsHtml(true);
 
-        GridLayout content = new GridLayout(2, 4);
+        GridLayout content = new GridLayout(2, 5);
         content.setResponsive(true);
         content.setSpacing(true);
         content.addStyleName("view-top");
@@ -77,14 +79,38 @@ public class BotClientView extends VerticalLayout implements View {
         content.addComponent(accountLabel);
         content.addComponent(createAccountComboBox());
 
-        Label scriptLabel = new InlineLabel("Script:", VaadinIcons.CODE);
 
-
-        content.addComponent(scriptLabel);
+        content.addComponent(new InlineLabel("Script:", VaadinIcons.CODE));
         content.addComponent(createScriptComboBox());
+
+
+        content.addComponent(new InlineLabel("Proxy:", VaadinIcons.CONNECT));
+        content.addComponent(createProxyComboBox());
 
         panel.setContent(content);
         addComponent(panel);
+    }
+
+    private ComboBox createProxyComboBox(){
+        assignedProxy.setHeight(25, Unit.PIXELS);
+        assignedProxy.setWidth(100, Unit.PERCENTAGE);
+        assignedProxy.setItemCaptionGenerator(proxy -> proxy.getHost() + ":" + proxy.getPort());
+
+
+        List<Proxy> byOwner = ProxyService.getInstance().getByOwner(acuityAccount.getID());
+        assignedProxy.setItems(byOwner);
+
+        ProxyService.getInstance().getByID(botClient.getClientConfig().getAssignedProxyID()).ifPresent(proxy -> {
+            assignedProxy.setSelectedItem(proxy);
+        });
+
+        assignedProxy.addSelectionListener(singleSelectionEvent -> {
+            if (singleSelectionEvent.isUserOriginated()){
+                Proxy selectProxy = singleSelectionEvent.getFirstSelectedItem().orElse(null);
+                BotClientConfigService.getInstance().assignProxy(botClient.getKey(), selectProxy != null ? selectProxy.getID() : null);
+            }
+        });
+        return assignedProxy;
     }
 
     private ComboBox createScriptComboBox(){

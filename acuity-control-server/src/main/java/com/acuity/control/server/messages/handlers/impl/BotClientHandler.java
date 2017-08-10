@@ -48,7 +48,7 @@ public class BotClientHandler extends MessageHandler {
             String name = messagePackage.getBody("user.name", null);
             if (name != null){
                 ArangoCollection collection = AcuityDB.getDB().db(AcuityDB.DB_NAME).collection("Machine");
-                String key = ownerID + ":" + name;
+                String key = ownerID + "-" + name;
                 Machine machine = new Machine(ownerID, key);
                 machine.getProperties().putAll(messagePackage.getBody());
                 if (collection.documentExists(key)){

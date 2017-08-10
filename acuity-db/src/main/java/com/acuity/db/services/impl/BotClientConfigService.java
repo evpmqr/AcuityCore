@@ -37,6 +37,11 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
         getCollection().updateDocument(configKey, value, new DocumentUpdateOptions().keepNull(true));
     }
 
+    public void assignProxy(String configKey, String proxyID){
+        BaseDocument value = new BaseDocument();
+        value.addAttribute("assignedProxyID", proxyID);
+        getCollection().updateDocument(configKey, value, new DocumentUpdateOptions().keepNull(true));
+    }
 
     public void removeConfig(String configKey) {
         getCollection().deleteDocument(configKey);

@@ -38,9 +38,10 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "        )\n" +
                 "    let config = document(BotClientConfig, client._key)\n" +
                 "  return merge(client, {\n" +
-                "        \"assignedAccount\" : document(first(assignment)._from),\n" +
+                "        \"assignedAccount\" : first(assignment),\n" +
                 "        \"clientConfig\" : config,\n" +
-                "        \"assignedScript\" : document(config.assignedScriptID)\n" +
+                "        \"assignedScript\" : document(config.assignedScriptID),\n" +
+                "        \"assignedProxy\" : document(config.assignedProxyID)\n" +
                 "        })";
 
         return getDB().query(query, Collections.singletonMap("ownerID", ownerID), null, BotClient.class).asListRemaining();
@@ -58,7 +59,8 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "return merge(client, {\n" +
                 "    \"assignedAccount\" : document(first(assignment)._from),\n" +
                 "    \"clientConfig\" : config,\n" +
-                "    \"assignedScript\" : document(config.assignedScriptID)\n" +
+                "    \"assignedScript\" : document(config.assignedScriptID),\n" +
+                "    \"assignedProxy\" : document(config.assignedProxyID)\n" +
                 "    })";
 
         Stream<BotClient> clientID1 = getDB().query(query, Collections.singletonMap("clientID", clientID), null, BotClient.class).asListRemaining().stream();
