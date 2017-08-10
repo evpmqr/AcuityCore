@@ -4,10 +4,7 @@ import com.acuity.web.site.components.InlineLabel;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 /**
  * Created by Eclipseop.
@@ -15,10 +12,20 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class LandingView extends VerticalLayout implements View {
 
-	private void build() {
+	@Override
+	public void enter(ViewChangeListener.ViewChangeEvent event) {
+		buildComponent();
+	}
+
+	private void buildComponent() {
+		setSizeFull();
+		setMargin(false);
+		setSpacing(false);
 		addStyleName("view");
 
-		addComponent(createMainPanel());
+		Panel mainPanel = createMainPanel();
+		addComponent(mainPanel);
+		setComponentAlignment(mainPanel, Alignment.MIDDLE_CENTER);
 	}
 
 	private Panel createMainPanel() {
@@ -49,10 +56,5 @@ public class LandingView extends VerticalLayout implements View {
 		panel.setContent(content);
 
 		return panel;
-	}
-
-	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent event) {
-		build();
 	}
 }

@@ -1,6 +1,7 @@
 package com.acuity.web.site;
 
 import com.acuity.db.AcuityDB;
+import com.acuity.dropbox.AcuityRepo;
 import com.acuity.web.site.events.Events;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinServlet;
@@ -22,6 +23,7 @@ public class DashboardServlet extends VaadinServlet {
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         AcuityDB.init();
+        AcuityRepo.init();
         Events.start();
     }
 
