@@ -19,6 +19,13 @@ public class Machine extends Vertex{
         this.ownerID = ownerID;
     }
 
+    public Machine() {
+    }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
     public HashSet<String> getIPs() {
         return ips;
     }

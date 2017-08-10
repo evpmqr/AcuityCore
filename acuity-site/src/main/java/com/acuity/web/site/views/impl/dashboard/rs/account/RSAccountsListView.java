@@ -72,7 +72,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private Button createNewRSAccountButton(){
         Button addRSAccount = new Button("Add", clickEvent -> {
             final Window window = new Window("Add RS-Account");
-            window.setWidth(360.0f, Unit.PIXELS);
+            window.setSizeUndefined();
             AddRSAccountForm addRSAccountForm = new AddRSAccountForm(window);
             addRSAccountForm.setMargin(true);
             window.setContent(addRSAccountForm);
@@ -85,6 +85,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private Button createDeletedUnusableButton() {
         final Button deleteUnusableButton = new Button("Delete Unusable", clickEvent -> {
             RSAccountService.getInstance().deleteUnusableAccounts(acuityAccount.getID());
+            Notification.show("Deleted All Unusable Account(s).", Notification.Type.TRAY_NOTIFICATION);
         });
         deleteUnusableButton.setIcon(VaadinIcons.CLOSE_SMALL);
         return deleteUnusableButton;

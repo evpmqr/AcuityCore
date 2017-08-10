@@ -1,6 +1,8 @@
 package com.acuity.db.domain.vertex.impl.bot_clients;
 
 import com.acuity.db.domain.vertex.Vertex;
+import com.acuity.db.domain.vertex.impl.Machine;
+import com.acuity.db.domain.vertex.impl.Proxy;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.impl.AcuityAccountService;
@@ -15,13 +17,19 @@ public class BotClient extends Vertex {
     private String ownerID;
     private LocalDateTime connectionTime = LocalDateTime.now();
 
+    private String machineID;
+
+
     private RSAccount assignedAccount;
     private Script assignedScript;
     private BotClientConfig clientConfig;
+    private Proxy assignedProxy;
+    private Machine machine;
 
-    public BotClient(String key, String ownerKey) {
+    public BotClient(String key, String ownerKey, String machineID) {
         this._key = key;
         this.ownerID = AcuityAccountService.getInstance().getCollectionName() + "/" + ownerKey;
+        this.machineID = machineID;
     }
 
     public BotClient() {
@@ -41,6 +49,18 @@ public class BotClient extends Vertex {
 
     public RSAccount getAssignedAccount() {
         return assignedAccount;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public String getMachineID() {
+        return machineID;
+    }
+
+    public Proxy getAssignedProxy() {
+        return assignedProxy;
     }
 
     public BotClientConfig getClientConfig() {

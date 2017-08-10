@@ -3,8 +3,10 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.DBCollectionService;
+import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
+import com.arangodb.model.DocumentUpdateOptions;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +29,12 @@ public class BotClientService extends DBCollectionService<BotClient> {
         super(AcuityDB.DB_NAME, "BotClient", BotClient.class);
     }
 
+    public void setMachine(String botClientKey, String machineID) {
+        BaseDocument value = new BaseDocument();
+        value.addAttribute("machineID", machineID);
+        getCollection().updateDocument(botClientKey, value, new DocumentUpdateOptions().keepNull(true));
+    }
+
     public List<BotClient> getJoinedByOwnerID(String ownerID){
         String query = "for client in BotClient\n" +
                 "    filter client.ownerID == @ownerID\n" +
@@ -40,9 +48,10 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "  return merge(client, {\n" +
                 "        \"assignedAccount\" : document(first(assignment)._from),\n" +
                 "        \"clientConfig\" : config,\n" +
-                "        \"assignedScript\" : document(config.assignedScriptID)\n" +
+                "        \"assignedScript\" : document(config.assignedScriptID),\n" +
+                "        \"assignedProxy\" : document(config.assignedProxyID),\n" +
+                "        \"machine\" : document(client.machineID)\n" +
                 "        })";
-
         return getDB().query(query, Collections.singletonMap("ownerID", ownerID), null, BotClient.class).asListRemaining();
     }
 
@@ -58,15 +67,17 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "return merge(client, {\n" +
                 "    \"assignedAccount\" : document(first(assignment)._from),\n" +
                 "    \"clientConfig\" : config,\n" +
-                "    \"assignedScript\" : document(config.assignedScriptID)\n" +
+                "    \"assignedScript\" : document(config.assignedScriptID),\n" +
+                "    \"assignedProxy\" : document(config.assignedProxyID),\n" +
+                "    \"machine\" : document(client.machineID)\n" +
                 "    })";
 
         Stream<BotClient> clientID1 = getDB().query(query, Collections.singletonMap("clientID", clientID), null, BotClient.class).asListRemaining().stream();
         return clientID1.filter(Objects::nonNull).findAny();
     }
 
-    public Optional<BotClient> registerClient(String key, String ownerID){
-        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID), new DocumentCreateOptions().returnNew(true));
+    public Optional<BotClient> registerClient(String key, String ownerID, String machineID){
+        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID, machineID), new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(createEntity.getNew());
     }
 

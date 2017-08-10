@@ -84,7 +84,7 @@ public class RSAccountView extends VerticalLayout implements View{
                     public void onConfirm(String acuityPassword, AcuityAccount acuityAccount) {
                         if (acuityAccount != null){
                             try {
-                                String password1 = AcuityEncryption.decryptRSPassword(rsAccount.getPassword(), rsAccount.getPasswordIV(), acuityPassword, acuityAccount.getRsAccountEIV(), acuityAccount.getRsAccountEKey());
+                                String password1 = AcuityEncryption.decryptString(rsAccount.getPassword(), acuityPassword, acuityAccount.getPasswordEncryptionKey());
                                 passwordBttn.setCaption(password1);
                                 passwordShown = !passwordShown;
                             } catch (Exception e) {

@@ -11,8 +11,8 @@ public class BotClientConfig extends Vertex {
     private String ownerID;
     private String botClientID;
 
-    private boolean running = true;
     private String assignedScriptID;
+    private String assignedProxyID;
 
     public BotClientConfig(String ownerID, String botClientKey) {
         this._key = botClientKey;
@@ -21,6 +21,10 @@ public class BotClientConfig extends Vertex {
     }
 
     public BotClientConfig() {
+    }
+
+    public String getAssignedProxyID() {
+        return assignedProxyID;
     }
 
     public String getAssignedScriptID() {
@@ -33,9 +37,5 @@ public class BotClientConfig extends Vertex {
 
     public String getOwnerID() {
         return ownerID;
-    }
-
-    public boolean isRunning() {
-        return running;
     }
 }

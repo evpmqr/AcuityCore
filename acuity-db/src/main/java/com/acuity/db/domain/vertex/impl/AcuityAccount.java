@@ -1,7 +1,7 @@
 package com.acuity.db.domain.vertex.impl;
 
+import com.acuity.db.domain.common.EncryptedString;
 import com.acuity.db.domain.vertex.Vertex;
-import com.acuity.security.Encryption;
 
 /**
  * Created by Zachary Herridge on 8/1/2017.
@@ -11,19 +11,21 @@ public class AcuityAccount extends Vertex {
     private String email;
     private String displayName;
     private String passwordHash;
-    private String rsAccountEIV;
-    private String rsAccountEKey;
+
+    private EncryptedString passwordEncryptionKey;
+
+    private boolean allowPasswordMemoryStoring = false;
+
     private int rank;
 
     public AcuityAccount() {
     }
 
-    public AcuityAccount(String email, String displayName, String passwordHash, byte[] rsAccountEIV, byte[] rsAccountEKey) {
+    public AcuityAccount(String email, String displayName, String passwordHash, EncryptedString passwordEncryptionKey) {
         this.email = email;
         this.displayName = displayName;
         this.passwordHash = passwordHash;
-        this.rsAccountEIV = Encryption.ENCODER.encode(rsAccountEIV);
-        this.rsAccountEKey = Encryption.ENCODER.encode(rsAccountEKey);
+        this.passwordEncryptionKey = passwordEncryptionKey;
     }
 
     public String getEmail() {
@@ -34,12 +36,8 @@ public class AcuityAccount extends Vertex {
         return displayName;
     }
 
-    public String getRsAccountEIV() {
-        return rsAccountEIV;
-    }
-
-    public String getRsAccountEKey() {
-        return rsAccountEKey;
+    public EncryptedString getPasswordEncryptionKey() {
+        return passwordEncryptionKey;
     }
 
     public String getPasswordHash() {
@@ -50,7 +48,9 @@ public class AcuityAccount extends Vertex {
         return rank;
     }
 
-
+    public boolean isAllowPasswordMemoryStoring() {
+        return allowPasswordMemoryStoring;
+    }
 
     @Override
     public String toString() {

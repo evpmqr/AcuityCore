@@ -60,6 +60,7 @@ public class DashboardUI extends UI {
         AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLoginByEmail(event.getUserName(), event.getPassword()).orElse(null);
         if (acuityAccount != null){
             getSession().setAttribute(AcuityAccount.class, acuityAccount);
+            if (acuityAccount.isAllowPasswordMemoryStoring()) getSession().setAttribute("passwordStore", event.getPassword());
             mainView.getDashboardNavigator().initViewProviders(acuityAccount);
             Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!", Notification.Type.TRAY_NOTIFICATION);
         }

@@ -4,7 +4,6 @@ import com.acuity.control.server.Events;
 import com.acuity.control.server.messages.handlers.MessageHandler;
 import com.acuity.control.server.websockets.WSocket;
 import com.acuity.control.server.websockets.WSocketEvent;
-import com.acuity.db.AcuityDB;
 import com.acuity.db.arango.monitor.events.ArangoEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
@@ -13,11 +12,7 @@ import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.Machine;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
-import com.acuity.db.services.impl.BotClientConfigService;
-import com.acuity.db.services.impl.BotClientService;
-import com.acuity.db.services.impl.MessagePackageService;
-import com.acuity.db.services.impl.RSAccountService;
-import com.arangodb.ArangoCollection;
+import com.acuity.db.services.impl.*;
 import com.arangodb.model.DocumentUpdateOptions;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
@@ -35,6 +30,8 @@ public class BotClientHandler extends MessageHandler {
     private String ownerID;
     private Vertex botClient;
     private Vertex config;
+    private String machineID;
+    private String machineKey;
 
     public BotClientHandler(WSocket wSocket) {
         super(wSocket);
@@ -43,20 +40,12 @@ public class BotClientHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-
         if (messagePackage.getType() == MessagePackage.Type.MACHINE_INFO){
             String name = messagePackage.getBody("user.name", null);
             if (name != null){
-                ArangoCollection collection = AcuityDB.getDB().db(AcuityDB.DB_NAME).collection("Machine");
-                String key = ownerID + ":" + name;
-                Machine machine = new Machine(ownerID, key);
+                Machine machine = new Machine(ownerID, machineKey);
                 machine.getProperties().putAll(messagePackage.getBody());
-                if (collection.documentExists(key)){
-                    collection.updateDocument(key, machine, new DocumentUpdateOptions().mergeObjects(true));
-                }
-                else {
-                    collection.insertDocument(machine);
-                }
+                MachineService.getInstance().getCollection().updateDocument(machineKey, machine, new DocumentUpdateOptions().mergeObjects(true));
             }
         }
     }
@@ -102,7 +91,13 @@ public class BotClientHandler extends MessageHandler {
         AcuityAccount acuityAccount = getSocket().getSession().getAttribute(AcuityAccount.class);
         if (acuityAccount != null){
             ownerID = acuityAccount.getID();
-            BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey()).ifPresent(botClient -> {
+
+            machineKey = MachineService.getInstance().getKey(acuityAccount.getKey(), loginComplete.getLoginPackage().getBody("machineUsername", null));
+            machineID = MachineService.getInstance().getCollectionName() + "/" + machineKey;
+            if (!MachineService.getInstance().getCollection().documentExists(machineKey)){
+                machineID = MachineService.getInstance().insert(new Machine(ownerID, machineKey)).getId();
+            }
+            BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey(), machineID).ifPresent(botClient -> {
                 this.botClient = botClient;
                 BotClientConfigService.getInstance().registerConfig(acuityAccount.getID(), botClient.getKey()).ifPresent(botClientConfig -> {
                     this.config = botClientConfig;

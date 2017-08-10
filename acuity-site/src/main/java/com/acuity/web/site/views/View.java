@@ -5,7 +5,10 @@ import com.acuity.web.site.views.impl.LoginView;
 import com.acuity.web.site.views.impl.RegistrationView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientsListView;
+import com.acuity.web.site.views.impl.dashboard.landing.LandingView;
+import com.acuity.web.site.views.impl.dashboard.machine.MachineListView;
 import com.acuity.web.site.views.impl.dashboard.menu.MenuItem;
+import com.acuity.web.site.views.impl.dashboard.proxy.ProxyListView;
 import com.acuity.web.site.views.impl.dashboard.rs.account.RSAccountView;
 import com.acuity.web.site.views.impl.dashboard.rs.account.RSAccountsListView;
 import com.acuity.web.site.views.impl.dashboard.script.AddScriptView;
@@ -17,6 +20,7 @@ import com.vaadin.icons.VaadinIcons;
  * Created by Zach on 8/5/2017.
  */
 public enum View {
+    LANDING(LandingView.class, "Introduction", true, VaadinIcons.USER, 0),
     ACCOUNTS(RSAccountsListView.class, "RS-Accounts", true, VaadinIcons.USER, 1),
     ACCOUNT(RSAccountView.class, "RS-Account", false, null, 1),
     CLIENTS(BotClientsListView.class, "Clients", true, VaadinIcons.CLUSTER, 1),
@@ -24,6 +28,8 @@ public enum View {
     ADD_SCRIPT(AddScriptView.class, "AddScript", false, null, 1),
     SCRIPT(ScriptView.class, "Script", false, null, 1),
     SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
+    PROXIES(ProxyListView.class, "Proxies", true, VaadinIcons.CONNECT, 1),
+    MACHINES(MachineListView.class, "Machines", true, VaadinIcons.LAPTOP, 1),
     LOGIN(LoginView.class, "Login", false, null, 0),
     REGISTER(RegistrationView.class, "Register", false, null, 0)
     ;

@@ -3,6 +3,7 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.services.DBCollectionService;
+import com.arangodb.entity.DocumentCreateEntity;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
@@ -19,8 +20,9 @@ public class MessagePackageService extends DBCollectionService<MessagePackage> {
         super(AcuityDB.DB_NAME, "MessagePackage", MessagePackage.class);
     }
 
-    public void insert(MessagePackage messagePackage){
+    public DocumentCreateEntity<MessagePackage> insert(MessagePackage messagePackage){
         getCollection().insertDocument(messagePackage);
+        return null;
     }
 
     public void delete(MessagePackage message){

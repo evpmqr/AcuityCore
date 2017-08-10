@@ -51,6 +51,8 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected").setHidden(true);
         Grid.Column<BotClient, String> account = clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
         clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
+        clientGrid.addColumn(botClient -> botClient.getAssignedProxy() == null ? "None" : botClient.getAssignedProxy().getHost() + ":" + botClient.getAssignedProxy().getPort()).setCaption("Proxy");
+        clientGrid.addColumn(botClient -> botClient.getMachine() == null ? "None" : botClient.getMachine().getProperties().getOrDefault("user.name", "")).setCaption("Machine").setHidden(true);
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.sort(account);
@@ -79,8 +81,10 @@ public class BotClientsListView extends VerticalLayout implements View {
         String clientID = event.getBotClientID();
 
         if (event.getType() == ArangoEvent.DELETE){
-            if (clients.removeIf(botClient -> botClient.getID().equals(clientID)) && !(event instanceof BotClientEvent)){
-                BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
+            if (clients.removeIf(botClient -> botClient.getID().equals(clientID))){
+                if (!(event instanceof BotClientEvent)){
+                    BotClientService.getInstance().getJoinedByID(clientID).ifPresent(clients::add);
+                }
                 clientGrid.getDataProvider().refreshAll();
             }
         }

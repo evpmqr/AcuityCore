@@ -3,6 +3,7 @@ package com.acuity.web.site.views.impl.dashboard.rs.account;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.db.services.impl.RSAccountService;
+import com.google.common.base.Strings;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
@@ -16,8 +17,8 @@ public class AddRSAccountForm extends FormLayout {
 
     private TextField email = new TextField("Email");
     private TextField ign = new TextField("IGN");
-    private PasswordField acuityPassword = new PasswordField("Acuity Password");
     private PasswordField password = new PasswordField("RS-Password");
+    private PasswordField acuityPassword = new PasswordField("Acuity Password");
 
     private Window window;
 
@@ -26,11 +27,11 @@ public class AddRSAccountForm extends FormLayout {
         buildComponent();
     }
 
-
     private void buildComponent(){
+        setResponsive(true);
+        setSizeUndefined();
         addFields();
         addAddButton();
-        setResponsive(true);
     }
 
     private void addFields(){
@@ -41,20 +42,21 @@ public class AddRSAccountForm extends FormLayout {
         ign.setIcon(VaadinIcons.USER);
         addComponent(ign);
 
-        acuityPassword.setIcon(VaadinIcons.CAMERA);
-        acuityPassword.setRequiredIndicatorVisible(true);
-        addComponent(acuityPassword);
-
         password.setIcon(VaadinIcons.PASSWORD);
         password.setRequiredIndicatorVisible(true);
         addComponent(password);
+
+        acuityPassword.setIcon(VaadinIcons.CAMERA);
+        acuityPassword.setRequiredIndicatorVisible(true);
+        acuityPassword.setValue(Strings.nullToEmpty((String) VaadinSession.getCurrent().getAttribute("passwordStore")));
+        addComponent(acuityPassword);
     }
 
     private void addAddButton(){
         addComponent(new Button("Add", clickEvent -> {
             try {
                 if (AcuityAccountService.getInstance().checkLoginByID(acuityAccount.getID(), acuityPassword.getValue()).isPresent()){
-                    RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(), acuityAccount.getRsAccountEIV(), acuityAccount.getRsAccountEKey());
+                    RSAccountService.getInstance().addRSAccount(acuityAccount.getID(), email.getValue(), ign.getValue(), password.getValue(), acuityPassword.getValue(),acuityAccount.getPasswordEncryptionKey());
                 }
                 else {
                     Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);
@@ -66,6 +68,4 @@ public class AddRSAccountForm extends FormLayout {
             }
         }));
     }
-
-
 }
