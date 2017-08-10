@@ -8,6 +8,7 @@ import com.arangodb.entity.DocumentDeleteEntity;
 import com.arangodb.entity.MultiDocumentEntity;
 import javafx.util.Pair;
 
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -25,7 +26,6 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
         super(AcuityDB.DB_NAME, "RSAccount", RSAccount.class);
     }
 
-
     public MultiDocumentEntity<DocumentDeleteEntity<Void>> deleteAccounts(Set<RSAccount> accounts) {
         MultiDocumentEntity<DocumentDeleteEntity<Void>> result = getCollection().deleteDocuments(accounts);
         accounts.forEach(account -> RSAccountAssignmentService.getInstance().removeByFromID(account.getID()));
@@ -36,5 +36,14 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
         Pair<byte[], byte[]> result = AcuityEncryption.encryptRSPassword(password, acuityPassword, accountEncryptionIV, accountEncryptionKey);
         RSAccount rsAccount = new RSAccount(ownerID, email, ign, result.getKey(), result.getValue());
         insert(rsAccount);
+    }
+
+    public void deleteUnusableAccounts(String ownerID) {
+        String query =
+                "FOR account in RSAccount\n" +
+                "filter account.ownerID == @ownerID && (account.banned == true || account.locked == true)\n" +
+                "REMOVE account IN RSAccount\n";
+
+        getDB().query(query, Collections.singletonMap("ownerID", ownerID), null, RSAccount.class);
     }
 }

@@ -11,6 +11,9 @@ public class RSAccount extends Vertex {
     private String ownerID;
     private String email;
     private String ign;
+    private boolean banned;
+    private boolean locked;
+    private boolean wrongLogin;
 
     private String passwordIV;
     private String password;
@@ -44,6 +47,18 @@ public class RSAccount extends Vertex {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public boolean isWrongLogin() {
+        return wrongLogin;
     }
 
     @Override

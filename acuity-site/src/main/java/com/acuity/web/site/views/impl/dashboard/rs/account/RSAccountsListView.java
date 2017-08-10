@@ -56,7 +56,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
     private void addControls(){
         HorizontalLayout controls = new HorizontalLayout();
-        controls.addComponents(createNewRSAccountButton(), createDeleteSelectedButton());
+        controls.addComponents(createNewRSAccountButton(), createDeletedUnusableButton(), createDeleteSelectedButton());
         addComponents(controls);
     }
 
@@ -80,6 +80,14 @@ public class RSAccountsListView extends VerticalLayout implements View{
         });
         addRSAccount.setIcon(VaadinIcons.PLUS_CIRCLE);
         return addRSAccount;
+    }
+
+    private Button createDeletedUnusableButton() {
+        final Button deleteUnusableButton = new Button("Delete Unusable", clickEvent -> {
+            RSAccountService.getInstance().deleteUnusableAccounts(acuityAccount.getID());
+        });
+        deleteUnusableButton.setIcon(VaadinIcons.CLOSE_SMALL);
+        return deleteUnusableButton;
     }
 
     private void addRSAccountsGrid(){
