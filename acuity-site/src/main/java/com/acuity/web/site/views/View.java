@@ -19,6 +19,7 @@ import com.vaadin.icons.VaadinIcons;
  * Created by Zach on 8/5/2017.
  */
 public enum View {
+
     ACCOUNTS(RSAccountsListView.class, "RS-Accounts", true, VaadinIcons.USER, 1),
     ACCOUNT(RSAccountView.class, "RS-Account", false, null, 1),
     CLIENTS(BotClientsListView.class, "Clients", true, VaadinIcons.CLUSTER, 1),
@@ -30,8 +31,10 @@ public enum View {
 
     SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
     LOGIN(LoginView.class, "Login", false, null, 0),
-    REGISTER(RegistrationView.class, "Register", false, null, 0)
+    REGISTER(RegistrationView.class, "Register", false, null, 0),
     ;
+
+    public static String ERROR = "ERROR VIEW";
 
     private Class<? extends com.vaadin.navigator.View> viewClass;
     private String name;

@@ -16,6 +16,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
+import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +51,19 @@ public class RSAccountsListView extends VerticalLayout implements View{
     private void buildComponent(){
         addStyleName("view");
         setSizeFull();
-        addRSAccountsGrid();
-        addControls();
+
+        VerticalLayout test = new VerticalLayout();
+        test.setMargin(false);
+        test.addComponents(createRSAccountsGrid(), createControls());
+        addComponents(new Panel("RS Accounts", test));
     }
 
-    private void addControls(){
+    private HorizontalLayout createControls(){
         HorizontalLayout controls = new HorizontalLayout();
+        controls.setMargin(false);
+        controls.addStyleName("view");
         controls.addComponents(createNewRSAccountButton(), createDeletedUnusableButton(), createDeleteSelectedButton());
-        addComponents(controls);
+        return controls;
     }
 
     private Button createDeleteSelectedButton(){
@@ -90,7 +96,7 @@ public class RSAccountsListView extends VerticalLayout implements View{
         return deleteUnusableButton;
     }
 
-    private void addRSAccountsGrid(){
+    private Grid<RSAccount> createRSAccountsGrid(){
         grid.setDataProvider(DataProvider.ofCollection(rsAccounts));
         grid.addColumn(RSAccount::getEmail).setCaption("Email");
         grid.addColumn(RSAccount::getIgn).setCaption("IGN");
@@ -108,7 +114,15 @@ public class RSAccountsListView extends VerticalLayout implements View{
 
 
         grid.getColumns().forEach(column -> column.setHidable(true));
-        addComponent(grid);
+        return grid;
+    }
+
+    private TextField getColumnFilterField() {
+        TextField filter = new TextField();
+        filter.setWidth("100%");
+        filter.addStyleName(ValoTheme.TEXTFIELD_TINY);
+        filter.setPlaceholder("Filter");
+        return filter;
     }
 
     @Override

@@ -7,10 +7,7 @@ import com.vaadin.data.provider.DataProvider;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.List;
@@ -61,7 +58,11 @@ public class MachineListView extends VerticalLayout implements View{
         grid.setColumnReorderingAllowed(true);
         grid.setSizeFull();
         grid.getColumns().forEach(column -> column.setHidable(true));
-        addComponent(grid);
+
+
+        Panel panel = new Panel("Machines", grid);
+
+        addComponent(panel);
     }
 
 }

@@ -24,6 +24,8 @@ public class ScriptService extends DBCollectionService<Script> {
         super(AcuityDB.DB_NAME, "Script", Script.class);
     }
 
+
+
     public List<Script> getByAccess(String acuityID, int accessLevel, int rank) {
         String query = "for script in Script\n" +
                 "filter script.ownerID == @acuityID || script.accessLevel == @accessLevel || @rankAccess\n" +
