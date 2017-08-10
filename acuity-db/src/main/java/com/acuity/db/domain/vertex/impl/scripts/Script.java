@@ -16,8 +16,8 @@ public class Script extends Vertex {
     private String title;
     private String category;
     private String desc;
-    private LocalDateTime creationTimeStamp = LocalDateTime.now();
-
+    private LocalDateTime creationTimestamp = LocalDateTime.now();
+    private LocalDateTime lastUpdateTimestamp;
 
     private int accessLevel = Access.PUBLIC.getCode();
 
@@ -41,8 +41,8 @@ public class Script extends Vertex {
         return added;
     }
 
-    public LocalDateTime getCreationTimeStamp() {
-        return creationTimeStamp;
+    public LocalDateTime getCreationTimestamp() {
+        return creationTimestamp;
     }
 
     public String getOwnerID() {
@@ -87,6 +87,14 @@ public class Script extends Vertex {
 
     public HashSet<String> getLocalPaths() {
         return localPaths;
+    }
+
+    public LocalDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 
     public enum  Access {

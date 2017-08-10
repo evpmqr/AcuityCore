@@ -13,6 +13,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.renderers.LocalDateTimeRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.List;
@@ -54,6 +55,7 @@ public class ScriptsListView extends VerticalLayout implements View {
         grid.addColumn(script -> script.getAuthor().getDisplayName()).setCaption("Author");
         grid.addColumn(Script::getCategory).setCaption("Category");
         grid.addColumn(Script::getDesc).setCaption("Description");
+        grid.addColumn(Script::getLastUpdateTimestamp, new LocalDateTimeRenderer()).setCaption("Last Update");
 
         grid.addComponentColumn(script -> {
             HorizontalLayout content = new HorizontalLayout();
