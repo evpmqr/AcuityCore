@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public class AddedScript extends Edge{
 
-    private LocalDateTime addedTimeStamp = LocalDateTime.now();
+    private LocalDateTime addedTimestamp = LocalDateTime.now();
 
     public AddedScript(String acuityID, String scriptID) {
         super(acuityID, scriptID);
@@ -19,7 +19,7 @@ public class AddedScript extends Edge{
     public AddedScript() {
     }
 
-    public LocalDateTime getAddedTimeStamp() {
-        return addedTimeStamp;
+    public LocalDateTime getAddedTimestamp() {
+        return addedTimestamp;
     }
 }
