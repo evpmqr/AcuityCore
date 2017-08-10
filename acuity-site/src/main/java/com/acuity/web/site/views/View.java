@@ -20,19 +20,24 @@ import com.vaadin.icons.VaadinIcons;
  * Created by Zach on 8/5/2017.
  */
 public enum View {
-    LANDING(LandingView.class, "Introduction", true, VaadinIcons.USER, 0),
+
     ACCOUNTS(RSAccountsListView.class, "RS-Accounts", true, VaadinIcons.USER, 1),
     ACCOUNT(RSAccountView.class, "RS-Account", false, null, 1),
     CLIENTS(BotClientsListView.class, "Clients", true, VaadinIcons.CLUSTER, 1),
     CLIENT(BotClientView.class, "Client", false, null, 1),
     ADD_SCRIPT(AddScriptView.class, "AddScript", false, null, 1),
-    SCRIPT(ScriptView.class, "Script", false, null, 1),
-    SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
     PROXIES(ProxyListView.class, "Proxies", true, VaadinIcons.CONNECT, 1),
     MACHINES(MachineListView.class, "Machines", true, VaadinIcons.LAPTOP, 1),
+
+    SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
+    SCRIPT(ScriptView.class, "Script", false, null, 0),
     LOGIN(LoginView.class, "Login", false, null, 0),
-    REGISTER(RegistrationView.class, "Register", false, null, 0)
+    REGISTER(RegistrationView.class, "Register", false, null, 0),
+
+    LANDING(LandingView.class, "", false, null, 0),
     ;
+
+    public static String ERROR = "ERROR VIEW";
 
     private Class<? extends com.vaadin.navigator.View> viewClass;
     private String name;

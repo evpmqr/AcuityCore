@@ -28,7 +28,7 @@ public class DashboardNavigator extends Navigator {
         setErrorProvider(new ViewProvider() {
             @Override
             public String getViewName(String s) {
-                return "ERROR VIEW";
+                return View.ERROR;
             }
 
             @Override

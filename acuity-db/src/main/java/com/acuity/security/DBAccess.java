@@ -21,6 +21,10 @@ public class DBAccess {
         return getProperty("password2");
     }
 
+    public static String getRepoKey(){
+        return getProperty("repo-key");
+    }
+
     private static String getProperty(String key){
         Properties prop = new Properties();
         try (InputStream in = DBAccess.class.getClassLoader().getResourceAsStream("db.properties")){

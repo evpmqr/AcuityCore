@@ -164,7 +164,7 @@ public class BotClientView extends VerticalLayout implements View {
                 Events.getDBEventBus().register(this);
             }
         });
-        if (botClient == null) getUI().getNavigator().navigateTo("ERROR VIEW");
+        if (botClient == null) getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.ERROR);
         else build();
     }
 
