@@ -3,6 +3,7 @@ package com.acuity.web.site.views.impl;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.navigator.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
@@ -11,7 +12,7 @@ import com.vaadin.ui.themes.ValoTheme;
 /**
  * Created by Zachary Herridge on 8/1/2017.
  */
-public class LoginView extends VerticalLayout {
+public class LoginView extends VerticalLayout implements View {
 
     public LoginView() {
         setSizeFull();
@@ -40,7 +41,7 @@ public class LoginView extends VerticalLayout {
         HorizontalLayout fields = new HorizontalLayout();
         fields.addStyleName("fields");
 
-        final TextField username = new TextField("Username");
+        final TextField username = new TextField("Email");
         username.setIcon(FontAwesome.USER);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 

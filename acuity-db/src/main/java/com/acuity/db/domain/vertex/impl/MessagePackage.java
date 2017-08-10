@@ -21,6 +21,10 @@ public class MessagePackage extends Vertex {
         putHeader("messageType", type);
     }
 
+    public double getType(){
+        return getHeader("messageType", (double) MessagePackage.Type.UNKNOWN);
+    }
+
     public Map<String, Object> getHeaders() {
         return headers;
     }
@@ -64,5 +68,6 @@ public class MessagePackage extends Vertex {
         int BAD_LOGIN = 3;
         int DIRECT = 4;
         int ACCOUNT_ASSIGNMENT_CHANGE = 5;
+        int MACHINE_INFO = 6;
     }
 }

@@ -26,8 +26,7 @@ public class LoginHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-        Double messageType = messagePackage.getHeader("messageType", (double) MessagePackage.Type.UNKNOWN);
-        logger.info(messagePackage.toString());
+        Double messageType = messagePackage.getType();
         if (messageType == MessagePackage.Type.LOGIN){
 
             String username = messagePackage.getBody("username", null);
@@ -37,7 +36,7 @@ public class LoginHandler extends MessageHandler {
             if (username != null && password != null && sessionType != null){
                 logger.debug("Attempting login for '{}'.", username);
                 AcuityAccount acuityAccount = AcuityAccountService.getInstance()
-                        .checkLogin(username, password)
+                        .checkLoginByEmail(username, password)
                         .orElse(null);
 
                 if (acuityAccount != null){

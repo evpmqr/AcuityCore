@@ -1,12 +1,45 @@
 @import "../valo/valo";
 
 
+.v-slot-acuity-primary-bar{
+  background-color:#07a9ca !important;
+  color:#07a9ca !important;
+}
+
+.acuity-primary{
+  color:#07a9ca !important;
+}
+
+.v-csslayout-smallMargin{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.grid-button{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.view{
+  padding-top: 0 !important;
+  padding-left: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.view-top{
+  padding-top: 10px !important;
+  padding-left: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.v-gridlayout-smallMargin{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 .v-grid-cell-focused:before {
   display: none !important;
 }
 
-$valo-menu-background-color: #54564d;
-
-@mixin dashboard {
-  @include valo;
-}

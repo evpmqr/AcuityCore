@@ -5,11 +5,10 @@ import com.acuity.api.Events;
 import com.acuity.api.input.SmartActions;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
-import com.acuity.api.rs.query.Players;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
+import com.acuity.botcontrol.BotControl;
 import com.acuity.client.devgui.ScriptRunnerView;
 import com.google.common.eventbus.Subscribe;
 
@@ -25,7 +24,7 @@ import java.util.stream.Stream;
 public class ClientBootstrap {
 
     @Subscribe
-    public void testDraw(InGameDrawEvent event) {
+    public void testDraw(InGameDrawEvent event){
         LocalPlayer.get().ifPresent(player -> {
             player.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
                 event.getGraphics().drawString("HP: " + player.getHealthPercent(), screenLocation.getX(), screenLocation.getY());
@@ -40,19 +39,17 @@ public class ClientBootstrap {
     }
 
     @Subscribe
-    public void testKeyEvent(KeyEvent e) {
-        if (e.getKeyChar() == 'c' && e.isControlDown()) {
+    public void testKeyEvent(KeyEvent e){
+        if (e.getKeyChar() == 'c' && e.isControlDown()){
             SmartActions.INSTANCE.clear();
-        } else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED) {
+        }
+        else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
             TileDumper.execute();
-        } else if (e.getKeyChar() == 'n') {
+        }
+        else if (e.getKeyChar() == 'n'){
             LocalPlayer.get().ifPresent(player -> {
                 System.out.println(player.getHealthPercent());
 
-            });
-        } else if (e.getKeyChar() == 'b') {
-            LocalPlayer.get().ifPresent(player -> {
-                System.out.println(player.getSceneLocation().getWorldLocation());
             });
         }
     }
@@ -60,6 +57,8 @@ public class ClientBootstrap {
     public ClientBootstrap() {
         EventQueue.invokeLater(() -> {
             try {
+                BotControl.getInstance().start();
+
                 JFrame frame = new JFrame();
                 frame.setSize(new Dimension(800, 600));
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,17 +68,17 @@ public class ClientBootstrap {
                 frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
                 AcuityInstance.boot();
 
-                //     MouseDataCollector.INSTANCE.start();
-                //     SmartActions.INSTANCE.start();
-                new ScriptRunnerView().setVisible(false);
+           //     MouseDataCollector.INSTANCE.start();
+           //     SmartActions.INSTANCE.start();
 
+                new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
-       // Events.getRsEventBus().register(this);
-       // Events.getAcuityEventBus().register(this);
+        Events.getRsEventBus().register(this);
+        Events.getAcuityEventBus().register(this);
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package com.acuity.db;
 
+import com.acuity.db.services.impl.AcuityAccountService;
 import com.arangodb.ArangoDB;
 import com.arangodb.velocypack.module.jdk8.VPackJdk8Module;
 
@@ -34,5 +35,10 @@ public class AcuityDB {
 
     public static void main(String[] args) {
         init();
+        try {
+            AcuityAccountService.getInstance().registerAccount("test@gmail.com", "TestAccount", "123123");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

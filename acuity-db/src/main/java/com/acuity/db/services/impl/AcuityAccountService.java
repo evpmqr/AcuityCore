@@ -1,14 +1,13 @@
 package com.acuity.db.services.impl;
 
-import com.acuity.bcrypt.BCrypt;
 import com.acuity.db.AcuityDB;
-import com.acuity.db.domain.edge.Edge;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.DBCollectionService;
+import com.acuity.security.Encryption;
+import com.acuity.security.bcrypt.BCrypt;
 import com.arangodb.ArangoCursor;
-import com.arangodb.ArangoDBException;
-import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
+import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -28,13 +27,18 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
         super(AcuityDB.DB_NAME, "AcuityAccount", AcuityAccount.class);
     }
 
-    public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws ArangoDBException{
-        AcuityAccount acuityAccount = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()));
-        DocumentCreateEntity<AcuityAccount> acuityAccountDocumentCreateEntity = getCollection().insertDocument(acuityAccount, new DocumentCreateOptions().returnNew(true));
-        return Optional.ofNullable(acuityAccountDocumentCreateEntity.getNew());
+    public Optional<AcuityAccount> registerAccount(String email, String username, String password) throws Exception {
+        Pair<byte[], byte[]> encrypt = Encryption.encrypt(Encryption.getSecrete(password, Encryption.SALT), Encryption.generateEncryptionKey());
+        AcuityAccount insert = new AcuityAccount(email, username, BCrypt.hashpw(password, BCrypt.gensalt()), encrypt.getKey(), encrypt.getValue());
+        AcuityAccount result = getCollection().insertDocument(insert, new DocumentCreateOptions().returnNew(true)).getNew();
+        return Optional.ofNullable(result);
     }
 
-    public Optional<AcuityAccount> checkLogin(String email, String password){
+    public Optional<AcuityAccount> checkLoginByID(String acuityID, String password){
+        return getByID(acuityID).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);
+    }
+
+    public Optional<AcuityAccount> checkLoginByEmail(String email, String password){
         return getAccountByEmail(email).map(acuityAccount -> BCrypt.checkpw(password, acuityAccount.getPasswordHash()) ? acuityAccount : null);
     }
 

@@ -4,7 +4,7 @@ import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
-import com.acuity.web.site.views.impl.LoginView;
+import com.acuity.web.site.views.View;
 import com.acuity.web.site.views.impl.MainView;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Push;
@@ -30,6 +30,7 @@ import java.util.Locale;
 public class DashboardUI extends UI {
 
     private Events events = new Events();
+    private MainView mainView;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -42,22 +43,29 @@ public class DashboardUI extends UI {
     }
 
     private void updateContent(){
+        mainView = new MainView();
         AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
+        mainView.getDashboardNavigator().initViewProviders(acuityAccount);
+        setContent(mainView);
         if (acuityAccount != null){
-            setContent(new MainView());
             getNavigator().navigateTo(getNavigator().getState());
         }
         else {
-            setContent(new LoginView());
+            getNavigator().navigateTo(View.LOGIN.getName());
         }
     }
 
     @Subscribe
     public void userLoginRequested(final DashboardEvent.UserLoginRequestedEvent event) {
-        AcuityAccountService.getInstance().checkLogin(event.getUserName(), event.getPassword()).ifPresent(acuityAccount -> {
+        AcuityAccount acuityAccount = AcuityAccountService.getInstance().checkLoginByEmail(event.getUserName(), event.getPassword()).orElse(null);
+        if (acuityAccount != null){
             getSession().setAttribute(AcuityAccount.class, acuityAccount);
-            Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!");
-        });
+            mainView.getDashboardNavigator().initViewProviders(acuityAccount);
+            Notification.show("Welcome  back " + acuityAccount.getDisplayName() + "!", Notification.Type.TRAY_NOTIFICATION);
+        }
+        else {
+            Notification.show("Incorrect Acuity Login.", Notification.Type.TRAY_NOTIFICATION);
+        }
         updateContent();
     }
 

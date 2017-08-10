@@ -53,6 +53,10 @@ public class ArangoMonitorStream {
         if (scheduledExecutorService != null) scheduledExecutorService.shutdownNow();
     }
 
+    public void removeListener(ArangoStreamListener listener){
+        listeners.remove(listener);
+    }
+
     private void poll() {
         try {
             if (jwt == null && username != null && password != null){

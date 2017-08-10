@@ -1,13 +1,6 @@
 package com.acuity.web.site.events;
 
-import com.acuity.db.arango.monitor.ArangoMonitorStream;
-import com.acuity.db.arango.monitor.events.ArangoEvent;
-import com.acuity.db.arango.monitor.events.ArangoEventImpl;
-import com.acuity.db.arango.monitor.events.wrapped.impl.BotClientEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountAssignedToEvent;
-import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
-import com.acuity.db.services.impl.BotClientService;
-import com.acuity.db.util.DBAccess;
+import com.acuity.db.arango.monitor.events.ArangoEventDispatcher;
 import com.acuity.web.site.DashboardUI;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionContext;
@@ -18,13 +11,7 @@ import com.google.common.eventbus.SubscriberExceptionHandler;
  */
 public class Events implements SubscriberExceptionHandler {
 
-    private static ArangoMonitorStream arangoMonitor = new ArangoMonitorStream("http://AcuityBotting.com:8529", "AcuityCore-Prod", DBAccess.getUsername(), DBAccess.getPassword());
-    private static EventBus dbEventBus = new EventBus(new SubscriberExceptionHandler() {
-        @Override
-        public void handleException(Throwable throwable, SubscriberExceptionContext subscriberExceptionContext) {
-            throwable.printStackTrace();
-        }
-    });
+    private static ArangoEventDispatcher arangoEventDispatcher = new ArangoEventDispatcher();
 
     private EventBus eventBus = new EventBus(this);
 
@@ -41,41 +28,19 @@ public class Events implements SubscriberExceptionHandler {
     }
 
     public static EventBus getDBEventBus() {
-        return dbEventBus;
+        return arangoEventDispatcher.getEventBus();
     }
 
     public static void start(){
-        arangoMonitor.addListener(new ArangoListener());
-        arangoMonitor.start();
+        arangoEventDispatcher.start();
     }
 
     public static void stop(){
-        arangoMonitor.stop();
+        arangoEventDispatcher.stop();
     }
 
     @Override
     public final void handleException(final Throwable exception, final SubscriberExceptionContext context) {
         exception.printStackTrace();
-    }
-
-    public static class ArangoListener implements ArangoMonitorStream.ArangoStreamListener{
-
-        @Override
-        public void onEvent(ArangoEventImpl event) {
-            if (event.getType() == ArangoEvent.CREATE_OR_UPDATE || event.getType() == ArangoEvent.DELETE){
-                if (BotClientService.getInstance().getCollectionID().equals(event.getCid())){
-                    dbEventBus.post(new BotClientEvent(event));
-                }
-                else if (event.getCName().equals("RSAccount")){
-                    dbEventBus.post(new RSAccountEvent(event));
-                }
-                else if (event.getCName().equals("AssignedTo")){
-                    dbEventBus.post(new RSAccountAssignedToEvent(event));
-                }
-                else {
-                    dbEventBus.post(event);
-                }
-            }
-        }
     }
 }
