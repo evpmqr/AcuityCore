@@ -3,6 +3,7 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.edge.impl.AssignedTo;
 import com.acuity.db.services.DBEdgeCollectionService;
+import com.arangodb.entity.DocumentCreateEntity;
 
 /**
  * Created by Zachary Herridge on 8/7/2017.
@@ -20,9 +21,10 @@ public class RSAccountAssignmentService extends DBEdgeCollectionService<Assigned
     }
 
     @Override
-    public void insert(AssignedTo entity) {
+    public DocumentCreateEntity<AssignedTo> insert(AssignedTo entity) {
         removeByFromID(entity.getFrom());
         removeByToID(entity.getTo());
         super.insert(entity);
+        return null;
     }
 }

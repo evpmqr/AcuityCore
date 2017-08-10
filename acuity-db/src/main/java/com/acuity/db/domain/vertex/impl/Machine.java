@@ -22,6 +22,10 @@ public class Machine extends Vertex{
     public Machine() {
     }
 
+    public String getOwnerID() {
+        return ownerID;
+    }
+
     public HashSet<String> getIPs() {
         return ips;
     }

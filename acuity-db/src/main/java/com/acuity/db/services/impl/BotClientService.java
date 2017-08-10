@@ -69,15 +69,15 @@ public class BotClientService extends DBCollectionService<BotClient> {
                 "    \"clientConfig\" : config,\n" +
                 "    \"assignedScript\" : document(config.assignedScriptID),\n" +
                 "    \"assignedProxy\" : document(config.assignedProxyID),\n" +
-                "    \"machine\" : document(config.machineID)\n" +
+                "    \"machine\" : document(client.machineID)\n" +
                 "    })";
 
         Stream<BotClient> clientID1 = getDB().query(query, Collections.singletonMap("clientID", clientID), null, BotClient.class).asListRemaining().stream();
         return clientID1.filter(Objects::nonNull).findAny();
     }
 
-    public Optional<BotClient> registerClient(String key, String ownerID){
-        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID), new DocumentCreateOptions().returnNew(true));
+    public Optional<BotClient> registerClient(String key, String ownerID, String machineID){
+        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID, machineID), new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(createEntity.getNew());
     }
 

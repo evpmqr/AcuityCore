@@ -1,5 +1,6 @@
 package com.acuity.control.server.websockets;
 
+import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.google.common.eventbus.SubscriberExceptionContext;
 
 /**
@@ -16,6 +17,15 @@ public class WSocketEvent {
 
     public static class LoginComplete {
 
+        private MessagePackage loginPackage;
+
+        public LoginComplete(MessagePackage loginPackage) {
+            this.loginPackage = loginPackage;
+        }
+
+        public MessagePackage getLoginPackage() {
+            return loginPackage;
+        }
     }
 
     public static class Closed {

@@ -59,7 +59,7 @@ public class LoginHandler extends MessageHandler {
                     session.setAttribute(AcuityAccount.class, acuityAccount);
                     destroy();
                     getSocket().send(new MessagePackage(MessagePackage.Type.GOOD_LOGIN).putBody("acuityAccount", acuityAccount));
-                    getSocket().getEventBus().post(new WSocketEvent.LoginComplete());
+                    getSocket().getEventBus().post(new WSocketEvent.LoginComplete(messagePackage));
                 }
                 else {
                     logger.debug("Bad login for '{}'.", username);

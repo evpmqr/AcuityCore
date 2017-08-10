@@ -4,6 +4,7 @@ import com.acuity.db.AcuityDB;
 import com.arangodb.ArangoCollection;
 import com.arangodb.ArangoCursor;
 import com.arangodb.ArangoDatabase;
+import com.arangodb.entity.DocumentCreateEntity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,8 +62,8 @@ public class DBCollectionService<T> {
         return system.asListRemaining();
     }
 
-    public void insert(T entity) {
-        if (entity == null) return;
-        getCollection().insertDocument(entity);
+    public DocumentCreateEntity<T> insert(T entity) {
+        if (entity == null) return null;
+        return getCollection().insertDocument(entity);
     }
 }
