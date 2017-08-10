@@ -1,12 +1,12 @@
 package com.acuity.db.services.impl;
 
 import com.acuity.db.AcuityDB;
+import com.acuity.db.domain.common.EncryptedString;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.DBCollectionService;
 import com.acuity.security.AcuityEncryption;
 import com.arangodb.entity.DocumentDeleteEntity;
 import com.arangodb.entity.MultiDocumentEntity;
-import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.Set;
@@ -32,9 +32,9 @@ public class RSAccountService extends DBCollectionService<RSAccount> {
         return result;
     }
 
-    public void addRSAccount(String ownerID, String email, String ign, String password, String acuityPassword, String accountEncryptionIV, String accountEncryptionKey) throws Exception {
-        Pair<byte[], byte[]> result = AcuityEncryption.encryptRSPassword(password, acuityPassword, accountEncryptionIV, accountEncryptionKey);
-        RSAccount rsAccount = new RSAccount(ownerID, email, ign, result.getKey(), result.getValue());
+    public void addRSAccount(String ownerID, String email, String ign, String password, String acuityPassword, EncryptedString rsAccountKey) throws Exception {
+        EncryptedString result = AcuityEncryption.encryptString(password, acuityPassword, rsAccountKey);
+        RSAccount rsAccount = new RSAccount(ownerID, email, ign, result);
         insert(rsAccount);
     }
 

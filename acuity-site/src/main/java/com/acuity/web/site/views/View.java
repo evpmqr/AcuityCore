@@ -6,6 +6,7 @@ import com.acuity.web.site.views.impl.RegistrationView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientView;
 import com.acuity.web.site.views.impl.dashboard.botclient.BotClientsListView;
 import com.acuity.web.site.views.impl.dashboard.menu.MenuItem;
+import com.acuity.web.site.views.impl.dashboard.proxy.ProxyListView;
 import com.acuity.web.site.views.impl.dashboard.rs.account.RSAccountView;
 import com.acuity.web.site.views.impl.dashboard.rs.account.RSAccountsListView;
 import com.acuity.web.site.views.impl.dashboard.script.AddScriptView;
@@ -23,6 +24,8 @@ public enum View {
     CLIENT(BotClientView.class, "Client", false, null, 1),
     ADD_SCRIPT(AddScriptView.class, "AddScript", false, null, 1),
     SCRIPT(ScriptView.class, "Script", false, null, 1),
+    PROXIES(ProxyListView.class, "Proxies", true, VaadinIcons.CONNECT, 1),
+
     SCRIPTS(ScriptsListView.class, "Scripts", true, VaadinIcons.CODE, 0),
     LOGIN(LoginView.class, "Login", false, null, 0),
     REGISTER(RegistrationView.class, "Register", false, null, 0)

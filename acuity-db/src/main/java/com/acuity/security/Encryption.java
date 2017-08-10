@@ -1,6 +1,6 @@
 package com.acuity.security;
 
-import javafx.util.Pair;
+import com.acuity.db.domain.common.EncryptedString;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -55,12 +55,12 @@ public class Encryption {
         return new String(cipher.doFinal(encryptedText), "UTF-8");
     }
 
-    public static Pair<byte[], byte[]> encrypt(SecretKey key, String plainText) throws Exception{
+    public static EncryptedString encrypt(SecretKey key, String plainText) throws Exception{
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         AlgorithmParameters params = cipher.getParameters();
         byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
         byte[] encrypted = cipher.doFinal(plainText.getBytes("UTF-8"));
-        return new Pair<>(iv, encrypted);
+        return new EncryptedString(Encryption.SALT, encrypted, iv);
     }
 }
