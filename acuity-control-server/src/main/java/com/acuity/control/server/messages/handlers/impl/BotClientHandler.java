@@ -35,6 +35,7 @@ public class BotClientHandler extends MessageHandler {
     private String ownerID;
     private Vertex botClient;
     private Vertex config;
+    private String machineID;
 
     public BotClientHandler(WSocket wSocket) {
         super(wSocket);
@@ -43,20 +44,24 @@ public class BotClientHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-
         if (messagePackage.getType() == MessagePackage.Type.MACHINE_INFO){
             String name = messagePackage.getBody("user.name", null);
             if (name != null){
+                name = name.replaceAll("/", "-");
                 ArangoCollection collection = AcuityDB.getDB().db(AcuityDB.DB_NAME).collection("Machine");
-                String key = ownerID + "-" + name;
-                Machine machine = new Machine(ownerID, key);
+                String machineKey = ownerID.split("/")[1] + "-" + name;
+
+                Machine machine = new Machine(ownerID, machineKey);
                 machine.getProperties().putAll(messagePackage.getBody());
-                if (collection.documentExists(key)){
-                    collection.updateDocument(key, machine, new DocumentUpdateOptions().mergeObjects(true));
+                if (collection.documentExists(machineKey)){
+                    collection.updateDocument(machineKey, machine, new DocumentUpdateOptions().mergeObjects(true));
                 }
                 else {
                     collection.insertDocument(machine);
                 }
+
+
+                BotClientService.getInstance().setMachine(botClient.getKey(), "Machine/" + machineKey);
             }
         }
     }

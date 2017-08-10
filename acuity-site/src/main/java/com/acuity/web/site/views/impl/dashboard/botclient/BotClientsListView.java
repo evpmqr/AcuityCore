@@ -52,6 +52,7 @@ public class BotClientsListView extends VerticalLayout implements View {
         Grid.Column<BotClient, String> account = clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
         clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
         clientGrid.addColumn(botClient -> botClient.getAssignedProxy() == null ? "None" : botClient.getAssignedProxy().getHost() + ":" + botClient.getAssignedProxy().getPort()).setCaption("Proxy");
+        clientGrid.addColumn(botClient -> botClient.getMachine() == null ? "None" : botClient.getMachine().getProperties().getOrDefault("user.name", "")).setCaption("Machine").setHidden(true);
         clientGrid.setSizeFull();
         clientGrid.setColumnReorderingAllowed(true);
         clientGrid.sort(account);
