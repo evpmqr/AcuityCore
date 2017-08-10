@@ -14,6 +14,8 @@ public class AcuityAccount extends Vertex {
 
     private EncryptedString passwordEncryptionKey;
 
+    private boolean allowPasswordMemoryStoring = false;
+
     private int rank;
 
     public AcuityAccount() {
@@ -46,7 +48,9 @@ public class AcuityAccount extends Vertex {
         return rank;
     }
 
-
+    public boolean isAllowPasswordMemoryStoring() {
+        return allowPasswordMemoryStoring;
+    }
 
     @Override
     public String toString() {

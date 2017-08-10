@@ -3,6 +3,7 @@ package com.acuity.web.site.views.impl.dashboard.rs.account;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.db.services.impl.RSAccountService;
+import com.google.common.base.Strings;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
@@ -47,6 +48,7 @@ public class AddRSAccountForm extends FormLayout {
 
         acuityPassword.setIcon(VaadinIcons.CAMERA);
         acuityPassword.setRequiredIndicatorVisible(true);
+        acuityPassword.setValue(Strings.nullToEmpty((String) VaadinSession.getCurrent().getAttribute("passwordStore")));
         addComponent(acuityPassword);
     }
 
